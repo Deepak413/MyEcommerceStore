@@ -14,6 +14,8 @@ process.on("uncaughtException", (err) => {
 //config
 dotenv.config({path:"backend/config/config.env"});
 
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
 //connecting to database
 connectDatabase();
 
