@@ -47,13 +47,18 @@ function App() {
   const [stripeApiKey, setStripeApiKey] = useState("");
 
   async function getStripeApiKey() {
-    const { data } = await axios.get("/api/v1/stripeapikey");
+    try {
+      const { data } = await axios.get("/api/v1/stripeapikey");
 
-    setStripeApiKey(data.stripeApiKey);
+      setStripeApiKey(data.stripeApiKey);
+    }catch(err){
+      console.log(err);
+    }
+    
   }
 
-  // console.log("for userOptions")
-  // console.log(user);
+  console.log("for userOptions")
+  console.log(user);
   useEffect(() => {
     webFont.load({
       google: {
@@ -74,10 +79,10 @@ function App() {
       <Routes>
         {stripeApiKey && (
           <Route path="/process/payment" element={
-              <Elements stripe={loadStripe(stripeApiKey)}>
-                <Payment />
-              </Elements>
-            }
+            <Elements stripe={loadStripe(stripeApiKey)}>
+              <Payment />
+            </Elements>
+          }
           />
         )}
         <Route exact path='/' Component={Home} />
@@ -89,7 +94,7 @@ function App() {
 
         <Route exact path="/contact" Component={Contact} />
 
-        <Route exact path="/about" Component={About}/>
+        <Route exact path="/about" Component={About} />
 
         <Route exact path='/account' Component={Profile} />
 

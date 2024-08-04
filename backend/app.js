@@ -8,6 +8,11 @@ const path = require("path");
 
 const dotenv = require("dotenv");
 
+// const corsOptions = {
+//     origin: "http://localhost:3000" // frontend URI (ReactJS)
+// }
+// app.use(cors(corsOptions));
+
 app.use(cors());
 
 const errorMiddleware = require("./middleware/error");

@@ -48,6 +48,8 @@ const Products = ({ match }) => {
     }
     let count = filteredProductsCount;
 
+    console.log(products);
+
     useEffect(() => {
         if (error) {
             alert.error(error);
