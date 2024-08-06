@@ -24,7 +24,7 @@ cloudinary.config({
 })
 
 const server = app.listen(process.env.PORT, ()=>{
-    console.log(`server is running on http://localhost:${process.env.PORT}`);
+    console.log(`server is running on port ${process.env.PORT}`);
 })
 
 //Unhandling Promise Rejection handling  - strings change
