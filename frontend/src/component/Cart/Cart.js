@@ -3,7 +3,7 @@ import "./Cart.css";
 import CartItemCard from "./CartItemCard";
 import { useSelector, useDispatch } from "react-redux";
 import { addItemsToCart, removeItemsFromCart } from "../../actions/cartAction";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { TbShoppingCartOff } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { useAlert } from 'react-alert';

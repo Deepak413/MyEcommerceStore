@@ -17,9 +17,9 @@ import {
     DialogContent,
     DialogTitle,
     Button,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import { Rating } from "@material-ui/lab";
+import { Rating } from "@mui/lab";
 import { newReviewReset } from '../../reducers/productReducer.js';
 
 const ProductDetails = () => {

@@ -1,13 +1,15 @@
-
 {
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.12.4",
-    "@material-ui/data-grid": "^4.0.0-alpha.37",
-    "@material-ui/icons": "^4.11.3",
-    "@material-ui/lab": "^4.0.0-alpha.61",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/lab": "^5.0.0-alpha.173",
+    "@mui/material": "^5.16.7",
+    "@mui/styles": "^5.16.7",
+    "@mui/x-data-grid": "^7.12.1",
     "@reduxjs/toolkit": "^1.9.7",
     "@stripe/react-stripe-js": "^2.7.3",
     "@stripe/stripe-js": "^4.1.0",
