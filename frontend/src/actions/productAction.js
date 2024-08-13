@@ -6,7 +6,7 @@ export const getProduct = (keyword = "", currentPage=1, price=[0,25000], categor
     try {
         dispatch(allProductRequest());
 
-        let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
+        let link = `https://shoppingkaro-65sf.onrender.com/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
 
         if (category) {
             link += `&category=${category}&ratings[gte]=${ratings}`;
@@ -35,7 +35,7 @@ export const getProduct = (keyword = "", currentPage=1, price=[0,25000], categor
 export const getProductDetails = (id) => async(dispatch) => {
     try {
         dispatch(productDetailsRequest());
-        const {data} = await axios.get(`/api/v1/product/${id}`);
+        const {data} = await axios.get(`https://shoppingkaro-65sf.onrender.com/api/v1/product/${id}`);
         dispatch(productDetailsSuccess(data.product));
     } catch (error) {
         dispatch(productDetailsFail(error.response.data.message));
@@ -51,7 +51,7 @@ export const newReview = (reviewData) => async (dispatch) => {
         headers: { "Content-Type": "application/json" },
       };
   
-      const { data } = await axios.put(`/api/v1/review`, reviewData, config);
+      const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/review`, reviewData, config);
   
       dispatch(newReviewSuccess(data.success));
     } catch (error) {

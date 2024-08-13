@@ -12,8 +12,11 @@ const dotenv = require("dotenv");
 //     origin: "http://localhost:3000" // frontend URI (ReactJS)
 // }
 // app.use(cors(corsOptions));
-
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000", // The frontend URL
+    credentials: true
+}));
 
 const errorMiddleware = require("./middleware/error");
 
@@ -42,6 +45,15 @@ app.use("/api/v1", Payment);
 // app.get("*", (req, res) => {
 //     res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
 // });
+
+// if (process.env.NODE_ENV == "production") {
+//     const path = require('path');
+
+//     app.get('/', (req,res)=>{
+//         app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+//         res.sendFile(path.resolve(__dirname, 'client', 'build','index.html'));
+//     })
+// }
 
 //Middleware for errors
 app.use(errorMiddleware);

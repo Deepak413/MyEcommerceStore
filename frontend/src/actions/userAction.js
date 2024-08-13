@@ -30,7 +30,7 @@ export const login = (email, password) => async (dispatch) => {
 
         const config = { headers: { "Content-Type": "application/json" } };
 
-        const { data } = await axios.post(`/api/v1/login`, { email, password }, config);
+        const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/login`, { email, password }, config);
 
         dispatch(loginSuccess(data));
     } catch (error) {
@@ -44,8 +44,8 @@ export const register = (userData) => async (dispatch) => {
 
         const config = { headers: { "Content-Type": "multipart/form-data" } };    //bcz image also included
 
-        // const { data } = await axios.put(`/api/v1/me/update`, userData, config);
-        const { data } = await axios.post(`/api/v1/register`, userData, config);
+        // const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/me/update`, userData, config);
+        const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/register`, userData, config);
 
         console.log("registered user is : ", data);
 
@@ -60,7 +60,7 @@ export const loadUser = () => async (dispatch) => {
     try {
         dispatch(loadUserRequest());
 
-        const { data } = await axios.get(`/api/v1/me`);
+        const { data } = await axios.get(`https://shoppingkaro-65sf.onrender.com/api/v1/me`);
 
         dispatch(loadUserSuccess(data));
     } catch (error) {
@@ -71,7 +71,7 @@ export const loadUser = () => async (dispatch) => {
 // Logout User
 export const logout = () => async (dispatch) => {
     try {
-        await axios.get(`/api/v1/logout`);
+        await axios.get(`https://shoppingkaro-65sf.onrender.com/api/v1/logout`);
 
         dispatch(logoutSuccess());
     } catch (error) {
@@ -86,7 +86,7 @@ export const updateProfile = (userData) => async (dispatch) => {
 
         const config = { headers: { "Content-Type": "multipart/form-data" } };    //bcz image also included
 
-        const { data } = await axios.put(`/api/v1/me/update`, userData, config);
+        const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/me/update`, userData, config);
 
         dispatch(updateProfileSuccess(data.success));
     } catch (error) {
@@ -102,7 +102,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
 
         const config = { headers: { "Content-Type": "application/json" } };
 
-        const { data } = await axios.put(`/api/v1/password/update`, passwords, config);
+        const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/password/update`, passwords, config);
 
         dispatch(updatePasswordSuccess(data));
     } catch (error) {
@@ -117,7 +117,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 
         const config = { headers: { "Content-Type": "application/json" } };
 
-        const { data } = await axios.post(`/api/v1/password/forgot`, email, config);
+        const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/password/forgot`, email, config);
 
         dispatch(forgotPasswordSuccess(data.message));
     } catch (error) {
@@ -132,7 +132,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 
         const config = { headers: { "Content-Type": "application/json" } };
 
-        const { data } = await axios.put(`/api/v1/password/reset/${token}`, passwords, config);
+        const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/password/reset/${token}`, passwords, config);
 
         dispatch(resetPasswordSuccess(data.success));
     } catch (error) {

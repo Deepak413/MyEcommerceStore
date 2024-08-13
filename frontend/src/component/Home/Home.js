@@ -30,7 +30,7 @@ const Home = () => {
 
     return (
         <Fragment>
-            {loading ? <Loader /> : 
+            {/* {loading ? <Loader /> : 
             <Fragment>
                 <MetaData title="ECOMMERCE" />
                 <div className="banner">
@@ -47,7 +47,24 @@ const Home = () => {
                 <div className="container" id="container">
                     {products && products.map(product => <ProductCard key={product._id} product={product} />)}
                 </div>
-            </Fragment>}
+            </Fragment>} */}
+            <Fragment>
+                <MetaData title="ECOMMERCE" />
+                <div className="banner">
+                    <p>Welcome to Ecommerce</p>
+                    <h1>FIND AMAZING PRODUCT BELOW</h1>
+
+                    <a href="#container">
+                        <button> Scroll <CgMouse /> </button>
+                    </a>
+                </div>
+
+                <h2 className="homeHeading">Featured Products</h2>
+
+                <div className="container" id="container">
+                    {products && products.map(product => <ProductCard key={product._id} product={product} />)}
+                </div>
+            </Fragment>
         </Fragment>
     )
 }

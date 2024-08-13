@@ -32,7 +32,7 @@ export const createOrder = (order) => async (dispatch) => {
                 "Content-Type": "application/json",
             },
         };
-        const { data } = await axios.post("/api/v1/order/new", order, config);
+        const { data } = await axios.post("https://shoppingkaro-65sf.onrender.com/api/v1/order/new", order, config);
 
         dispatch(createOrderSuccess(data));
     } catch (error) {
@@ -45,7 +45,7 @@ export const myOrders = () => async (dispatch) => {
     try {
         dispatch(myOrdersRequest());
 
-        const { data } = await axios.get("/api/v1/orders/me");
+        const { data } = await axios.get("https://shoppingkaro-65sf.onrender.com/api/v1/orders/me");
 
         dispatch(myOrdersSuccess(data));
     } catch (error) {
@@ -58,7 +58,7 @@ export const getAllOrders = () => async (dispatch) => {
     try {
         dispatch(allOrdersRequest());
 
-        const { data } = await axios.get("/api/v1/admin/orders");
+        const { data } = await axios.get("https://shoppingkaro-65sf.onrender.com/api/v1/admin/orders");
 
         dispatch(allOrdersSuccess(data));
     } catch (error) {
@@ -77,7 +77,7 @@ export const updateOrder = (id, order) => async (dispatch) => {
             },
         };
         const { data } = await axios.put(
-            `/api/v1/admin/order/${id}`,
+            `https://shoppingkaro-65sf.onrender.com/api/v1/admin/order/${id}`,
             order,
             config
         );
@@ -93,7 +93,7 @@ export const deleteOrder = (id) => async (dispatch) => {
     try {
         dispatch(deleteOrderRequest());
 
-        const { data } = await axios.delete(`/api/v1/admin/order/${id}`);
+        const { data } = await axios.delete(`https://shoppingkaro-65sf.onrender.com/api/v1/admin/order/${id}`);
 
         dispatch(deleteOrderSuccess(data.success));
     } catch (error) {
@@ -106,7 +106,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
     try {
         dispatch(orderDetailsRequest());
 
-        const { data } = await axios.get(`/api/v1/order/${id}`);
+        const { data } = await axios.get(`https://shoppingkaro-65sf.onrender.com/api/v1/order/${id}`);
 
         dispatch(orderDetailsSuccess(data.order));
     } catch (error) {
