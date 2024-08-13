@@ -12,11 +12,11 @@ const dotenv = require("dotenv");
 //     origin: "http://localhost:3000" // frontend URI (ReactJS)
 // }
 // app.use(cors(corsOptions));
-// app.use(cors());
-app.use(cors({
-    origin: "http://localhost:3000", // The frontend URL
-    credentials: true
-}));
+app.use(cors());
+// app.use(cors({
+//     origin: "https://shoppinggkaro.netlify.app/", // The frontend URL
+//     credentials: true
+// }));
 
 const errorMiddleware = require("./middleware/error");
 
@@ -40,18 +40,19 @@ app.use("/api/v1", user);
 app.use("/api/v1", Order);
 app.use("/api/v1", Payment);
 
-// app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-// app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
-// });
-
 if (process.env.NODE_ENV == "production") {
 
-    app.get('/', (req,res)=>{
-        app.use(express.static(path.resolve(__dirname, 'frontend', 'build')));
-        res.sendFile(path.resolve(__dirname, 'frontend', 'build','index.html'));
-    })
+    app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+    });
+
+
+    // app.get('/', (req,res)=>{
+    //     app.use(express.static(path.resolve(__dirname, 'frontend', 'build')));
+    //     res.sendFile(path.resolve(__dirname, 'frontend', 'build','index.html'));
+    // })
 }
 
 //Middleware for errors
