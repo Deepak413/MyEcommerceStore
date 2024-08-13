@@ -46,14 +46,13 @@ app.use("/api/v1", Payment);
 //     res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
 // });
 
-// if (process.env.NODE_ENV == "production") {
-//     const path = require('path');
+if (process.env.NODE_ENV == "production") {
 
-//     app.get('/', (req,res)=>{
-//         app.use(express.static(path.resolve(__dirname, 'client', 'build')));
-//         res.sendFile(path.resolve(__dirname, 'client', 'build','index.html'));
-//     })
-// }
+    app.get('/', (req,res)=>{
+        app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+        res.sendFile(path.resolve(__dirname, 'client', 'build','index.html'));
+    })
+}
 
 //Middleware for errors
 app.use(errorMiddleware);
