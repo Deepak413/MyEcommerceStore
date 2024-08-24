@@ -51,11 +51,11 @@ const Home = () => {
             <Fragment>
                 <MetaData title="ECOMMERCE" />
                 <div className="banner">
-                    <p>Welcome to Ecommerce</p>
-                    <h1>FIND AMAZING PRODUCT BELOW</h1>
+                    <p>Welcome to ShoppingKaro</p>
+                    <h1>INTRODUCING NEW ARRIVALS</h1>
 
                     <a href="#container">
-                        <button> Scroll <CgMouse /> </button>
+                        <button> View Collection <CgMouse /> </button>
                     </a>
                 </div>
 

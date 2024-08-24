@@ -12,7 +12,9 @@ const dotenv = require("dotenv");
 //     origin: "http://localhost:3000" // frontend URI (ReactJS)
 // }
 // app.use(cors(corsOptions));
-app.use(cors());
+
+app.use(cors());   //only this line works in netlify for frontend
+
 // app.use(cors({
 //     origin: "https://shoppinggkaro.netlify.app/", // The frontend URL
 //     credentials: true
