@@ -21,20 +21,19 @@ const Home = () => {
     const { loading, error, products } = useSelector(state => state.products);
 
     useEffect(() => {
-        if(error){
+        if (error) {
             alert.error(error);
             dispatch(clearErrors());
         }
         dispatch(getProduct());
-    }, [dispatch,error,alert]);
+    }, [dispatch, error, alert]);
 
     return (
         <Fragment>
-            {/* {loading ? <Loader /> : 
             <Fragment>
                 <MetaData title="ECOMMERCE" />
                 <div className="banner">
-                    <p>Welcome to Ecommerce</p>
+                    <p>Welcome to ShoppingKaro</p>
                     <h1>FIND AMAZING PRODUCT BELOW</h1>
 
                     <a href="#container">
@@ -44,11 +43,12 @@ const Home = () => {
 
                 <h2 className="homeHeading">Featured Products</h2>
 
-                <div className="container" id="container">
-                    {products && products.map(product => <ProductCard key={product._id} product={product} />)}
-                </div>
-            </Fragment>} */}
-            <Fragment>
+                {loading ? <Loader /> :
+                    <div className="container" id="container">
+                        {products && products.map(product => <ProductCard key={product._id} product={product} />)}
+                    </div>}
+            </Fragment>
+            {/* <Fragment>
                 <MetaData title="ECOMMERCE" />
                 <div className="banner">
                     <p>Welcome to ShoppingKaro</p>
@@ -64,7 +64,7 @@ const Home = () => {
                 <div className="container" id="container">
                     {products && products.map(product => <ProductCard key={product._id} product={product} />)}
                 </div>
-            </Fragment>
+            </Fragment> */}
         </Fragment>
     )
 }
