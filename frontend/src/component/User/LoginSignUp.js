@@ -75,7 +75,7 @@ const LoginSignUp = () => {
             dispatch(clearErrors());
         }
         if(isAuthenticated){   // usr cant access page while logged in
-            navigate('/shipping');
+            navigate('/account');
         }
     }, [dispatch, error, alert,navigate, isAuthenticated])
 

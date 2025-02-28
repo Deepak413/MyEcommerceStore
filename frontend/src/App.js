@@ -53,6 +53,7 @@ function App() {
       setStripeApiKey(data.stripeApiKey);
     }catch(err){
       console.log(err);
+      console.error('Error fetching Stripe API key:', err.response ? err.response.data : err.message);
     }
     
   }
