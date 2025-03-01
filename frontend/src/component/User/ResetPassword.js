@@ -1,7 +1,8 @@
 import "./ResetPassword.css";
 import React, { Fragment, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAlert } from 'react-alert';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {  AiFillLock } from "react-icons/ai";
 import { RiKeyLine } from "react-icons/ri";
 
@@ -13,11 +14,10 @@ import MetaData from '../layout/MetaData';
 const ResetPassword = () => {
 
     const dispatch = useDispatch();
-    const alert = useAlert();
     const navigate = useNavigate();
     const {token} = useParams();
-    // console.log("token = ");
-    // console.log(token);
+    console.log("token = ");
+    console.log(token);
 
     const { error, success, loading } = useSelector((state) => state.forgotPassword);
 
@@ -37,17 +37,17 @@ const ResetPassword = () => {
 
     useEffect(() => {
         if (error) {
-            alert.error(error);
+            toast.error(error);
             dispatch(clearErrors());
         }
 
         if (success) {
-            alert.success("Password Updaed/Reset Successfully");
+            toast.success("Password Updaed/Reset Successfully");
 
             navigate("/login");
 
         }
-    }, [dispatch, error, alert, navigate, success]);
+    }, [dispatch, error, toast, navigate, success]);
     return (
         <Fragment>
             {loading ? (

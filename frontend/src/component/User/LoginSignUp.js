@@ -4,7 +4,8 @@ import { CiMail } from "react-icons/ci";
 import { AiOutlineLock } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useAlert } from 'react-alert';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, register, clearErrors } from '../../actions/userAction';
 import Loader from '../layout/Loader/Loader';
@@ -12,7 +13,6 @@ import Loader from '../layout/Loader/Loader';
 const LoginSignUp = () => {
     
     const location = useLocation();
-    const alert = useAlert();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { error, loading, isAuthenticated } = useSelector(state => state.user);
@@ -49,7 +49,7 @@ const LoginSignUp = () => {
         myForm.set("password", password);
         myForm.set("avatar", avatar);
         dispatch(register(myForm));
-        alert.success("registration Successfully");
+        toast.success("registration Successfully");
     };
 
     const registerDataChange = (e) => {
@@ -71,13 +71,13 @@ const LoginSignUp = () => {
     
     useEffect(() => {
         if (error) {
-            alert.error(error);
+            toast.error(error);
             dispatch(clearErrors());
         }
         if(isAuthenticated){   // usr cant access page while logged in
             navigate('/account');
         }
-    }, [dispatch, error, alert,navigate, isAuthenticated])
+    }, [dispatch, error, toast, navigate, isAuthenticated])
 
     const switchTabs = (e, tab) => {
         if (tab === "login") {

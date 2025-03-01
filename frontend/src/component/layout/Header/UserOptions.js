@@ -8,7 +8,8 @@ import { RxExit } from 'react-icons/rx';
 import { BsFillCartFill } from 'react-icons/bs';
 import { FaRegListAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { useAlert } from 'react-alert';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { logout } from '../../../actions/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,7 +19,6 @@ const UserOptions = ({user}) => {
     
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
-    const alert = useAlert();
     const dispatch = useDispatch();
     // console.log("inside userOptions");
     // console.log(user);
@@ -61,7 +61,7 @@ const UserOptions = ({user}) => {
     }
     function logoutUser() {
         dispatch(logout());
-        alert.success("Logout Successfully");
+        toast.success("Logout Successfully");
     }
 
     return (

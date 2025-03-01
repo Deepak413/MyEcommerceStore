@@ -8,7 +8,8 @@ import { useParams } from 'react-router-dom';
 import Pagination from "react-js-pagination";
 import Slider from "@mui/material/Slider";
 import { Rating } from '@mui/material';
-import {useAlert} from "react-alert";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Typography from "@mui/material/Typography";
 import MetaData from '../layout/MetaData';
 // import _ from 'lodash';    
@@ -26,9 +27,6 @@ const categories = [
 const Products = ({ match }) => {
 
     const dispatch = useDispatch();
-
-    const alert = useAlert();
-
     const [currentPage, setCurrentPage] = useState(1);
     const [price, setPrice] = useState([0, 25000]);
     const [category, setCategory] = useState("");
@@ -52,11 +50,11 @@ const Products = ({ match }) => {
 
     useEffect(() => {
         if (error) {
-            alert.error(error);
+            toast.error(error);
             dispatch(clearErrors());
         }
         dispatch(getProduct(keyword, currentPage, price, category, ratings));
-    }, [dispatch, keyword, currentPage, price, category, ratings,alert, error]);
+    }, [dispatch, keyword, currentPage, price, category, ratings, toast, error]);
 
 
     return (

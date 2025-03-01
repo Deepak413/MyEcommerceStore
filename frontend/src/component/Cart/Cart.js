@@ -6,12 +6,12 @@ import { addItemsToCart, removeItemsFromCart } from "../../actions/cartAction";
 import { Typography } from "@mui/material";
 import { TbShoppingCartOff } from "react-icons/tb";
 import { Link } from "react-router-dom";
-import { useAlert } from 'react-alert';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
 
-    const alert = useAlert();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { cartItems } = useSelector((state) => state.cart);
@@ -19,7 +19,7 @@ const Cart = () => {
     const increaseQuantity = (id, quantity, stock) => {
         const newQty = quantity + 1;
         if (stock <= quantity) {
-            alert.error("Out of stock")
+            toast.error("Out of stock")
             return;
         }
         dispatch(addItemsToCart(id, newQty));
@@ -28,7 +28,7 @@ const Cart = () => {
     const decreaseQuantity = (id, quantity) => {
         const newQty = quantity - 1;
         if (1 >= quantity) {
-            alert.error("total cannot be 0")
+            toast.error("total cannot be 0")
             return;
         }
         dispatch(addItemsToCart(id, newQty));

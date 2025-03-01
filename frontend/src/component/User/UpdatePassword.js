@@ -1,7 +1,6 @@
 import "./UpdatePassword.css";
 import React, { Fragment, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAlert } from 'react-alert';
 import { AiOutlineLock } from "react-icons/ai";
 import { AiFillLock } from "react-icons/ai";
 import { RiKeyLine } from "react-icons/ri";
@@ -11,12 +10,12 @@ import { updatePassword, clearErrors } from '../../actions/userAction';
 import Loader from '../layout/Loader/Loader';
 import { updatePasswordReset } from '../../reducers/userReducer';
 import MetaData from '../layout/MetaData';
+import { toast } from "react-toastify";
 
 
 const UpdatePassword = () => {
 
     const dispatch = useDispatch();
-    const alert = useAlert();
     const navigate = useNavigate();
 
     const { error, isUpdated, loading } = useSelector((state) => state.profile);
@@ -40,18 +39,18 @@ const UpdatePassword = () => {
 
     useEffect(() => {
         if (error) {
-            alert.error(error);
+            toast.error(error);
             dispatch(clearErrors());
         }
 
         if (isUpdated) {
-            alert.success("Password Changed Successfully");
+            toast.success("Password Changed Successfully");
 
             navigate("/account");
 
             dispatch(updatePasswordReset());
         }
-    }, [dispatch, error, alert, navigate, isUpdated]);
+    }, [dispatch, error, toast, navigate, isUpdated]);
 
 
     return (

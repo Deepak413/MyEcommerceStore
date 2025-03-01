@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { getOrderDetails, clearErrors } from "../../actions/orderAction";
 import Loader from "../layout/Loader/Loader";
-import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from "react-router-dom";
 
 const OrderDetails = () => {
@@ -14,16 +15,15 @@ const OrderDetails = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     dispatch(getOrderDetails(id));
-  }, [dispatch, alert, error, id]);
+  }, [dispatch, toast, error, id]);
   return (
     <Fragment>
       {loading ? (

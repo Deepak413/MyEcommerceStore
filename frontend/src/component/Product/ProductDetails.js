@@ -8,7 +8,8 @@ import { useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard.js";
 import Loader from '../layout/Loader/Loader';
-import { useAlert } from 'react-alert';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import MetaData from '../layout/MetaData';
 import { addItemsToCart } from '../../actions/cartAction';
 import {
@@ -25,7 +26,6 @@ import { newReviewReset } from '../../reducers/productReducer.js';
 const ProductDetails = () => {
     const dispatch = useDispatch();
     const { id } = useParams();      //to get the id parameter from the current page
-    const alert = useAlert();
 
     const { product, loading, error } = useSelector((state) => state.productDetails);
 
@@ -58,7 +58,7 @@ const ProductDetails = () => {
 
     const addToCartHandler = () => {
         dispatch(addItemsToCart(id, quantity));
-        alert.success("Item added to cart");
+        toast.success("Item added to cart");
     }
 
     const submitReviewToggle = () => {
@@ -79,24 +79,23 @@ const ProductDetails = () => {
 
     useEffect(() => {
         if (error) {
-
             console.log("Error while getting product details");
-            alert.error(error);
+            toast.error(error);
             dispatch(clearErrors());
         }
 
         if (reviewError) {
-            alert.error(reviewError);
+            toast.error(reviewError);
             dispatch(clearErrors());
           }
       
           if (success) {
-            alert.success("Review Submitted Successfully");
+            toast.success("Review Submitted Successfully");
             dispatch(newReviewReset());
           }
 
         dispatch(getProductDetails(id));
-    }, [dispatch, id, alert, error, quantity, reviewError, success]);
+    }, [dispatch, id, toast, error, quantity, reviewError, success]);
 
     const options = {
         size: "large",
@@ -145,7 +144,7 @@ const ProductDetails = () => {
                                         Add to Cart
                                     </button>
                                 </div>
-
+                                
                                 <p>
                                     Status:
                                     <b className={product.Stock < 1 ? "redColor" : "greenColor"}>

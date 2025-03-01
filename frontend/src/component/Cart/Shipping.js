@@ -10,14 +10,14 @@ import PublicIcon from "@mui/icons-material/Public";
 import PhoneIcon from "@mui/icons-material/Phone";
 import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStation";
 import { Country, State } from "country-state-city";
-import { useAlert } from "react-alert";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import CheckoutSteps from "./CheckoutSteps.js";
 import { useNavigate } from "react-router-dom";
 
 const Shipping = ({ history }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const alert = useAlert();
   const { shippingInfo } = useSelector((state) => state.cart);
 
   const [address, setAddress] = useState(shippingInfo.address);
@@ -31,7 +31,7 @@ const Shipping = ({ history }) => {
     e.preventDefault();
 
     if (phoneNo.length < 10 || phoneNo.length > 10) {
-      alert.error("Phone Number should be 10 digits Long");
+      toast.error("Phone Number should be 10 digits Long");
       return;
     }
     dispatch(

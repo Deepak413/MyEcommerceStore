@@ -45,7 +45,7 @@ export const register = (userData) => async (dispatch) => {
         const config = { headers: { "Content-Type": "multipart/form-data" } };    //bcz image also included
 
         // const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/me/update`, userData, config);
-        const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/register`, userData, config);
+        const { data } = await axios.post(`http://localhost:4000/api/v1/register`, userData, config);
 
         console.log("registered user is : ", data);
 

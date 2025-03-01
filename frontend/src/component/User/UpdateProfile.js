@@ -3,25 +3,24 @@ import "./UpdateProfile.css";
 import { CiMail } from "react-icons/ci";
 import { BiUserCircle } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
-import { useAlert } from 'react-alert';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile, clearErrors, loadUser } from '../../actions/userAction';
 import Loader from '../layout/Loader/Loader';
 import { updateProfileReset } from '../../reducers/userReducer';
 import MetaData from '../layout/MetaData';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UpdateProfile = () => {
 
     const dispatch = useDispatch();
-    const alert = useAlert();
     const navigate = useNavigate();
 
     const { user } = useSelector((state) => state.user);
     const { error, isUpdated, loading } = useSelector((state) => state.profile);
     // console.log(user);
     // console.log(isUpdated);
-
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -60,20 +59,19 @@ const UpdateProfile = () => {
         }
 
         if (error) {
-            alert.error(error);
+            toast.error(error);
             dispatch(clearErrors());
         }
 
         if (isUpdated) {
-            alert.success("Profile Updated Successfully");
+            toast.success("Profile Updated Successfully");
             dispatch(loadUser());
 
             navigate("/account");
 
             dispatch(updateProfileReset());
         }
-    }, [dispatch, error, alert, navigate, user, isUpdated]);
-
+    }, [dispatch, error, toast, navigate, user, isUpdated]);
 
 
     return (
