@@ -58,8 +58,6 @@ function App() {
     
   }
 
-  console.log("for userOptions")
-  console.log(user);
   useEffect(() => {
     webFont.load({
       google: {

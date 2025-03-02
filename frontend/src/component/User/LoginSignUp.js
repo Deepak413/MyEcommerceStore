@@ -3,7 +3,7 @@ import "./LoginSignUp.css";
 import { CiMail } from "react-icons/ci";
 import { AiOutlineLock } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +12,6 @@ import Loader from '../layout/Loader/Loader';
 
 const LoginSignUp = () => {
     
-    const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { error, loading, isAuthenticated } = useSelector(state => state.user);

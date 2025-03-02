@@ -8,17 +8,21 @@ const path = require("path");
 
 const dotenv = require("dotenv");
 
-// const corsOptions = {
-//     origin: "http://localhost:3000" // frontend URI (ReactJS)
-// }
-// app.use(cors(corsOptions));
+const corsOptions = {
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    credentials: true, // Required for cookies and auth headers
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+};
 
-app.use(cors());   //only this line works in netlify for frontend
-
-// app.use(cors({
-//     origin: "https://shoppinggkaro.netlify.app/", // The frontend URL
-//     credentials: true
-// }));
+app.use(cors(corsOptions));
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", req.headers.origin); // Dynamic origin
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    next();
+});
 
 const errorMiddleware = require("./middleware/error");
 

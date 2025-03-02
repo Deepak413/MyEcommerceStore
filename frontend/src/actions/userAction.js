@@ -1,40 +1,52 @@
 import axios from "axios";
-import { clearAllErrors, 
-    forgotPasswordFail, 
-    forgotPasswordRequest, 
-    forgotPasswordSuccess, 
-    loadUserFail, 
-    loadUserRequest, 
-    loadUserSuccess, 
-    loginFail, 
-    loginRequest, 
-    loginSuccess, 
-    logoutFail, 
-    logoutSuccess,  
-    registerUserFail,  
-    registerUserRequest, 
-    registerUserSuccess, 
-    resetPasswordFail, 
-    resetPasswordRequest, 
-    resetPasswordSuccess, 
-    updatePasswordFail, 
-    updatePasswordRequest, 
-    updatePasswordSuccess, 
-    updateProfileFail, 
-    updateProfileRequest, 
-    updateProfileSuccess } from "../reducers/userReducer";
+import {
+    clearAllErrors,
+    forgotPasswordFail,
+    forgotPasswordRequest,
+    forgotPasswordSuccess,
+    loadUserFail,
+    loadUserRequest,
+    loadUserSuccess,
+    loginFail,
+    loginRequest,
+    loginSuccess,
+    logoutFail,
+    logoutSuccess,
+    registerUserFail,
+    registerUserRequest,
+    registerUserSuccess,
+    resetPasswordFail,
+    resetPasswordRequest,
+    resetPasswordSuccess,
+    updatePasswordFail,
+    updatePasswordRequest,
+    updatePasswordSuccess,
+    updateProfileFail,
+    updateProfileRequest,
+    updateProfileSuccess
+} from "../reducers/userReducer";
 
 export const login = (email, password) => async (dispatch) => {
     try {
         dispatch(loginRequest());
 
-        const config = { headers: { "Content-Type": "application/json" } };
+        const config = {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+        };
 
         const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/login`, { email, password }, config);
 
         dispatch(loginSuccess(data));
     } catch (error) {
-        dispatch(loginFail(error.response.data.message));
+        console.error(error);  // This will help debug the error in the console
+        if (error.response) {
+            dispatch(loginFail(error.response.data.message)); // If response exists, use it
+        } else if (error.request) {
+            dispatch(loginFail('Network error: No response received.'));
+        } else {
+            dispatch(loginFail('Error occurred while logging in.'));
+        }
     }
 };
 
@@ -45,7 +57,7 @@ export const register = (userData) => async (dispatch) => {
         const config = { headers: { "Content-Type": "multipart/form-data" } };    //bcz image also included
 
         // const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/me/update`, userData, config);
-        const { data } = await axios.post(`http://localhost:4000/api/v1/register`, userData, config);
+        const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/register`, userData, config);
 
         console.log("registered user is : ", data);
 

@@ -49,7 +49,7 @@ export const myOrders = () => async (dispatch) => {
 
         dispatch(myOrdersSuccess(data));
     } catch (error) {
-        console.log(error);
+        console.log("my orders are :", error);
         dispatch(myOrdersFail(error.response.data.message));
     }
 };
