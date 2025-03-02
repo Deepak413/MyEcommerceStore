@@ -8,21 +8,41 @@ const path = require("path");
 
 const dotenv = require("dotenv");
 
+// Allow both local frontend and Netlify frontend
+const allowedOrigins = [
+    "http://localhost:3000",  // Local frontend
+    "https://shoppinggkaro.netlify.app"  // Netlify frontend
+];
+
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
-    credentials: true, // Required for cookies and auth headers
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, origin); // Allow this origin
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true,  // Required for cookies/auth headers
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(cors(corsOptions));
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", req.headers.origin); // Dynamic origin
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    next();
-});
+// const corsOptions = {
+//     origin: process.env.FRONTEND_URL || "http://localhost:3000",
+//     credentials: true, // Required for cookies and auth headers
+//     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+//     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+// };
+
+// app.use(cors(corsOptions));
+// app.use((req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", req.headers.origin); // Dynamic origin
+//     res.header("Access-Control-Allow-Credentials", "true");
+//     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+//     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//     next();
+// });
 
 const errorMiddleware = require("./middleware/error");
 
