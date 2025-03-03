@@ -39,7 +39,7 @@ export const login = (email, password) => async (dispatch) => {
 
         dispatch(loginSuccess(data));
     } catch (error) {
-        console.error(error);  // This will help debug the error in the console
+        console.error(error);
         if (error.response) {
             dispatch(loginFail(error.response.data.message)); // If response exists, use it
         } else if (error.request) {
@@ -54,7 +54,10 @@ export const register = (userData) => async (dispatch) => {
     try {
         dispatch(registerUserRequest());
 
-        const config = { headers: { "Content-Type": "multipart/form-data" } };    //bcz image also included
+        const config = {
+            headers: { "Content-Type": "multipart/form-data" },
+            withCredentials: true,
+        };
 
         // const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/me/update`, userData, config);
         const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/register`, userData, config);
@@ -96,7 +99,10 @@ export const updateProfile = (userData) => async (dispatch) => {
     try {
         dispatch(updateProfileRequest());
 
-        const config = { headers: { "Content-Type": "multipart/form-data" } };    //bcz image also included
+        const config = {
+            headers: { "Content-Type": "multipart/form-data" },
+            withCredentials: true,
+        };
 
         const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/me/update`, userData, config);
 
@@ -108,17 +114,27 @@ export const updateProfile = (userData) => async (dispatch) => {
 
 
 // Update password
-export const updatePassword = (passwords) => async (dispatch) => {
+export const updatePassword = (token, passwords) => async (dispatch) => {
     try {
         dispatch(updatePasswordRequest());
 
-        const config = { headers: { "Content-Type": "application/json" } };
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true,
+        };
+
+        console.log("sending password update axios request with credentials");
 
         const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/password/update`, passwords, config);
 
         dispatch(updatePasswordSuccess(data));
     } catch (error) {
-        dispatch(updatePasswordFail(error.response.data.message));
+        // dispatch(updatePasswordFail(error.response.data.message));
+        console.error("Update Password Error: ", error);
+        dispatch(updatePasswordFail(error.response?.data?.message || "Something went wrong"));
     }
 };
 
@@ -127,7 +143,10 @@ export const forgotPassword = (email) => async (dispatch) => {
     try {
         dispatch(forgotPasswordRequest());
 
-        const config = { headers: { "Content-Type": "application/json" } };
+        const config = {
+            headers: { "Content-Type": "application/json"  },
+            withCredentials: true,
+        };
 
         const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/password/forgot`, email, config);
 
@@ -142,7 +161,10 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
     try {
         dispatch(resetPasswordRequest());
 
-        const config = { headers: { "Content-Type": "application/json" } };
+        const config = {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+        };
 
         const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/password/reset/${token}`, passwords, config);
 

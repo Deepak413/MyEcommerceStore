@@ -9,48 +9,38 @@ const path = require("path");
 const dotenv = require("dotenv");
 
 // Allow both local frontend and Netlify frontend
-const allowedOrigins = [
-    "http://localhost:3000",  // Local frontend
-    "https://shoppinggkaro.netlify.app"  // Netlify frontend
-];
+// const allowedOrigins = [
+//     "http://localhost:3000",  // Local frontend
+//     "https://shoppinggkaro.netlify.app"  // Netlify frontend
+// ];
 
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, origin); // Allow this origin
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    credentials: true,  // Required for cookies/auth headers
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-};
-
-app.use(cors(corsOptions));
 // const corsOptions = {
-//     origin: process.env.FRONTEND_URL || "http://localhost:3000",
-//     credentials: true, // Required for cookies and auth headers
-//     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-//     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+//     origin: function (origin, callback) {
+//         if (!origin || allowedOrigins.includes(origin)) {
+//             callback(null, origin); // Allow this origin
+//         } else {
+//             callback(new Error("Not allowed by CORS"));
+//         }
+//     },
+//     credentials: true,  // Required for cookies/auth headers
+//     Headers: true,
+//     exposedHeaders: 'Set-Cookie',
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
 // };
+app.use(cors({
+    origin: ["http://localhost:3000", "https://shoppinggkaro.netlify.app"],
+    credentials: true,  // 🔥 ALLOW COOKIES TO BE SENT
+}));
 
 // app.use(cors(corsOptions));
-// app.use((req, res, next) => {
-//     res.header("Access-Control-Allow-Origin", req.headers.origin); // Dynamic origin
-//     res.header("Access-Control-Allow-Credentials", "true");
-//     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//     next();
-// });
-
 const errorMiddleware = require("./middleware/error");
 
 //config
 dotenv.config({ path: "backend/config/config.env" });
+app.use(cookieParser());
 
 app.use(express.json());
-app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 

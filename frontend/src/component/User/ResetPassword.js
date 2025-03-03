@@ -16,8 +16,7 @@ const ResetPassword = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {token} = useParams();
-    console.log("token = ");
-    console.log(token);
+    console.log("token in ResetPassword.js = ", token);
 
     const { error, success, loading } = useSelector((state) => state.forgotPassword);
 

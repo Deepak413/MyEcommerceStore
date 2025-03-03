@@ -12,11 +12,14 @@ import MetaData from "../layout/MetaData";
 import LaunchIcon from "@mui/icons-material/Launch";
 
 const MyOrders = () => {
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
+  
   const { loading, error, orders } = useSelector((state) => state.myOrders);
   const { user } = useSelector((state) => state.user);
-
+  console.log("Entered in MyOrders.js with user : ", user);
+  console.log("Also with orders : ", orders);
+  
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
 

@@ -35,6 +35,8 @@ const UpdateProfile = () => {
         myForm.set("name", name);
         myForm.set("email", email);
         myForm.set("avatar", avatar);
+        if(error)
+            console.log("getting error while updating profile : ",error);
         dispatch(updateProfile(myForm));
     };
 
@@ -59,6 +61,7 @@ const UpdateProfile = () => {
         }
 
         if (error) {
+            console.log("inside UpdateProfile.js : ",error);
             toast.error(error);
             dispatch(clearErrors());
         }

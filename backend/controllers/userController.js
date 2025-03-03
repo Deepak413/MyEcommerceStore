@@ -161,6 +161,8 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 //Update User Password
 exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 
+  console.log("in userController, token is : ", req.token);
+
   const user = await User.findById(req.user.id).select("+password");
 
   const isPasswordMatched = await user.comparePassword(req.body.oldPassword);

@@ -1,6 +1,6 @@
 import "./UpdatePassword.css";
 import React, { Fragment, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AiOutlineLock } from "react-icons/ai";
 import { AiFillLock } from "react-icons/ai";
 import { RiKeyLine } from "react-icons/ri";
@@ -18,6 +18,10 @@ const UpdatePassword = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const { user, isAuthenticated } = useSelector((state) => state.user);
+    console.log("Inside UpdatePassword.js token : ", user.token);
+    console.log("Inside UpdatePassword.js token from localstorage : ", localStorage.getItem("Cookies"));
+
     const { error, isUpdated, loading } = useSelector((state) => state.profile);
 
 
@@ -27,18 +31,22 @@ const UpdatePassword = () => {
 
     const updatePasswordSubmit = (e) => {
         e.preventDefault();
-    
+
         const myForm = new FormData();
-    
+
         myForm.set("oldPassword", oldPassword);
         myForm.set("newPassword", newPassword);
         myForm.set("confirmPassword", confirmPassword);
-    
-        dispatch(updatePassword(myForm));
-      };
+
+        if (error)
+            console.log("getting error while updating password : ", error);
+        console.log("dispatching password update");
+        dispatch(updatePassword(user.token, myForm));
+    };
 
     useEffect(() => {
         if (error) {
+            console.log("inside UpdatePassword.js error : ", error);
             toast.error(error);
             dispatch(clearErrors());
         }
