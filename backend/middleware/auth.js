@@ -6,25 +6,23 @@ const ErrorHander = require("../utils/errorhander");
 exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     console.log("Authentication process started");
     console.log("req in auth : ", req);
-    console.log("req in auth ended")
-    console.log("Headers received in request in auth:", req.headers);
-    console.log("Headers received in request in auth: ended");
+    console.log("req in auth ended");
 
-    console.log("Cookies in Headers in auth:", req.headers);
-    console.log("Cookies in Headers in auth: ended");
+    console.log("Headers in auth:", req.headers);
+    console.log("Headers in auth: ended");
 
     console.log("Received Cookies in auth:", req.cookies);
     console.log("Received Cookies in auth: ended")
 
-    const authHeader = req.headers.authorization;
-    console.log("authorization in auth.js : ", authHeader);
-    console.log("authorization in auth.js : ended");
+    // const authHeader = req.headers.authorization;
+    // console.log("authorization in auth.js : ", authHeader);
+    // console.log("authorization in auth.js : ended");
 
-    const token = authHeader.split(" ")[1];
+    // const token = authHeader.split(" ")[1];
 
-    console.log("token in auth.js : ", token);
+    // console.log("token in auth.js : ", token);
     
-    console.log("Checking incoming cookies inside auth.js : ", req.cookies);
+    console.log("Checking incoming token cookie inside auth.js : ", req.cookies.token);
 
     // if (!token) {
     //     return next(new ErrorHander("Token not found!, Please Login to access this resource", 401));
@@ -35,9 +33,8 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     }
 
     try {
-        // const token = authorization.split(" ")[1]; // Extract token
-        console.log("Extracted token from Authorization : ", token);
-        const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+        // console.log("Extracted token from Authorization : ", token);
+        const decodedData = jwt.verify(req.cookies.token, process.env.JWT_SECRET);
         console.log("Decoded data in auth : ", decodedData);
 
         req.user = await User.findById(decodedData.id);

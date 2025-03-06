@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
     const navigate = useNavigate();
     const { user, loading, isAuthenticated } = useSelector((state) => state.user);
-    console.log(user);
     console.log("Is user is authenticated : ", isAuthenticated);
 
     useEffect(() => {
