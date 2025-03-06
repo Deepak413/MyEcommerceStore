@@ -26,6 +26,8 @@ import {
     updateProfileSuccess
 } from "../reducers/userReducer";
 
+axios.defaults.withCredentials = true;
+
 export const login = (email, password) => async (dispatch) => {
     try {
         dispatch(loginRequest());

@@ -7,6 +7,7 @@ const cors = require('cors');
 const path = require("path");
 
 const dotenv = require("dotenv");
+const errorMiddleware = require("./middleware/error");
 
 // Allow both local frontend and Netlify frontend
 // const allowedOrigins = [
@@ -30,11 +31,13 @@ const dotenv = require("dotenv");
 // };
 app.use(cors({
     origin: ["http://localhost:3000", "https://shoppinggkaro.netlify.app"],
-    credentials: true,  // 🔥 ALLOW COOKIES TO BE SENT
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 
 // app.use(cors(corsOptions));
-const errorMiddleware = require("./middleware/error");
+
 
 //config
 dotenv.config({ path: "backend/config/config.env" });
