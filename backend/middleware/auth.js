@@ -28,7 +28,7 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     //     return next(new ErrorHander("Token not found!, Please Login to access this resource", 401));
     // }
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (!req.cookies?.token) {
         return res.status(401).json({ message: "Authentication required!!! Token not found!, Please Login to access this resource" });
     }
 

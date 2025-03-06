@@ -20,7 +20,6 @@ const UpdatePassword = () => {
 
     const { user, isAuthenticated } = useSelector((state) => state.user);
     console.log("Inside UpdatePassword.js token : ", user.token);
-    console.log("Inside UpdatePassword.js token from localstorage : ", localStorage.getItem("Cookies"));
 
     const { error, isUpdated, loading } = useSelector((state) => state.profile);
 
