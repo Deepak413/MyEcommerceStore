@@ -3,11 +3,6 @@
     scroll-behavior: smooth;
   }
   
-  body {
-    cursor: url("./images/cursor1.png"), auto;
-  }
-  
-  
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -19,4 +14,8 @@
   }
   .redColor {
     color: red !important;
+  }
+
+  nav {
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
   }

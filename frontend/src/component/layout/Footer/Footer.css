@@ -1,79 +1,393 @@
-footer {
-    margin-top: 10vmax;
-    padding: 2vmax;
-    background-color: rgb(34, 33, 33);
-    color: white;
+/* FOOTER CSS */
+.footer {
+    width: 100%;
+    background-color: rgb(229, 229, 229);
+}
+
+.footer_container {
+    padding: 2.3rem 4rem;
     display: flex;
-    align-items: center;
 }
 
-.leftFooter {
-    width: 20%;
-    display: flex;
-
-    flex-direction: column;
-    align-items: center;
+.footer_container_left {
+    /* border: 1px solid red; */
+    width: 30%;
+    padding: 25px 0;
 }
 
-.leftFooter>h4 {
-    font-family: "Roboto";
-    /* font-size: 1vmax; */
-}
 
-.leftFooter>p {
-    text-align: center;
-    /* font-size: 1.2vmax; */
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-}
-
-.leftFooter>img {
-    width: 10vmax;
-    margin: 1vmax;
-    cursor: pointer;
-}
-
-.midFooter {
-    width: 60%;
-
-    text-align: center;
-}
-
-.midFooter>h1 {
-    font-size: 4vmax;
-    font-family: "Roboto";
-    color: #eb4034;
-}
-
-.midFooter>p {
-    max-width: 60%;
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-    margin: 1vmax auto;
-}
-
-.rightFooter {
-    width: 20%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.rightFooter>h4 {
-    font-family: "Roboto";
-    font-size: 1.4vmax;
-    text-decoration: underline;
-}
-
-.rightFooter>a {
+.footer_container_left a {
     text-decoration: none;
-    font-size: 1.3vmax;
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-    color: white;
-    transition: all 0.5s;
-    margin: 0.5vmax;
+
 }
 
-.rightFooter>a:hover {
-    color: #eb4034;
+.footer_logo>a {
+    font-family: "Saira Condensed", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    /* font-family: "Boldonse", system-ui; */
+    letter-spacing: 4px;
+    font-size: 1.5rem;
+    color: black;
+    line-height: 1.2rem;
+
+}
+
+.footer_logo1>a {
+    font-size: 2.5rem;
+    color: #919191;
+    opacity: 0.7;
+    font-family: system-ui;
+}
+
+
+.footer_container_left>p {
+    padding-top: 20px;
+    font-family: system-ui;
+    text-align: justify;
+}
+
+.footer_links {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 23px 0;
+}
+
+.footer_links h5 {
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 3px;
+    font-size: 23px;
+}
+
+.footer_links_list {
+    list-style: none;
+    padding: 2px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 27px;
+    
+}
+
+.footer_link {
+    text-decoration: none;
+    color: #444444;
+    font-size: 17px;
+    font-weight: bold;
+    
+    font-family: 'Roboto';
+    transition: color 0.3s ease-in-out;
+}
+
+.footer_link:hover {
+    color: #999999;
+}
+
+
+.footer_container_right {
+    width: 50%;
+    padding: 23px 0;
+    /* border: 1px solid red; */
+}
+
+.footer_mail_container {
+    margin-bottom: 35px;
+}
+
+.footer_mail_container h5 {
+    color: black;
+    /* margin-bottom: 22px; */
+    /* font-family: fantasy; */
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 3px;
+    font-size: 23px;
+}
+
+.footer_mail_container input {
+    padding: 10px;
+    font-size: 17px;
+    width: 70%;
+    border-radius: 7px;
+    border: 1px solid #cecece;
+    margin-right: 12px;
+}
+
+.footer_mail_container button {
+    /* font-size: 13px; */
+    /* font-weight: bold; */
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 11px 18px;
+    background-color: #868686;
+    color: #f5f5f5;
+    font-family: sans-serif;
+    letter-spacing: 3px;
+    border: 1px solid black;
+}
+
+.footer_mail_container button:hover {
+    background-color: black;
+    transition: 0.5s;
+}
+
+
+.footer_info_container {
+    display: flex;
+    /* border: 1px solid yellow; */
+    width: 100%;
+}
+
+.footer_address_detail {
+    /* width: 45%; */
+    padding: 30px 0px;
+    font-family: 'Roboto';
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+.footer_address_detail h5 {
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    margin-bottom: 13px;
+}
+
+.footer_address_card {
+    display: flex;
+    margin-bottom: 6px;
+    align-items: center;
+}
+
+.footer_address_cardicon {
+    font-size: 1.5rem;
+    margin-right: 13px;
+}
+
+.footer_social_card {
+    width: 100%;
+}
+
+.footer_social_card h3 {
+    color: black;
+    /* font-weight: bold; */
+    /* margin-bottom: 13px; */
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 3px;
+    font-size: 23px;
+}
+
+.footer_social_cardlinks {
+    display: flex;
+    padding: 19px 0;
+    gap: 18px;
+
+}
+
+.footer_social_cardlink {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 18px;
+}
+
+.footer_social_cardlinks .insta_icon,
+.footer_social_cardlinks .linkedin_icon,
+.footer_social_cardlinks .fb_icon,
+.footer_social_cardlinks .twitter_icon {
+    text-decoration: none;
+    /* Removes underline from the links */
+    color: black;
+    /* Default color of icons */
+    transition: color 0.3s ease, transform 0.3s ease;
+    /* Smooth transition for color and scaling */
+    display: inline-block;
+    /* Ensures icons stay inline */
+}
+
+/* Hover Effects */
+.footer_social_cardlinks .insta_icon:hover {
+    color: #E4405F;
+    /* Instagram pink color */
+    transform: scale(1.1);
+    /* Slightly zoom in on hover */
+}
+
+.footer_social_cardlinks .linkedin_icon:hover {
+    color: #0077b5;
+    /* LinkedIn blue color */
+    transform: scale(1.1);
+    /* Slightly zoom in on hover */
+}
+
+.footer_social_cardlinks .fb_icon:hover {
+    color: #1877f2;
+    /* Facebook blue color */
+    transform: scale(1.1);
+    /* Slightly zoom in on hover */
+}
+
+.footer_social_cardlinks .twitter_icon:hover {
+    color: #1da1f2;
+    /* Twitter blue color */
+    transform: scale(1.1);
+    /* Slightly zoom in on hover */
+}
+
+.footer_line {
+    width: 100%;
+    background-color: rgb(81 81 81);
+    color: white;
+    font-weight: 500;
+    font-family: 'Roboto';
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+
+/* CSS FOR TABLET */
+@media (max-width: 850px) {
+    .footer_container {
+        padding: 3rem 1rem;
+    }
+
+    .footer_container_left {
+        width: 41%;
+        padding: 25px 31px;
+    }
+
+    .footer_container_right {
+        width: 59%;
+        padding: 35px 13px;
+    }
+
+    .footer_container_left>a {
+        font-weight: 400;
+        font-size: 1.3rem;
+    }
+
+    .footer_container_left>p {
+        padding-top: 20px;
+        width: 84%;
+        font-family: system-ui;
+        display: flex;
+        text-align: justify;
+    }
+
+    .footer_mail_container input {
+        padding: 7px 10px;
+        width: 70%;
+    }
+
+    .footer_mail_container button {
+        font-size: 13px;
+        margin-top: 20px;
+        border-radius: 10px;
+        padding: 11px 18px;
+        background-color: #868686;
+        color: #f5f5f5;
+        font-family: sans-serif;
+        letter-spacing: 3px;
+        border: 1px solid black;
+    }
+
+    .footer_address_detail {
+        margin-right: 14px;
+    }
+
+    .footer_social_card p {
+        width: 75%;
+    }
+
+    .footer_social_cardlink {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 13px;
+    }
+}
+
+
+
+
+/* CSS FOR MOBILE PHONES */
+@media (max-width: 450px) {
+    .footer_container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer_container_left {
+        width: 100%;
+        padding: 25px;
+    }
+
+    .footer_container_right {
+        width: 100%;
+        padding: 18px 26px;
+    }
+
+    .footer_container_left>a {
+        font-weight: 400;
+        font-size: 1.3rem;
+    }
+
+    .footer_container_left>p {
+        width: 92%;
+    }
+
+    .footer_mail_container {
+        margin-bottom: 45px;
+    }
+
+    .footer_mail_container h5 {
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+        font-size: 21px;
+    }
+
+    .footer_mail_container input {
+        padding: 5px 13px;
+        width: 91%;
+    }
+
+    .footer_mail_container button {
+        font-size: 12px;
+        margin-top: 11px;
+        padding: 6px 14px;
+    }
+
+    /* .footer_social_card h5 {
+        font-size: 19px;
+    } */
+
+    .footer_social_card p {
+        width: 75%;
+    }
+
+    .footer_social_cardlinks {
+        width: 84%;
+    }
+
+    .footer_social_cardlink {
+        font-size: 13px;
+        padding: 13px;
+        margin-right: 10px;
+    }
+
+    .footer_line {
+        padding: 9px 10px;
+        font-size: 12px;
+    }
 }

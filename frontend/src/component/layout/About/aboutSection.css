@@ -1,4 +1,4 @@
-.aboutSection {
+/* .aboutSection {
     height: 100vh;
     width: 100vw;
     max-width: 100%;
@@ -121,4 +121,103 @@
       font-size: 6vmax;
       margin: 1vmax;
     }
+  } */
+
+
+  .about-us {
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
   }
+  
+  .about-banner {
+    /* background: url("../../../images/aboutbg.jpg") no-repeat center center/cover; */
+    color: white;
+    
+    /* Ensure full page coverage */
+    width: 100vw;   /* Full viewport width */
+    height: 80vh;  /* Full viewport height */
+    
+    /* Flexbox to center content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    /* Optional: Fix the position so it remains fullscreen */
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  
+  .about-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 50px 0;
+  }
+  
+  .about-text {
+    max-width: 600px;
+    text-align: left;
+  }
+  
+  .about-text h2 {
+    font-size: 28px;
+    color: #0073e6;
+  }
+  
+  .about-image img {
+    width: 400px;
+    border-radius: 10px;
+  }
+  
+  .mission-section {
+    background: #f8f8f8;
+    padding: 40px;
+    margin-top: 30px;
+  }
+  
+  .why-choose-us {
+    text-align: left;
+    max-width: 700px;
+    margin: auto;
+  }
+  
+  .why-choose-us h2 {
+    text-align: center;
+    color: #0073e6;
+  }
+  
+  .why-choose-us ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .why-choose-us li {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .our-products {
+    margin-top: 40px;
+  }
+  
+  .product-icons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+  }
+  
+  .product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .product-item p {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  

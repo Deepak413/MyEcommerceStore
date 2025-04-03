@@ -1,4 +1,4 @@
-.contactContainer {
+/* .contactContainer {
     height: 100vh;
     width: 100vw;
     max-width: 100%;
@@ -25,4 +25,115 @@
     to {
       transform: translateX(0);
     }
+  } */
+
+  .contact_us {
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
   }
+  
+  /* Header Section */
+  .contact_banner {
+    /* background: url("../../../images/contactbg.jpg") no-repeat center center/cover; */
+    color: white;
+    padding: 80px 20px;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Contact Form & Details Section */
+  .contact_container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 50px 0;
+  }
+  
+  /* Contact Form */
+  .contact_form {
+    width: 45%;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact_form h2 {
+    margin-bottom: 15px;
+    color: #0073e6;
+  }
+  
+  .contact_form form input,
+  .contact_form form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .contact_form form textarea {
+    height: 100px;
+  }
+  
+  .contact_form form button {
+    background: #0073e6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .contact_form form button:hover {
+    background: #005bb5;
+  }
+  
+  /* Contact Details */
+  .contact_details {
+    width: 45%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .contact_details h2 {
+    color: #0073e6;
+  }
+  
+  .contact_details p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  /* Google Map */
+  .contact_map {
+    margin-top: 40px;
+  }
+  
+  .contact_map h2 {
+    margin-bottom: 10px;
+    color: #0073e6;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .contact_container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .contact_form, .contact_details {
+      width: 90%;
+    }
+  }
+  

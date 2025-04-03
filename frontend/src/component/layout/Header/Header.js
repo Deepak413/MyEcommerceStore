@@ -1,63 +1,56 @@
-import React from 'react'
-import {ReactNavbar} from "overlay-navbar";
-import logo from "../../../images/logo.png";
+import {React, useState} from 'react';
 import { BsFillCartFill } from 'react-icons/bs';
 import { ImSearch } from 'react-icons/im';
 import { BiSolidUserPin } from 'react-icons/bi';
 
+import { NavLink, useLocation } from "react-router-dom";
+import { FiMenu, FiX } from "react-icons/fi";
+import "./Header.css"; 
 
-const options = {
-    burgerColorHover: "#eb4034",
-    burgerColor: "wheat",
-    logo,
-    logoWidth: "20vmax",
-    navColor1: "white",
-    logoHoverSize: "10px",
-    logoHoverColor: "#eb4034",
-    logoAnimationTime: "0.1",
-    logoTransition: "0.1",
-    link1Text: "Home",
-    link2Text: "Products",
-    link3Text: "Contact",
-    link4Text: "About",
-    link1Url: "/",
-    link2Url: "/products",
-    link3Url: "/contact",
-    link4Url: "/about",
-    link1Size: "1.3vmax",
-    link1Color: "rgba(35, 35, 35,0.8)",
-    nav1justifyContent: "flex-end",
-    nav2justifyContent: "flex-end",
-    nav3justifyContent: "flex-start",
-    nav4justifyContent: "flex-start",
-    link1AnimationTime: "0.1",
-    searchIconAnimationTime: "0.1",
-    link1ColorHover: "#eb4034",
-    link1Margin: "1vmax",
-    profileIconUrl: "/login",
-    searchIconUrl: "/search",
-    cartIconUrl: "/cart",
-    profileIconColor: "rgba(35, 35, 35,0.8)",
-    searchIconColor: "rgba(35, 35, 35,0.8)",
-    cartIconColor: "rgba(35, 35, 35,0.8)",
-    profileIconColorHover: "#eb4034",
-    searchIconColorHover: "#eb4034",
-    cartIconColorHover: "#eb4034",
-    cartIconMargin: "1vmax",
-    cartIcon :true,
-    CartIconElement: BsFillCartFill,
-    searchIcon :true,
-    SearchIconElement: ImSearch,
-    profileIcon :true,
-    ProfileIconElement: BiSolidUserPin,
-  };
+import { FaPersonWalkingLuggage } from "react-icons/fa6";
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const isHomePage = location.pathname === "/";
   return (
-    <>
-        <ReactNavbar {...options} />
-    </>
-  )
-}
+    <nav className="navbar">
+      <div className="navbar_container">
+
+        <div className="navlogo_container">
+          <div className={`nav_logo ${isHomePage ? "white_nav_link" : ""}`} >
+            <NavLink to="/">SHOPPINGG</NavLink>
+          </div>
+          <div className={`nav_logo1 ${isHomePage ? "white_nav_logo1" : ""}`} >
+            <NavLink to="/">KARO</NavLink>
+            <FaPersonWalkingLuggage style={{ color: location.pathname === "/" ? "white" : "black" }}  size={35} />
+          </div>
+        </div>
+        <ul className={`nav_links ${isOpen ? "active" : ""} ${isHomePage ? "white_nav_link" : ""}`}>
+          <li><NavLink to="/" className="nav_item">Home</NavLink></li>
+          <li><NavLink to="/products" className="nav_item">Products</NavLink></li>
+          <li><NavLink to="/contact" className="nav_item">Contact</NavLink></li>
+          <li><NavLink to="/about" className="nav_item">About</NavLink></li>
+
+        </ul>
+
+        <ul className={`nav_links ${isOpen ? "active" : ""} ${isHomePage ? "white_nav_link" : ""}`}>
+          <li><NavLink to="/search" className="nav_item"><ImSearch size={30} /></NavLink></li>
+          <li><NavLink to="/cart" className="nav_item"><BsFillCartFill size={30} /></NavLink></li>
+          <li><NavLink to="/login" className="nav_item"><BiSolidUserPin size={30} /></NavLink></li>
+
+        </ul>
+
+        {/* Mobile Menu Button */}
+        <button className="menu-icon" onClick={toggleMenu}>
+          {isOpen ? <FiX /> : <FiMenu />}
+        </button>
+      </div>
+    </nav>
+  );
+};
 
 export default Header

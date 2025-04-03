@@ -9,13 +9,6 @@ import Loader from '../layout/Loader/Loader';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// const product = {
-//     name: "Black Shirt",
-//     images:[{ url: "https://assets.ajio.com/medias/sys_master/root/20220121/hol0/61ea6d54f997dd6623328068/-288Wx360H-462521550-black-MODEL.jpg" }],
-//     price: "$40",
-//     _id:"abhishek",
-// }
-
 const Home = () => {
     const dispatch = useDispatch();
     const { loading, error, products } = useSelector(state => state.products);
@@ -30,41 +23,25 @@ const Home = () => {
 
     return (
         <Fragment>
-            <Fragment>
-                <MetaData title="ECOMMERCE" />
-                <div className="banner">
-                    <p>Welcome to ShoppingKaro</p>
-                    <h1>FIND AMAZING PRODUCT BELOW</h1>
-
-                    <a href="#container">
-                        <button> Scroll <CgMouse /> </button>
-                    </a>
+            <MetaData title="ShoppinggKaro" />
+            <div className="banner">
+                <div className="overlay"></div>
+                <div className="home_content">
+                    <h1>LET'S LEVEL UP </h1>
+                    <h1>YOUR GADGETS</h1>
                 </div>
 
-                <h2 className="homeHeading">Featured Products</h2>
-
-                {loading ? <Loader /> :
-                    <div className="container" id="container">
-                        {products && products.map(product => <ProductCard key={product._id} product={product} />)}
-                    </div>}
-            </Fragment>
-            {/* <Fragment>
-                <MetaData title="ECOMMERCE" />
-                <div className="banner">
-                    <p>Welcome to ShoppingKaro</p>
-                    <h1>INTRODUCING NEW ARRIVALS</h1>
-
                     <a href="#container">
-                        <button> View Collection <CgMouse /> </button>
+                        <button> Shop Now <CgMouse /> </button>
                     </a>
-                </div>
+            </div>
 
-                <h2 className="homeHeading">Featured Products</h2>
+            <h2 className="homeHeading">Featured Products</h2>
 
+            {loading ? <Loader /> :
                 <div className="container" id="container">
                     {products && products.map(product => <ProductCard key={product._id} product={product} />)}
-                </div>
-            </Fragment> */}
+                </div>}
         </Fragment>
     )
 }

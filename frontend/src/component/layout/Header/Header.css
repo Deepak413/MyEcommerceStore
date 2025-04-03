@@ -1,4 +1,4 @@
-.speedDial{
+/* .speedDial{
     position: fixed;
     right: 3vmax;
     top: 3vmax;
@@ -10,4 +10,120 @@
     height: 56px;
     border-radius: 50%;
     border: 2px solid black;
+} */
+
+.navbar {
+  position: absolute;
+  background: transparent;
+  color: white;
+  padding: 23px 20px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 89%;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.navlogo_container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.nav_logo>a {
+  font-family: "Saira Condensed", sans-serif;
+  font-weight: 400;
+  text-decoration: none;
+  font-style: normal;
+  letter-spacing: 4px;
+  font-size: 1.2rem;
+  color: black;
+  line-height: 1.2rem;
+
+}
+.nav_logo_icon{
+  color: black;
+}
+
+.nav_logo1>a {
+  font-size: 2rem;
+  color: #a8a6a6;
+  opacity: 0.7;
+  text-decoration: none;
+  font-family: system-ui;
+  letter-spacing: 5px;
+}
+
+.nav_links a:hover {
+  color: #ff6600;
+}
+
+.nav_links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav_item {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
+  font-family: 'Droid Sans';
+}
+
+.white_nav_link a {
+  color: white;
+}
+.white_nav_logo1{
+  color: white;
+
+}
+
+.nav-item:hover {
+  color: #ff6600;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .nav_links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #333;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    display: none;
+  }
+
+  .nav_links.active {
+    display: flex;
+  }
+
+  .nav_item {
+    padding: 10px 0;
+  }
 }

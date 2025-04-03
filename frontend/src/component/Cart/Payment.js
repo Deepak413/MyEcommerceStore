@@ -35,6 +35,8 @@ const Payment = () => {
   const { user } = useSelector((state) => state.user);
   const { error } = useSelector((state) => state.newOrder);
 
+  axios.defaults.withCredentials = true;
+
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
   };

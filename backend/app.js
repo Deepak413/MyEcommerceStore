@@ -9,35 +9,12 @@ const path = require("path");
 const dotenv = require("dotenv");
 const errorMiddleware = require("./middleware/error");
 
-// Allow both local frontend and Netlify frontend
-// const allowedOrigins = [
-//     "http://localhost:3000",  // Local frontend
-//     "https://shoppinggkaro.netlify.app"  // Netlify frontend
-// ];
-
-// const corsOptions = {
-//     origin: function (origin, callback) {
-//         if (!origin || allowedOrigins.includes(origin)) {
-//             callback(null, origin); // Allow this origin
-//         } else {
-//             callback(new Error("Not allowed by CORS"));
-//         }
-//     },
-//     credentials: true,  // Required for cookies/auth headers
-//     Headers: true,
-//     exposedHeaders: 'Set-Cookie',
-//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//     allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
-// };
 app.use(cors({
     origin: ["http://localhost:3000", "https://shoppinggkaro.netlify.app"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
     methods: ["GET", "POST", "PUT", "DELETE"],
 }));
-
-// app.use(cors(corsOptions));
-
 
 //config
 dotenv.config({ path: "backend/config/config.env" });
