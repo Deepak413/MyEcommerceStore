@@ -2,14 +2,20 @@ import axios from "axios";
 import { allProductFail, allProductRequest, allProductSuccess, clearAllErrors, productDetailsFail, productDetailsSuccess } from "../reducers/productReducer";
 import { productDetailsRequest, newReviewFail, newReviewRequest, newReviewReset, newReviewSuccess } from "../reducers/productReducer";
 
-export const getProduct = (keyword = "", currentPage=1, price=[0,25000], category, ratings=0) => async(dispatch) => {
+export const getProduct = (keyword = "", currentPage=1, price=[12000, 150000], category, ratings=0) => async(dispatch) => {
     try {
         dispatch(allProductRequest());
 
         let link = `https://shoppingkaro-65sf.onrender.com/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
 
+        // if (category) {
+        //     link += `&category=${category}&ratings[gte]=${ratings}`;
+        // }
         if (category) {
-            link += `&category=${category}&ratings[gte]=${ratings}`;
+            link += `&category=${category}`;
+        }
+        if (ratings > 0) {
+            link += `&ratings[gte]=${ratings}`;
         }
 
         // let link = ` http://localhost:4000/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;

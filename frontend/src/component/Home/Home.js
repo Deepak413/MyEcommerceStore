@@ -30,16 +30,20 @@ const Home = () => {
                     <h1>LET'S LEVEL UP </h1>
                     <h1>YOUR GADGETS</h1>
                 </div>
+                <div className="home_content1">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor.</p>
+                </div>
 
-                    <a href="#container">
-                        <button> Shop Now <CgMouse /> </button>
-                    </a>
+                <a href="#container">
+                    <button> Shop Now <CgMouse /> </button>
+                </a>
             </div>
 
-            <h2 className="homeHeading">Featured Products</h2>
+            <h2 id="container" className="homeHeading">Featured Products</h2>
 
             {loading ? <Loader /> :
-                <div className="container" id="container">
+                <div className="container">
                     {products && products.map(product => <ProductCard key={product._id} product={product} />)}
                 </div>}
         </Fragment>

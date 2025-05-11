@@ -1,16 +1,18 @@
-import {React, useState} from 'react';
+import { React, useState } from 'react';
 import { BsFillCartFill } from 'react-icons/bs';
 import { ImSearch } from 'react-icons/im';
 import { BiSolidUserPin } from 'react-icons/bi';
 
 import { NavLink, useLocation } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
-import "./Header.css"; 
+import "./Header.css";
 
 import { FaPersonWalkingLuggage } from "react-icons/fa6";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+
   const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -26,7 +28,7 @@ const Header = () => {
           </div>
           <div className={`nav_logo1 ${isHomePage ? "white_nav_logo1" : ""}`} >
             <NavLink to="/">KARO</NavLink>
-            <FaPersonWalkingLuggage style={{ color: location.pathname === "/" ? "white" : "black" }}  size={35} />
+            <FaPersonWalkingLuggage style={{ color: location.pathname === "/" ? "white" : "black" }} size={25} />
           </div>
         </div>
         <ul className={`nav_links ${isOpen ? "active" : ""} ${isHomePage ? "white_nav_link" : ""}`}>
@@ -38,9 +40,14 @@ const Header = () => {
         </ul>
 
         <ul className={`nav_links ${isOpen ? "active" : ""} ${isHomePage ? "white_nav_link" : ""}`}>
-          <li><NavLink to="/search" className="nav_item"><ImSearch size={30} /></NavLink></li>
-          <li><NavLink to="/cart" className="nav_item"><BsFillCartFill size={30} /></NavLink></li>
-          <li><NavLink to="/login" className="nav_item"><BiSolidUserPin size={30} /></NavLink></li>
+          {/* <li><NavLink to="/search" className="nav_item"><ImSearch size={25} /></NavLink></li> */}
+          <li>
+            <button onClick={() => setShowSearch(true)} className="nav_item search_button">
+              <ImSearch size={25} />
+            </button>
+          </li>
+          <li><NavLink to="/cart" className="nav_item"><BsFillCartFill size={25} /></NavLink></li>
+          <li><NavLink to="/login" className="nav_item"><BiSolidUserPin size={25} /></NavLink></li>
 
         </ul>
 
@@ -48,6 +55,10 @@ const Header = () => {
         <button className="menu-icon" onClick={toggleMenu}>
           {isOpen ? <FiX /> : <FiMenu />}
         </button>
+      </div>
+      <div className={`search_bar_slide ${showSearch ? "show" : ""}`}>
+        <input type="text" placeholder="Search products..." />
+        <button onClick={() => setShowSearch(false)} className="close_search">×</button>
       </div>
     </nav>
   );
