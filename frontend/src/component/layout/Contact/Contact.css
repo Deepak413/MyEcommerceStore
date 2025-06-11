@@ -1,139 +1,146 @@
-/* .contactContainer {
-    height: 100vh;
-    width: 100vw;
-    max-width: 100%;
-    display: grid;
-    place-items: center;
-    background-color: white;
-    position: fixed;
-  }
-  
-  .mailBtn {
-    text-decoration: none;
-    transform: translateX(-100vw);
-    animation: mailBtnAnimation 2s forwards;
-  }
-  
-  .mailBtn > button {
-    text-decoration: none;
-    font: 200 2vmax "Roboto";
-    cursor: url("https://img.icons8.com/color/48/000000/edit--v2.png"), pointer;
-    padding: 2vmax;
-  }
-  
-  @keyframes mailBtnAnimation {
-    to {
-      transform: translateX(0);
-    }
-  } */
+.contact-page {
+  text-align: center;
+  background: #f5f5f5;
+  font-family: Arial, sans-serif;
+  margin-top: 6rem;
+}
 
-  .contact_us {
-    font-family: Arial, sans-serif;
-    color: #333;
-    text-align: center;
-  }
-  
-  /* Header Section */
-  .contact_banner {
-    /* background: url("../../../images/contactbg.jpg") no-repeat center center/cover; */
-    color: white;
-    padding: 80px 20px;
-    height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Contact Form & Details Section */
-  .contact_container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    margin: 50px 0;
-  }
-  
-  /* Contact Form */
-  .contact_form {
-    width: 45%;
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .contact_form h2 {
-    margin-bottom: 15px;
-    color: #0073e6;
-  }
-  
-  .contact_form form input,
-  .contact_form form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .contact_form form textarea {
-    height: 100px;
-  }
-  
-  .contact_form form button {
-    background: #0073e6;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .contact_form form button:hover {
-    background: #005bb5;
-  }
-  
-  /* Contact Details */
-  .contact_details {
-    width: 45%;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: left;
-  }
-  
-  .contact_details h2 {
-    color: #0073e6;
-  }
-  
-  .contact_details p {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 18px;
-    margin: 10px 0;
-  }
-  
-  /* Google Map */
-  .contact_map {
-    margin-top: 40px;
-  }
-  
-  .contact_map h2 {
-    margin-bottom: 10px;
-    color: #0073e6;
-  }
-  
-  /* Responsive Design */
-  @media screen and (max-width: 768px) {
-    .contact_container {
-      flex-direction: column;
-      align-items: center;
-    }
-    .contact_form, .contact_details {
-      width: 90%;
-    }
-  }
-  
+.contact-header {
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+      margin-top: 6rem;
+    padding: 5rem 0;
+}
+
+.contact-header .sub-title,
+.contact-footer .sub-title {
+  letter-spacing: 1px;
+  font-size: 12px;
+  color: #666;
+}
+
+.title {
+  font-size: 3.5rem;
+  margin: 18px 0;
+  font-family: Impact;
+  font-weight: 700;
+}
+
+.divider {
+  width: 40px;
+  height: 2px;
+  background: #c2a78e;
+  border: none;
+  margin: 20px auto;
+}
+
+.contact-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  gap: 45px;
+}
+
+.contact-card {
+  background: white;
+  border-radius: 12px;
+  padding: 4rem 5rem;
+  width: 14rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+}
+
+.contact-card .icon {
+  color: #f1bd71;
+  margin-bottom: 15px;
+}
+
+.contact-card h3 {
+  font-size: 23px;
+  font-weight: bold;
+  margin: 10px 0 5px;
+  font-family: Impact;
+}
+
+.contact-card p {
+  font-size: 14px;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+.contact-footer {
+  margin-top: 8rem;
+}
+
+.contact-form {
+  max-width: 700px;
+  margin: 40px auto 0;
+  text-align: left;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  margin-bottom: 3px;
+  color: #333;
+}
+
+.form-group label span {
+  color: red;
+}
+
+.name-fields {
+  display: flex;
+  gap: 10px;
+}
+
+.name-fields input {
+  flex: 1;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+
+.send-button {
+  padding: 10px 24px;
+  background: #f7c273;
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.send-button:hover {
+  background: #333;
+}
+
+.contact-map {
+  margin-top: 40px;
+}

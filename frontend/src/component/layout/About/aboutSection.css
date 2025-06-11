@@ -1,223 +1,199 @@
-/* .aboutSection {
-    height: 100vh;
-    width: 100vw;
-    max-width: 100%;
-    background-color: white;
-    display: grid;
-    grid-template-columns: 4fr 4fr;
-    position: fixed;
-  }
-  
-  .aboutSectionGradient {
-    background-image: linear-gradient(
-      to bottom right,
-      rgb(78, 81, 255),
-      rgb(74, 137, 189)
-    );
-  }
-  
-  .aboutSectionContainer {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    background-color: rgb(255, 255, 255);
-    width: 80vw;
-    height: 80vh;
-    transform: translateX(-50%) translateY(-50%);
-    box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.192);
-  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .aboutSectionContainer > h1 {
-    font: 400 3vmax "Roboto";
-    color: tomato;
-    margin: 2vmax;
-  }
-  
-  .aboutSectionContainer > div {
-    display: flex;
-    width: 100%;
-  }
-  
-  .aboutSectionContainer > div > div {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2vmax;
-    box-sizing: border-box;
-  }
-  
-  .aboutSectionContainer > div > div > p {
-    color: rgba(0, 0, 0, 0.623);
-    font: 100 1vmax "Roboto";
-  }
-  
-  .aboutSectionContainer > div > div > button {
-    margin: 1vmax 0;
-  }
-  
-  .aboutSectionContainer > div > div > span {
-    font: 100 1vmax "Roboto";
-    color: rgba(0, 0, 0, 0.616);
-    text-align: center;
-    width: 80%;
-  }
-  
-  .aboutSectionContainer2 {
-    border-left: 1px solid rgba(0, 0, 0, 0.116);
-  }
-  
-  .aboutSectionContainer2 > h2 {
-    color: rgba(0, 0, 0, 0.623);
-    font: 100 2vmax "Roboto";
-    margin: 2vmax;
-  }
-  
-  .aboutSectionContainer2 > a > svg {
-    font-size: 4vmax;
-  }
-  
-  .youtubeSvgIcon {
-    color: tomato;
-  }
-  
-  .instagramSvgIcon {
-    color: rgb(144, 81, 202);
-  }
-  
-  @media screen and (max-width: 600px) {
-    .aboutSectionContainer > div {
-      display: block;
-    }
-  
-    .aboutSectionContainer > h1 {
-      font: 400 5vmax "Roboto";
-      margin: 3vmax;
-    }
-  
-    .aboutSectionContainer > div > div > p {
-      font: 100 2vmax "Roboto";
-    }
-  
-    .aboutSectionContainer > div > div > span {
-      font: 100 1.4vmax "Roboto";
-      width: 70%;
-    }
-  
-    .aboutSectionContainer2 {
-      border-left: none;
-    }
-  
-    .aboutSectionContainer2 > h2 {
-      font: 100 3vmax "Roboto";
-      margin: 2vmax;
-    }
-  
-    .aboutSectionContainer2 > a > svg {
-      font-size: 6vmax;
-      margin: 1vmax;
-    }
-  } */
+.about-us {
+  font-family: Arial, sans-serif;
+  color: #333;
+  text-align: center;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-banner {
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 6rem;
+  padding: 5rem 0;
+}
+
+.about-banner .sub-title {
+  letter-spacing: 1px;
+  font-size: 13px;
+  color: #666;
+}
+
+.title {
+  font-size: 3.5rem;
+  margin: 18px 0;
+  font-family: Impact;
+  font-weight: 700;
+  color: black;
+}
 
 
-  .about-us {
-    font-family: Arial, sans-serif;
-    color: #333;
-    text-align: center;
-  }
-  
-  .about-banner {
-    /* background: url("../../../images/aboutbg.jpg") no-repeat center center/cover; */
-    color: white;
-    
-    /* Ensure full page coverage */
-    width: 100vw;   /* Full viewport width */
-    height: 80vh;  /* Full viewport height */
-    
-    /* Flexbox to center content */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    /* Optional: Fix the position so it remains fullscreen */
-    position: relative;
-    top: 0;
-    left: 0;
-  }
-  
-  .about-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin: 50px 0;
-  }
-  
-  .about-text {
-    max-width: 600px;
-    text-align: left;
-  }
-  
-  .about-text h2 {
-    font-size: 28px;
-    color: #0073e6;
-  }
-  
-  .about-image img {
-    width: 400px;
-    border-radius: 10px;
-  }
-  
-  .mission-section {
-    background: #f8f8f8;
-    padding: 40px;
-    margin-top: 30px;
-  }
-  
-  .why-choose-us {
-    text-align: left;
-    max-width: 700px;
-    margin: auto;
-  }
-  
-  .why-choose-us h2 {
-    text-align: center;
-    color: #0073e6;
-  }
-  
-  .why-choose-us ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .why-choose-us li {
-    font-size: 18px;
-    margin: 10px 0;
-  }
-  
-  .our-products {
-    margin-top: 40px;
-  }
-  
-  .product-icons {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 20px;
-  }
-  
-  .product-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .product-item p {
-    font-size: 16px;
-    margin-top: 10px;
-  }
-  
+.divider {
+  width: 40px;
+  height: 2px;
+  background: #c2a78e;
+  border: none;
+  margin: 20px auto;
+}
+
+.about-content {
+  padding: 3rem 0;
+  display: flex;
+  justify-content: space-around;
+  background: white;
+  margin: 0 6rem;
+}
+
+.about-text {
+  width: 40%;
+  text-align: left;
+}
+
+.about-text p {
+  font-family: 'monospace';
+}
+
+.about-text h2 {
+  font-size: 1.7rem;
+  color: black;
+  font-family: Impact;
+  letter-spacing: 1px;
+  margin-bottom: 17px;
+}
+
+.about-image {
+  width: 40%;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* MISSION SECTION */
+.mission-section {
+  /* background: #f8f8f8;
+  padding: 40px;
+  margin-top: 30px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  padding: 7rem 0;
+}
+
+
+.mission-subtitle {
+  letter-spacing: 1px;
+  font-size: 14px;
+  color: #666;
+}
+
+.mission-title {
+  font-size: 2.5rem;
+  margin: 18px 0;
+  font-family: Impact;
+  font-weight: 700;
+}
+
+.mission-text {
+  width: 75%;
+  margin-top: 1.4rem;
+}
+
+/* OUR ADVANTAGES SECTION */
+.service-cards-container {
+  padding: 3rem 1.5rem;
+  background-color: #fff;
+  text-align: center;
+}
+
+.service-subtitle {
+  letter-spacing: 1px;
+  font-size: 15px;
+  color: #666;
+}
+
+.service-title {
+  font-size: 2.5rem;
+  margin: 14px 0;
+  font-family: Impact;
+  font-weight: 700;
+}
+
+.service-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3.5rem;
+}
+
+.service-card {
+  border-radius: 12px;
+  padding: 4rem 5rem;
+  width: 14rem;
+  box-shadow: 0 15px 23px rgba(0.5, 0.5, 0.5, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: scale(1.05);
+}
+
+.service-icon {
+  border: 1px solid black;
+  padding: 12px;
+  border-radius: 50%;
+  background: black;
+  color: white;
+}
+
+
+.our-products {
+  width: 86%;
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.our-products-subtitle {
+  letter-spacing: 1px;
+  font-size: 15px;
+  color: #666;
+}
+
+.our-products-title {
+  font-size: 2.5rem;
+  margin: 14px 0;
+  font-family: Impact;
+  font-weight: 700;
+}
+
+.our-products-icons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+}
+
+.our-product-item {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  padding: 4rem;
+  background: white;
+  border-radius: 13px;
+}
+
+.our-product-item p {
+  font-size: 21px;
+  margin-top: 18px;
+  font-family: 'Droid Sans';
+}

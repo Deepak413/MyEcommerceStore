@@ -1,56 +1,3 @@
-// import React from "react";
-// import "./aboutSection.css";
-// import { Button, Typography, Avatar } from "@mui/material";
-// import YouTubeIcon from "@mui/icons-material/YouTube";
-// import InstagramIcon from "@mui/icons-material/Instagram";
-// const About = () => {
-//   const visitInstagram = () => {
-//     window.location = "https://instagram.com/deepak_dhaker_18";
-//   };
-//   return (
-//     <div className="aboutSection">
-//       <div></div>
-//       <div className="aboutSectionGradient"></div>
-//       <div className="aboutSectionContainer">
-//         <Typography component="h1">About Us</Typography>
-
-//         <div>
-//           <div>
-//             <Avatar
-//               style={{ width: "10vmax", height: "10vmax", margin: "2vmax 0" }}
-//               alt="Founder"
-//             />
-//             <Typography>Deepak Dhaker</Typography>
-//             <Button onClick={visitInstagram} color="primary">
-//               Visit Instagram
-//             </Button>
-//             <span>
-//               This is a sample wesbite made by @DeepakDhaker.
-//             </span>
-//           </div>
-//           <div className="aboutSectionContainer2">
-//             <Typography component="h2">Our Brands</Typography>
-//             <a
-//               href="https://www.youtube.com"
-//               target="blank"
-//             >
-//               <YouTubeIcon className="youtubeSvgIcon" />
-//             </a>
-
-//             <a href="https://instagram.com/deepak_dhaker_18" target="blank">
-//               <InstagramIcon className="instagramSvgIcon" />
-//             </a>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default About;
-
-
-
 import React from "react";
 import "./aboutSection.css"; // Import CSS for styling
 import aboutImage from "../../../images/aboutbg.jpg";
@@ -61,16 +8,22 @@ const About = () => {
     <div className="about-us">
       {/* Header Section */}
       <div className="about-banner">
-        <h1>About Us</h1>
-        <p>Your trusted store for high-quality electronic gadgets</p>
+        <p className="sub-title">Your trusted store for high-quality electronic gadgets</p>
+        <h1 className="title">ABOUT US</h1>
+        <hr className="divider" />
       </div>
 
       {/* Introduction Section */}
       <div className="about-content">
         <div className="about-text">
-          <h2>Who We Are</h2>
+          <h2>WHO WE ARE</h2>
           <p>
-            Welcome to <strong>GadgetHub</strong>, your one-stop destination for the latest and greatest in electronic devices.
+            Welcome to <strong style={{ color: "#f1bd71" }}>SHOPPINGG KARO</strong>, your one-stop destination for the latest and greatest in electronic devices.
+            We are passionate about providing high-quality **laptops, smartphones, tablets, cameras, and headphones** to enhance your tech lifestyle.
+          </p>
+          <br />
+          <p>
+            your one-stop destination for the latest and greatest in electronic devices.
             We are passionate about providing high-quality **laptops, smartphones, tablets, cameras, and headphones** to enhance your tech lifestyle.
           </p>
         </div>
@@ -81,48 +34,66 @@ const About = () => {
 
       {/* Mission Section */}
       <div className="mission-section">
-        <h2>Our Mission</h2>
-        <p>
-          Our mission is to deliver top-notch electronics at competitive prices while ensuring exceptional customer service. 
+        <p className="mission-subtitle">Your Needs, Our Mission</p>
+        <h2 className="mission-title">Our Mission</h2>
+        <hr className="divider" />
+        <p className="mission-text">
+          Our mission is to deliver top-notch electronics at competitive prices while ensuring exceptional customer service.
           We believe in offering **the latest technology** with a seamless shopping experience.
         </p>
       </div>
 
-      {/* Why Choose Us Section */}
-      <div className="why-choose-us">
-        <h2>Why Choose Us?</h2>
-        <ul>
-          <li>✔ Wide range of high-quality electronic gadgets</li>
-          <li>✔ 100% Genuine and Branded Products</li>
-          <li>✔ Competitive Prices and Special Discounts</li>
-          <li>✔ Secure Payment Methods</li>
-          <li>✔ Fast & Reliable Shipping</li>
-          <li>✔ 24/7 Customer Support</li>
-        </ul>
+      {/* Why Choose Us Section - Card Style */}
+      <div className="service-cards-container">
+        <p className="service-subtitle">Why Choose Us</p>
+        <h2 className="service-title">Our Advantages</h2>
+        <hr className="divider" />
+        <div className="service-cards">
+          <div className="service-card">
+            {/* <div className="service-icon">🚚</div> */}
+            <FaCamera size={20} className="service-icon" />
+            <h3>Fast Delivery</h3>
+            <p>Quick and reliable delivery service across the country.</p>
+          </div>
+          <div className="service-card">
+            {/* <div className="service-icon">📦</div> */}
+            <FaHeadphones size={20} className="service-icon" />
+            <h3>Free Shipping</h3>
+            <p>No extra cost on standard deliveries for select products.</p>
+          </div>
+          <div className="service-card">
+            {/* <div className="service-icon">🔁</div> */}
+            <FaMobileAlt size={20} className="service-icon" />
+            <h3>Easy Returns</h3>
+            <p>30-day hassle-free returns on all eligible products.</p>
+          </div>
+        </div>
       </div>
 
       {/* Our Products Section */}
       <div className="our-products">
-        <h2>Our Products</h2>
-        <div className="product-icons">
-          <div className="product-item">
-            <FaLaptop size={50} color="#0073e6" />
+        <p className="our-products-subtitle">Quality Tech You Can Trust</p>
+        <h2 className="our-products-title">Our Products</h2>
+        <hr className="divider" />
+        <div className="our-products-icons">
+          <div className="our-product-item">
+            <FaLaptop size={45} color="#5e5e5e" />
             <p>Laptops</p>
           </div>
-          <div className="product-item">
-            <FaMobileAlt size={50} color="#28a745" />
+          <div className="our-product-item">
+            <FaMobileAlt size={45} color="#5e5e5e" />
             <p>Smartphones</p>
           </div>
-          <div className="product-item">
-            <FaTabletAlt size={50} color="#ff9800" />
+          <div className="our-product-item">
+            <FaTabletAlt size={45} color="#5e5e5e" />
             <p>Tablets</p>
           </div>
-          <div className="product-item">
-            <FaCamera size={50} color="#dc3545" />
+          <div className="our-product-item">
+            <FaCamera size={45} color="#5e5e5e"  />
             <p>Cameras</p>
           </div>
-          <div className="product-item">
-            <FaHeadphones size={50} color="#6f42c1" />
+          <div className="our-product-item">
+            <FaHeadphones size={45} color="#5e5e5e" />
             <p>Headphones</p>
           </div>
         </div>
