@@ -1,6 +1,7 @@
 import { React, useState, useRef } from 'react';
 import { BsFillCartFill } from 'react-icons/bs';
 import { ImSearch } from 'react-icons/im';
+import { IoClose } from "react-icons/io5";
 import { BiSolidUserPin } from 'react-icons/bi';
 
 import { NavLink, useLocation } from "react-router-dom";
@@ -8,11 +9,15 @@ import { FiMenu, FiX } from "react-icons/fi";
 import "./Header.css";
 
 import { FaPersonWalkingLuggage } from "react-icons/fa6";
+import { useSelector } from 'react-redux';
+import UserOptions from './UserOptions';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const searchRef = useRef(null);
+  const { isAuthenticated, user } = useSelector(state => state.user);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const location = useLocation();
 
@@ -50,10 +55,10 @@ const Header = () => {
                   type="text"
                   className="nav_search_input"
                   placeholder="Search..."
-                  
+
                 />
                 <button onClick={() => setShowSearch(false)} className="nav_search_inside_button">
-                  <ImSearch size={18} />
+                  <IoClose size={21} />
                 </button>
               </div>
             ) : (
@@ -62,14 +67,22 @@ const Header = () => {
               </button>
             )}
           </li>
-
-          {/* <li className="nav_item">
-            <button onClick={() => setShowSearch(true)} className="nav_item search_button">
-              <ImSearch size={25} />
-            </button>
-          </li> */}
-          <li><NavLink to="/cart" className="nav_item"><BsFillCartFill size={21} /></NavLink></li>
+          {/* <li><NavLink to="/cart" className="nav_item"><BsFillCartFill size={21} style={{ color: cartItems.length > 0 ? "#ff6600" : "unset" }} /></NavLink></li> */}
+          <li className="nav_item cart_icon_wrapper">
+            <NavLink to="/cart" className="cart_icon_link">
+              <div className="cart_icon_container">
+                <BsFillCartFill
+                  size={21}
+                  style={{ color: cartItems.length > 0 ? "rgb(255 159 0)" : "unset" }}
+                />
+                {cartItems.length > 0 && (
+                  <span className="cart_count_tooltip">{cartItems.length}</span>
+                )}
+              </div>
+            </NavLink>
+          </li>
           <li><NavLink to="/login" className="nav_item"><BiSolidUserPin size={21} /></NavLink></li>
+
 
         </ul>
 
