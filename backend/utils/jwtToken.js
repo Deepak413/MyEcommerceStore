@@ -2,15 +2,16 @@
 
 const sendToken = (user, statusCode, res) => {
     const token = user.getJWTToken();
-
+    console.log("inside sendToken in jwtToken.js , token : ", token);
+    const isProd = process.env.NODE_ENV === "production";
     //options for cookie
     const options = {
         expires: new Date(
             Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
         ),
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "None",
+        secure: isProd,
+        sameSite: isProd ? "None" : "Lax",
         path: "/"
     };
 
@@ -20,6 +21,8 @@ const sendToken = (user, statusCode, res) => {
         user,
         token,
     });
+    console.log("inside sendToken in jwtToken.js , cookie set successfully : ");
+
     console.log("Cookies set in response:", res.getHeaders()["set-cookie"]);
 };
 

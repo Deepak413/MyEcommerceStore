@@ -44,9 +44,12 @@ export const createOrder = (order) => async (dispatch) => {
 // My Orders
 export const myOrders = () => async (dispatch) => {
     try {
+        console.log("entering myOrders in OrderAction");
         dispatch(myOrdersRequest());
 
         const { data } = await axios.get("https://shoppingkaro-65sf.onrender.com/api/v1/orders/me");
+        console.log("data fetched in orderAction : ", data);
+
 
         dispatch(myOrdersSuccess(data));
     } catch (error) {

@@ -38,6 +38,7 @@ export const login = (email, password) => async (dispatch) => {
         };
 
         const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/login`, { email, password }, config);
+        console.log("In login in userAction, data : ", data);
 
         dispatch(loginSuccess(data));
     } catch (error) {
@@ -63,8 +64,7 @@ export const register = (userData) => async (dispatch) => {
 
         // const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/me/update`, userData, config);
         const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/register`, userData, config);
-
-        console.log("registered user is : ", data);
+        console.log("In register in userAction, data : ", data);
 
         dispatch(registerUserSuccess(data.user));
     } catch (error) {
@@ -78,6 +78,8 @@ export const loadUser = () => async (dispatch) => {
         dispatch(loadUserRequest());
 
         const { data } = await axios.get(`https://shoppingkaro-65sf.onrender.com/api/v1/me`);
+        console.log("In loadUser in userAction, data : ", data);
+
 
         dispatch(loadUserSuccess(data));
     } catch (error) {
@@ -89,6 +91,8 @@ export const loadUser = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
     try {
         await axios.get(`https://shoppingkaro-65sf.onrender.com/api/v1/logout`);
+        console.log("In logout in userAction, User logged out!!");
+
         // localStorage.removeItem("token");
         dispatch(logoutSuccess());
         // window.location.reload();

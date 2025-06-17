@@ -1,20 +1,21 @@
 .updateProfileContainer {
     width: 100vw;
-    height: 100vh;
+    height: 88vh;
     max-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgb(231, 231, 231);
-    position: fixed;
+    margin: 6rem 0;
+    /* position: fixed;
     top: 0%;
-    left: 0;
+    left: 0; */
   }
   
   .updateProfileBox {
     background-color: white;
     width: 25vw;
-    height: 70vh;
+    height: 64vh;
     box-sizing: border-box;
     overflow: hidden;
   }
@@ -36,7 +37,7 @@
     margin: auto;
     padding: 2vmax;
     justify-content: space-evenly;
-    height: 70%;
+    height: 63%;
     transition: all 0.5s;
   }
   
@@ -53,7 +54,7 @@
     box-sizing: border-box;
     border: 1px solid rgba(0, 0, 0, 0.267);
     border-radius: 4px;
-    font: 300 0.9vmax cursive;
+    font: 300 0.9vmax Droid Sans;
     outline: none;
   }
   
@@ -81,7 +82,7 @@
     height: 5vh;
     border: none;
     margin: 0%;
-    font: 400 0.8vmax cursive;
+    font: 400 0.8vmax Droid Sans;
     transition: all 0.5s;
     padding: 0 1vmax;
     color: rgba(0, 0, 0, 0.623);
@@ -94,12 +95,13 @@
   
   .updateProfileBtn {
     border: none;
-    background-color: tomato;
+    background-color: #f5a623;
     color: white;
     font: 300 0.9vmax "Roboto";
     width: 100%;
     padding: 0.8vmax;
     cursor: pointer;
+    margin-top: 1rem;
     transition: all 0.5s;
     border-radius: 4px;
     outline: none;
@@ -107,7 +109,7 @@
   }
   
   .updateProfileBtn:hover {
-    background-color: rgb(179, 66, 46);
+    background-color: #d48503;
   }
   
   @media screen and (max-width: 600px) {
@@ -125,7 +127,7 @@
   
     .updateProfileForm > div > input {
       padding: 2.5vmax 5vmax;
-      font: 300 1.7vmax cursive;
+      font: 300 1.7vmax Droid Sans;
     }
   
     .updateProfileForm > div > svg {
@@ -139,7 +141,7 @@
   
     #updateProfileImage > input::file-selector-button {
       height: 7vh;
-      font: 400 1.8vmax cursive;
+      font: 400 1.8vmax Droid Sans;
     }
   
     .updateProfileBtn {

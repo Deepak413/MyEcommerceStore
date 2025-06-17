@@ -18,6 +18,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   })
 
   const { name, email, password } = req.body;
+  console.log("inside userController, name, email", name, email);
 
   const user = await User.create({
     name, email, password,
@@ -27,6 +28,8 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     }
   });
 
+  console.log("inside userController, created user", user);
+  
   sendToken(user, 201, res);
 })
 
