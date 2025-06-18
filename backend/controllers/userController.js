@@ -62,11 +62,12 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
 //Logout user
 exports.logout = catchAsyncErrors(async (req, res, next) => {
+  const isProd = process.env.NODE_ENV === "production";
 
   res.cookie("token", null, {
     expires: new Date(Date.now()),
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
     sameSite: "None",
     path: "/",
   });
