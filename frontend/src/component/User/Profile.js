@@ -1,15 +1,24 @@
 import React, { Fragment, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader/Loader";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { logout } from "../../actions/userAction";
 
 const Profile = () => {
     const navigate = useNavigate();
     const { user, loading, isAuthenticated } = useSelector((state) => state.user);
     console.log("Is user is authenticated : ", isAuthenticated);
+    const dispatch = useDispatch();
+
+    function logoutUser() {
+            dispatch(logout());
+            toast.success("Logout Successfully");
+            navigate("/login");
+        }
 
     useEffect(() => {
         if (isAuthenticated === false) {
@@ -46,6 +55,7 @@ const Profile = () => {
                             <div>
                                 <Link to="/orders">My Orders</Link>
                                 <Link to="/password/update">Change Password</Link>
+                                <Link onClick={logoutUser}>Logout</Link>
                             </div>
                         </div>
                     </div>

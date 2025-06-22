@@ -58,7 +58,7 @@ const Header = () => {
 
                 />
                 <button onClick={() => setShowSearch(false)} className="nav_search_inside_button">
-                  <IoClose size={21} />
+                  <IoClose size={21} style={{color: "black"}}/>
                 </button>
               </div>
             ) : (

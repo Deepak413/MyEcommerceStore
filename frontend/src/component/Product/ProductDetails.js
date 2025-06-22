@@ -36,7 +36,7 @@ const ProductDetails = () => {
 
     const { success, error: reviewError } = useSelector(
         (state) => state.newReview
-      );
+    );
 
     const increseQuantity = () => {
         console.log("quantity incresed");
@@ -87,12 +87,12 @@ const ProductDetails = () => {
         if (reviewError) {
             toast.error(reviewError);
             dispatch(clearErrors());
-          }
-      
-          if (success) {
+        }
+
+        if (success) {
             toast.success("Review Submitted Successfully");
             dispatch(newReviewReset());
-          }
+        }
 
         dispatch(getProductDetails(id));
     }, [dispatch, id, toast, error, quantity, reviewError, success]);
@@ -111,7 +111,7 @@ const ProductDetails = () => {
                     <MetaData title={`${product.name} --ECOMMERCE`} />
                     <div className="ProductDetails">
                         <div>
-                            <Carousel showIndicators={false} showThumbs={false}>
+                            <Carousel showIndicators={true} showThumbs={true} showArrows={true} showStatus={false}>
                                 {product.images &&
                                     product.images.map((item, i) => (
                                         <img src={item.url} key={item.url} alt={`${i} Slide`} className="CarouselImage" style={{}} />
@@ -122,12 +122,13 @@ const ProductDetails = () => {
 
                         <div>
                             <div className="detailsBlock-1">
+
+                                <p>Category: {product.category}</p>
                                 <h2>{product.name}</h2>
-                                <p>Product # {product._id}</p>
                             </div>
-                            <div className="detailsBlock-2">
-                                <Rating {...options} />
-                                <span className='.detailsBlock-2-span'> ({product.numOfReviews} Reviews)</span>
+
+                            <div className="detailsBlock-4">
+                                 <p>{product.description}</p>
                             </div>
                             <div className="detailsBlock-3">
                                 <h1>{`₹${product.price}`}</h1>
@@ -144,19 +145,20 @@ const ProductDetails = () => {
                                         Add to Cart
                                     </button>
                                 </div>
-                                
+
                                 <p>
                                     Status:
                                     <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
-                                        {product.Stock < 1 ? "  OutOfStock" : "  InStock"}
+                                        {product.Stock < 1 ? "  OutOfStock" : "  In Stock"}
                                     </b>
                                 </p>
                             </div>
-                            <div className="detailsBlock-4">
-                                Description : <p>{product.description}</p>
+                            <div className="detailsBlock-2">
+                                <Rating {...options} />
+                                <span className='detailsBlock-2-span'> ({product.numOfReviews} Reviews)</span>
                             </div>
 
-                            <button onClick={submitReviewToggle} className="submitReview"> Submit Review </button>
+                            <button onClick={submitReviewToggle} className="submitReview"> Write a Review </button>
                         </div>
                     </div>
 
@@ -166,9 +168,10 @@ const ProductDetails = () => {
                         aria-labelledby="simple-dialog-title"
                         open={open}
                         onClose={submitReviewToggle}
+                        className="submitReviewContainer"
                     >
-                        <DialogTitle>Submit Review</DialogTitle>
-                        <DialogContent className="submitDialog">
+                        <DialogTitle className="submitReviewHeading">Submit Review</DialogTitle>
+                        <DialogContent className="submitReviewBox">
                             <Rating
                                 onChange={(e) => setRating(e.target.value)}
                                 value={rating}
@@ -176,7 +179,7 @@ const ProductDetails = () => {
                             />
 
                             <textarea
-                                className="submitDialogTextArea"
+                                className="submitReviewBoxTextArea"
                                 cols="30"
                                 rows="5"
                                 value={comment}
@@ -184,12 +187,8 @@ const ProductDetails = () => {
                             ></textarea>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={submitReviewToggle} color="secondary">
-                                Cancel
-                            </Button>
-                            <Button onClick={reviewSubmitHandler} color="primary">
-                                Submit
-                            </Button>
+                            <button className="submitReviewCancelBtn" onClick={submitReviewToggle}>CANCEL</button>
+                            <button className="submitReviewSubmitBtn" onClick={reviewSubmitHandler}>SUBMIT</button>
                         </DialogActions>
                     </Dialog>
 

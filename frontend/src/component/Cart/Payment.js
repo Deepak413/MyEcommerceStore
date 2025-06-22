@@ -50,7 +50,8 @@ const Payment = () => {
     totalPrice: orderInfo.totalPrice,
   };
 
-  const submitHandler = async(e) => {
+  const submitHandler = async (e) => {
+    console.log("clicked on Place order");
     e.preventDefault();
 
     payBtn.current.disabled = true;
@@ -67,9 +68,14 @@ const Payment = () => {
         config
       );
 
+      console.log("in payment.js data from api : ", data);
+
       const client_secret = data.client_secret;
 
+      console.log("stripe in Payment.js : ", stripe);
+      console.log("elements in Payment.js : ", elements);
       if (!stripe || !elements) return;
+
 
       const result = await stripe.confirmCardPayment(client_secret, {
         payment_method: {
@@ -87,6 +93,9 @@ const Payment = () => {
           },
         },
       });
+
+      console.log("result in Payment.js from confirmCardPayment : ", result);
+      console.log("result.error : ", result.error);
 
       if (result.error) {
         payBtn.current.disabled = false;
@@ -106,6 +115,7 @@ const Payment = () => {
         }
       }
     } catch (error) {
+      console.log("Error in catch in Payment.js : ", error);
       payBtn.current.disabled = false;
       toast.error(error.response.data.message);
     }
@@ -119,33 +129,40 @@ const Payment = () => {
   }, [dispatch, error, toast]);
 
 
-  return <Fragment>
-    <MetaData title="Payment" />
-    <CheckoutSteps activeStep={2} />
-    <div className="paymentContainer">
-      <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
-        <Typography>Card Info</Typography>
-        <div>
-          <CreditCardIcon />
-          <CardNumberElement className="paymentInput" />
+  return (
+
+    <Fragment>
+      <div className="paymentParentContainer">
+        <MetaData title="Payment" />
+        <div className="paymentCheckoutSteps">
+          <CheckoutSteps activeStep={2} />
         </div>
-        <div>
-          <EventIcon />
-          <CardExpiryElement className="paymentInput" />
+        <div className="paymentContainer">
+          <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
+            <Typography>Payment</Typography>
+            <div>
+              <CreditCardIcon />
+              <CardNumberElement className="paymentInput" />
+            </div>
+            <div>
+              <EventIcon />
+              <CardExpiryElement className="paymentInput" />
+            </div>
+            <div>
+              <VpnKeyIcon />
+              <CardCvcElement className="paymentInput" />
+            </div>
+            <input
+              type="submit"
+              value={`Place Order - ₹${orderInfo && orderInfo.totalPrice}`}
+              ref={payBtn}
+              className="paymentFormBtn"
+            />
+          </form>
         </div>
-        <div>
-          <VpnKeyIcon />
-          <CardCvcElement className="paymentInput" />
-        </div>
-        <input
-          type="submit"
-          value={`Pay - ₹${orderInfo && orderInfo.totalPrice}`}
-          ref={payBtn}
-          className="paymentFormBtn"
-        />
-      </form>
-    </div>
-  </Fragment>
+      </div>
+    </Fragment>
+  );
 }
 
 export default Payment;
