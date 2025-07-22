@@ -72,10 +72,14 @@
   color: white;
 }
 
+/* .white_nav_link div{
+  color: white;
+}
+
 .white_nav_link button {
   color: white;
   cursor: pointer;
-}
+} */
 
 .white_nav_logo1 {
   color: white;
@@ -120,7 +124,20 @@
   transition: all 0.3s ease;
 }
 
+/* .nav_search_button_container{
+  display: flex;
+} */
+
 .nav_search_inside_button {
+  position: absolute;
+  right: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.nav_search_inside_button1 {
   position: absolute;
   right: 5px;
   background: none;
@@ -129,11 +146,27 @@
   color: #333;
 }
 
+.nav_search_inside_button:hover {
+  color: #ffaa2c;
+}
+
+.nav_search_inside_button1:hover {
+  color: #ffaa2c;
+}
+
 .nav_search_button {
   background: none;
   border: none;
   cursor: pointer;
   transition: color 0.3s ease;
+}
+
+.nav_search_button_white {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  color: white;
 }
 
 /* CART ICON COUNT STYLING */
@@ -172,6 +205,14 @@
 
 .cart_icon_container:hover .cart_count_tooltip {
   opacity: 1;
+}
+
+.cart_icon {
+  transition: color 0.3s ease;
+}
+
+.cart_icon:hover {
+  color: #ffaa2c !important;
 }
 
 /* USEROPTION STYLES */
@@ -216,6 +257,10 @@
 }
 
 .nav_search_button :hover {
+  color: #ffaa2c;
+}
+
+.nav_search_button_white :hover {
   color: #ffaa2c;
 }
 

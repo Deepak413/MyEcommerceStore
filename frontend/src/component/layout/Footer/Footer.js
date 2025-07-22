@@ -15,10 +15,14 @@ const Footer = () => {
             <div className="footer">
                 <div className="footer_container">
                     <div className="footer_container_left">
-                        <div className="footer_logo" >
+                        <div className="footer_logo" onClick={() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}>
                             <NavLink to="/">SHOPPINGG</NavLink>
                         </div>
-                        <div className="footer_logo1" >
+                        <div className="footer_logo1" onClick={() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }} >
                             <NavLink to="/">KARO</NavLink>
                             <FaPersonWalkingLuggage size={45} />
                         </div>
@@ -37,16 +41,24 @@ const Footer = () => {
                         <h5>LINKS</h5>
                         <ul className="footer_links_list">
                             <li>
-                                <NavLink to="/" className="footer_link">Home</NavLink>
+                                <NavLink to="/" className="footer_link" onClick={() => {
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}>Home</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/products" className="footer_link">Products</NavLink>
+                                <NavLink to="/products" className="footer_link" onClick={() => {
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}>Products</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/contact" className="footer_link">Contact</NavLink>
+                                <NavLink to="/contact" className="footer_link" onClick={() => {
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}>Contact</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/about" className="footer_link">About</NavLink>
+                                <NavLink to="/about" className="footer_link"onClick={() => {
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }} >About</NavLink>
                             </li>
                         </ul>
                     </div>
@@ -60,10 +72,10 @@ const Footer = () => {
                             <div className="footer_social_card">
                                 <h3>GET SOCIAL</h3>
                                 <div className="footer_social_cardlinks">
-                                    <NavLink to='https://www.facebook.com/' className=" insta_icon "><RiInstagramFill size={40} /></NavLink>
-                                    <NavLink to='https://www.instagram.com/' className=" linkedin_icon "><FaLinkedin size={40} /></NavLink>
-                                    <NavLink to='https://www.twitter.com/' className=" fb_icon"><FaFacebookSquare size={40} /></NavLink>
-                                    <NavLink to='https://www.linkedin.com/' className=" twitter_icon "><FaSquareTwitter size={40} /></NavLink>
+                                    <NavLink to='https://www.instagram.com/deepak_dhaker_18/' target="_blank" className=" insta_icon "><RiInstagramFill size={40} /></NavLink>
+                                    <NavLink to='http://www.linkedin.com/in/deepak-dhaker' target="_blank" className=" linkedin_icon "><FaLinkedin size={40} /></NavLink>
+                                    <NavLink to='https://www.instagram.com/deepak_dhaker_18/' target="_blank" className=" fb_icon"><FaFacebookSquare size={40} /></NavLink>
+                                    <NavLink to='https://x.com/DeepakDhaker413' target="_blank" className=" twitter_icon "><FaSquareTwitter size={40} /></NavLink>
                                 </div>
                             </div>
                         </div>

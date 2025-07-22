@@ -30,7 +30,7 @@
 .close-btn {
   position: absolute;
   top: 6px;
-  right: 11px;
+  right: 5px;
   font-size: 29px;
   font-weight: 100;
   background: none;
@@ -45,7 +45,7 @@
 }
 
 .filterBoxSearchContainer>input {
-  padding: 12px 22px 12px 6px;
+  padding: 12px 0 12px 6px;
   font-family: system-ui;
   font-size: 14px;
   opacity: 0.6;
@@ -55,12 +55,19 @@
 }
 
 .filterBoxSearchContainer>button {
-  padding: 12px 16px;
-  font-family: 'Droid Sans';
+  padding: 9px 17px;
+  /* font-family: 'Droid Sans'; */
   letter-spacing: 2px;
   text-transform: uppercase;
   background-color: #ffaa2c;
   border: 1px solid #ffaa2c;
+  font-weight: bold;
+  font-size: 0.7rem;
+  margin-top: 5px;
+}
+
+.filterBoxSearchContainerBtn:hover {
+  color: white;
 }
 
 
@@ -68,28 +75,49 @@
   margin: 30px 0;
 }
 
+.filterByPriceContainerBtn {
+  padding: 8px 16px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background-color: #ffaa2c;
+  border: 1px solid #ffaa2c;
+  font-weight: bold;
+}
+.filterByPriceContainerBtn:hover{
+  color: white;
+}
+
+
 .filterByPriceContainer>h3 {
   font-family: monospace;
   font-weight: 400;
   font-size: 1.2rem;
-  margin-bottom: 11px;
+  margin-bottom: 14px;
   color: #353535;
 }
+
 .filterByCategoryContainer>h3 {
   font-family: monospace;
   font-weight: 400;
   font-size: 1.2rem;
   margin-bottom: 11px;
-  
+
   color: #353535;
 }
 
+.filterByPriceDetails {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 19px;
+  align-items: center;
+}
 
-.filterByPriceContainer > div{
-  font-size: 12px;
-    font-family: sans-serif;
-    opacity: 0.6;
-    margin-top: 4px;
+.filterByPriceDetails>p {
+  font-size: 15px;
+  font-family: sans-serif;
+  opacity: 0.6;
+  /* margin-top: 4px; */
 }
 
 
@@ -109,12 +137,12 @@
 
 .category-link {
   list-style: none;
-    color: rgb(41 41 41 / 61%);
-    font: 400 1.1vmax "Roboto";
-    margin: 0.3vmax 0.9vmax;
-    cursor: pointer;
-    transition: all 0.5s;
-    letter-spacing: 1px;
+  color: rgb(41 41 41 / 61%);
+  font: 400 1.1vmax "Roboto";
+  margin: 0.3vmax 0.9vmax;
+  cursor: pointer;
+  transition: all 0.5s;
+  letter-spacing: 1px;
 }
 
 .category-link:hover {

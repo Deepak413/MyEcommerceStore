@@ -83,7 +83,7 @@
 }
 
 .footer_link:hover {
-    color: #999999;
+    color: #ffaa2c;
 }
 
 
@@ -187,7 +187,7 @@
 
 }
 
-.footer_social_cardlink {
+/* .footer_social_cardlink {
     width: 2rem;
     height: 2rem;
     display: flex;
@@ -197,7 +197,7 @@
     text-align: center;
     border-radius: 50%;
     margin-right: 18px;
-}
+} */
 
 .footer_social_cardlinks .insta_icon,
 .footer_social_cardlinks .linkedin_icon,
@@ -214,16 +214,19 @@
 }
 
 /* Hover Effects */
-.footer_social_cardlinks .insta_icon:hover {
+/* .footer_social_cardlinks .insta_icon:hover {
     background: linear-gradient(45deg,
-    #feda75,  /* light yellow */
-    #fa7e1e,  /* orange */
-    #d62976,  /* pink */
-    #962fbf,  /* purple */
-    #4f5bd5   /* blue */
+    #feda75, 
+    #fa7e1e,
+    #d62976,
+    #962fbf,
+    #4f5bd5 
   );
     transform: scale(1.1);
-    /* Slightly zoom in on hover */
+} */
+ .footer_social_cardlinks .insta_icon:hover {
+    color: #0077b5;
+    transform: scale(1.1);
 }
 
 .footer_social_cardlinks .linkedin_icon:hover {

@@ -7,14 +7,14 @@
 //     const [keyword, setKeyword] = useState("");
 //     const navigate = useNavigate();
 
-//     const searchSubmitHandler = (e) => {
-//         e.preventDefault();
-//         if (keyword.trim()) {
-//             navigate(`/products/${keyword}`);
-//         } else {
-//             navigate("/products");
-//         }
-//     };
+    // const searchSubmitHandler = (e) => {
+    //     e.preventDefault();
+    //     if (keyword.trim()) {
+    //         navigate(`/products/${keyword}`);
+    //     } else {
+    //         navigate("/products");
+    //     }
+    // };
 
 //     return (
 //         <Fragment>

@@ -4,7 +4,7 @@ import { ImSearch } from 'react-icons/im';
 import { IoClose } from "react-icons/io5";
 import { BiSolidUserPin } from 'react-icons/bi';
 
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import "./Header.css";
 
@@ -18,11 +18,22 @@ const Header = () => {
   const searchRef = useRef(null);
   const { isAuthenticated, user } = useSelector(state => state.user);
   const { cartItems } = useSelector((state) => state.cart);
+  const navigate = useNavigate();
 
   const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleSearch = () => setShowSearch((prev) => !prev);
+
+  const [keyword, setKeyword] = useState("");
+  const searchSubmitHandler = (e) => {
+    e.preventDefault();
+    if (keyword.trim()) {
+      navigate(`/products/${keyword}`);
+    } else {
+      navigate("/products");
+    }
+  };
 
   const isHomePage = location.pathname === "/";
   return (
@@ -55,14 +66,18 @@ const Header = () => {
                   type="text"
                   className="nav_search_input"
                   placeholder="Search..."
-
+                  onChange={(e) => setKeyword(e.target.value)}
                 />
-                <button onClick={() => setShowSearch(false)} className="nav_search_inside_button">
-                  <IoClose size={21} style={{color: "black"}}/>
+                {/* <div className='nav_search_button_container'></div> */}
+                <button onClick={searchSubmitHandler} className="nav_search_inside_button">
+                  <ImSearch size={16} />
+                </button>
+                <button onClick={() => setShowSearch(false)} className="nav_search_inside_button1">
+                  <IoClose size={21} />
                 </button>
               </div>
             ) : (
-              <button onClick={() => setShowSearch(true)} className="nav_search_button">
+              <button onClick={() => setShowSearch(true)} className={`${isHomePage ? "nav_search_button_white" : "nav_search_button"}`}>
                 <ImSearch size={21} />
               </button>
             )}
@@ -71,9 +86,20 @@ const Header = () => {
           <li className="nav_item cart_icon_wrapper">
             <NavLink to="/cart" className="cart_icon_link">
               <div className="cart_icon_container">
+                {/* <BsFillCartFill
+                  size={21}
+                  style={{ color: cartItems.length > 0 ? "rgb(255 159 0)" : "" }}
+                /> */}
                 <BsFillCartFill
                   size={21}
-                  style={{ color: cartItems.length > 0 ? "rgb(255 159 0)" : "unset" }}
+                  className='cart_icon'
+                  style={{
+                    color: cartItems.length > 0
+                      ? "rgb(255 159 0)"
+                      : isHomePage
+                        ? "white"
+                        : "black"
+                  }}
                 />
                 {cartItems.length > 0 && (
                   <span className="cart_count_tooltip">{cartItems.length}</span>

@@ -77,23 +77,23 @@ const About = () => {
         <hr className="divider" />
         <div className="our-products-icons">
           <div className="our-product-item">
-            <FaLaptop size={45} color="#5e5e5e" />
+            <FaLaptop className="our-product-icon" />
             <p>Laptops</p>
           </div>
           <div className="our-product-item">
-            <FaMobileAlt size={45} color="#5e5e5e" />
+            <FaMobileAlt className="our-product-icon" />
             <p>Smartphones</p>
           </div>
           <div className="our-product-item">
-            <FaTabletAlt size={45} color="#5e5e5e" />
+            <FaTabletAlt className="our-product-icon" />
             <p>Tablets</p>
           </div>
           <div className="our-product-item">
-            <FaCamera size={45} color="#5e5e5e"  />
+            <FaCamera className="our-product-icon"  />
             <p>Cameras</p>
           </div>
           <div className="our-product-item">
-            <FaHeadphones size={45} color="#5e5e5e" />
+            <FaHeadphones className="our-product-icon" />
             <p>Headphones</p>
           </div>
         </div>

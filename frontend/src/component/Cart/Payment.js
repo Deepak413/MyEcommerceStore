@@ -63,7 +63,7 @@ const Payment = () => {
         },
       };
       const { data } = await axios.post(
-        "/api/v1/payment/process",
+        "https://shoppingkaro-65sf.onrender.com/api/v1/payment/process",
         paymentData,
         config
       );

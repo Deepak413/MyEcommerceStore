@@ -181,19 +181,29 @@
   display: flex;
   justify-content: space-between;
   margin-top: 3rem;
+  flex-wrap: wrap;
 }
 
 .our-product-item {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-  padding: 4rem;
+  /* padding: 4rem; */
+  padding: clamp(1.5rem, 4vw, 4rem);;
+  text-align: center;
   background: white;
   border-radius: 13px;
 }
 
+.our-product-icon {
+  color: #5e5e5e;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  transition: transform 0.3s ease;
+
+}
+
 .our-product-item p {
-  font-size: 21px;
+  /* font-size: 21px;
   margin-top: 18px;
-  font-family: 'Droid Sans';
+  font-family: 'Droid Sans'; */
+  font-size: clamp(1rem, 2vw, 1.3rem); 
+  margin-top: 18px;
+  font-family: 'Droid Sans', sans-serif;
 }
