@@ -1,21 +1,21 @@
-# MERN E-COMMERCE TUTORIAL
+# MyEcommerceStore - ShoppinggKaro
 
-Hi! My name is **Abhishek Singh**, I have created this tutorial to teach MERN Stack for free on YouTube.
+Built a full-stack eCommerce website with more than 20 pages, featuring secure JWT authentication, role-based access,
+and a responsive UI using React, Redux, and React Router.
 
-# Prerequisite
+• Built dynamic product catalog with filtering, searching, pagination and detailed pages including reviews and ratings.
 
-1.  Must have basic knowledge of **Node**, **React**, **Express**, **MongoDB** . _I have made tutorial on each technology on YouTube , make sure to check it out_. **Links are Below respectively**
-2.  Node - https://youtu.be/BSO9C8Z-YV8
-3.  React - https://youtu.be/99kgUCIMboY
-4.  Express - https://youtu.be/teipbke8c4A\
-5.  MongoDB - https://youtu.be/AYDP1S5BbTo
-6.  RestApi - https://youtu.be/AhCSfuG9Jxw _(optional)_
+• Enhanced ordering workflow by integrating cart management, CRUD operations, and Stripe for smooth checkout.
 
-# Install Dependencies
+• Enabled users to register, log in, update profile, and manage orders with full functionality.
 
-**For Backend** - `npm i`
+• Implemented in-app notifications with validation-based popups to enhance UX and reduce user errors
 
-**For Frontend** - `cd frontend` ` npm i`
+• Added security measures including data validation, bcrypt password hashing, ensured responsive design.
+
+• Integrated Cloudinary CDN to optimize image delivery and improve load speed.
+
+
 
 ## Env Variables
 
@@ -37,11 +37,3 @@ SMPT_PORT=
 CLOUDINARY_NAME
 CLOUDINARY_API_KEY
 CLOUDINARY_API_SECRET
-_fill each filed with your info respectively_
-
-## Author
-
-**Instagram** Click [Here](https://www.instagram.com/meabhisingh) **@meAbhiSingh**
-**YouTube** Click [Here](https://www.youtube.com/channel/UCO7afj9AUo0zV69pqEYhcjw/) **6 Pack Programmer**
-**LinkedIn** Click [Here](https://in.linkedin.com/in/meabhisingh) **@meAbhiSingh**
-**Twitter** Click [Here](https://twitter.com/meAbhi_Singh) **@meAbhi_Singh**
