@@ -68,8 +68,9 @@ function App() {
     store.dispatch(loadUser());
 
     getStripeApiKey();
+    console.log("stripeApiKey in App.js:", stripeApiKey);
 
-  }, [])
+  }, [stripeApiKey])
   return (
     <Router>
       <Header />

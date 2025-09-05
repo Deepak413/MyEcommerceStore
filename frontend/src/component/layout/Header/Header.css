@@ -215,6 +215,11 @@
   color: #ffaa2c !important;
 }
 
+.login_icon_img{
+  height: 3.3rem;
+  width: 3rem;
+}
+
 /* USEROPTION STYLES */
 .speedDialIcon {
   border-radius: 50%;

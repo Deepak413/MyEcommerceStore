@@ -28,9 +28,9 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     //     return next(new ErrorHander("Token not found!, Please Login to access this resource", 401));
     // }
 
-    if (!req.cookies?.token) {
-        return res.status(401).json({ message: "Authentication required!!! Token not found!, Please Login to access this resource" });
-    }
+    // if (!req.cookies?.token) {
+    //     return res.status(401).json({ message: "Authentication required!!! Token not found!, Please Login to access this resource" });
+    // }
 
     try {
         // console.log("Extracted token from Authorization : ", token);
@@ -48,7 +48,6 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
         console.error("JWT Verification Error:", error);
         return res.status(401).json({ message: "Invalid or Expired Token" });
     }
-
 
 });
 

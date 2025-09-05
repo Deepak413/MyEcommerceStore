@@ -11,6 +11,8 @@ import "./Header.css";
 import { FaPersonWalkingLuggage } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import UserOptions from './UserOptions';
+// import login from "../../../images/login.png";
+import { BiLogIn } from "react-icons/bi";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -82,14 +84,9 @@ const Header = () => {
               </button>
             )}
           </li>
-          {/* <li><NavLink to="/cart" className="nav_item"><BsFillCartFill size={21} style={{ color: cartItems.length > 0 ? "#ff6600" : "unset" }} /></NavLink></li> */}
           <li className="nav_item cart_icon_wrapper">
             <NavLink to="/cart" className="cart_icon_link">
               <div className="cart_icon_container">
-                {/* <BsFillCartFill
-                  size={21}
-                  style={{ color: cartItems.length > 0 ? "rgb(255 159 0)" : "" }}
-                /> */}
                 <BsFillCartFill
                   size={21}
                   className='cart_icon'
@@ -107,20 +104,21 @@ const Header = () => {
               </div>
             </NavLink>
           </li>
-          <li><NavLink to="/login" className="nav_item"><BiSolidUserPin size={21} /></NavLink></li>
+          {isAuthenticated ? 
+            <li><NavLink to="/login" className="nav_item"><BiSolidUserPin size={21} /></NavLink></li> 
+            : 
+            <li><NavLink to="/login" className="nav_item"><BiLogIn size={22}/>
+            {/* <img src={login} alt="Login" className="login_icon_img"/> */}
+          </NavLink></li>}
 
 
         </ul>
 
-        {/* Mobile Menu Button */}
+        {/* For Mobile Menu Button */}
         <button className="menu-icon" onClick={toggleMenu}>
           {isOpen ? <FiX /> : <FiMenu />}
         </button>
       </div>
-      {/* <div className={`search_bar_slide ${showSearch ? "show" : ""}`}>
-        <input type="text" placeholder="Search products..." />
-        <button onClick={() => setShowSearch(false)} className="close_search">×</button>
-      </div> */}
     </nav>
   );
 };

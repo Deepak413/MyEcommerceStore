@@ -69,13 +69,14 @@ const LoginSignUp = () => {
     };
     
     useEffect(() => {
+        if(isAuthenticated){   // usr cant access page while logged in
+            navigate('/account');
+        }
         if (error) {
             toast.error(error);
             dispatch(clearErrors());
         }
-        if(isAuthenticated){   // usr cant access page while logged in
-            navigate('/account');
-        }
+        
     }, [dispatch, error, toast, navigate, isAuthenticated])
 
     const switchTabs = (e, tab) => {

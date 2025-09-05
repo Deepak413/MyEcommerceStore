@@ -179,17 +179,23 @@
 .our-products-icons {
   width: 100%;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   margin-top: 3rem;
-  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .our-product-item {
-  /* padding: 4rem; */
-  padding: clamp(1.5rem, 4vw, 4rem);;
   text-align: center;
   background: white;
   border-radius: 13px;
+  /* border: 1px solid black; */
+  width: 20%;
+  height: 11rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .our-product-icon {
@@ -200,10 +206,7 @@
 }
 
 .our-product-item p {
-  /* font-size: 21px;
-  margin-top: 18px;
-  font-family: 'Droid Sans'; */
-  font-size: clamp(1rem, 2vw, 1.3rem); 
+  font-size: clamp(1rem, 2vw, 1.3rem);
   margin-top: 18px;
   font-family: 'Droid Sans', sans-serif;
 }
