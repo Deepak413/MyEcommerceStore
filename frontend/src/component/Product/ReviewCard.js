@@ -16,7 +16,7 @@ const ReviewCard = ({ review }) => {
     return (
         <>
             <div className="reviewCard">
-                <img src={profilePng} alt="User" />
+                <img src={review.avatar || profilePng} alt="User" />
                 <p>{review.name}</p>
                 <ReactStars {...options} />
                 <span className="reviewCardComment">{review.comment}</span>
