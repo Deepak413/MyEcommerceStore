@@ -19,12 +19,12 @@ const About = () => {
           <h2>WHO WE ARE</h2>
           <p>
             Welcome to <strong style={{ color: "#f1bd71" }}>SHOPPINGG KARO</strong>, your one-stop destination for the latest and greatest in electronic devices.
-            We are passionate about providing high-quality **laptops, smartphones, tablets, cameras, and headphones** to enhance your tech lifestyle.
+            We are passionate about providing high-quality laptops, smartphones, tablets, cameras, and headphones to enhance your tech lifestyle.
           </p>
           <br />
           <p>
-            your one-stop destination for the latest and greatest in electronic devices.
-            We are passionate about providing high-quality **laptops, smartphones, tablets, cameras, and headphones** to enhance your tech lifestyle.
+            Again your one-stop destination for the latest and greatest in electronic devices.
+            We are passionate about providing high-quality laptops, tablets, cameras, and headphones to enhance your tech lifestyle.
           </p>
         </div>
         <div className="about-image">
@@ -38,7 +38,7 @@ const About = () => {
         <h2 className="mission-title">Our Mission</h2>
         <hr className="divider" />
         <p className="mission-text">
-          Our mission is to deliver top-notch electronics at competitive prices while ensuring exceptional customer service.
+          Our mission is to deliver exclusive electronics at competitive prices while ensuring exceptional customer service.
           We believe in offering **the latest technology** with a seamless shopping experience.
         </p>
       </div>
