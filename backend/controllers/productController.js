@@ -108,6 +108,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
     const review = {
         user: req.user._id,
         name: req.user.name,
+        avatar: req.user.avatar.url,
         rating: Number(rating),
         comment,
     };
@@ -120,8 +121,12 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
 
     if (isReviewed) {
         product.reviews.forEach((rev) => {
-            if (rev.user.toString() === req.user._id.toString())
-                (rev.rating = rating), (rev.comment = comment);
+            if (rev.user.toString() === req.user._id.toString()){
+                rev.rating = rating;
+                rev.comment = comment;
+                rev.avatar = req.user.avatar.url;
+            }
+            // (rev.rating = rating), (rev.comment = comment);
         });
     } else {
         product.reviews.push(review);

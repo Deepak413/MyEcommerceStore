@@ -18,7 +18,11 @@ const ProductCard = ({ product }) => {
         <div className="productCardImg">
           <img src={product.images[0].url} alt={product.name} />
         </div>
-        <p>{product.name}</p>
+        <p>
+          {product.name.length > 22
+            ? product.name.substring(0, 22) + ".."
+            : product.name}
+        </p>
 
         <div className="productCardStars">
           <ReactStars {...options} />

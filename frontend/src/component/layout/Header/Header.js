@@ -107,11 +107,7 @@ const Header = () => {
           {isAuthenticated ? 
             <li><NavLink to="/login" className="nav_item"><BiSolidUserPin size={21} /></NavLink></li> 
             : 
-            <li><NavLink to="/login" className="nav_item"><BiLogIn size={22}/>
-            {/* <img src={login} alt="Login" className="login_icon_img"/> */}
-          </NavLink></li>}
-
-
+            <li><NavLink to="/login" className="nav_item"><BiLogIn size={22}/></NavLink></li>}
         </ul>
 
         {/* For Mobile Menu Button */}
