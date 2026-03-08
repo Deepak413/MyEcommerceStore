@@ -27,17 +27,17 @@ const Contact = () => {
         <div className="contact-card">
           <FaPhone size={40} className="icon" />
           <h3>PHONE NUMBER</h3>
-          <p>929-242-6868</p>
+          <p>929-242-2413</p>
         </div>
         <div className="contact-card">
-          <FaPhone size={40} className="icon" />
+          <FaEnvelope size={40} className="icon" />
           <h3>EMAIL</h3>
-          <p>contact@info.com</p>
+          <p>deepak@info.com</p>
         </div>
         <div className="contact-card">
-          <FaPhone size={40} className="icon" />
+          <FaMapMarkerAlt size={40} className="icon" />
           <h3>ADDRESS</h3>
-          <p>123 Fifth Avenue, New York, NY 10160</p>
+          <p>Megapolis Springs, Hingewadi phase 3, Pune</p>
         </div>
       </div>
 
