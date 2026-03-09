@@ -25,6 +25,7 @@ import {
     updateProfileRequest,
     updateProfileSuccess
 } from "../reducers/userReducer";
+import { toast } from "react-toastify";
 
 axios.defaults.withCredentials = true;
 
@@ -39,10 +40,11 @@ export const login = (email, password) => async (dispatch) => {
 
         const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/login`, { email, password }, config);
         console.log("In login in userAction, data : ", data);
-
+        toast.success("Login Successful 🎉");
         dispatch(loginSuccess(data));
     } catch (error) {
         console.error(error);
+        toast.error(error);
         if (error.response) {
             dispatch(loginFail(error.response.data.message)); // If response exists, use it
         } else if (error.request) {

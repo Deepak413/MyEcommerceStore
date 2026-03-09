@@ -12,6 +12,7 @@ const Profile = () => {
     const navigate = useNavigate();
     const { user, loading, isAuthenticated } = useSelector((state) => state.user);
     console.log("Is user is authenticated : ", isAuthenticated);
+    console.log("user in Profile : ", user);
     const dispatch = useDispatch();
 
     function logoutUser() {
@@ -32,36 +33,95 @@ const Profile = () => {
             ) : (
                 <Fragment>
                     <MetaData title={`${user?.user?.name}'s Profile`} />
-                    <div className="profileContainer">
-                        <div>
-                            <h1>My Profile</h1>
-                            <img src={user?.user?.avatar?.url} alt={user?.user?.name} />
-                            <Link to="/me/update">Edit Profile</Link>
-                        </div>
-                        <div>
-                            <div>
-                                <h4>Full Name</h4>
-                                <p>{user?.user?.name}</p>
-                            </div>
-                            <div>
-                                <h4>Email</h4>
-                                <p>{user?.user?.email}</p>
-                            </div>
-                            <div>
-                                <h4>Joined On</h4>
-                                <p>{String(user?.user?.createdAt).substring(0,10)}</p>
+
+                    <div className="profileWrapper">
+
+                        <div className="profileCard">
+
+                            <div className="profileLeft">
+
+                                <h2>My Account</h2>
+
+                                <img
+                                    src={user?.user?.avatar?.url}
+                                    alt={user?.user?.name}
+                                />
+
+                                <Link className="editProfileBtn" to="/me/update">
+                                    Edit Profile
+                                </Link>
+
                             </div>
 
-                            <div>
-                                <Link to="/orders">My Orders</Link>
-                                <Link to="/password/update">Change Password</Link>
-                                <Link onClick={logoutUser}>Logout</Link>
+                            <div className="profileRight">
+
+                                <div className="profileInfo">
+                                    <h4>Full Name</h4>
+                                    <p>{user?.user?.name}</p>
+                                </div>
+
+                                <div className="profileInfo">
+                                    <h4>Email</h4>
+                                    <p>{user?.user?.email}</p>
+                                </div>
+
+                                <div className="profileInfo">
+                                    <h4>Joined On</h4>
+                                    <p>{String(user?.user?.createdAt).substring(0, 10)}</p>
+                                </div>
+
+                                <div className="profileActions">
+                                    <Link to="/orders">My Orders</Link>
+                                    <Link to="/password/update">Change Password</Link>
+                                    <button onClick={logoutUser}>Logout</button>
+                                </div>
+
                             </div>
+
                         </div>
+
                     </div>
+
                 </Fragment>
             )}
         </Fragment>
+        // <Fragment>
+        //     {loading ? (
+        //         <Loader />
+        //     ) : (
+        //         <Fragment>
+        //             <MetaData title={`${user?.user?.name}'s Profile`} />
+        //             <div className="profileContainer">
+        //                 <div>
+        //                     <h1>My Profile</h1>
+        //                     <img src={user?.user?.avatar?.url} alt={user?.user?.name} />
+        //                     <Link to="/me/update">Edit Profile</Link>
+        //                 </div>
+        //                 <div>
+        //                     <div>
+        //                         <h4>Full Name</h4>
+        //                         <p>{user?.user?.name}</p>
+        //                     </div>
+        //                     <div>
+        //                         <h4>Email</h4>
+        //                         <p>{user?.user?.email}</p>
+        //                     </div>
+        //                     <div>
+        //                         <h4>Joined On</h4>
+        //                         <p>{String(user?.user?.createdAt).substring(0,10)}</p>
+        //                     </div>
+
+        //                     <div>
+        //                         <Link to="/orders">My Orders</Link>
+        //                         <Link to="/password/update">Change Password</Link>
+        //                         <Link onClick={logoutUser}>Logout</Link>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </Fragment>
+        //     )}
+        // </Fragment>
+        
     );
 };
 

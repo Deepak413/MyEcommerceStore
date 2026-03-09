@@ -73,6 +73,7 @@ const LoginSignUp = () => {
             navigate('/account');
         }
         if (error) {
+            toast.error(error);
             dispatch(clearErrors());
         }
         
