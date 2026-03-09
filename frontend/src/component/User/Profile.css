@@ -1,11 +1,11 @@
-.profileContainer {
+/* .profileContainer {
   margin-top: 6rem;
   display: flex;
   padding: 3rem;
   background-color: #e5e5e5;
 }
 
-/* PROFILE RIGHT CONTAINER */
+//PROFILE RIGHT CONTAINER
 
 .profileContainer>div:first-child {
   color: rgba(0, 0, 0, 0.555);
@@ -57,7 +57,7 @@
   background-color: #d48503;
 }
 
-/* PROFILE RIGHT CONTAINER */
+//PROFILE RIGHT CONTAINER
 .profileContainer>div:last-child {
   background-color: white;
   width: 40%;
@@ -135,4 +135,132 @@
     padding: 1vmax;
     margin: 2vmax 0;
   }
+} */
+
+
+
+.profileWrapper{
+  margin-top:6rem;
+  background:#f5f5f5;
+  min-height:80vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:2rem;
+}
+
+.profileCard{
+  width:80%;
+  max-width:900px;
+  background:white;
+  display:flex;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+  overflow:hidden;
+}
+
+.profileLeft{
+  width:40%;
+  background:#fafafa;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:start;
+  padding:3rem 2rem;
+}
+
+.profileLeft h2{
+  margin-bottom:2rem;
+  font-family:"Roboto";
+}
+
+.profileLeft img{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #f5a623;
+  margin-bottom:2rem;
+}
+
+.editProfileBtn{
+  background:#f5a623;
+  color:white;
+  text-decoration:none;
+  padding:10px 25px;
+  border-radius:5px;
+  transition:0.3s;
+}
+
+.editProfileBtn:hover{
+  background:#d48503;
+}
+.profileRight{
+  width:60%;
+  padding:3rem;
+  display:flex;
+  flex-direction:column;
+  gap:2rem;
+}
+
+.profileInfo h4{
+  font-weight:500;
+  margin-bottom:5px;
+}
+
+.profileInfo p{
+  color:#666;
+}
+
+.profileActions{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:1rem;
+}
+
+.profileActions a,
+.profileActions button{
+  text-decoration:none;
+  background:#444;
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:5px;
+  text-align:center;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.profileActions a:hover,
+.profileActions button:hover{
+  background:#f5a623;
+}
+
+@media(max-width:768px){
+
+.profileCard{
+  flex-direction:column;
+  width:95%;
+}
+
+.profileLeft{
+  width:100%;
+}
+
+.profileRight{
+  width:100%;
+  padding:2rem;
+  text-align:center;
+}
+
+.profileActions{
+  align-items:center;
+}
+
+.profileActions a,
+.profileActions button{
+  width:70%;
+}
+
 }

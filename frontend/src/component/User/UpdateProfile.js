@@ -19,7 +19,7 @@ const UpdateProfile = () => {
 
     const { user } = useSelector((state) => state.user);
     const { error, isUpdated, loading } = useSelector((state) => state.profile);
-    // console.log(user);
+    console.log("user in UpdateProfile : ", user);
     // console.log(isUpdated);
 
     const [name, setName] = useState("");
@@ -34,7 +34,9 @@ const UpdateProfile = () => {
 
         myForm.set("name", name);
         myForm.set("email", email);
-        myForm.set("avatar", avatar);
+        if(avatar){
+            myForm.set("avatar", avatar);
+        }
         if(error)
             console.log("getting error while updating profile : ",error);
         dispatch(updateProfile(myForm));
@@ -62,7 +64,7 @@ const UpdateProfile = () => {
 
         if (error) {
             console.log("inside UpdateProfile.js : ",error);
-            toast.error(error);
+            // toast.error(error);
             dispatch(clearErrors());
         }
 
@@ -74,7 +76,7 @@ const UpdateProfile = () => {
 
             dispatch(updateProfileReset());
         }
-    }, [dispatch, error, toast, navigate, user, isUpdated]);
+    }, [dispatch, error, navigate, user, isUpdated]);
 
 
     return (
