@@ -112,8 +112,7 @@
     color: rgb(48, 48, 48);
     transition: all 0.5s;
     align-items: center;
-    /* max-height: 20rem; */
-    height: 20rem;
+    height: 21rem;
     padding-bottom: 4rem;
 }
 .productCardImg{

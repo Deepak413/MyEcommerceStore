@@ -29,6 +29,35 @@ const productSlice = createSlice({
   },
 });
 
+const similarProductsSlice = createSlice({
+  name: "similarProducts",
+  initialState: {
+    similarProducts: [],
+    loading: false,
+    error: null,
+    similarProductsCount: 0,
+  },
+  reducers: {
+    similarProductsRequest: (state) => {
+      state.loading = true;
+    },
+    similarProductsSuccess: (state, action) => {
+      state.loading = false;
+      state.similarProducts = action.payload.products;
+      state.similarProductsCount = action.payload.productsCount;
+      state.resultPerPage = action.payload.resultPerPage;
+      state.filteredProductsCount = action.payload.filteredProductsCount;
+    },
+    similarProductsFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    clearAllErrors: (state) => {
+      state.error = null;
+    },
+  },
+});
+
 const productDetailsSlice = createSlice({
   name: "productDetails",
   initialState: {
@@ -94,8 +123,14 @@ export const {
   allProductRequest,
   allProductSuccess,
   allProductFail,
-  clearAllErrors,
+  clearAllErrors
 } = productSlice.actions;
+
+export const{
+  similarProductsRequest,
+  similarProductsSuccess,
+  similarProductsFail
+} = similarProductsSlice.actions;
 
 export const {
   productDetailsRequest,
@@ -112,6 +147,7 @@ export const {
 
 const reducers = {
   products: productSlice.reducer,
+  similarProducts: similarProductsSlice.reducer,
   productDetails: productDetailsSlice.reducer,
   newReview: newReviewSlice.reducer,
 };

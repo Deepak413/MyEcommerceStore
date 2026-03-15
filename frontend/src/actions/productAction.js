@@ -1,5 +1,5 @@
 import axios from "axios";
-import { allProductFail, allProductRequest, allProductSuccess, clearAllErrors, productDetailsFail, productDetailsSuccess } from "../reducers/productReducer";
+import { allProductFail, allProductRequest, allProductSuccess, clearAllErrors, productDetailsFail, productDetailsSuccess, similarProductsFail, similarProductsRequest, similarProductsSuccess } from "../reducers/productReducer";
 import { productDetailsRequest, newReviewFail, newReviewRequest, newReviewReset, newReviewSuccess } from "../reducers/productReducer";
 
 export const getProduct = (keyword = "", currentPage=1, price=[12000, 150000], category, ratings=0) => async(dispatch) => {
@@ -24,7 +24,7 @@ export const getProduct = (keyword = "", currentPage=1, price=[12000, 150000], c
 };
 export const getSimilarCategoryProducts = (category) => async(dispatch) => {
     try {
-        dispatch(allProductRequest());
+        dispatch(similarProductsRequest());
 
         let link = `https://shoppingkaro-65sf.onrender.com/api/v1/products`;
 
@@ -34,9 +34,9 @@ export const getSimilarCategoryProducts = (category) => async(dispatch) => {
 
         const {data} = await axios.get(link);
         console.log("Similar category products in getSimilarCategoryProducts ProductAction.js : ", data);
-        dispatch(allProductSuccess({...data}));
+        dispatch(similarProductsSuccess({...data}));
     } catch (error) {
-        dispatch(allProductFail(error.response.data.message));
+        dispatch(similarProductsFail(error.response.data.message));
     }
 };
 
