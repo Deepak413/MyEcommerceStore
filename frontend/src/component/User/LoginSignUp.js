@@ -48,7 +48,7 @@ const LoginSignUp = () => {
         myForm.set("password", password);
         myForm.set("avatar", avatar);
         dispatch(register(myForm));
-        toast.success("registration Successfully");
+        toast.success("Registration Successful");
     };
 
     const registerDataChange = (e) => {
@@ -73,7 +73,7 @@ const LoginSignUp = () => {
             navigate('/account');
         }
         if (error) {
-            toast.error(error);
+            // toast.error(error);
             dispatch(clearErrors());
         }
         
