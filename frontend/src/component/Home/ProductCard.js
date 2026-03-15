@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
     color: "rgba(20,20,20,0.1)",
     activeColor: "#ca944d",
     size: window.innerWidth < 600 ? 8 : 13,
-    value: product.ratings,
+    value: product?.ratings || 0,
     isHalf: true,
   }
 
@@ -16,12 +16,12 @@ const ProductCard = ({ product }) => {
     <>
       <Link className='productCard' to={`/product/${product._id}`}>
         <div className="productCardImg">
-          <img src={product.images[0].url} alt={product.name} />
+          <img src={product?.images[0]?.url} alt={product?.name} />
         </div>
         <p>
-          {product.name.length > 22
+          {product?.name?.length > 22
             ? product.name.substring(0, 22) + ".."
-            : product.name}
+            : product?.name}
         </p>
 
         <div className="productCardStars">

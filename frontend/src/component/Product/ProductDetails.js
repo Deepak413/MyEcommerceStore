@@ -23,13 +23,23 @@ import {
 
 import { Rating } from "@mui/lab";
 import { newReviewReset } from '../../reducers/productReducer.js';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Navigation } from "swiper/modules";
+import "swiper/css/navigation";
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
     const { id } = useParams();      //to get the id parameter from the current page
 
-    const { product, loading, error } = useSelector((state) => state.productDetails);
-    const { similarProducts, productsLoading, productsError } = useSelector((state) => state.products);
+    const { product, loading: productLoading, error: productError } =
+        useSelector((state) => state.productDetails);
+
+    const {
+        similarProducts,
+        loading: similarProductsLoading,
+        error: similarProductsError,
+    } = useSelector((state) => state.similarProducts);
 
     const [filteredSimilarProducts, setFilteredSimilarProducts] = useState([]);
 
@@ -82,9 +92,9 @@ const ProductDetails = () => {
     };
 
     useEffect(() => {
-        if (error) {
+        if (productError) {
             console.log("Error while getting product details");
-            toast.error(error);
+            toast.error(productError);
             dispatch(clearErrors());
         }
 
@@ -100,22 +110,15 @@ const ProductDetails = () => {
 
         dispatch(getProductDetails(id));
         console.log("product detail in ProductDetails : ", product);
-    }, [dispatch, id, error, reviewError, success]);
+    }, [dispatch, id, productError, reviewError, success]);
 
-    // fetch similar products only when product is loaded
-    // useEffect(() => {
-    //     if (product?.category) {
-    //         dispatch(getSimilarCategoryProducts(product.category));
-    //         console.log("Similar products in : ProductDetails.js : ", similarProducts);
-    //     }
-    // }, [dispatch, product.category]);
     useEffect(() => {
         if (product?.category) {
             dispatch(getSimilarCategoryProducts(product.category));
         }
         console.log("Similar products in ProductDetails.js : ", similarProducts);
 
-    }, [dispatch, product?.category]);
+    }, [dispatch, product]);
 
     useEffect(() => {
         if (similarProducts && similarProducts.length && product?._id) {
@@ -137,13 +140,9 @@ const ProductDetails = () => {
         readOnly: true,
         precision: 0.5,
     }
-
-    // const filteredSimilarProducts = similarProducts?.products?.filter((item) => item._id !== product._id);
-    // console.log("filteredSimilarProducts in ProductDetails.js : ", filteredSimilarProducts);
-
     return (
         <Fragment>
-            {loading ? (<Loader />) : (
+            {productLoading ? (<Loader />) : (
                 <>
                     <MetaData title={`${product.name} --ECOMMERCE`} />
                     <div className="ProductDetails">
@@ -241,17 +240,46 @@ const ProductDetails = () => {
                     )}
 
 
-                    <h3 className="similarProductsHeading">Similar Products</h3>
+                    <h2 className="similarProductsHeading">Similar Products</h2>
 
-                    {productsLoading ? (
-                        <Loader />
-                    ) : (
+                    {/* {similarProductsLoading ? (<Loader />) : (
                         <div className="similarProductsContainer">
-                            {filteredSimilarProducts &&
-                                filteredSimilarProducts.map((prdct) => (
-                                    <ProductCard key={prdct._id} product={prdct} />
-                                ))
-                            }
+                            <div className="similarProductsCards">
+                                {filteredSimilarProducts &&
+                                    filteredSimilarProducts.map((prdct) => (
+                                        <ProductCard key={prdct._id} product={prdct} />
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    )} */}
+
+                    {similarProductsLoading ? (<Loader />) : (
+                        <div className="similarProductsContainer">
+                            <div className='similarProductsCards'>
+
+                                <Swiper
+                                    modules={[Navigation]}
+                                    navigation
+                                    loop={true}
+                                    spaceBetween={10}
+                                    slidesPerView={3}
+                                    centeredSlides={false}
+                                    grabCursor={true}
+                                    breakpoints={{
+                                        320: { slidesPerView: 1 },
+                                        600: { slidesPerView: 2 },
+                                        900: { slidesPerView: 3 },
+                                        1200: { slidesPerView: 4 },
+                                    }}
+                                >
+                                    {filteredSimilarProducts?.map((p) => (
+                                        <SwiperSlide key={p._id}>
+                                            <ProductCard product={p} />
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            </div>
                         </div>
                     )}
 
