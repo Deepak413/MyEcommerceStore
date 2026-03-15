@@ -3,11 +3,12 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from 'react-redux';
-import { clearErrors, getProductDetails, newReview } from '../../actions/productAction';
+import { clearErrors, getProductDetails, getSimilarCategoryProducts, newReview } from '../../actions/productAction';
 import { useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard.js";
 import Loader from '../layout/Loader/Loader';
+import ProductCard from '../Home/ProductCard.js';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MetaData from '../layout/MetaData';
@@ -28,6 +29,9 @@ const ProductDetails = () => {
     const { id } = useParams();      //to get the id parameter from the current page
 
     const { product, loading, error } = useSelector((state) => state.productDetails);
+    const { similarProducts, productsLoading, productsError } = useSelector((state) => state.products);
+
+    const [filteredSimilarProducts, setFilteredSimilarProducts] = useState([]);
 
     const [quantity, setQuantity] = useState(1);
     const [open, setOpen] = useState(false);
@@ -95,7 +99,37 @@ const ProductDetails = () => {
         }
 
         dispatch(getProductDetails(id));
-    }, [dispatch, id, toast, error, quantity, reviewError, success]);
+        console.log("product detail in ProductDetails : ", product);
+    }, [dispatch, id, error, reviewError, success]);
+
+    // fetch similar products only when product is loaded
+    // useEffect(() => {
+    //     if (product?.category) {
+    //         dispatch(getSimilarCategoryProducts(product.category));
+    //         console.log("Similar products in : ProductDetails.js : ", similarProducts);
+    //     }
+    // }, [dispatch, product.category]);
+    useEffect(() => {
+        if (product?.category) {
+            dispatch(getSimilarCategoryProducts(product.category));
+        }
+        console.log("Similar products in ProductDetails.js : ", similarProducts);
+
+    }, [dispatch, product?.category]);
+
+    useEffect(() => {
+        if (similarProducts && similarProducts.length && product?._id) {
+
+            const filtered = similarProducts.filter(
+                (item) => item._id !== product._id
+            );
+
+            setFilteredSimilarProducts(filtered);
+
+            console.log("Filtered Similar Products in ProductDetails.js: ", filtered);
+        }
+
+    }, [similarProducts, product?._id]);
 
     const options = {
         size: "large",
@@ -103,6 +137,9 @@ const ProductDetails = () => {
         readOnly: true,
         precision: 0.5,
     }
+
+    // const filteredSimilarProducts = similarProducts?.products?.filter((item) => item._id !== product._id);
+    // console.log("filteredSimilarProducts in ProductDetails.js : ", filteredSimilarProducts);
 
     return (
         <Fragment>
@@ -128,7 +165,7 @@ const ProductDetails = () => {
                             </div>
 
                             <div className="detailsBlock-4">
-                                 <p>{product.description}</p>
+                                <p>{product.description}</p>
                             </div>
                             <div className="detailsBlock-3">
                                 <h1>{`₹${product.price}`}</h1>
@@ -201,6 +238,21 @@ const ProductDetails = () => {
                         </div>
                     ) : (
                         <p className="noReviews">No Reviews Yet</p>
+                    )}
+
+
+                    <h3 className="similarProductsHeading">Similar Products</h3>
+
+                    {productsLoading ? (
+                        <Loader />
+                    ) : (
+                        <div className="similarProductsContainer">
+                            {filteredSimilarProducts &&
+                                filteredSimilarProducts.map((prdct) => (
+                                    <ProductCard key={prdct._id} product={prdct} />
+                                ))
+                            }
+                        </div>
                     )}
 
                 </>

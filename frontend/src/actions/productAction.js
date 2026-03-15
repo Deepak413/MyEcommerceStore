@@ -22,6 +22,23 @@ export const getProduct = (keyword = "", currentPage=1, price=[12000, 150000], c
         dispatch(allProductFail(error.response.data.message));
     }
 };
+export const getSimilarCategoryProducts = (category) => async(dispatch) => {
+    try {
+        dispatch(allProductRequest());
+
+        let link = `https://shoppingkaro-65sf.onrender.com/api/v1/products`;
+
+        if (category) {
+            link += `?category=${category}`;
+        }
+
+        const {data} = await axios.get(link);
+        console.log("Similar category products in getSimilarCategoryProducts ProductAction.js : ", data);
+        dispatch(allProductSuccess({...data}));
+    } catch (error) {
+        dispatch(allProductFail(error.response.data.message));
+    }
+};
 
 export const getProductDetails = (id) => async(dispatch) => {
     try {
