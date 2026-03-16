@@ -27,6 +27,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Navigation } from "swiper/modules";
 import "swiper/css/navigation";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
@@ -242,21 +243,13 @@ const ProductDetails = () => {
 
                     <h2 className="similarProductsHeading">Similar Products</h2>
 
-                    {/* {similarProductsLoading ? (<Loader />) : (
-                        <div className="similarProductsContainer">
-                            <div className="similarProductsCards">
-                                {filteredSimilarProducts &&
-                                    filteredSimilarProducts.map((prdct) => (
-                                        <ProductCard key={prdct._id} product={prdct} />
-                                    ))
-                                }
-                            </div>
-                        </div>
-                    )} */}
-
                     {similarProductsLoading ? (<Loader />) : (
                         <div className="similarProductsContainer">
                             <div className='similarProductsCards'>
+
+                                <button className="viewAllBtn">
+                                    <FaArrowRightLong style={{color:"white"}} />
+                                </button>
 
                                 <Swiper
                                     modules={[Navigation]}

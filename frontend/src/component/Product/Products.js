@@ -43,8 +43,6 @@ const Products = ({ match }) => {
 
     const { products, loading, error, productsCount, resultPerPage, filteredProductsCount } = useSelector((state) => state.products)
 
-    // const keyword = match.params.keyword;
-    // const { keyword = "" } = useParams();
     const params = useParams();
     const keyword = params.keyword === undefined ? "" : params.keyword;
 
@@ -138,6 +136,34 @@ const Products = ({ match }) => {
                                 ))
                             }
                         </div>
+                        
+                        {resultPerPage < productsCount && (
+                            <div className="paginationBox">
+                                <Pagination
+                                    count={Math.ceil(productsCount / resultPerPage)}
+                                    page={currentPage}
+                                    onChange={(e, page) => setCurrentPage(page)}
+                                    variant="outlined"
+                                    shape="rounded"
+                                    size="large"
+                                    // color='primary'
+                                    sx={{
+                                        '& .MuiPaginationItem-root': {
+                                            color: 'black',
+                                            borderColor: '#d3d3d3',
+                                        },
+                                        '& .MuiPaginationItem-root.Mui-selected': {
+                                            backgroundColor: '#ffaa2c',
+                                            color: 'white',
+                                            borderColor: '#ffaa2c',
+                                            '&:hover': {
+                                                backgroundColor: '#e6951a',
+                                            },
+                                        },
+                                    }}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -192,15 +218,7 @@ const Products = ({ match }) => {
 
                     </div>
                     <div className="filterBox">
-                        {/* <Typography>Price</Typography>
-                    <Slider
-                        value={price}
-                        onChange={priceHandler}
-                        valueLabelDisplay="auto"
-                        aria-labelledby="range-slider"
-                        min={0}
-                        max={500000}
-                    /> */}
+
                         <ul className="categoryBox">
                             {categories.map((category) => (
                                 <li
@@ -215,16 +233,7 @@ const Products = ({ match }) => {
 
                         <fieldset>
                             <Typography style={{ fontFamily: "monospace", fontSize: "0.9rem" }} component="legend">Ratings Above</Typography>
-                            {/* <Slider
-                            value={ratings}
-                            onChange={(e, newRating) => {
-                                setRatings(newRating);
-                            }}
-                            aria-labelledby="continuous-slider"
-                            valueLabelDisplay="auto"
-                            min={0}
-                            max={5}
-                        /> */}
+
                             <Box>
                                 <Slider
                                     getAriaLabel={() => 'Ratings range'}
@@ -267,34 +276,6 @@ const Products = ({ match }) => {
                         </fieldset>
                     </div>
                 </div>
-
-                {resultPerPage < productsCount && (
-                    <div className="paginationBox">
-                        <Pagination
-                            count={Math.ceil(productsCount / resultPerPage)}
-                            page={currentPage}
-                            onChange={(e, page) => setCurrentPage(page)}
-                            variant="outlined"
-                            shape="rounded"
-                            size="large"
-                            // color='primary'
-                            sx={{
-                                '& .MuiPaginationItem-root': {
-                                    color: 'black',
-                                    borderColor: '#d3d3d3',
-                                },
-                                '& .MuiPaginationItem-root.Mui-selected': {
-                                    backgroundColor: '#ffaa2c',
-                                    color: 'white',
-                                    borderColor: '#ffaa2c',
-                                    '&:hover': {
-                                        backgroundColor: '#e6951a',
-                                    },
-                                },
-                            }}
-                        />
-                    </div>
-                )}
             </Fragment>}
         </Fragment>
     )
