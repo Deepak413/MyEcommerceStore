@@ -2,7 +2,7 @@ import axios from "axios";
 import { allProductFail, allProductRequest, allProductSuccess, clearAllErrors, productDetailsFail, productDetailsSuccess, similarProductsFail, similarProductsRequest, similarProductsSuccess } from "../reducers/productReducer";
 import { productDetailsRequest, newReviewFail, newReviewRequest, newReviewReset, newReviewSuccess } from "../reducers/productReducer";
 
-export const getProduct = (keyword = "", currentPage=1, price=[12000, 150000], category, ratings=0) => async(dispatch) => {
+export const getProduct = (keyword = "", currentPage=1, price=[12000, 150000], category, ratings=0, sort="") => async(dispatch) => {
     try {
         dispatch(allProductRequest());
 
@@ -15,8 +15,13 @@ export const getProduct = (keyword = "", currentPage=1, price=[12000, 150000], c
             link += `&ratings[gte]=${ratings}`;
         }
 
+        if (sort) {
+            link += `&sort=${sort}`;
+        }
+
+
         const {data} = await axios.get(link);
-        // console.log(data);
+        console.log("data from backend in getProduct in ProductAction : ", data);
         dispatch(allProductSuccess({...data}));
     } catch (error) {
         dispatch(allProductFail(error.response.data.message));

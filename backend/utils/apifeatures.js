@@ -9,7 +9,7 @@ class ApiFeatures {
           ? {
                 name:{
                     $regex:this.queryStr.keyword, 
-                    $options: "i",           //fir case insensitiveness
+                    $options: "i",           //for case insensitiveness
                 },
             } 
           : {};
@@ -23,7 +23,7 @@ class ApiFeatures {
         const queryCopy = {...this.queryStr};
         
         //removing some fields for filter by category
-        const removeFields = ["keyword", "page", "limit"];
+        const removeFields = ["keyword", "page", "limit", "sort"];
         removeFields.forEach(key=>delete queryCopy[key]);
 
         // Filter for price and Rating
@@ -34,6 +34,17 @@ class ApiFeatures {
         this.query = this.query.find(JSON.parse(queryStr));
         return this;
 
+    }
+
+    sort() {
+        let sortBy = "-createdAt"; // default: newest
+
+        if (this.queryStr.sort) {
+            sortBy = this.queryStr.sort.split(",").join(" ");
+        }
+
+        this.query = this.query.sort(sortBy);
+        return this;
     }
 
     pagination(resultPerPage){

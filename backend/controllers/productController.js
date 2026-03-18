@@ -24,13 +24,23 @@ exports.getAllProducts = catchAsyncErrors(async (req, res,next) => {
     // return next(new ErrorHander("this is my custom error", 500));
     const resultPerPage = 8;
     const productsCount = await Product.countDocuments();
+    console.log("productsCount in getAllProducts in ProductController : ", productsCount);
 
-    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(resultPerPage);
+    // let sort = req.query.sort || "-createdAt"; // default newest
+    
+
+    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter();
+
+    // Get filtered count BEFORE pagination
+    const filteredProducts = await apiFeature.query.clone();
+    const filteredProductsCount = filteredProducts.length;
+
+    apiFeature.sort().pagination(resultPerPage);
     
     let products = await apiFeature.query;
-    let filteredProductsCount = products.length;
+    // let filteredProductsCount = products.length;
 
-    apiFeature.pagination(resultPerPage);
+    // apiFeature.pagination(resultPerPage);
     
     //  products = await apiFeature.query;
 

@@ -4,7 +4,7 @@ import { getProduct, clearErrors } from '../../actions/productAction';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../Home/ProductCard';
 import Loader from '../layout/Loader/Loader';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useParams } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 import Slider from "@mui/material/Slider";
 import { Rating } from '@mui/material';
@@ -41,6 +41,8 @@ const Products = ({ match }) => {
     const [ratings, setRatings] = useState(0);
     const navigate = useNavigate();
 
+    const [tempPrice, setTempPrice] = useState([0, 200000]); // for slider state - to make API call when user clicks on button
+
     const { products, loading, error, productsCount, resultPerPage, filteredProductsCount } = useSelector((state) => state.products)
 
     const params = useParams();
@@ -53,38 +55,52 @@ const Products = ({ match }) => {
     const priceHandler = (event, newPrice) => {
         setPrice(newPrice);
     }
-    let count = filteredProductsCount;
 
-    console.log("count : ", count);
-    console.log("products", products);
+    console.log("filteredProductsCount in Productsjs: ", filteredProductsCount);
+    console.log("products in Productsjs", products);
 
-    // const [selectedSortOption, setSelectedSortOption] = useState('default');
+    const [selectedSortOption, setSelectedSortOption] = useState('default');
 
-    // const handleSortChange = (e) => {
-    //     const value = e.target.value;
-    //     setSelectedSortOption(value);
-    // };
+    const handleSortChange = (e) => {
+        const value = e.target.value;
+        setSelectedSortOption(value);
+        console.log("selectedSortOption in Productsjs : ", selectedSortOption);
+        setCurrentPage(1);
+    };
 
     const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
 
     const toggleFilterBox = () => setIsFilterBoxOpen(!isFilterBoxOpen);
-    const toggleResetButton = (e) => {
+
+    const handleFilterButton = () => {
+        toggleFilterBox();
+    }
+    const handleResetButton = (e) => {
         setCategory("");
         setRatings(0);
         setPrice([0, 200000]);
+        setTempPrice([0, 200000]);
         setSearchTerm("");
+        setCurrentPage(1);
         console.log("Filters reset done.");
     }
 
     const [searchTerm, setSearchTerm] = useState("");
-    const searchSubmitHandler = (e) => {
+    const handleSearchFilterSubmit = (e) => {
         e.preventDefault();
-        if (searchTerm.trim()) {
-            navigate(`/products/${searchTerm}`);
+        toggleFilterBox();
+        let searchTermTemp = searchTerm;
+        setSearchTerm("");
+        if (searchTermTemp.trim()) {
+            navigate(`/products/${searchTermTemp}`);
         } else {
             navigate("/products");
         }
     };
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [keyword]);
 
     useEffect(() => {
         if (error) {
@@ -93,12 +109,33 @@ const Products = ({ match }) => {
             dispatch(clearErrors());
         }
         const delayDebounce = setTimeout(() => {
-            dispatch(getProduct(keyword, currentPage, price, category, ratings));
+            dispatch(getProduct(keyword, currentPage, price, category, ratings, selectedSortOption));
         }, 400);
 
         return () => clearTimeout(delayDebounce);
-        // dispatch(getProduct(keyword, currentPage, price, category, ratings));
-    }, [dispatch, keyword, currentPage, price, category, ratings, toast, error]);
+    }, [dispatch, keyword, currentPage, price, category, ratings, selectedSortOption, error]);
+
+    const handleCategoryFilterClick = (category) => {
+        setCategory(category);
+        console.log("Selected category:", category);
+        console.log("filteredProductsCount after category filter click : ", filteredProductsCount);
+        setCurrentPage(1);
+        toggleFilterBox();
+    };
+
+    const handleRatingFilterClick = (newRating) => {
+        setRatings(newRating);
+        console.log("Selected Rating:", newRating);
+        console.log("filteredProductsCount after newRating filter click : ", filteredProductsCount);
+        setCurrentPage(1);
+        toggleFilterBox();
+    }
+
+    const handlePriceFilterBtnClick = () => {
+        setPrice(tempPrice);
+        setCurrentPage(1);
+        toggleFilterBox();
+    };
 
 
     return (
@@ -109,35 +146,46 @@ const Products = ({ match }) => {
                     <div className="productsBox">
                         <div className='filterContainer'>
                             <div className='filterButtonsContainer'>
-                                <NavLink onClick={toggleFilterBox}>
+                                <NavLink onClick={handleFilterButton}>
                                     <HiOutlineAdjustmentsHorizontal className="filterIcon" size={17} />
                                     <span>FILTER</span>
                                 </NavLink>
-                                <NavLink to="/products" onClick={toggleResetButton}>
+                                <NavLink to="/products" onClick={handleResetButton}>
                                     <RxReset className="filterIcon" size={17} />
                                     <span>RESET</span>
                                 </NavLink>
                             </div>
 
-                            {/* <div className="sortDropdown">
+                            <div className="sortDropdown">
                                 <select id="sort" value={selectedSortOption} onChange={handleSortChange}>
-                                    <option value="default">Featured</option>
+                                    <option value="">Featured</option>
                                     <option value="price">Price: Low to High</option>
-                                    <option value="price">Price: High to Low</option>
-                                    <option value="name">Newest Arrivals</option>
+                                    <option value="-price">Price: High to Low</option>
+                                    <option value="-createdAt">Newest Arrivals</option>
                                 </select>
-                            </div> */}
+                            </div>
                         </div>
 
-                        <div className="products">
-                            {products &&
-                                products.map((product) => (
-                                    <ProductCard key={product._id} product={product} />
-                                ))
-                            }
-                        </div>
-                        
-                        {resultPerPage < productsCount && (
+
+                        {products && products.length > 0 ? (
+                            <div className="products">
+                                {products &&
+                                    products.map((product) => (
+                                        <ProductCard key={product._id} product={product} />
+                                    ))
+                                }
+                            </div>
+                        ) : (
+                            <div className="noProductsContainer">
+                                <h2 className="noProducts">No Result</h2>
+                                <NavLink to="/products" onClick={handleResetButton}>
+                                    <span>View All Products</span>
+                                </NavLink>
+                            </div>
+
+                        )}
+
+                        {products && products.length > 0 && (
                             <div className="paginationBox">
                                 <Pagination
                                     count={Math.ceil(productsCount / resultPerPage)}
@@ -146,7 +194,6 @@ const Products = ({ match }) => {
                                     variant="outlined"
                                     shape="rounded"
                                     size="large"
-                                    // color='primary'
                                     sx={{
                                         '& .MuiPaginationItem-root': {
                                             color: 'black',
@@ -172,18 +219,15 @@ const Products = ({ match }) => {
                     <button className="close-btn" onClick={toggleFilterBox}>×</button>
                     <div className="filterBoxSearchContainer">
                         <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} type="text" placeholder="Search for Gadgets..." autoFocus />
-                        <button className='filterBoxSearchContainerBtn' onClick={searchSubmitHandler}>Search</button>
+                        <button className='filterBoxSearchContainerBtn' onClick={handleSearchFilterSubmit}>Search</button>
                     </div>
                     <div className="filterByPriceContainer">
                         <h3>Filter By Price</h3>
                         <Box>
                             <Slider
                                 getAriaLabel={() => 'Price range'}
-                                value={price}
-                                onChange={(e, newValue) => setPrice(newValue)} // updates state
-                                onChangeCommitted={() => {
-                                    setCurrentPage(1); // reset pagination
-                                }}
+                                value={tempPrice}
+                                onChange={(e, newValue) => setTempPrice(newValue)}
                                 valueLabelDisplay="off"
                                 getAriaValueText={valuetext}
                                 min={0}
@@ -208,8 +252,8 @@ const Products = ({ match }) => {
                             />
                         </Box>
                         <div className='filterByPriceDetails'>
-                            <button className='filterByPriceContainerBtn'>Filter</button>
-                            <p>Price: <strong>₹{price[0].toLocaleString()} — ₹{price[1].toLocaleString()}</strong></p>
+                            <button onClick={handlePriceFilterBtnClick} className='filterByPriceContainerBtn'>Filter</button>
+                            <p>Price: <strong>₹{tempPrice[0].toLocaleString()} — ₹{tempPrice[1].toLocaleString()}</strong></p>
                         </div>
 
                     </div>
@@ -224,7 +268,7 @@ const Products = ({ match }) => {
                                 <li
                                     className="category-link"
                                     key={category}
-                                    onClick={() => setCategory(category)}
+                                    onClick={() => handleCategoryFilterClick(category)}
                                 >
                                     {category}
                                 </li>
@@ -238,7 +282,7 @@ const Products = ({ match }) => {
                                 <Slider
                                     getAriaLabel={() => 'Ratings range'}
                                     value={ratings}
-                                    onChange={(e, newRating) => setRatings(newRating)}
+                                    onChange={(e, newRating) => handleRatingFilterClick(newRating)}
                                     valueLabelDisplay="auto"
                                     getAriaValueText={(value) => `${value} Stars`}
                                     min={0}
@@ -268,7 +312,7 @@ const Products = ({ match }) => {
                                 name="simple-controlled"
                                 value={ratings}
                                 onChange={(e, newRating) => {
-                                    setRatings(newRating);
+                                    handleRatingFilterClick(newRating);
                                 }}
                                 max={5}
                                 defaultValue={0}
