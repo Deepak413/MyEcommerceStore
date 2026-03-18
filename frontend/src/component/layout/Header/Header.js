@@ -11,7 +11,6 @@ import "./Header.css";
 import { FaPersonWalkingLuggage } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import UserOptions from './UserOptions';
-// import login from "../../../images/login.png";
 import { BiLogIn } from "react-icons/bi";
 
 const Header = () => {
@@ -29,6 +28,7 @@ const Header = () => {
 
   const [keyword, setKeyword] = useState("");
   const searchSubmitHandler = (e) => {
+
     e.preventDefault();
     if (keyword.trim()) {
       navigate(`/products/${keyword}`);

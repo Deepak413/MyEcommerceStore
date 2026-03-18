@@ -12,7 +12,6 @@
     margin: 6rem 0;
     background-color: #f1f1f1;
     padding: 3rem 3rem;
-    /* border-top: 1px solid red; */
 }
 .productsBox{
     background-color: white;
@@ -21,7 +20,6 @@
     justify-content: center;
     align-items: center;    
     padding: 25px;
-    /* border-top: 1px solid red; */
 }
 
 
@@ -62,18 +60,48 @@
     padding: 7px 11px;
     font-family: monospace;
     font-size: medium;
-    border: none;
-    transition: all 0.3s ease;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: all 0.2s ease;
 }
 #sort:hover{
-    color: #ffaa2c;
+    color: white;
+    background-color: #ffaa2c;
 }
 .products {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
+.noProductsContainer{
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
 
+}
+.noProductsContainer > a{
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    background-color: #ffaa2c;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+.noProductsContainer > a :hover{
+    color: white;
+    transition: all 0.3s ease;
+}
+.noProducts{
+    font-size: 1.5rem;
+    color: #555;
+    padding: 1.5rem 0;
+}
 .paginationBox {
     display: flex;
     justify-content: center;
