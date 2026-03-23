@@ -51,11 +51,19 @@ exports.getSingleOrder = catchAsyncErrors(async (req, res, next) => {
 //Get Logged in user Orders
 exports.myOrders = catchAsyncErrors(async (req, res, next) => {
 
-    const orders = await Order.find({ user: req.user._id });    //logged in user id
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 3;
+    
+    const skip = (page - 1) * limit;
+    
+    const totalOrders = await Order.find({ user: req.user._id });    //logged in user id
+
+    const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 }).skip(skip).limit(limit);
 
     res.status(200).json({
         success: true,
         orders,
+        totalOrders,
     })
 });
 

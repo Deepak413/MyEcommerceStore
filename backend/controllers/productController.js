@@ -21,13 +21,9 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 //Get all products
 exports.getAllProducts = catchAsyncErrors(async (req, res,next) => {
 
-    // return next(new ErrorHander("this is my custom error", 500));
     const resultPerPage = 8;
     const productsCount = await Product.countDocuments();
     console.log("productsCount in getAllProducts in ProductController : ", productsCount);
-
-    // let sort = req.query.sort || "-createdAt"; // default newest
-    
 
     const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter();
 
@@ -38,11 +34,6 @@ exports.getAllProducts = catchAsyncErrors(async (req, res,next) => {
     apiFeature.sort().pagination(resultPerPage);
     
     let products = await apiFeature.query;
-    // let filteredProductsCount = products.length;
-
-    // apiFeature.pagination(resultPerPage);
-    
-    //  products = await apiFeature.query;
 
     res.status(200).json({
         success: true,

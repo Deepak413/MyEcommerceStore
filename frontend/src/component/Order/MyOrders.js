@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import "./MyOrders.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,18 +13,31 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import { BiFontFamily } from "react-icons/bi";
 import { Typography } from "@mui/material";
 import { AiFillShopping } from "react-icons/ai";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const MyOrders = () => {
 
   const dispatch = useDispatch();
 
-  const { loading, error, orders } = useSelector((state) => state.myOrders);
+  const { loading, error, orders, totalOrders } = useSelector((state) => state.myOrders);
   const { user } = useSelector((state) => state.user);
   console.log("Entered in MyOrders.js with user : ", user);
   console.log("Also with orders : ", orders);
 
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+
   useEffect(() => {
-    dispatch(myOrders());
+    if (orders && orders.length >= (orders?.totalOrders || 0)) {
+      setHasMore(false);
+    }
+  }, [orders]);
+
+  useEffect(() => {
+    dispatch(myOrders(1));
+    console.log("scrollHeight : ", document.documentElement.scrollHeight);
+    console.log("innerHeight : ", window.innerHeight);
+    console.log("scrollTop : ", document.documentElement.scrollTop);
   }, [dispatch]);
 
   useEffect(() => {
@@ -33,6 +46,13 @@ const MyOrders = () => {
       dispatch(clearErrors());
     }
   }, [error, dispatch]);
+
+  const fetchMoreData = () => {
+    const nextPage = page + 1;
+    setPage(nextPage);
+
+    dispatch(myOrders(nextPage));
+  };
 
   return (
     <Fragment>
@@ -53,8 +73,19 @@ const MyOrders = () => {
             </div>
           )}
 
-          {orders &&
-            orders.map((order) => (
+          <InfiniteScroll
+            dataLength={orders.length} //This is important field to render the next data
+            next={fetchMoreData}
+            hasMore={hasMore}
+            loader={<Loader />}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>No more orders</b>
+              </p>
+            }
+
+          >
+            {orders && orders.map((order) => (
               <div key={order._id} className="orderCard">
 
                 <div className="orderHeader">
@@ -115,6 +146,7 @@ const MyOrders = () => {
 
               </div>
             ))}
+          </InfiniteScroll>
         </div>
       )}
     </Fragment>

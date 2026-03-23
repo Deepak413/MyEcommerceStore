@@ -31,14 +31,27 @@ const myOrdersSlice = createSlice({
         orders: [],
         loading: false,
         error: null,
+        totalOrders: 0,
     },
     reducers: {
         myOrdersRequest: (state) => {
-            state.loading = true;
+            if (!state.loading) {
+                state.loading = true;
+            }
         },
         myOrdersSuccess: (state, action) => {
             state.loading = false;
-            state.orders = action.payload.orders;
+            // state.orders = action.payload.orders;
+            const { orders, totalOrders, page } = action.payload;
+
+            if (page === 1) {
+                state.orders = orders;
+            } 
+            else {
+                state.orders = [...state.orders, ...orders];
+            }
+
+            state.totalOrders = totalOrders;
         },
         myOrdersFail: (state, action) => {
             state.loading = false;
