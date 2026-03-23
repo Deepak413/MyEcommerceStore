@@ -48,14 +48,6 @@ const Products = ({ match }) => {
     const params = useParams();
     const keyword = params.keyword === undefined ? "" : params.keyword;
 
-    const setCurrentPageNo = (e) => {
-        setCurrentPage(e);
-    }
-
-    const priceHandler = (event, newPrice) => {
-        setPrice(newPrice);
-    }
-
     console.log("filteredProductsCount in Productsjs: ", filteredProductsCount);
     console.log("products in Productsjs", products);
 
@@ -82,6 +74,7 @@ const Products = ({ match }) => {
         setTempPrice([0, 200000]);
         setSearchTerm("");
         setCurrentPage(1);
+        setSelectedSortOption("-createdAt");
         console.log("Filters reset done.");
     }
 
@@ -185,10 +178,10 @@ const Products = ({ match }) => {
 
                         )}
 
-                        {products && products.length > 0 && (
+                        {filteredProductsCount > resultPerPage  && (
                             <div className="paginationBox">
                                 <Pagination
-                                    count={Math.ceil(productsCount / resultPerPage)}
+                                    count={Math.ceil(filteredProductsCount / resultPerPage)}
                                     page={currentPage}
                                     onChange={(e, page) => setCurrentPage(page)}
                                     variant="outlined"
