@@ -28,16 +28,16 @@ const MyOrders = () => {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    if (orders && orders.length >= (orders?.totalOrders || 0)) {
+    if (orders && orders.length > (orders?.totalOrders || 0)) {
       setHasMore(false);
     }
   }, [orders]);
 
   useEffect(() => {
     dispatch(myOrders(1));
-    console.log("scrollHeight : ", document.documentElement.scrollHeight);
-    console.log("innerHeight : ", window.innerHeight);
-    console.log("scrollTop : ", document.documentElement.scrollTop);
+    // console.log("scrollHeight : ", document.documentElement.scrollHeight);
+    // console.log("innerHeight : ", window.innerHeight);
+    // console.log("scrollTop : ", document.documentElement.scrollTop);
   }, [dispatch]);
 
   useEffect(() => {
@@ -48,6 +48,7 @@ const MyOrders = () => {
   }, [error, dispatch]);
 
   const fetchMoreData = () => {
+    console.log("Fetching next order page...");
     const nextPage = page + 1;
     setPage(nextPage);
 

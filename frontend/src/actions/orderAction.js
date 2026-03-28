@@ -44,12 +44,12 @@ export const createOrder = (order) => async (dispatch) => {
 // My Orders
 export const myOrders = (page = 1) => async (dispatch) => {
     try {
-        console.log("entering myOrders in OrderAction");
+        console.log("entering myOrders in OrderAction with page : ", page);
         dispatch(myOrdersRequest());
 
         // const { data } = await axios.get("https://shoppingkaro-65sf.onrender.com/api/v1/orders/me");
         const { data } = await axios.get(`https://shoppingkaro-65sf.onrender.com/api/v1/orders/me?page=${page}&limit=3`);
-        console.log("data fetched in orderAction : ", data);
+        console.log("data(orders with page and limit) fetched in orderAction : ", data);
 
 
         dispatch(myOrdersSuccess(data));

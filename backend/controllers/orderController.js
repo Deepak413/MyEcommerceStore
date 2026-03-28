@@ -56,14 +56,19 @@ exports.myOrders = catchAsyncErrors(async (req, res, next) => {
     
     const skip = (page - 1) * limit;
     
-    const totalOrders = await Order.find({ user: req.user._id });    //logged in user id
+    const totalOrders = await Order.countDocuments({ user: req.user._id });
 
     const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 }).skip(skip).limit(limit);
-
+    console.log("page in myOrders in orderController.js is : ", page);
+    console.log("skip in myOrders in orderController.js is : ", skip);
+    console.log("totalOrders of current user in myOrders in orderController.js is : ", totalOrders);
+    console.log("orders fetched in myOrders in orderController.js is : ", orders);
+    
     res.status(200).json({
         success: true,
         orders,
         totalOrders,
+        page
     })
 });
 
