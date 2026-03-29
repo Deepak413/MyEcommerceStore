@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { createOrder, clearErrors } from "../../actions/orderAction";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { emptyWholeCart } from "../../actions/cartAction";
 
 const Payment = () => {
 
@@ -109,6 +110,7 @@ const Payment = () => {
           };
 
           dispatch(createOrder(order));
+          dispatch(emptyWholeCart());
           navigate("/success");
         } else {
           toast.error("There's some issue while processing payment ");

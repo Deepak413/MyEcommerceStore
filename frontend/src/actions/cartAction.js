@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addToCart, removeCartItem, saveShippingInformation } from "../reducers/cartReducer";
+import { addToCart, removeCartItem, saveShippingInformation, emptyCart } from "../reducers/cartReducer";
 
 export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
     const { data } = await axios.get(`https://shoppingkaro-65sf.onrender.com/api/v1/product/${id}`);
@@ -37,4 +37,10 @@ export const removeItemsFromCart = (id) => async (dispatch, getState) => {
 export const saveShippingInfo = (data) => async (dispatch, getState) => {
     dispatch(saveShippingInformation(data));
     localStorage.setItem("shippingInfo", JSON.stringify(data));
+}
+
+// Empty the Cart
+export const emptyWholeCart = () => async (dispatch, getState) => {
+    dispatch(emptyCart());
+    localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 }

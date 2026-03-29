@@ -19,25 +19,31 @@ const MyOrders = () => {
 
   const dispatch = useDispatch();
 
-  const { loading, error, orders, totalOrders } = useSelector((state) => state.myOrders);
+  const { loading, loadingMore, error, orders, totalOrders } = useSelector((state) => state.myOrders);
   const { user } = useSelector((state) => state.user);
   console.log("Entered in MyOrders.js with user : ", user);
-  console.log("Also with orders : ", orders);
+  console.log("orders in MyOrders.js : ", orders);
+  console.log("totalOrders in MyOrders.js : ", totalOrders);
 
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
+  // useEffect(() => {
+  //   if (orders && orders.length > (orders?.totalOrders || 0)) {
+  //     setHasMore(false);
+  //   }
+  // }, [orders]);
   useEffect(() => {
-    if (orders && orders.length > (orders?.totalOrders || 0)) {
-      setHasMore(false);
+    if (orders && totalOrders !== 0) {
+      setHasMore(orders.length < totalOrders);
+      console.log("hasMore in MyOrders.js is : ", hasMore);
     }
-  }, [orders]);
+  }, [orders, totalOrders]);
 
   useEffect(() => {
+    setPage(1);
+    setHasMore(true);
     dispatch(myOrders(1));
-    // console.log("scrollHeight : ", document.documentElement.scrollHeight);
-    // console.log("innerHeight : ", window.innerHeight);
-    // console.log("scrollTop : ", document.documentElement.scrollTop);
   }, [dispatch]);
 
   useEffect(() => {
@@ -48,11 +54,17 @@ const MyOrders = () => {
   }, [error, dispatch]);
 
   const fetchMoreData = () => {
-    console.log("Fetching next order page...");
-    const nextPage = page + 1;
-    setPage(nextPage);
 
-    dispatch(myOrders(nextPage));
+    console.log("Fetching next order page...");
+    // const nextPage = page + 1;
+    // setPage(nextPage);
+
+    // dispatch(myOrders(nextPage));
+    setPage((prev) => {
+      const nextPage = prev + 1;
+      dispatch(myOrders(nextPage));
+      return nextPage;
+    });
   };
 
   return (
@@ -74,83 +86,96 @@ const MyOrders = () => {
             </div>
           )}
 
-          <InfiniteScroll
-            dataLength={orders.length} //This is important field to render the next data
-            next={fetchMoreData}
-            hasMore={hasMore}
-            loader={<Loader />}
-            endMessage={
-              <p style={{ textAlign: "center" }}>
-                <b>No more orders</b>
-              </p>
-            }
+          <div className="scrollContainer">
 
-          >
-            {orders && orders.map((order) => (
-              <div key={order._id} className="orderCard">
 
-                <div className="orderHeader">
-                  <div style={{ fontFamily: "monospace", textTransform: "uppercase" }}>
-                    <p><strong>Order ID:</strong> {order._id}</p>
-                    <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
+            <InfiniteScroll
+              dataLength={orders.length}
+              next={fetchMoreData}
+              hasMore={hasMore}
+              loader={
+                loadingMore && (
+                  <div className="infiniteLoader">
+                    <div className="spinner"></div>
+                    <p>Loading more orders...</p>
                   </div>
-
-                  <div className="orderStatus">
-                    <span
-                      className={
-                        order.orderStatus === "Delivered"
-                          ? "statusDelivered"
-                          : "statusProcessing"
-                      }
-                    >
-                      {order.orderStatus}
-                    </span>
-                  </div>
+                )
+              }
+              endMessage={
+                <div className="endMessage">
+                  <span className="line"></span>
+                  <p>No more orders</p>
+                  <span className="line"></span>
                 </div>
+              }
+            >
+              {orders && orders.map((order) => (
+                <div key={order._id} className="orderCard">
 
-                <div className="orderItems">
-
-                  {order.orderItems.map((item, index) => (
-                    <div key={index} className="orderItem">
-
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="orderItemImage"
-                      />
-
-                      <div className="orderItemDetails">
-                        <p className="productName">{item.name}</p>
-                        <p>
-                          {item.name.length > 40
-                            ? item.name.substring(0, 40) + "..."
-                            : item.name}
-                        </p>
-                        <p>Price: ₹{item.price}</p>
-                        <p>Quantity: {item.quantity}</p>
-                      </div>
+                  <div className="orderHeader">
+                    <div style={{ fontFamily: "monospace", textTransform: "uppercase" }}>
+                      <p><strong>Order ID:</strong> {order._id}</p>
+                      <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
                     </div>
-                  ))}
 
-                </div>
-
-                <div className="orderFooter">
-
-                  <div style={{ fontFamily: "monospace" }}>
-                    <p><strong>Total:</strong> ₹{order.totalPrice}</p>
-                    <p><strong>Payment:</strong> {order.paymentInfo.status}</p>
+                    <div className="orderStatus">
+                      <span
+                        className={
+                          order.orderStatus === "Delivered"
+                            ? "statusDelivered"
+                            : "statusProcessing"
+                        }
+                      >
+                        {order.orderStatus}
+                      </span>
+                    </div>
                   </div>
 
-                  <Link to={`/order/${order._id}`} className="viewOrderBtn">View Order</Link>
+                  <div className="orderItems">
+
+                    {order.orderItems.map((item, index) => (
+                      <div key={index} className="orderItem">
+
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="orderItemImage"
+                        />
+
+                        <div className="orderItemDetails">
+                          <p className="productName">{item.name}</p>
+                          <p>
+                            {item.name.length > 40
+                              ? item.name.substring(0, 40) + "..."
+                              : item.name}
+                          </p>
+                          <p>Price: ₹{item.price}</p>
+                          <p>Quantity: {item.quantity}</p>
+                        </div>
+                      </div>
+                    ))}
+
+                  </div>
+
+                  <div className="orderFooter">
+
+                    <div style={{ fontFamily: "monospace" }}>
+                      <p><strong>Total:</strong> ₹{order.totalPrice}</p>
+                      <p><strong>Payment:</strong> {order.paymentInfo.status}</p>
+                    </div>
+
+                    <Link to={`/order/${order._id}`} className="viewOrderBtn">View Order</Link>
+
+                  </div>
 
                 </div>
-
-              </div>
-            ))}
-          </InfiniteScroll>
+              ))}
+            </InfiniteScroll>
+          </div>
         </div>
-      )}
-    </Fragment>
+      )
+      }
+    </Fragment >
   );
 };
 

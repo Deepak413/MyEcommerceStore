@@ -33,6 +33,9 @@ const cartSlice = createSlice({
                 return i.product !== action.payload;
             })
         },
+        emptyCart: (state) => {
+            state.cartItems = []
+        },
 
         saveShippingInformation: (state, action) => {
             state.shippingInfo = action.payload;
@@ -41,7 +44,7 @@ const cartSlice = createSlice({
 })
 
 export const {
-    addToCart, removeCartItem, saveShippingInformation
+    addToCart, removeCartItem, saveShippingInformation, emptyCart
 } = cartSlice.actions;
 
 const reducers = {

@@ -30,23 +30,30 @@ const myOrdersSlice = createSlice({
     initialState: {
         orders: [],
         loading: false,
+        loadingMore: false,
         error: null,
         totalOrders: 0,
     },
     reducers: {
-        myOrdersRequest: (state) => {
-            if (!state.loading) {
-                state.loading = true;
+        myOrdersRequest: (state, action) => {
+            // if (!state.loading) {
+            //     state.loading = true;
+            // }
+            if (action.payload === 1) {
+                state.loading = true;       // first load
+            } else {
+                state.loadingMore = true;   // next pages
             }
         },
         myOrdersSuccess: (state, action) => {
-            state.loading = false;
             // state.orders = action.payload.orders;
             const { orders, totalOrders, page } = action.payload;
+            state.loading = false;
+            state.loadingMore = false;
 
             if (page === 1) {
                 state.orders = orders;
-            } 
+            }
             else {
                 state.orders = [...state.orders, ...orders];
             }

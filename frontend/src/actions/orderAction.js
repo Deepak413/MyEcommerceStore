@@ -18,7 +18,7 @@ import {
     orderDetailsRequest,
     orderDetailsSuccess,
     orderDetailsFail,
-    clearAllErrors    
+    clearAllErrors
 } from "../reducers/orderReducer";
 
 axios.defaults.withCredentials = true;
@@ -45,16 +45,20 @@ export const createOrder = (order) => async (dispatch) => {
 export const myOrders = (page = 1) => async (dispatch) => {
     try {
         console.log("entering myOrders in OrderAction with page : ", page);
-        dispatch(myOrdersRequest());
+        dispatch(myOrdersRequest(page));
 
         // const { data } = await axios.get("https://shoppingkaro-65sf.onrender.com/api/v1/orders/me");
         const { data } = await axios.get(`https://shoppingkaro-65sf.onrender.com/api/v1/orders/me?page=${page}&limit=3`);
         console.log("data(orders with page and limit) fetched in orderAction : ", data);
 
 
-        dispatch(myOrdersSuccess(data));
+        dispatch(myOrdersSuccess({
+            orders: data.orders,
+            totalOrders: data.totalOrders,
+            page,
+        }));
     } catch (error) {
-        console.log("my orders are :", error);
+        console.log("error in myOrders action :", error);
         dispatch(myOrdersFail(error.response.data.message));
     }
 };
