@@ -37,6 +37,10 @@ const LoginSignUp = () => {
     const loginSubmit = (e) => {
         e.preventDefault();
         dispatch(login(loginEmail, loginPassword));
+        // if (error) {
+        //     toast.error(error);
+        //     dispatch(clearErrors());
+        // }
     }
     const registerSubmit = (e) => {
         e.preventDefault();
@@ -48,7 +52,10 @@ const LoginSignUp = () => {
         myForm.set("password", password);
         myForm.set("avatar", avatar);
         dispatch(register(myForm));
-        toast.success("Registration Successful");
+        // if (error) {
+        //     toast.error(error);
+        //     dispatch(clearErrors());
+        // }
     };
 
     const registerDataChange = (e) => {
@@ -73,7 +80,7 @@ const LoginSignUp = () => {
             navigate('/account');
         }
         if (error) {
-            // toast.error(error);
+            toast.error(error);
             dispatch(clearErrors());
         }
         

@@ -92,6 +92,8 @@
     background-color: #ffaa2c;
     font-weight: bold;
     letter-spacing: 3px;
+    font-size: 0.7rem;
+    font-family: 'Roboto';
 }
 .noProductsContainer > a :hover{
     color: white;
@@ -99,7 +101,7 @@
 }
 .noProducts{
     font-size: 1.5rem;
-    color: #555;
+    color: black;
     padding: 1.5rem 0;
 }
 .paginationBox {

@@ -56,10 +56,6 @@ const MyOrders = () => {
   const fetchMoreData = () => {
 
     console.log("Fetching next order page...");
-    // const nextPage = page + 1;
-    // setPage(nextPage);
-
-    // dispatch(myOrders(nextPage));
     setPage((prev) => {
       const nextPage = prev + 1;
       dispatch(myOrders(nextPage));
@@ -94,7 +90,7 @@ const MyOrders = () => {
               next={fetchMoreData}
               hasMore={hasMore}
               loader={
-                loadingMore && (
+                loadingMore && orders.length > 0 && (
                   <div className="infiniteLoader">
                     <div className="spinner"></div>
                     <p>Loading more orders...</p>
@@ -102,14 +98,14 @@ const MyOrders = () => {
                 )
               }
               endMessage={
-                <div className="endMessage">
+                orders.length > 0 && (<div className="endMessage">
                   <span className="line"></span>
                   <p>No more orders</p>
                   <span className="line"></span>
-                </div>
+                </div>)
               }
             >
-              {orders && orders.map((order) => (
+              {orders && orders.length > 0 && orders.map((order) => (
                 <div key={order._id} className="orderCard">
 
                   <div className="orderHeader">

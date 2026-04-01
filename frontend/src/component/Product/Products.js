@@ -170,9 +170,9 @@ const Products = ({ match }) => {
                             </div>
                         ) : (
                             <div className="noProductsContainer">
-                                <h2 className="noProducts">No Result</h2>
+                                <h2 className="noProducts">No Product Found</h2>
                                 <NavLink to="/products" onClick={handleResetButton}>
-                                    <span>View All Products</span>
+                                    <span><strong>VIEW ALL PRODUCTS</strong></span>
                                 </NavLink>
                             </div>
 

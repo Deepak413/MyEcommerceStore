@@ -11,14 +11,28 @@ const crypto = require("crypto");
 //Register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
-  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    folder: "avatars",
-    width: 150,
-    crop: "scale",
-  })
+  //Upload avatar to cloudinary
+  let myCloud;
+  try {
+    myCloud = await cloudinary.v2.uploader.upload(avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+  } catch (error) {
+    return next(new ErrorHander("Avatar upload failed on cloudinary", 500));
+  }
+  // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+  //   folder: "avatars",
+  //   width: 150,
+  //   crop: "scale",
+  // })
 
-  const { name, email, password } = req.body;
+  const { name, email, password, avatar } = req.body;
   console.log("inside userController, name, email", name, email);
+  if (!name || !email || !password || !avatar) {
+    return next(new ErrorHander("Please fill all required fields", 400));
+  }
 
   const user = await User.create({
     name, email, password,
@@ -29,7 +43,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   });
 
   console.log("inside userController, created user", user);
-  
+
   sendToken(user, 201, res);
 })
 

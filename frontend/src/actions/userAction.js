@@ -40,18 +40,24 @@ export const login = (email, password) => async (dispatch) => {
 
         const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/login`, { email, password }, config);
         console.log("In login in userAction, data : ", data);
-        toast.success("Login Successful 🎉");
+        
         dispatch(loginSuccess(data));
+        toast.success("Login Successful 🎉");
     } catch (error) {
         console.error(error);
         toast.error(error);
-        if (error.response) {
-            dispatch(loginFail(error.response.data.message)); // If response exists, use it
+
+        let message = "Error occurred while login";
+
+        if (error.response && error.response.data.message) {
+            message = error.response.data.message;  // If response exists, use it
         } else if (error.request) {
-            dispatch(loginFail('Network error: No response received.'));
+            message = "Network error: No response from server";
         } else {
-            dispatch(loginFail('Error occurred while logging in.'));
+            message = error.message;
         }
+
+        dispatch(loginFail(message));
     }
 };
 
@@ -64,13 +70,23 @@ export const register = (userData) => async (dispatch) => {
             withCredentials: true,
         };
 
-        // const { data } = await axios.put(`https://shoppingkaro-65sf.onrender.com/api/v1/me/update`, userData, config);
         const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/register`, userData, config);
         console.log("In register in userAction, data : ", data);
 
         dispatch(registerUserSuccess(data.user));
+        toast.success("Registration Successful 🎉");
     } catch (error) {
-        dispatch(registerUserFail(error.response.data.message));
+        console.log(error);
+
+        let message = "Something went wrong while registration";
+
+        if (error.response && error.response.data.message) {
+            message = error.response.data.message;
+        }else {
+            message = error.message;
+        }
+
+        dispatch(registerUserFail(message));
     }
 };
 
