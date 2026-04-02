@@ -11,22 +11,11 @@ const crypto = require("crypto");
 //Register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
-  //Upload avatar to cloudinary
-  let myCloud;
-  try {
-    myCloud = await cloudinary.v2.uploader.upload(avatar, {
-      folder: "avatars",
-      width: 150,
-      crop: "scale",
-    });
-  } catch (error) {
-    return next(new ErrorHander("Avatar upload failed on cloudinary", 500));
-  }
-  // const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-  //   folder: "avatars",
-  //   width: 150,
-  //   crop: "scale",
-  // })
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  })
 
   const { name, email, password, avatar } = req.body;
   console.log("inside userController, name, email", name, email);
