@@ -1,7 +1,9 @@
 import React from "react";
 import "./aboutSection.css"; // Import CSS for styling
 import aboutImage from "../../../images/aboutbg.jpg";
-import { FaLaptop, FaMobileAlt, FaCamera, FaTabletAlt, FaHeadphones } from "react-icons/fa";
+import { FaLaptop, FaMobileAlt, FaCamera, FaTabletAlt, FaHeadphones, FaTv } from "react-icons/fa";
+import { BsSmartwatch } from "react-icons/bs";
+import OurAdvantages from "../OurAdvantages";
 
 const About = () => {
   return (
@@ -44,31 +46,7 @@ const About = () => {
       </div>
 
       {/* Why Choose Us Section - Card Style */}
-      <div className="service-cards-container">
-        <p className="service-subtitle">Why Choose Us</p>
-        <h2 className="service-title">Our Advantages</h2>
-        <hr className="divider" />
-        <div className="service-cards">
-          <div className="service-card">
-            {/* <div className="service-icon">🚚</div> */}
-            <FaCamera size={20} className="service-icon" />
-            <h3>Fast Delivery</h3>
-            <p>Quick and reliable delivery service across the country.</p>
-          </div>
-          <div className="service-card">
-            {/* <div className="service-icon">📦</div> */}
-            <FaHeadphones size={20} className="service-icon" />
-            <h3>Free Shipping</h3>
-            <p>No extra cost on standard deliveries for select products.</p>
-          </div>
-          <div className="service-card">
-            {/* <div className="service-icon">🔁</div> */}
-            <FaMobileAlt size={20} className="service-icon" />
-            <h3>Easy Returns</h3>
-            <p>30-day hassle-free returns on all eligible products.</p>
-          </div>
-        </div>
-      </div>
+      <div className="ourAdvantagesContainer"><OurAdvantages /></div>
 
       {/* Our Products Section */}
       <div className="our-products">
@@ -95,6 +73,14 @@ const About = () => {
           <div className="our-product-item">
             <FaHeadphones className="our-product-icon" />
             <p>Headphones</p>
+          </div>
+          <div className="our-product-item">
+            <FaTv className="our-product-icon" />
+            <p>TV</p>
+          </div>
+          <div className="our-product-item">
+            <BsSmartwatch className="our-product-icon" />
+            <p>Smartwatch</p>
           </div>
         </div>
       </div>

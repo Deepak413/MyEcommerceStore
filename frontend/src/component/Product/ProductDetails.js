@@ -25,7 +25,7 @@ import { Rating } from "@mui/lab";
 import { newReviewReset } from '../../reducers/productReducer.js';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { Navigation } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css/navigation";
 import { FaArrowRightLong } from "react-icons/fa6";
 
@@ -54,11 +54,9 @@ const ProductDetails = () => {
     );
 
     const increseQuantity = () => {
-        console.log("quantity incresed");
-        console.log("product details is : ", product);
-        console.log("id of current page : ", id);
         console.log("quantity : ", quantity);
         if (quantity >= product.Stock) {
+            toast.error("Out of stock");
             return;
         }
         setQuantity(quantity + 1);
@@ -66,6 +64,7 @@ const ProductDetails = () => {
     const decreseQuantity = () => {
         console.log("quantity decresed");
         if (quantity <= 1) {
+            toast.error("total cannot be 0");
             return;
         }
         setQuantity(quantity - 1);
@@ -248,15 +247,15 @@ const ProductDetails = () => {
                             <div className='similarProductsCards'>
 
                                 <button className="viewAllBtn">
-                                    <FaArrowRightLong style={{color:"white"}} />
+                                    <FaArrowRightLong style={{ color: "white" }} />
                                 </button>
 
                                 <Swiper
                                     modules={[Navigation]}
                                     navigation
-                                    loop={true}
-                                    spaceBetween={10}
-                                    slidesPerView={3}
+                                    pagination={{ clickable: true }}
+                                    spaceBetween={20}
+                                    slidesPerView={4}
                                     centeredSlides={false}
                                     grabCursor={true}
                                     breakpoints={{

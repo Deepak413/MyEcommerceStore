@@ -101,11 +101,12 @@ const Products = ({ match }) => {
             toast.error(error);
             dispatch(clearErrors());
         }
-        const delayDebounce = setTimeout(() => {
-            dispatch(getProduct(keyword, currentPage, price, category, ratings, selectedSortOption));
-        }, 400);
+        // const delayDebounce = setTimeout(() => {
+        //     dispatch(getProduct(keyword, currentPage, price, category, ratings, selectedSortOption));
+        // }, 400);
 
-        return () => clearTimeout(delayDebounce);
+        // return () => clearTimeout(delayDebounce);
+        dispatch(getProduct(keyword, currentPage, price, category, ratings, selectedSortOption));
     }, [dispatch, keyword, currentPage, price, category, ratings, selectedSortOption, error]);
 
     const handleCategoryFilterClick = (category) => {
@@ -167,6 +168,7 @@ const Products = ({ match }) => {
                                         <ProductCard key={product._id} product={product} />
                                     ))
                                 }
+
                             </div>
                         ) : (
                             <div className="noProductsContainer">
@@ -178,7 +180,13 @@ const Products = ({ match }) => {
 
                         )}
 
-                        {filteredProductsCount > resultPerPage  && (
+                        {currentPage === Math.ceil(filteredProductsCount / resultPerPage) && (
+                            <div className="endOfList">
+                                <span>End of List</span>
+                            </div>
+                        )}
+
+                        {filteredProductsCount > resultPerPage && (
                             <div className="paginationBox">
                                 <Pagination
                                     count={Math.ceil(filteredProductsCount / resultPerPage)}

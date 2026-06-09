@@ -1,0 +1,74 @@
+/* OUR ADVANTAGES SECTION */
+.service-cards-container {
+  padding: 5rem 1.5rem;
+  background: linear-gradient(to bottom, #ffffff, #faf8f4);
+  text-align: center;
+}
+
+.service-subtitle {
+  letter-spacing: 2px;
+  font-size: 14px;
+  color: #ca944d;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.service-title {
+  font-size: 2.8rem;
+  margin: 14px 0;
+  font-weight: 700;
+  color: #222;
+}
+
+.divider {
+  width: 80px;
+  height: 3px;
+  border: none;
+  background: #ca944d;
+  margin: 0 auto;
+}
+
+.service-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3.5rem;
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  width: 280px;
+  border: 1px solid #f1f1f1;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.35s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 35px rgba(202, 148, 77, 0.18);
+}
+
+.service-card h3 {
+  margin: 1.2rem 0 0.8rem;
+  color: #222;
+  font-size: 1.3rem;
+}
+
+.service-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.service-icon {
+  width: 65px;
+  height: 65px;
+  padding: 16px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ca944d, #e0b16d);
+  color: white;
+  box-shadow: 0 8px 18px rgba(202, 148, 77, 0.35);
+}

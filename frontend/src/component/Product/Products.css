@@ -69,10 +69,36 @@
     background-color: #ffaa2c;
 }
 .products {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    width: 100%; 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 1rem;
 }
+
+.endOfList {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.endOfList span {
+    color: #777;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.endOfList span::before,
+.endOfList span::after {
+    content: "";
+    display: inline-block;
+    width: 60px;
+    height: 1px;
+    background: #d3d3d3;
+    vertical-align: middle;
+    margin: 0 12px;
+}
+
 .noProductsContainer{
     height: 50vh;
     width: 100%;

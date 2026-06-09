@@ -76,7 +76,7 @@ const LoginSignUp = () => {
     };
     
     useEffect(() => {
-        if(isAuthenticated){   // usr cant access page while logged in
+        if(isAuthenticated){
             navigate('/account');
         }
         if (error) {

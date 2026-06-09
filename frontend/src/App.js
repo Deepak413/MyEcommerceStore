@@ -36,27 +36,25 @@ import MyOrders from "./component/Order/MyOrders.js";
 import OrderDetails from "./component/Order/OrderDetails.js";
 import About from './component/layout/About/About.js';
 import Contact from './component/layout/Contact/Contact.js';
-
-
-// import ProtectedRoute from './component/Route/ProtectedRoute';
+import PaymentWrapper from './component/Cart/PaymentWrapper.js';
 
 function App() {
 
   const { isAuthenticated, user } = useSelector(state => state.user);
 
-  const [stripeApiKey, setStripeApiKey] = useState("");
+  // const [stripeApiKey, setStripeApiKey] = useState("");
 
-  async function getStripeApiKey() {
-    try {
-      const { data } = await axios.get("https://shoppingkaro-65sf.onrender.com/api/v1/stripeapikey");
+  // async function getStripeApiKey() {
+  //   try {
+  //     const { data } = await axios.get("https://shoppingkaro-65sf.onrender.com/api/v1/stripeapikey");
 
-      setStripeApiKey(data.stripeApiKey);
-    }catch(err){
-      console.log(err);
-      console.error('Error fetching Stripe API key:', err.response ? err.response.data : err.message);
-    }
+  //     setStripeApiKey(data.stripeApiKey);
+  //   }catch(err){
+  //     console.log(err);
+  //     console.error('Error fetching Stripe API key:', err.response ? err.response.data : err.message);
+  //   }
     
-  }
+  // }
 
   useEffect(() => {
     webFont.load({
@@ -67,25 +65,19 @@ function App() {
 
     store.dispatch(loadUser());
 
-    getStripeApiKey();
-    console.log("stripeApiKey in App.js:", stripeApiKey);
+    // getStripeApiKey();
+    // console.log("stripeApiKey in App.js:", stripeApiKey);
 
-  }, [stripeApiKey])
+  }, [])
   return (
     <Router>
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
 
       <Routes>
-        {stripeApiKey && (
-          <Route path="/process/payment" element={
-            <Elements stripe={loadStripe(stripeApiKey)}>
-              <Payment />
-            </Elements>
-          }
-          />
-        )}
-        <Route exact path='/' Component={Home} />
+        <Route path="/process/payment" element={<PaymentWrapper />}/>
+        {/* <Route exact path='/' Component={Home} /> */}
+        <Route exact path="/" element={<Home />} />
         <Route exact path='/product/:id' Component={ProductDetails} />
         <Route exact path='/products' Component={Products} />
         <Route path='/products/:keyword' Component={Products} />

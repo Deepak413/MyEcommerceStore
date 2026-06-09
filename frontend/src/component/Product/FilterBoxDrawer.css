@@ -41,7 +41,6 @@
 .filterBoxSearchContainer {
 
   margin: 20px 0 34px 0;
-  /* border: 1px solid red; */
 }
 
 .filterBoxSearchContainer>input {
@@ -125,28 +124,31 @@
 
 .filterBox {
   width: 10vmax;
-  /* position: absolute; */
-  /* top: 10vmax; */
-  /* left: 4vmax; */
 }
 
-.categoryBox {
-  padding: 2px 0;
-  margin-bottom: 1.1rem;
+ .categoryBox {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin-bottom: 1.5rem;
 }
 
 .category-link {
   list-style: none;
-  color: rgb(41 41 41 / 61%);
-  font: 400 1.1vmax "Roboto";
-  margin: 0.3vmax 0.9vmax;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: #555;
+  font: 500 0.95rem "Roboto";
   cursor: pointer;
-  transition: all 0.5s;
-  letter-spacing: 1px;
+  transition: all 0.25s ease;
+  border-left: 3px solid transparent;
 }
 
 .category-link:hover {
+  background-color: rgba(255, 170, 44, 0.1);
   color: #ffaa2c;
+  border-left: 3px solid #ffaa2c;
+  padding-left: 18px;
 }
 
 .filterBox>fieldset {

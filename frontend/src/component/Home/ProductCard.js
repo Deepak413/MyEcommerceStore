@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
+import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
   const options = {
@@ -26,6 +27,9 @@ const ProductCard = ({ product }) => {
 
         <div className="productCardStars">
           <ReactStars {...options} />
+          <span className="reviewCount">
+            ({product.numOfReviews})
+          </span>
         </div>
         <span className="productCardPrice">{`₹${product.price}`}</span>
 

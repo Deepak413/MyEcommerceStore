@@ -27,6 +27,10 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
         user: req.user._id,
     });
 
+    order.orderItems.forEach(async(ord) => {
+        await updateStock(ord.product, ord.quantity)
+    })
+
     res.status(201).json({
         success:true,
         order,
@@ -102,10 +106,6 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHander("You have already delivered this order", 400));
     }
 
-    order.orderItems.forEach(async(ord) => {
-        await updateStock(ord.product, ord.quantity)
-    })
-    
     if(req.body.status === "Delivered"){
         order.deliveredAt = Date.now(); 
     }

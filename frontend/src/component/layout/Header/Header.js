@@ -1,4 +1,4 @@
-import { React, useState, useRef } from 'react';
+import { React, useState, useRef, useEffect } from 'react';
 import { BsFillCartFill } from 'react-icons/bs';
 import { ImSearch } from 'react-icons/im';
 import { IoClose } from "react-icons/io5";
@@ -27,6 +27,7 @@ const Header = () => {
   const toggleSearch = () => setShowSearch((prev) => !prev);
 
   const [keyword, setKeyword] = useState("");
+
   const searchSubmitHandler = (e) => {
 
     e.preventDefault();
@@ -36,6 +37,16 @@ const Header = () => {
       navigate("/products");
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (keyword.trim()) {
+        navigate(`/products/${keyword}`);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [keyword, navigate]);
 
   const isHomePage = location.pathname === "/";
   return (
@@ -60,7 +71,6 @@ const Header = () => {
         </ul>
 
         <ul className={`nav_links ${isOpen ? "active" : ""} ${isHomePage ? "white_nav_link" : ""}`}>
-          {/* <li><NavLink to="/search" className="nav_item"><ImSearch size={25} /></NavLink></li> */}
           <li ref={searchRef} className="nav_item nav_search_box_wrapper">
             {showSearch ? (
               <div className={`nav_search_input_wrapper ${showSearch ? 'slide-in' : 'slide-out'}`}>
@@ -68,9 +78,9 @@ const Header = () => {
                   type="text"
                   className="nav_search_input"
                   placeholder="Search..."
+                  value={keyword}
                   onChange={(e) => setKeyword(e.target.value)}
                 />
-                {/* <div className='nav_search_button_container'></div> */}
                 <button onClick={searchSubmitHandler} className="nav_search_inside_button">
                   <ImSearch size={16} />
                 </button>
@@ -104,10 +114,10 @@ const Header = () => {
               </div>
             </NavLink>
           </li>
-          {isAuthenticated ? 
-            <li><NavLink to="/login" className="nav_item"><BiSolidUserPin size={21} /></NavLink></li> 
-            : 
-            <li><NavLink to="/login" className="nav_item"><BiLogIn size={22}/></NavLink></li>}
+          {isAuthenticated ?
+            <li><NavLink to="/login" className="nav_item"><BiSolidUserPin size={21} /></NavLink></li>
+            :
+            <li><NavLink to="/login" className="nav_item"><BiLogIn size={22} /></NavLink></li>}
         </ul>
 
         {/* For Mobile Menu Button */}

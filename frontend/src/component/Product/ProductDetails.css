@@ -287,7 +287,7 @@
 .similarProductsCards {
   display: flex;
   background-color: white;
-  padding: 2rem;
+  padding: 3rem 2rem;
   border-radius: 13px;
   gap: 2rem;
   position: relative;
@@ -310,7 +310,7 @@
 }
 
 .viewAllBtn:hover {
-  background: #747474;
+  background: #ffaa2c;
   transition: all 0.4s ease;
 }
 

@@ -3,7 +3,7 @@
   grid-template-columns: 2fr 1fr;
   gap: 3rem;
   padding: 4rem;
-  background: #f1f3f6;
+  background: #f5f5f5;
   min-height: 70vh;
   margin-top: 6rem;
 }
@@ -37,21 +37,31 @@
   display: flex;
   justify-content: space-between;
   padding: 2rem 0 1rem 0;
+
 }
 
 .orderProductCardBtns a {
-  color: black;
-  text-decoration: none;
-  font-family: sans-serif;
+  font-family: monospace;
+  letter-spacing: 1px;
   display: flex;
   justify-content: center;
-  padding: 0.5rem 4rem;
-  border: 1px solid #e1e1e1;
-  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: all 0.5s;
+  background-color: #ffaa2c;
+  padding: 0.6vmax 2.2vmax;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-decoration: none;
 }
 
 .orderProductCardBtns a:hover {
-  background-color: rgb(202, 202, 202);
+  background-color: white;
+  color: black;
+  border: 1px solid black;
   transition: ease;
 }
 
