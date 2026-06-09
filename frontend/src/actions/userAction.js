@@ -175,8 +175,11 @@ export const forgotPassword = (email) => async (dispatch) => {
 
         const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/password/forgot`, email, config);
 
+        console.log("data in forgotPassword from API in userAction : ", data);
+
         dispatch(forgotPasswordSuccess(data.message));
     } catch (error) {
+        console.log("error in forgotPassword from API in userAction : ", error)
         dispatch(forgotPasswordFail(error.response.data.message));
     }
 };
