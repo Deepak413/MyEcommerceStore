@@ -6,11 +6,8 @@ const sendEmail = async (options) => {
     console.log("SMTP_PASSWORD in sendEmail : ", process.env.SMTP_PASSWORD);
 
     let transporter = nodeMailer.createTransport({
-        service: 'Gmail',
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth:  {
+        service: 'gmail',
+        auth: {
             user: process.env.SMTP_MAIL,
             pass: process.env.SMTP_PASSWORD,
         }
@@ -22,8 +19,14 @@ const sendEmail = async (options) => {
         subject: options.subject,
         text: options.message,
     };
-    // await transporter.verify();
-    // console.log("SMTP Connected in sendEmail");
+
+    try {
+        await transporter.verify();
+        console.log("SMTP Connected in sendEmail");
+    } catch (err) {
+        console.error("Verify Error in sendEmail:", err);
+        throw err;
+    }
 
     try {
         const info = await transporter.sendMail(mailOptions);
