@@ -5,12 +5,24 @@ const sendEmail = async (options) => {
     console.log("SMTP_MAIL in sendEmail : ", process.env.SMTP_MAIL);
     console.log("SMTP_PASSWORD in sendEmail : ", process.env.SMTP_PASSWORD);
 
-    let transporter = nodeMailer.createTransport({
-        service: 'gmail',
+    // let transporter = nodeMailer.createTransport({
+    //     service: 'gmail',
+    //     auth: {
+    //         user: process.env.SMTP_MAIL,
+    //         pass: process.env.SMTP_PASSWORD,
+    //     }
+    // });
+    const transporter = nodeMailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
         auth: {
             user: process.env.SMTP_MAIL,
             pass: process.env.SMTP_PASSWORD,
-        }
+        },
+        connectionTimeout: 30000,
+        greetingTimeout: 30000,
+        socketTimeout: 30000,
     });
 
     const mailOptions = {
