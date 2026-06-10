@@ -43,33 +43,35 @@
 
 // module.exports = sendEmail;
 
-const brevo = require("@getbrevo/brevo");
+const axios = require("axios");
 
 const sendEmail = async (options) => {
-  const apiInstance = new brevo.TransactionalEmailsApi();
+    console.log("SMTP_PASSWORD:", process.env.SMTP_PASSWORD?.substring(0, 15));
+    const response = await axios.post(
+        "https://api.brevo.com/v3/smtp/email",
+        {
+            sender: {
+                name: "ShoppingKaro",
+                email: process.env.SMTP_MAIL,
+            },
+            to: [
+                {
+                    email: options.email,
+                },
+            ],
+            subject: options.subject,
+            textContent: options.message,
+        },
+        {
+            headers: {
+                accept: "application/json",
+                "content-type": "application/json",
+                "api-key": process.env.SMTP_PASSWORD,
+            },
+        }
+    );
 
-  apiInstance.setApiKey(
-    brevo.TransactionalEmailsApiApiKeys.apiKey,
-    process.env.SMTP_PASSWORD
-  );
-
-  const emailData = {
-    sender: {
-      name: "ShoppingKaro",
-      email: process.env.SMTP_MAIL,
-    },
-    to: [
-      {
-        email: options.email,
-      },
-    ],
-    subject: options.subject,
-    textContent: options.message,
-  };
-
-  const response = await apiInstance.sendTransacEmail(emailData);
-
-  console.log("Email sent:", response);
+    console.log("Email Sent:", response.data);
 };
 
 module.exports = sendEmail;
