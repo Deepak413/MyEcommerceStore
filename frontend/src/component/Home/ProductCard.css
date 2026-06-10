@@ -19,6 +19,7 @@
 .productCard:hover {
     transform: translateY(-10px);
     box-shadow: 0 18px 35px rgba(202, 148, 77, 0.18);
+    border: 1px solid #f0f0f0;
 }
 
 .productCardImg {

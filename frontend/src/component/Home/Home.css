@@ -124,6 +124,8 @@
 .swiper-slide {
     height: auto;
     display: flex;
+    padding-top: 12px;
+    box-sizing: border-box;
 }
 
 

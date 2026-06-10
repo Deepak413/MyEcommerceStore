@@ -19,6 +19,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import OurAdvantages from '../layout/OurAdvantages.js';
 import { FaArrowRightLong } from "react-icons/fa6";
+import { loadUser } from '../../actions/userAction.js';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -32,11 +33,12 @@ const Home = () => {
     const bestsellerProducts = [...products].sort((a, b) => b.numOfReviews - a.numOfReviews).slice(0, 8);
     console.log("bestsellerProducts in Home.js : ", bestsellerProducts);
     useEffect(() => {
+        dispatch(getProduct());
+        dispatch(loadUser());
         if (error) {
             toast.error(error);
             dispatch(clearErrors());
         }
-        dispatch(getProduct());
     }, [dispatch, error, toast]);
 
     return (

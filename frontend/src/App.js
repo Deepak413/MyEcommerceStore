@@ -42,20 +42,6 @@ function App() {
 
   const { isAuthenticated, user } = useSelector(state => state.user);
 
-  // const [stripeApiKey, setStripeApiKey] = useState("");
-
-  // async function getStripeApiKey() {
-  //   try {
-  //     const { data } = await axios.get("https://shoppingkaro-65sf.onrender.com/api/v1/stripeapikey");
-
-  //     setStripeApiKey(data.stripeApiKey);
-  //   }catch(err){
-  //     console.log(err);
-  //     console.error('Error fetching Stripe API key:', err.response ? err.response.data : err.message);
-  //   }
-    
-  // }
-
   useEffect(() => {
     webFont.load({
       google: {
@@ -64,11 +50,8 @@ function App() {
     });
 
     store.dispatch(loadUser());
-
-    // getStripeApiKey();
-    // console.log("stripeApiKey in App.js:", stripeApiKey);
-
   }, [])
+
   return (
     <Router>
       <Header />
@@ -76,7 +59,6 @@ function App() {
 
       <Routes>
         <Route path="/process/payment" element={<PaymentWrapper />}/>
-        {/* <Route exact path='/' Component={Home} /> */}
         <Route exact path="/" element={<Home />} />
         <Route exact path='/product/:id' Component={ProductDetails} />
         <Route exact path='/products' Component={Products} />
