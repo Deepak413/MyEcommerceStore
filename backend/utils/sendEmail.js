@@ -43,31 +43,33 @@
 
 // module.exports = sendEmail;
 
-
-const nodemailer = require("nodemailer");
+const brevo = require("@getbrevo/brevo");
 
 const sendEmail = async (options) => {
+  const apiInstance = new brevo.TransactionalEmailsApi();
 
-    const transporter = nodemailer.createTransport({
-        host: "smtp-relay.brevo.com",
-        port: 587,
-        secure: false,
-        auth: {
-            user: process.env.SMTP_LOGIN,
-            pass: process.env.SMTP_PASSWORD,
-        },
-    });
+  apiInstance.setApiKey(
+    brevo.TransactionalEmailsApiApiKeys.apiKey,
+    process.env.SMTP_PASSWORD
+  );
 
-    const mailOptions = {
-        from: `"ShoppingKaro" <${process.env.SMTP_MAIL}>`,
-        to: options.email,
-        subject: options.subject,
-        text: options.message,
-    };
+  const emailData = {
+    sender: {
+      name: "ShoppingKaro",
+      email: process.env.SMTP_MAIL,
+    },
+    to: [
+      {
+        email: options.email,
+      },
+    ],
+    subject: options.subject,
+    textContent: options.message,
+  };
 
-    const info = await transporter.sendMail(mailOptions);
+  const response = await apiInstance.sendTransacEmail(emailData);
 
-    console.log("Email Sent:", info.messageId);
+  console.log("Email sent:", response);
 };
 
 module.exports = sendEmail;

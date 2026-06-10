@@ -84,6 +84,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 // Forgot Password
 exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
+  console.log("user detail in forgotPassword in userController : ", user);
 
   if (!user) {
     return next(new ErrorHander("User not found", 404));
