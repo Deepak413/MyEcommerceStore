@@ -19,7 +19,7 @@ export const getProduct = (keyword = "", currentPage=1, price=[12000, 150000], c
             link += `&sort=${sort}`;
         }
 
-
+        console.log("ProductAction.js  -  hitting getProduct query with LINK : ", link);
         const {data} = await axios.get(link);
         console.log("data from backend in getProduct in ProductAction : ", data);
         dispatch(allProductSuccess({...data}));
@@ -27,6 +27,27 @@ export const getProduct = (keyword = "", currentPage=1, price=[12000, 150000], c
         dispatch(allProductFail(error.response.data.message));
     }
 };
+
+export const getProductWithoutPagination = (sort="") => async(dispatch) => {
+    try {
+        dispatch(allProductRequest());
+
+        let link = "https://shoppingkaro-65sf.onrender.com/api/v1/productsAll";
+
+        if (sort) {
+            link += `&sort=${sort}`;
+        }
+
+        console.log("ProductAction.js  -  hitting getProductWithoutPagination query with LINK : ", link);
+        const {data} = await axios.get(link);
+        console.log("data from backend in getProductWithoutPagination in ProductAction : ", data);
+        dispatch(allProductSuccess({...data}));
+    } catch (error) {
+        console.log("Error in productAction.js getProductWithoutPagination method");
+        dispatch(allProductFail(error.response.data.message));
+    }
+};
+
 export const getSimilarCategoryProducts = (category) => async(dispatch) => {
     try {
         dispatch(similarProductsRequest());

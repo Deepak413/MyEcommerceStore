@@ -3,7 +3,7 @@ import { CgMouse } from "react-icons/cg";
 import "./Home.css";
 import ProductCard from "./ProductCard.js";
 import MetaData from '../layout/MetaData';
-import { getProduct, clearErrors } from '../../actions/productAction';
+import { getProduct,getProductWithoutPagination, clearErrors, getSimilarCategoryProducts } from '../../actions/productAction';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/Loader/Loader';
 import { toast } from 'react-toastify';
@@ -20,9 +20,11 @@ import "swiper/css/pagination";
 import OurAdvantages from '../layout/OurAdvantages.js';
 import { FaArrowRightLong } from "react-icons/fa6";
 import { loadUser } from '../../actions/userAction.js';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { loading, error, products } = useSelector(state => state.products);
     console.log("products in Home.js : ", products);
 
@@ -33,7 +35,9 @@ const Home = () => {
     const bestsellerProducts = [...products].sort((a, b) => b.numOfReviews - a.numOfReviews).slice(0, 8);
     console.log("bestsellerProducts in Home.js : ", bestsellerProducts);
     useEffect(() => {
-        dispatch(getProduct());
+        console.log("Dispatching Home.js getProduct()");
+        dispatch(getProductWithoutPagination());
+        // dispatch(getProduct("", 1, [0, 200000], "", 0, "-ratings"));
         dispatch(loadUser());
         if (error) {
             toast.error(error);
@@ -57,6 +61,50 @@ const Home = () => {
                 <a href="#container">
                     <button> Shop Now <CgMouse /> </button>
                 </a>
+            </div>
+
+            <div className="categoryShowcase">
+                <h2 className="categoryTitle">Explore Our Collections</h2>
+                <p className="categorySubtitle">
+                    Discover the latest technology crafted for work, gaming, and entertainment.
+                </p>
+
+                <div className="categoryGrid">
+
+                    <Link
+                        to="/products?category=Laptop"
+                        className="categoryCard laptop"
+                    >
+                        <div className="categoryOverlay">
+                            <h3>Laptops</h3>
+                            <p>Powerful machines for work and gaming</p>
+                            <span className="browseBtn">Browse Collection</span>
+                        </div>
+                    </Link>
+
+                    <Link
+                        to="/products?category=Phone"
+                        className="categoryCard mobile"
+                    >
+                        <div className="categoryOverlay">
+                            <h3>Smartphones</h3>
+                            <p>Stay connected with flagship devices</p>
+                            <span className="browseBtn">Browse Collection</span>
+                        </div>
+                    </Link>
+
+                    <Link
+                        to="/products?category=Monitor"
+                        className="categoryCard monitor"
+                    >
+                        <div className="categoryOverlay">
+                            <h3>Monitors</h3>
+                            <p>Immersive displays for productivity</p>
+                            <span className="browseBtn">Browse Collection</span>
+                        </div>
+                    </Link>
+
+                </div>
             </div>
 
             <h2 id="container" className="homeHeading">Featured Products</h2>

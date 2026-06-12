@@ -4,7 +4,7 @@ import { getProduct, clearErrors } from '../../actions/productAction';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../Home/ProductCard';
 import Loader from '../layout/Loader/Loader';
-import { Link, NavLink, useNavigate, useParams } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useParams, useLocation } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 import Slider from "@mui/material/Slider";
 import { Rating } from '@mui/material';
@@ -35,11 +35,15 @@ const categories = [
 const Products = ({ match }) => {
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const [currentPage, setCurrentPage] = useState(1);
     const [price, setPrice] = useState([0, 200000]);
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState(new URLSearchParams(window.location.search).get("category") || "");
+    // const [category, setCategory] = useState("");
     const [ratings, setRatings] = useState(0);
-    const navigate = useNavigate();
 
     const [tempPrice, setTempPrice] = useState([0, 200000]); // for slider state - to make API call when user clicks on button
 
@@ -48,15 +52,16 @@ const Products = ({ match }) => {
     const params = useParams();
     const keyword = params.keyword === undefined ? "" : params.keyword;
 
-    console.log("filteredProductsCount in Productsjs: ", filteredProductsCount);
+    // console.log("filteredProductsCount in Productsjs: ", filteredProductsCount);
     console.log("products in Productsjs", products);
+    // console.log("Category in Product.js from params : ", category);
 
     const [selectedSortOption, setSelectedSortOption] = useState('default');
 
     const handleSortChange = (e) => {
         const value = e.target.value;
         setSelectedSortOption(value);
-        console.log("selectedSortOption in Productsjs : ", selectedSortOption);
+        console.log("selectedSortOption called in Productsjs : ", selectedSortOption);
         setCurrentPage(1);
     };
 
@@ -68,6 +73,7 @@ const Products = ({ match }) => {
         toggleFilterBox();
     }
     const handleResetButton = (e) => {
+        console.log("handleResetButton called in Product.js");
         setCategory("");
         setRatings(0);
         setPrice([0, 200000]);
@@ -80,9 +86,11 @@ const Products = ({ match }) => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const handleSearchFilterSubmit = (e) => {
+        console.log("handleSearchFilterSubmit called in Product.js");
         e.preventDefault();
         toggleFilterBox();
         let searchTermTemp = searchTerm;
+        console.log("searchTermTemp in handleSearchFilterSubmit in Product.js : ", searchTermTemp);
         setSearchTerm("");
         if (searchTermTemp.trim()) {
             navigate(`/products/${searchTermTemp}`);
@@ -93,19 +101,30 @@ const Products = ({ match }) => {
 
     useEffect(() => {
         setCurrentPage(1);
+        setCategory(params.category === undefined ? "" : params.category);
     }, [keyword]);
 
     useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const categoryFromUrl = queryParams.get("category");
+
+        setCategory(categoryFromUrl || "");
+        setCurrentPage(1);
+        console.log("category in useEffect1 : ", categoryFromUrl);
+    }, [location.search]);
+    // useEffect(() => {
+    //     const queryParams = new URLSearchParams(location.search);
+    //     setCategory(queryParams.get("category") || "");
+    // }, [location.search]);
+
+    useEffect(() => {
+        console.log("API Call Category in useEffect2:", category);
         if (error) {
-            console.log("getting error in Product.js");
+            console.log("getting error in Product.js useEffct2");
             toast.error(error);
             dispatch(clearErrors());
         }
-        // const delayDebounce = setTimeout(() => {
-        //     dispatch(getProduct(keyword, currentPage, price, category, ratings, selectedSortOption));
-        // }, 400);
-
-        // return () => clearTimeout(delayDebounce);
+        
         dispatch(getProduct(keyword, currentPage, price, category, ratings, selectedSortOption));
     }, [dispatch, keyword, currentPage, price, category, ratings, selectedSortOption, error]);
 
@@ -126,6 +145,7 @@ const Products = ({ match }) => {
     }
 
     const handlePriceFilterBtnClick = () => {
+        console.log("handlePriceFilterBtnClick called in Product.js");
         setPrice(tempPrice);
         setCurrentPage(1);
         toggleFilterBox();

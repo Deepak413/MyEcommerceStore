@@ -18,12 +18,12 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 });
 
 
-//Get all products
-exports.getAllProducts = catchAsyncErrors(async (req, res,next) => {
+//Get all products with pagination
+exports.getAllProductsWithPagination = catchAsyncErrors(async (req, res, next) => {
 
     const resultPerPage = 8;
     const productsCount = await Product.countDocuments();
-    console.log("productsCount in getAllProducts in ProductController : ", productsCount);
+    console.log("productsCount in getAllProductsWithPagination in ProductController : ", productsCount);
 
     const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter();
 
@@ -32,7 +32,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res,next) => {
     const filteredProductsCount = filteredProducts.length;
 
     apiFeature.sort().pagination(resultPerPage);
-    
+
     let products = await apiFeature.query;
 
     res.status(200).json({
@@ -41,6 +41,24 @@ exports.getAllProducts = catchAsyncErrors(async (req, res,next) => {
         productsCount,
         resultPerPage,
         filteredProductsCount,
+    });
+});
+
+//Get all products without pagination
+exports.getAllProductsWithoutPagination = catchAsyncErrors(async (req, res, next) => {
+
+    const productsCount = await Product.countDocuments();
+    console.log("productsCount in getAllProductsWithoutPagination in ProductController : ", productsCount);
+
+    const apiFeature = new ApiFeatures(Product.find(), req.query).sort();
+
+    const products = await apiFeature.query;
+
+    res.status(200).json({
+        success: true,
+        products,
+        productsCount,
+        filteredProductsCount: products.length,
     });
 });
 
@@ -122,7 +140,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
 
     if (isReviewed) {
         product.reviews.forEach((rev) => {
-            if (rev.user.toString() === req.user._id.toString()){
+            if (rev.user.toString() === req.user._id.toString()) {
                 rev.rating = rating;
                 rev.comment = comment;
                 rev.avatar = req.user.avatar.url;
@@ -171,7 +189,7 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
     }
 
     const reviews = product.reviews.filter(
-       (rev) => rev._id.toString() !== req.query.id.toString()
+        (rev) => rev._id.toString() !== req.query.id.toString()
     );
 
     let avg = 0;
@@ -181,9 +199,9 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
 
     let ratings = 0;
 
-    if(reviews.length === 0)
+    if (reviews.length === 0)
         ratings = 0;
-    else    
+    else
         ratings = avg / reviews.length;
 
     const numOfReviews = reviews.length;
@@ -196,9 +214,9 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
             numOfReviews,
         },
         {
-        new: true,
-        runValidators: true,
-        useFindAndModify: false,
+            new: true,
+            runValidators: true,
+            useFindAndModify: false,
         }
     );
 

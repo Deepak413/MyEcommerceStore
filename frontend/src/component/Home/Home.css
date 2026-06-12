@@ -90,6 +90,124 @@
     z-index: 1;
 }
 
+/* EXPLORE SECTION ON HOME */
+.categoryShowcase {
+    width: 90%;
+    margin: 5rem auto;
+    text-align: center;
+}
+
+.categoryTitle {
+    font-size: 2.7rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #121212;
+}
+
+.categorySubtitle {
+    color: #666;
+    margin-bottom: 3rem;
+    font-size: 1rem;
+}
+
+.categoryGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+}
+
+.categoryCard {
+    position: relative;
+    height: 420px;
+    border-radius: 22px;
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    align-items: flex-end;
+    transition: all 0.4s ease;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+.categoryCard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.8),
+        rgba(0,0,0,0.2),
+        transparent
+    );
+    z-index: 1;
+}
+
+.categoryCard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s ease;
+}
+
+.categoryCard:hover::after {
+    transform: scale(1.1);
+}
+
+.categoryCard:hover {
+    transform: translateY(-10px);
+}
+
+.laptop::after {
+    background-image: url("https://images.unsplash.com/photo-1496181133206-80ce9b88a853");
+}
+
+.mobile::after {
+    background-image: url("https://images.unsplash.com/photo-1511707171634-5f897ff02aa9");
+}
+
+.monitor::after {
+    background-image: url("https://images.unsplash.com/photo-1527443224154-c4a3942d3acf");
+}
+
+.categoryOverlay {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 2rem;
+    color: white;
+    text-align: left;
+}
+
+.categoryOverlay h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.categoryOverlay p {
+    margin-bottom: 1.3rem;
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+.browseBtn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.categoryCard:hover .browseBtn {
+    background: #ffaa2c;
+    transform: translateX(8px);
+}
+
+
 
 .homeHeading {
     text-align: center;
@@ -100,14 +218,6 @@
     padding: 1vmax;
     margin: 4vmax auto;
     color: rgb(0, 0, 0, 0.7);
-}
-
-.container {
-    /* width: 90%;
-    margin: 3rem auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 24px; */
 }
 
 .featuredProductsSlider {
@@ -176,5 +286,17 @@
     .productCardStars>span {
         margin: 0 0.5vmax;
         font: 300 1vmax "Roboto";
+    }
+
+    .categoryGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .categoryCard {
+        height: 320px;
+    }
+
+    .categoryTitle {
+        font-size: 2rem;
     }
 }
