@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 import 'react-toastify/dist/ReactToastify.css';
 import Typography from "@mui/material/Typography";
 import MetaData from '../layout/MetaData';
-import FilterBoxDrawer from './FilterBoxDrawer.js';
+// import FilterBoxDrawer from './FilterBoxDrawer.js';
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { RxReset } from "react-icons/rx";
 
@@ -52,9 +52,7 @@ const Products = ({ match }) => {
     const params = useParams();
     const keyword = params.keyword === undefined ? "" : params.keyword;
 
-    // console.log("filteredProductsCount in Productsjs: ", filteredProductsCount);
     console.log("products in Productsjs", products);
-    // console.log("Category in Product.js from params : ", category);
 
     const [selectedSortOption, setSelectedSortOption] = useState('default');
 
@@ -112,10 +110,6 @@ const Products = ({ match }) => {
         setCurrentPage(1);
         console.log("category in useEffect1 : ", categoryFromUrl);
     }, [location.search]);
-    // useEffect(() => {
-    //     const queryParams = new URLSearchParams(location.search);
-    //     setCategory(queryParams.get("category") || "");
-    // }, [location.search]);
 
     useEffect(() => {
         console.log("API Call Category in useEffect2:", category);

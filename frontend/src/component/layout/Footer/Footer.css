@@ -10,7 +10,6 @@
 }
 
 .footer_container_left {
-    /* border: 1px solid red; */
     width: 30%;
     padding: 25px 0;
 }
@@ -25,7 +24,6 @@
     font-family: "Saira Condensed", sans-serif;
     font-weight: 200;
     font-style: normal;
-    /* font-family: "Boldonse", system-ui; */
     letter-spacing: 4px;
     font-size: 1.5rem;
     color: black;
@@ -90,7 +88,6 @@
 .footer_container_right {
     width: 50%;
     padding: 23px 0;
-    /* border: 1px solid red; */
 }
 
 .footer_mail_container {
@@ -99,8 +96,6 @@
 
 .footer_mail_container h5 {
     color: black;
-    /* margin-bottom: 22px; */
-    /* font-family: fantasy; */
     font-family: 'Poppins', sans-serif;
     letter-spacing: 3px;
     font-size: 23px;
@@ -116,7 +111,6 @@
 }
 
 .footer_mail_container button {
-    /* background-color: #3d3d3d; */
     margin-top: 20px;
     border-radius: 10px;
     padding: 11px 18px;
@@ -136,12 +130,10 @@
 
 .footer_info_container {
     display: flex;
-    /* border: 1px solid yellow; */
     width: 100%;
 }
 
 .footer_address_detail {
-    /* width: 45%; */
     padding: 30px 0px;
     font-family: 'Roboto';
     font-size: 1.2rem;
@@ -172,8 +164,6 @@
 
 .footer_social_card h3 {
     color: black;
-    /* font-weight: bold; */
-    /* margin-bottom: 13px; */
     font-family: 'Poppins', sans-serif;
     letter-spacing: 3px;
     font-size: 23px;
@@ -185,18 +175,6 @@
     gap: 18px;
 
 }
-
-/* .footer_social_cardlink {
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    text-align: center;
-    border-radius: 50%;
-    margin-right: 18px;
-} */
 
 .footer_social_cardlinks .insta_icon,
 .footer_social_cardlinks .linkedin_icon,
@@ -212,17 +190,6 @@
     /* Ensures icons stay inline */
 }
 
-/* Hover Effects */
-/* .footer_social_cardlinks .insta_icon:hover {
-    background: linear-gradient(45deg,
-    #feda75, 
-    #fa7e1e,
-    #d62976,
-    #962fbf,
-    #4f5bd5 
-  );
-    transform: scale(1.1);
-} */
 .footer_social_cardlinks .insta_icon:hover {
     color: #0077b5;
     transform: scale(1.1);
@@ -230,23 +197,17 @@
 
 .footer_social_cardlinks .linkedin_icon:hover {
     color: #0077b5;
-    /* LinkedIn blue color */
     transform: scale(1.1);
-    /* Slightly zoom in on hover */
 }
 
 .footer_social_cardlinks .fb_icon:hover {
     color: #1877f2;
-    /* Facebook blue color */
     transform: scale(1.1);
-    /* Slightly zoom in on hover */
 }
 
 .footer_social_cardlinks .twitter_icon:hover {
     color: #1da1f2;
-    /* Twitter blue color */
     transform: scale(1.1);
-    /* Slightly zoom in on hover */
 }
 
 .footer_line {

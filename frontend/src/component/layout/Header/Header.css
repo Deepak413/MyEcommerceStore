@@ -124,10 +124,6 @@
   transition: all 0.3s ease;
 }
 
-/* .nav_search_button_container{
-  display: flex;
-} */
-
 .nav_search_inside_button {
   position: absolute;
   right: 30px;

@@ -29,7 +29,6 @@ const Home = () => {
     console.log("products in Home.js : ", products);
 
     const featuredProducts = products.slice(0, 8);
-    console.log("featuredProducts in Home.js : ", featuredProducts);
     const topRatedProducts = [...products].sort((a, b) => b.ratings - a.ratings).slice(0, 8);
     console.log("topRatedProducts in Home.js : ", topRatedProducts);
     const bestsellerProducts = [...products].sort((a, b) => b.numOfReviews - a.numOfReviews).slice(0, 8);
@@ -37,9 +36,10 @@ const Home = () => {
     useEffect(() => {
         console.log("Dispatching Home.js getProduct()");
         dispatch(getProductWithoutPagination());
-        // dispatch(getProduct("", 1, [0, 200000], "", 0, "-ratings"));
         dispatch(loadUser());
+
         if (error) {
+            console.log("home.js - Error found : ", error);
             toast.error(error);
             dispatch(clearErrors());
         }
@@ -107,13 +107,8 @@ const Home = () => {
                 </div>
             </div>
 
+
             <h2 id="container" className="homeHeading">Featured Products</h2>
-
-            {/* {loading ? <Loader /> :
-                <div className="container">
-                    {featuredProducts && featuredProducts.map(product => <ProductCard key={product._id} product={product} />)}
-                </div>} */}
-
             {loading ? <Loader /> :
                 <div className="container">
                     <div className="featuredProductsSlider">
@@ -153,12 +148,8 @@ const Home = () => {
                     </div>
                 </div>}
 
-            <h2 id="container" className="homeHeading">Bestsellers</h2>
 
-            {/* {loading ? <Loader /> :
-                <div className="container">
-                    {products && products.map(product => <ProductCard key={product._id} product={product} />)}
-                </div>} */}
+            <h2 id="container" className="homeHeading">Bestsellers</h2>
             {loading ? <Loader /> :
                 <div className="container">
                     <div className="featuredProductsSlider">
@@ -198,12 +189,8 @@ const Home = () => {
                     </div>
                 </div>}
 
-            <h2 id="container" className="homeHeading">Top Rated Products</h2>
 
-            {/* {loading ? <Loader /> :
-                <div className="container">
-                    {topRatedProducts && topRatedProducts.map(product => <ProductCard key={product._id} product={product} />)}
-                </div>} */}
+            <h2 id="container" className="homeHeading">Top Rated Products</h2>
             {loading ? <Loader /> :
                 <div className="container">
                     <div className="featuredProductsSlider">

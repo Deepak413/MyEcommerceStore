@@ -14,26 +14,9 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     console.log("Received Cookies in auth:", req.cookies);
     console.log("Received Cookies in auth: ended")
 
-    // const authHeader = req.headers.authorization;
-    // console.log("authorization in auth.js : ", authHeader);
-    // console.log("authorization in auth.js : ended");
-
-    // const token = authHeader.split(" ")[1];
-
-    // console.log("token in auth.js : ", token);
-    
     console.log("Checking incoming token cookie inside auth.js : ", req.cookies.token);
 
-    // if (!token) {
-    //     return next(new ErrorHander("Token not found!, Please Login to access this resource", 401));
-    // }
-
-    // if (!req.cookies?.token) {
-    //     return res.status(401).json({ message: "Authentication required!!! Token not found!, Please Login to access this resource" });
-    // }
-
     try {
-        // console.log("Extracted token from Authorization : ", token);
         const decodedData = jwt.verify(req.cookies.token, process.env.JWT_SECRET);
         console.log("Decoded data in auth : ", decodedData);
 

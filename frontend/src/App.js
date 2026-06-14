@@ -1,8 +1,3 @@
-//add http://localhost:4000 this in productAction.js to get all products and product details
-// all errors getting in Action files
-//all errors removed after adding http://localhost:4000 in all action files call
-
-
 import React from 'react';
 import { useState, useEffect } from 'react';
 import './App.css';

@@ -94,43 +94,6 @@ const UserOptions = ({ user }) => {
                 ))}
             </SpeedDial>
         </Fragment>
-        // <Fragment>
-        //     <Backdrop open={open} style={{ zIndex: 10 }} />
-        //     <SpeedDial
-        //         ariaLabel='SpeedDial tooltip example'
-        //         onClose={() => setOpen(false)}
-        //         onOpen={() => setOpen(true)}
-        //         open={open}
-        //         direction='down'
-        //         FabProps={{
-        //             size: 'small',
-        //             style: {
-        //                 background: 'transparent',
-        //                 boxShadow: 'none',
-        //             }
-        //         }}
-        //         sx={{ position: 'relative' }}
-        //         style={{ zIndex: 11 }}
-        //         className='speedDial'
-        //         icon={
-        //             <img
-        //                 className='speedDialIcon'
-        //                 src={user?.user?.avatar ? user?.user?.avatar?.url : "/Profile.png"}
-        //                 alt='Profile'
-        //             />
-        //         }
-        //     >
-        //         {options.map((item) => (
-        //             <SpeedDialAction
-        //                 key={item.name}
-        //                 icon={item.icon}
-        //                 tooltipTitle={item.name}
-        //                 tooltipOpen={window.innerWidth <= 600 ? true : false}
-        //                 onClick={item.func} />
-        //         ))}
-        //     </SpeedDial>
-        // </Fragment>
-
     )
 }
 
