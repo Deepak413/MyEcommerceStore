@@ -23,7 +23,10 @@ import {
     updatePasswordSuccess,
     updateProfileFail,
     updateProfileRequest,
-    updateProfileSuccess
+    updateProfileSuccess,
+    updateUserRequest,updateUserSuccess,updateUserFail,updateUserReset,
+    deleteUserRequest, deleteUserSuccess, deleteUserFail, deleteUserReset,
+    allUsersRequest, allUsersSuccess, allUsersFail, userDetailsRequest, userDetailsSuccess, userDetailsFail
 } from "../reducers/userReducer";
 import { toast } from "react-toastify";
 
@@ -199,6 +202,97 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
         dispatch(resetPasswordSuccess(data.success));
     } catch (error) {
         dispatch(resetPasswordFail(error.response.data.message));
+    }
+};
+
+// Get All Users for admin
+export const getAllUsers = () => async (dispatch) => {
+    try {
+        dispatch(allUsersRequest());
+
+        const { data } = await axios.get(
+            "https://shoppingkaro-65sf.onrender.com/api/v1/admin/users"
+        );
+
+        dispatch(allUsersSuccess(data.users));
+
+    } catch (error) {
+        dispatch(
+            allUsersFail(
+                error.response?.data?.message || "Failed to fetch users"
+            )
+        );
+    }
+};
+
+
+// Get User Details for admin
+export const getUserDetails = (id) => async (dispatch) => {
+    try {
+        dispatch(userDetailsRequest());
+
+        const { data } = await axios.get(
+            `https://shoppingkaro-65sf.onrender.com/api/v1/admin/user/${id}`
+        );
+
+        dispatch(userDetailsSuccess(data.user));
+
+    } catch (error) {
+        dispatch(
+            userDetailsFail(
+                error.response?.data?.message || "Failed to fetch user details"
+            )
+        );
+    }
+};
+
+
+// Update User
+export const updateUser = (id, userData) => async (dispatch) => {
+    try {
+        dispatch(updateUserRequest());
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        const { data } = await axios.put(
+            `https://shoppingkaro-65sf.onrender.com/api/v1/admin/user/${id}`,
+            userData,
+            config
+        );
+
+        dispatch(updateUserSuccess(data.success));
+
+    } catch (error) {
+        dispatch(
+            updateUserFail(
+                error.response?.data?.message || "Failed to update user"
+            )
+        );
+    }
+};
+
+
+// Delete User
+export const deleteUser = (id) => async (dispatch) => {
+    try {
+        dispatch(deleteUserRequest());
+
+        const { data } = await axios.delete(
+            `https://shoppingkaro-65sf.onrender.com/api/v1/admin/user/${id}`
+        );
+
+        dispatch(deleteUserSuccess(data.success));
+
+    } catch (error) {
+        dispatch(
+            deleteUserFail(
+                error.response?.data?.message || "Failed to delete user"
+            )
+        );
     }
 };
 

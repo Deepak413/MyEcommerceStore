@@ -79,6 +79,7 @@ const profileSlice = createSlice({
         loading: false,
         error: null,
         isUpdated: false,
+        isDeleted: false,
     },
     reducers: {
         updateProfileRequest: (state) => {
@@ -108,6 +109,34 @@ const profileSlice = createSlice({
         updatePasswordFail: (state, action) => {
             state.loading = false;
             state.error = action.payload;
+        },
+        updateUserRequest :(state) => {
+            state.loading = true;
+        },
+        updateUserSuccess: (state, action) => {
+            state.loading = false;
+            state.isUpdated = action.payload;
+        },
+        updateUserFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        updateUserReset: (state, action) => {
+            state.isUpdated = false;
+        },
+        deleteUserRequest :(state) => {
+            state.loading = true;
+        },
+        deleteUserSuccess: (state, action) => {
+            state.loading = false;
+            state.isDeleted = action.payload;
+        },
+        deleteUserFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        deleteUserReset: (state, action) => {
+            state.isDeleted = false;
         },
         clearAllErrors: (state) => {
             state.error = null;
@@ -154,6 +183,62 @@ const forgotPasswordSlice = createSlice({
     },
 })
 
+const allUsersSlice = createSlice({
+    name: "allUsers",
+    initialState: {
+        users: [],
+        loading: false,
+        error: null,
+    },
+    reducers: {
+        allUsersRequest: (state) => {
+            state.loading = true;
+        },
+
+        allUsersSuccess: (state, action) => {
+            state.loading = false;
+            state.users = action.payload;
+        },
+
+        allUsersFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+
+        clearAllErrors: (state) => {
+            state.error = null;
+        },
+    },
+});
+
+const userDetailsSlice = createSlice({
+    name: "userDetails",
+    initialState: {
+        user: {},
+        loading: false,
+        error: null,
+    },
+    reducers: {
+        userDetailsRequest: (state) => {
+            state.loading = true;
+        },
+
+        userDetailsSuccess: (state, action) => {
+            state.loading = false;
+            state.user = action.payload;
+        },
+
+        userDetailsFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+
+        clearAllErrors: (state) => {
+            state.error = null;
+        },
+    },
+});
+
 
 export const {
     loginRequest,loginFail,loginSuccess,
@@ -164,7 +249,9 @@ export const {
 
 export const {
     updateProfileRequest, updateProfileSuccess, updateProfileFail,updateProfileReset,
-    updatePasswordRequest, updatePasswordSuccess, updatePasswordFail, updatePasswordReset
+    updatePasswordRequest, updatePasswordSuccess, updatePasswordFail, updatePasswordReset,
+    updateUserRequest, updateUserSuccess, updateUserFail, updateUserReset,
+    deleteUserRequest, deleteUserSuccess, deleteUserFail, deleteUserReset,
 } = profileSlice.actions;
 
 export const {
@@ -172,10 +259,24 @@ export const {
     resetPasswordRequest, resetPasswordSuccess, resetPasswordFail
 } = forgotPasswordSlice.actions;
 
+export const {
+    allUsersRequest,
+    allUsersSuccess,
+    allUsersFail,
+} = allUsersSlice.actions;
+
+export const {
+    userDetailsRequest,
+    userDetailsSuccess,
+    userDetailsFail,
+} = userDetailsSlice.actions;
+
 const reducers = {
     user: userSlice.reducer,
     profile: profileSlice.reducer,
     forgotPassword: forgotPasswordSlice.reducer,
+    allUsers: allUsersSlice.reducer,
+    userDetails: userDetailsSlice.reducer,
 };
 
 export default reducers;

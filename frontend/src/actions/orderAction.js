@@ -75,7 +75,7 @@ export const getAllOrders = () => async (dispatch) => {
     }
 };
 
-// Update Order
+// Update Order (admin)
 export const updateOrder = (id, order) => async (dispatch) => {
     try {
         dispatch(updateOrderRequest());
@@ -97,7 +97,7 @@ export const updateOrder = (id, order) => async (dispatch) => {
     }
 };
 
-// Delete Order
+// Delete Order (admin)
 export const deleteOrder = (id) => async (dispatch) => {
     try {
         dispatch(deleteOrderRequest());

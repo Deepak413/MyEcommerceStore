@@ -29,6 +29,117 @@ const productSlice = createSlice({
   },
 });
 
+const adminProductSlice = createSlice({
+  name: "adminProducts",
+  initialState: {
+    products: [],
+    loading: false,
+    error: null,
+  },
+  reducers: {
+    adminProductRequest: (state) => {
+      state.loading = true;
+    },
+    adminProductSuccess: (state, action) => {
+      state.loading = false;
+      state.products = action.payload.products;
+    },
+    adminProductFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    clearAllErrors: (state) => {
+      state.error = null;
+    },
+  },
+});
+
+const newProductSlice = createSlice({
+  name: "newProduct",
+  initialState: {
+    loading: false,
+    success: false,
+    product: {},
+    error: null,
+  },
+  reducers: {
+    newProductRequest: (state) => {
+      state.loading = true;
+    },
+
+    newProductSuccess: (state, action) => {
+      state.loading = false;
+      state.success = action.payload.success;
+      state.product = action.payload.product;
+    },
+
+    newProductFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    newProductReset: (state) => {
+      state.success = false;
+      state.product = {};
+    },
+
+    clearAllErrors: (state) => {
+      state.error = null;
+    },
+  },
+});
+
+const productUpdateDeleteSlice = createSlice({
+  name: "productUpdateDelete",
+  initialState: {
+    loading: false,
+    isDeleted: false,
+    isUpdated: false,
+    error: null,
+  },
+  reducers: {
+    updateProductRequest: (state) => {
+      state.loading = true;
+    },
+
+    deleteProductRequest: (state) => {
+      state.loading = true;
+    },
+
+    updateProductSuccess: (state, action) => {
+      state.loading = false;
+      state.isUpdated = action.payload;
+    },
+
+    deleteProductSuccess: (state, action) => {
+      state.loading = false;
+      state.isDeleted = action.payload;
+    },
+
+    updateProductFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    deleteProductFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    updateProductReset: (state) => {
+      state.isUpdated = false;
+    },
+
+    deleteProductReset: (state) => {
+      state.isDeleted = false;
+    },
+
+    clearAllErrors: (state) => {
+      state.error = null;
+    },
+  },
+});
+
 const similarProductsSlice = createSlice({
   name: "similarProducts",
   initialState: {
@@ -119,12 +230,78 @@ const newReviewSlice = createSlice({
   },
 });
 
+const productReviewsSlice = createSlice({
+  name: "productReviews",
+  initialState: {
+    reviews: [],
+    loading: false,
+    error: null,
+  },
+  reducers: {
+    allReviewRequest: (state) => {
+      state.loading = true;
+    },
+
+    allReviewSuccess: (state, action) => {
+      state.loading = false;
+      state.reviews = action.payload;
+    },
+
+    allReviewFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    clearAllErrors: (state) => {
+      state.error = null;
+    },
+  },
+});
+
+const deleteReviewSlice = createSlice({
+  name: "deleteReview",
+  initialState: {
+    loading: false,
+    isDeleted: false,
+    error: null,
+  },
+  reducers: {
+    deleteReviewRequest: (state) => {
+      state.loading = true;
+    },
+
+    deleteReviewSuccess: (state, action) => {
+      state.loading = false;
+      state.isDeleted = action.payload;
+    },
+
+    deleteReviewFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    deleteReviewReset: (state) => {
+      state.isDeleted = false;
+    },
+
+    clearAllErrors: (state) => {
+      state.error = null;
+    },
+  },
+});
+
 export const {
   allProductRequest,
   allProductSuccess,
   allProductFail,
   clearAllErrors
 } = productSlice.actions;
+
+export const {
+  adminProductRequest,
+  adminProductSuccess,
+  adminProductFail,
+} = adminProductSlice.actions;
 
 export const{
   similarProductsRequest,
@@ -139,17 +316,56 @@ export const {
 } = productDetailsSlice.actions;
 
 export const {
+  newProductRequest,
+  newProductSuccess,
+  newProductFail,
+  newProductReset,
+} = newProductSlice.actions;
+
+export const {
+  updateProductRequest,
+  deleteProductRequest,
+
+  updateProductSuccess,
+  deleteProductSuccess,
+
+  updateProductFail,
+  deleteProductFail,
+
+  updateProductReset,
+  deleteProductReset,
+} = productUpdateDeleteSlice.actions;
+
+export const {
   newReviewRequest,
   newReviewSuccess,
   newReviewFail,
   newReviewReset
 } = newReviewSlice.actions;
 
+export const {
+  allReviewRequest,
+  allReviewSuccess,
+  allReviewFail,
+} = productReviewsSlice.actions;
+
+export const {
+  deleteReviewRequest,
+  deleteReviewSuccess,
+  deleteReviewFail,
+  deleteReviewReset,
+} = deleteReviewSlice.actions;
+
 const reducers = {
+  newProduct: newProductSlice.reducer,
   products: productSlice.reducer,
+  adminProducts: adminProductSlice.reducer,
+  productUpdateDelete: productUpdateDeleteSlice.reducer,
   similarProducts: similarProductsSlice.reducer,
   productDetails: productDetailsSlice.reducer,
   newReview: newReviewSlice.reducer,
+  productReviews: productReviewsSlice.reducer,
+  deleteReview: deleteReviewSlice.reducer,
 };
 
 export default reducers;

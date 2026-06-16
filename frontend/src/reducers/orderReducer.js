@@ -186,7 +186,9 @@ export const {
     updateOrderSuccess,
     deleteOrderSuccess,
     updateOrderFail,
-    deleteOrderFail
+    deleteOrderFail,
+    updateOrderReset,
+    deleteOrderReset
 } = orderSlice.actions;
 
 export const {
