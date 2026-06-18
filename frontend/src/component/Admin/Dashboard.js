@@ -5,11 +5,33 @@ import "./dashboard.css";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { Doughnut, Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+
 import { useSelector, useDispatch } from "react-redux";
 import { getAdminProduct } from "../../actions/productAction";
 import { getAllOrders } from "../../actions/orderAction.js";
 import { getAllUsers } from "../../actions/userAction.js";
 import MetaData from "../layout/MetaData";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  ArcElement,
+  Tooltip,
+  Legend
+);
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -20,6 +42,10 @@ const Dashboard = () => {
 
   const { users } = useSelector((state) => state.allUsers);
 
+  console.log("products in Dashboard : ", products);
+  console.log("orders in Dashboard : ", orders);
+  console.log("users in Dashboard : ", users);
+
   let outOfStock = 0;
 
   products &&
@@ -28,6 +54,7 @@ const Dashboard = () => {
         outOfStock += 1;
       }
     });
+  console.log("outOfStock in Dashboard : ", outOfStock);
 
   useEffect(() => {
     dispatch(getAdminProduct());
@@ -59,7 +86,10 @@ const Dashboard = () => {
       {
         backgroundColor: ["#00A6B4", "#6800B4"],
         hoverBackgroundColor: ["#4B5000", "#35014F"],
-        data: [outOfStock, products.length - outOfStock],
+        data: [
+          outOfStock,
+          (products?.length || 0) - outOfStock,
+        ],
       },
     ],
   };
