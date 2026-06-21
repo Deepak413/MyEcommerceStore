@@ -39,19 +39,20 @@ const NewProduct = () => {
     "Monitor",
     "Tv",
     "Earphone",
-];
+  ];
 
   useEffect(() => {
-    if (error) {
-      toast.error(error);
-      dispatch(clearErrors());
-    }
-
     if (success) {
       toast.success("Product Created Successfully");
       navigate('/admin/dashboard');
       dispatch(newProductReset());
     }
+
+    if (error) {
+      toast.error(error);
+      dispatch(clearErrors());
+    }
+
   }, [dispatch, toast, error, navigate, success]);
 
   const createProductSubmitHandler = (e) => {
@@ -78,6 +79,8 @@ const NewProduct = () => {
     setImagesPreview([]);
 
     files.forEach((file) => {
+      console.log(file.name);
+      console.log(file.size / 1024 / 1024, "MB");
       const reader = new FileReader();
 
       reader.onload = () => {

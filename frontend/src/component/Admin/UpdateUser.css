@@ -1,0 +1,12 @@
+.disabledField {
+  background: #f8fafc !important;
+  color: #64748b !important;
+  cursor: not-allowed;
+  border: 1px solid #e2e8f0 !important;
+  opacity: 0.9;
+}
+
+.disabledField:focus {
+  outline: none;
+  box-shadow: none;
+}

@@ -2,16 +2,12 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { Button } from "@material-ui/core";
 import Button from "@mui/material/Button";
 
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PersonIcon from "@mui/icons-material/Person";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import MetaData from "../layout/MetaData";
-// import MailOutlineIcon from "@material-ui/icons/MailOutline";
-// import PersonIcon from "@material-ui/icons/Person";
-// import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import SideBar from "./Sidebar";
 import { updateUserReset } from "../../reducers/userReducer";
 import {
@@ -21,6 +17,7 @@ import {
 } from "../../actions/userAction";
 import Loader from "../layout/Loader/Loader";
 import { useNavigate, useParams } from "react-router-dom";
+import "./UpdateUser.css";
 
 const UpdateUser = () => {
   const dispatch = useDispatch();
@@ -34,8 +31,6 @@ const UpdateUser = () => {
     isUpdated,
   } = useSelector((state) => state.profile);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
 
   const { id: userId } = useParams();
@@ -44,8 +39,6 @@ const UpdateUser = () => {
     if (!user || user._id !== userId) {
       dispatch(getUserDetails(userId));
     } else {
-      setName(user.name || "");
-      setEmail(user.email || "");
       setRole(user.role || "");
     }
     if (error) {
@@ -74,8 +67,6 @@ const UpdateUser = () => {
 
     const myForm = new FormData();
 
-    myForm.set("name", name);
-    myForm.set("email", email);
     myForm.set("role", role);
 
     dispatch(updateUser(userId, myForm));
@@ -101,9 +92,10 @@ const UpdateUser = () => {
                 <input
                   type="text"
                   placeholder="Name"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={user?.name || ""}
+                  disabled
+                  readOnly
+                  className="disabledField"
                 />
               </div>
               <div>
@@ -111,9 +103,10 @@ const UpdateUser = () => {
                 <input
                   type="email"
                   placeholder="Email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={user?.email || ""}
+                  disabled
+                  readOnly
+                  className="disabledField"
                 />
               </div>
 

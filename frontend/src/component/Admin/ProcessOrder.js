@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import MetaData from "../layout/MetaData";
 import { Link, useNavigate, useParams } from "react-router-dom";
-// import { Typography } from "@material-ui/core";
 import Typography from "@mui/material/Typography";
 import SideBar from "./Sidebar";
 import {
@@ -13,8 +12,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/Loader/Loader";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import AccountTreeIcon from "@material-ui/icons/AccountTree";
-// import { Button } from "@material-ui/core";
 import Button from "@mui/material/Button";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import { updateOrderReset } from "../../reducers/orderReducer";
@@ -23,6 +20,8 @@ import "./processOrder.css";
 const ProcessOrder = () => {
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   const { error: updateError, isUpdated } = useSelector((state) => state.order);
+
+  console.log("ProcessOrder.js : Order Details Data:", order);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -64,7 +63,7 @@ const ProcessOrder = () => {
       <MetaData title="Process Order" />
       <div className="dashboard">
         <SideBar />
-        <div className="newProductContainer">
+        <div className="productListContainer">
           {loading ? (
             <Loader />
           ) : (
@@ -108,7 +107,7 @@ const ProcessOrder = () => {
                         }
                       >
                         {order.paymentInfo &&
-                        order.paymentInfo.status === "succeeded"
+                          order.paymentInfo.status === "succeeded"
                           ? "PAID"
                           : "NOT PAID"}
                       </p>
@@ -123,21 +122,22 @@ const ProcessOrder = () => {
                   <Typography>Order Status</Typography>
                   <div className="orderDetailsContainerBox">
                     <div>
-                      <p
-                        className={
-                          order.orderStatus && order.orderStatus === "Delivered"
-                            ? "greenColor"
-                            : "redColor"
-                        }
+                      <div
+                        className={`orderStatusBadge ${order.orderStatus === "Delivered"
+                            ? "delivered"
+                            : order.orderStatus === "Shipped"
+                              ? "shipped"
+                              : "processing"
+                          }`}
                       >
-                        {order.orderStatus && order.orderStatus}
-                      </p>
+                        {order.orderStatus}
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="confirmCartItems">
                   <Typography>Your Cart Items:</Typography>
-                  <div className="confirmCartItemsContainer">
+                  <div className="processOrderCartItemsContainer">
                     {order.orderItems &&
                       order.orderItems.map((item) => (
                         <div key={item.product}>

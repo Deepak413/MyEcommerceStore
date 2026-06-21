@@ -31,7 +31,9 @@ const UsersList = () => {
   console.log("UsersList.js : deleteError:", deleteError);
 
   const deleteUserHandler = (id) => {
-    dispatch(deleteUser(id));
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      dispatch(deleteUser(id));
+    }
   };
 
   useEffect(() => {
@@ -197,7 +199,6 @@ const UsersList = () => {
                 },
 
                 "& .MuiDataGrid-row": {
-                  margin: "10px 0",
                   backgroundColor: "#fff",
                   borderRadius: "16px",
                   boxShadow: "0 4px 12px rgba(0,0,0,0.05)",

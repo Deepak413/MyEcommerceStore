@@ -31,7 +31,9 @@ const OrderList = () => {
   console.log("OrderList.js : deleteError:", deleteError);
 
   const deleteOrderHandler = (id) => {
-    dispatch(deleteOrder(id));
+    if (window.confirm("Are you sure you want to delete this order?")) {
+      dispatch(deleteOrder(id));
+    }
   };
 
   useEffect(() => {
@@ -197,7 +199,7 @@ const OrderList = () => {
               disableRowSelectionOnClick
               hideFooter
               className="productListTable"
-              getRowHeight={() => 85}
+              getRowHeight={() => 75}
               sx={{
                 "& .MuiDataGrid-cell": {
                   border: "none",
@@ -205,7 +207,6 @@ const OrderList = () => {
                 },
 
                 "& .MuiDataGrid-row": {
-                  margin: "10px 0",
                   backgroundColor: "#fff",
                   borderRadius: "16px",
                   boxShadow: "0 4px 12px rgba(0,0,0,0.05)",

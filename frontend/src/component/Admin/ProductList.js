@@ -53,8 +53,8 @@ const ProductList = () => {
 
     if (isDeleted) {
       toast.success("Product Deleted Successfully");
-      navigate('/admin/dashboard');
       dispatch(deleteProductReset());
+      navigate('/admin/products');
     }
 
   }, [dispatch, error, deleteError, navigate, isDeleted]);

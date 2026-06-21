@@ -35,7 +35,9 @@ const ProductReviews = () => {
   const [productId, setProductId] = useState("");
 
   const deleteReviewHandler = (reviewId) => {
-    dispatch(deleteReviews(reviewId, productId));
+    if (window.confirm("Are you sure you want to delete this review?")) {
+      dispatch(deleteReviews(reviewId, productId));
+    }
   };
 
   const productReviewsSubmitHandler = (e) => {
@@ -183,7 +185,6 @@ const ProductReviews = () => {
                   },
 
                   "& .MuiDataGrid-row": {
-                    marginBottom: "12px",
                     backgroundColor: "#fff",
                     borderRadius: "14px",
 
