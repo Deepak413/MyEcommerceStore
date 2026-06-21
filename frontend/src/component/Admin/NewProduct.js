@@ -2,13 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, createProduct } from "../../actions/productAction";
-// import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
-// import AccountTreeIcon from "@material-ui/icons/AccountTree";
-// import DescriptionIcon from "@material-ui/icons/Description";
-// import StorageIcon from "@material-ui/icons/Storage";
-// import SpellcheckIcon from "@material-ui/icons/Spellcheck";
-// import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import Button from "@mui/material/Button";
 
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
@@ -39,13 +33,13 @@ const NewProduct = () => {
 
   const categories = [
     "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
-    "Camera",
-    "SmartPhones",
-  ];
+    "Tablet",
+    "Phone",
+    "Watch",
+    "Monitor",
+    "Tv",
+    "Earphone",
+];
 
   useEffect(() => {
     if (error) {
@@ -108,7 +102,7 @@ const NewProduct = () => {
             encType="multipart/form-data"
             onSubmit={createProductSubmitHandler}
           >
-            <h1>Create Product</h1>
+            <h1>Create New Product</h1>
 
             <div>
               <SpellcheckIcon />

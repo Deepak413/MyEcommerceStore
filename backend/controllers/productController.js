@@ -88,10 +88,13 @@ exports.getAllProductsWithoutPagination = catchAsyncErrors(async (req, res, next
 // Get All Product (Admin)
 exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
     const products = await Product.find();
+    const productsCount = await Product.countDocuments();
 
     res.status(200).json({
         success: true,
         products,
+        productsCount,
+        totalProducts: products.length,
     });
 });
 
@@ -179,7 +182,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
         await cloudinary.v2.uploader.destroy(product.images[i].public_id);
     }
 
-    await product.remove();
+    await product.deleteOne();
 
     res.status(200).json({
         success: true,

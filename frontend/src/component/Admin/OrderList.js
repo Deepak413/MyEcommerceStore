@@ -1,12 +1,8 @@
 import React, { Fragment, useEffect } from "react";
-// import { DataGrid } from "@material-ui/data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-// import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
-// import EditIcon from "@material-ui/icons/Edit";
-// import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,6 +17,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 
 const OrderList = () => {
   const dispatch = useDispatch();
@@ -29,6 +26,9 @@ const OrderList = () => {
   const { error, orders } = useSelector((state) => state.allOrders);
 
   const { error: deleteError, isDeleted } = useSelector((state) => state.order);
+
+  console.log("OrderList.js : Orders Data:", orders);
+  console.log("OrderList.js : deleteError:", deleteError);
 
   const deleteOrderHandler = (id) => {
     dispatch(deleteOrder(id));
@@ -56,73 +56,107 @@ const OrderList = () => {
   }, [dispatch, toast, error, deleteError, isDeleted]);
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
+    {
+      field: "image",
+      headerName: "Image",
+      minWidth: 90,
+      flex: 0.25,
+      align: "center",
+      headerAlign: "center",
+      sortable: false,
+      renderCell: (params) => (
+        <div className="productImageCell">
+          <img src={params.row.image} alt={params.row.name} />
+        </div>
+      ),
+    },
+
+    {
+      field: "name",
+      headerName: "Product Name",
+      minWidth: 350,
+      flex: 1,
+      renderCell: (params) => (
+        <div className="productNameCell">
+          <span>
+            {params.row.name.length > 45
+              ? `${params.row.name.substring(0, 45)}...`
+              : params.row.name}
+          </span>
+        </div>
+      ),
+    },
 
     {
       field: "status",
       headerName: "Status",
       minWidth: 150,
-      flex: 0.5,
-      cellClassName: (params) =>
-        params.row.status === "Delivered"
-          ? "greenColor"
-          : "redColor",
-    },
-    {
-      field: "itemsQty",
-      headerName: "Items Qty",
-      type: "number",
-      minWidth: 150,
       flex: 0.4,
+      align: "center",
+      headerAlign: "center",
+      renderCell: (params) => (
+        <div
+          className={`statusBadge ${params.row.status === "Delivered"
+            ? "delivered"
+            : "processing"
+            }`}
+        >
+          {params.row.status}
+        </div>
+      ),
     },
 
     {
       field: "amount",
-      headerName: "Amount",
-      type: "number",
-      minWidth: 270,
-      flex: 0.5,
+      headerName: "Total Price",
+      minWidth: 170,
+      flex: 0.3,
+      align: "center",
+      headerAlign: "center",
+      renderCell: (params) => (
+        <span className="priceCell">
+          ₹{params.row.amount.toLocaleString()}
+        </span>
+      ),
     },
 
     {
       field: "actions",
-      flex: 0.3,
+      flex: 0.25,
       headerName: "Actions",
-      minWidth: 150,
-      type: "number",
+      minWidth: 140,
       sortable: false,
-      renderCell: (params) => {
-        return (
-          <Fragment>
-            <Link to={`/admin/order/${params.row.id}`}>
-              <EditIcon />
-            </Link>
+      align: "center",
+      headerAlign: "center",
+      renderCell: (params) => (
+        <div className="actionCell">
+          <Link
+            to={`/admin/order/${params.row.id}`}
+            className="editBtn"
+          >
+            <EditIcon />
+          </Link>
 
-            <Button onClick={() => deleteOrderHandler(params.row.id)}>
-              <DeleteIcon />
-            </Button>
-          </Fragment>
-        );
-      },
+          <button
+            className="deleteBtn"
+            onClick={() => deleteOrderHandler(params.row.id)}
+          >
+            <DeleteIcon />
+          </button>
+        </div>
+      ),
     },
   ];
-
-  // const rows = [];
-
-  // orders &&
-  //   orders.forEach((item) => {
-  //     rows.push({
-  //       id: item._id,
-  //       itemsQty: item.orderItems.length,
-  //       amount: item.totalPrice,
-  //       status: item.orderStatus,
-  //     });
-  //   });
 
   const rows =
     orders?.map((order) => ({
       id: order._id,
-      itemsQty: order.orderItems.length,
+      image: order.orderItems?.[0]?.image,
+      name:
+        order.orderItems?.length === 1
+          ? order.orderItems[0].name
+          : `${order.orderItems[0].name} + ${order.orderItems.length - 1
+          } more`,
       amount: order.totalPrice,
       status: order.orderStatus,
     })) || [];
@@ -134,23 +168,63 @@ const OrderList = () => {
       <div className="dashboard">
         <SideBar />
         <div className="productListContainer">
-          <h1 id="productListHeading">ALL ORDERS</h1>
+          <div className="productListHeader">
+            <div className="headerContent">
+              <div className="headerIcon">
+                <LocalShippingIcon />
+              </div>
 
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            autoHeight
-            disableRowSelectionOnClick
-            className="productListTable"
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 10,
+              <div className="headerText">
+                <h1>All Orders</h1>
+                <p>Manage customer orders</p>
+              </div>
+            </div>
+
+            <div className="headerStats">
+              <div className="stat">
+                <span className="statLabel">Total</span>
+                <span className="statValue">
+                  {orders?.length || 0}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="tableWrapper">
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              disableRowSelectionOnClick
+              hideFooter
+              className="productListTable"
+              getRowHeight={() => 85}
+              sx={{
+                "& .MuiDataGrid-cell": {
+                  border: "none",
+                  padding: "14px",
                 },
-              },
-            }}
-            pageSizeOptions={[10, 20, 50]}
-          />
+
+                "& .MuiDataGrid-row": {
+                  margin: "10px 0",
+                  backgroundColor: "#fff",
+                  borderRadius: "16px",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+
+                  "&:hover": {
+                    backgroundColor: "#fff8f0",
+                    transform: "translateY(-2px)",
+                    transition: "all .25s ease",
+                  },
+                },
+
+                "& .MuiDataGrid-columnHeader": {
+                  backgroundColor: "#fff8f0",
+                  borderBottom: "2px solid #ffaa2c",
+                  fontWeight: 700,
+                },
+              }}
+            />
+          </div>
         </div>
       </div>
     </Fragment>

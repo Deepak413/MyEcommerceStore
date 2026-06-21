@@ -2,109 +2,607 @@
   width: 100%;
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 260px 1fr;
   margin-top: 80px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f0f4f8 100%);
 }
 
 .dashboardContainer {
-  border-left: 1px solid rgba(0, 0, 0, 0.13);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafb 100%);
+  padding: 2.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.dashboardHeader {
+  margin-bottom: 3rem;
+  animation: slideDown 0.6s ease;
+  position: relative;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #fff8f0 0%, #fffbf7 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 170, 44, 0.2);
+  box-shadow: 0 8px 24px rgba(255, 170, 44, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.headerTop::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 170, 44, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 1;
+  z-index: 1;
+}
+
+.headerIconWrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ffaa2c 0%, #ff9500 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  box-shadow: 0 8px 20px rgba(255, 170, 44, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.headerIcon {
+  font-size: 2rem;
+}
+
+.headerTitleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dashboardTitle {
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #1f2937 0%, #ffaa2c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.dashboardSubtitle {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin: 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.subtitleIcon {
+  font-size: 1rem;
+  color: #ffaa2c;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.headerStats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 1;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 170, 44, 0.1);
+}
+
+.headerStatItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 120px;
+}
+
+.headerStatLabel {
+  color: #9ca3af;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.headerStatValue {
+  color: #1f2937;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.headerStatValue.active {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.headerStatDivider {
+  width: 1px;
+  height: 30px;
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 170, 44, 0.3) 50%, transparent 100%);
+}
+
+.headerDecoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #ffaa2c 50%, transparent 100%);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .headerTop {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .headerLeft {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .headerStats {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dashboardTitle {
+    font-size: 1.8rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerTop {
+    padding: 1.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .headerIconWrapper {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .dashboardTitle {
+    font-size: 1.6rem !important;
+  }
+
+  .dashboardSubtitle {
+    font-size: 0.85rem;
+    justify-content: center;
+  }
+
+  .headerStats {
+    width: 100%;
+  }
+
+  .headerStatItem {
+    min-width: 100px;
+  }
+}
+
+/* Summary Section */
+.dashboardSummary {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2.5rem 0;
+}
+
+/* Total Amount Card */
+.totalAmountCard {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, #fff8f0 0%, #fffaf5 100%);
+  border: 2px solid rgba(255, 170, 44, 0.2);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(255, 170, 44, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.totalAmountCard:hover {
+  border-color: #ffaa2c;
+  box-shadow: 0 12px 32px rgba(255, 170, 44, 0.2);
+  transform: translateY(-4px);
+}
+
+.totalIcon {
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffaa2c 0%, #ff9500 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  box-shadow: 0 4px 12px rgba(255, 170, 44, 0.3);
+}
+
+.cardContent {
+  flex: 1;
+}
+
+.cardLabel {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.cardValue {
+  color: #1f2937;
+  font-size: 2.2rem;
+  margin: 0;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffaa2c 0%, #ff9500 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Summary Box 2 */
+.dashboardSummaryBox2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.statCard {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
   background: white;
   padding: 2rem;
-  overflow-x: hidden;
+  height: 12rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* .dashboard {
-  display: flex;
-  min-height: 100vh;
-  background: #f9fafb;
+.statCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
 }
 
-.dashboardContainer {
-  flex: 1;
-  padding: 2rem;
-  overflow-x: auto;
-} */
-
-.dashboardContainer > h1 {
-  width: 100%;
-  text-align: center;
-  padding: 1rem 0;
-  margin-bottom: 2rem;
-}
-
-.dashboardSummary {
-  margin: 2rem 0;
-}
-
-.dashboardSummary > div {
-  display: flex;
-  background-color: white;
-  justify-content: center;
-}
-.dashboardSummary > div > p {
-  background-color: rgba(70, 117, 218, 0.932);
-  color: white;
-  font: 300 1.3rem "Roboto";
-  text-align: center;
-  padding: 1.5rem;
-  width: 100%;
-  margin: 0 2rem;
-}
-.dashboardSummaryBox2 > a {
-  color: rgb(0, 0, 0);
-  font: 300 2rem "Roboto";
-  text-align: center;
-  background-color: rgb(255, 233, 174);
+.statCard a {
   text-decoration: none;
-  padding: 1.5rem;
-  width: 10vmax;
-  height: 10vmax;
-  margin: 2rem;
-  border-radius: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: column;
+  gap: 1.5rem;
+  cursor: pointer;
+  height: 100%;
+  transition: all 0.3s ease;
+  color: inherit;
 }
 
-.dashboardSummaryBox2 > a:first-child {
-  background-color: rgb(255, 110, 110);
-  color: rgb(255, 255, 255);
+.cardIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.8rem;
+  flex-shrink: 0;
 }
 
-.dashboardSummaryBox2 > a:last-child {
-  background-color: rgb(51, 51, 51);
-  color: rgb(255, 255, 255);
+.productIcon {
+  background: linear-gradient(135deg, #ffaa2c 0%, #ff9500 100%);
+  box-shadow: 0 4px 12px rgba(255, 170, 44, 0.3);
+}
+
+.orderIcon {
+  background: linear-gradient(135deg, #ff7a2e 0%, #ffaa2c 100%);
+  box-shadow: 0 4px 12px rgba(255, 170, 44, 0.3);
+}
+
+.userIcon {
+  background: linear-gradient(135deg, #ffb347 0%, #ffaa2c 100%);
+  box-shadow: 0 4px 12px rgba(255, 170, 44, 0.3);
+}
+
+.cardInfo {
+  flex: 1;
+}
+
+.cardInfo .cardLabel {
+  color: #9ca3af;
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.cardNumber {
+  color: #1f2937;
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.statCard a:hover .cardIcon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.productAdminCard a:hover .cardNumber,
+.orderAdminCard a:hover .cardNumber,
+.userAdminCard a:hover .cardNumber {
+  color: #ffaa2c;
+}
+
+/* Charts Section */
+.chartsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.chartBox {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.chartBox:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 170, 44, 0.3);
+}
+
+.chartTitle {
+  color: #1f2937;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(255, 170, 44, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chartTitle::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: #ffaa2c;
+  border-radius: 50%;
 }
 
 .lineChart {
-  width: 90%;
-  max-width: 1000px;
-  margin: 2rem auto;
+  width: 100%;
+  height: 300px;
+  position: relative;
 }
 
 .doughnutChart {
-  width: 400px;
-  max-width: 90%;
-  margin: 3rem auto;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media screen and (max-width: 600px) {
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+  .chartsContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
   .dashboard {
     grid-template-columns: 1fr;
+    margin-top: 70px;
   }
 
   .dashboardContainer {
-    border-left: none;
+    padding: 1.5rem;
   }
 
-  .dashboardSummary > div > p {
-    margin: 0;
+  .dashboardTitle {
+    font-size: 1.8rem !important;
   }
 
-  .dashboardSummaryBox2 > a {
-    padding: 0.5rem;
-    margin: 1rem;
-    font: 300 0.9rem "Roboto";
+  .dashboardSummary {
+    gap: 1rem;
+  }
+
+  .totalAmountCard {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .totalAmountCard:hover {
+    transform: translateY(-2px);
+  }
+
+  .cardIcon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  .totalIcon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .cardValue {
+    font-size: 1.6rem;
+  }
+
+  .dashboardSummaryBox2 {
+    grid-template-columns: 1fr;
+  }
+
+  .chartsContainer {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .lineChart,
+  .doughnutChart {
+    height: 250px;
+  }
+
+  .statCard a {
+    padding: 1.25rem;
+  }
+
+  .chartBox {
+    padding: 1rem;
+  }
+
+  .chartTitle {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dashboardContainer {
+    padding: 1rem;
+  }
+
+  .dashboardTitle {
+    font-size: 1.5rem !important;
+  }
+
+  .dashboardSubtitle {
+    font-size: 0.85rem;
+  }
+
+  .totalAmountCard {
+    padding: 1rem;
+  }
+
+  .cardValue {
+    font-size: 1.4rem;
+  }
+
+  .cardLabel {
+    font-size: 0.75rem;
+  }
+
+  .cardIcon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+
+  .totalIcon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .statCard a {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .cardNumber {
+    font-size: 1.4rem;
+  }
+
+  .cardInfo .cardLabel {
+    font-size: 0.75rem;
+  }
+
+  .lineChart,
+  .doughnutChart {
+    height: 200px;
+  }
+
+  .chartBox {
+    padding: 0.75rem;
+  }
+
+  .chartTitle {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .dashboardSummary {
+    gap: 0.75rem;
   }
 }

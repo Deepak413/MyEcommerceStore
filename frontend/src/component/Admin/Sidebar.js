@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./sidebar.css";
 import logo from "../../images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PostAddIcon from "@mui/icons-material/PostAdd";
@@ -9,59 +10,173 @@ import AddIcon from "@mui/icons-material/Add";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import PeopleIcon from "@mui/icons-material/People";
 import RateReviewIcon from "@mui/icons-material/RateReview";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const Sidebar = () => {
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
+  const isProductsActive = location.pathname.includes("/admin/product");
+
+  // Keep Products dropdown open when on product pages
+  useEffect(() => {
+    if (isProductsActive) {
+      setIsProductsOpen(true);
+    }
+  }, [isProductsActive]);
+
+  const sidebarVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+  };
+
+  const menuItemVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.05, duration: 0.2 },
+    }),
+  };
+
   return (
-    <div className="sidebar">
+    <motion.div
+      className="sidebar"
+      variants={sidebarVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* Dashboard Link */}
+      <motion.div
+        custom={0}
+        variants={menuItemVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <Link
+          to="/admin/dashboard"
+          className={`sidebarLink ${isActive("/admin/dashboard") ? "active" : ""}`}
+        >
+          <div className="linkContent">
+            <DashboardIcon className="linkIcon" />
+            <span>Dashboard</span>
+          </div>
+          {isActive("/admin/dashboard") && <div className="activeIndicator" />}
+        </Link>
+      </motion.div>
 
-      <Link to="/admin/dashboard">
-        <p>
-          <DashboardIcon />
-          Dashboard
-        </p>
-      </Link>
+      {/* Products Section */}
+      <motion.div
+        custom={1}
+        variants={menuItemVariants}
+        initial="hidden"
+        animate="visible"
+        className="sidebarSection"
+      >
+        <button
+          className={`sidebarSectionTitle ${isProductsActive ? "active" : ""}`}
+          onClick={() => setIsProductsOpen(!isProductsOpen)}
+        >
+          <span>Products</span>
+          <motion.div
+            animate={{ rotate: isProductsOpen ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <KeyboardArrowDownIcon className="arrowIcon" />
+          </motion.div>
+        </button>
 
-      <div className="sidebarSection">
-        <div className="sidebarSectionTitle">Products</div>
-
-        <div className="subMenu">
-          <Link to="/admin/products">
-            <p>
-              <PostAddIcon />
-              All Products
-            </p>
+        <motion.div
+          className="subMenu"
+          initial={{ height: 0, opacity: 0 }}
+          animate={{
+            height: isProductsOpen ? "auto" : 0,
+            opacity: isProductsOpen ? 1 : 0,
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          <Link
+            to="/admin/products"
+            className={`subMenuLink ${isActive("/admin/products") ? "active" : ""}`}
+          >
+            <div className="linkContent">
+              <PostAddIcon className="linkIcon" />
+              <span>All Products</span>
+            </div>
+            {isActive("/admin/products") && <div className="activeIndicator" />}
           </Link>
 
-          <Link to="/admin/product">
-            <p>
-              <AddIcon />
-              Create Product
-            </p>
+          <Link
+            to="/admin/product"
+            className={`subMenuLink ${isActive("/admin/product") ? "active" : ""}`}
+          >
+            <div className="linkContent">
+              <AddIcon className="linkIcon" />
+              <span>Create Product</span>
+            </div>
+            {isActive("/admin/product") && <div className="activeIndicator" />}
           </Link>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <Link to="/admin/orders">
-        <p>
-          <ListAltIcon />
-          Orders
-        </p>
-      </Link>
+      {/* Orders Link */}
+      <motion.div
+        custom={2}
+        variants={menuItemVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <Link
+          to="/admin/orders"
+          className={`sidebarLink ${isActive("/admin/orders") ? "active" : ""}`}
+        >
+          <div className="linkContent">
+            <ListAltIcon className="linkIcon" />
+            <span>Orders</span>
+          </div>
+          {isActive("/admin/orders") && <div className="activeIndicator" />}
+        </Link>
+      </motion.div>
 
-      <Link to="/admin/users">
-        <p>
-          <PeopleIcon />
-          Users
-        </p>
-      </Link>
+      {/* Users Link */}
+      <motion.div
+        custom={3}
+        variants={menuItemVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <Link
+          to="/admin/users"
+          className={`sidebarLink ${isActive("/admin/users") ? "active" : ""}`}
+        >
+          <div className="linkContent">
+            <PeopleIcon className="linkIcon" />
+            <span>Users</span>
+          </div>
+          {isActive("/admin/users") && <div className="activeIndicator" />}
+        </Link>
+      </motion.div>
 
-      <Link to="/admin/reviews">
-        <p>
-          <RateReviewIcon />
-          Reviews
-        </p>
-      </Link>
-    </div>
+      {/* Reviews Link */}
+      <motion.div
+        custom={4}
+        variants={menuItemVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <Link
+          to="/admin/reviews"
+          className={`sidebarLink ${isActive("/admin/reviews") ? "active" : ""}`}
+        >
+          <div className="linkContent">
+            <RateReviewIcon className="linkIcon" />
+            <span>Reviews</span>
+          </div>
+          {isActive("/admin/reviews") && <div className="activeIndicator" />}
+        </Link>
+      </motion.div>
+    </motion.div>
   );
 };
 

@@ -1,54 +1,505 @@
 .productListContainer {
   width: 100%;
   box-sizing: border-box;
-  background-color: rgb(255, 255, 255);
-  border-left: 1px solid rgba(0, 0, 0, 0.158);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafb 100%);
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 2rem;
+  gap: 2rem;
 }
 
-#productListHeading {
-  font: 400 2rem "Roboto";
-  padding: 0.5vmax;
-  box-sizing: border-box;
-  color: rgba(0, 0, 0, 0.637);
-  transition: all 0.5s;
-  margin: 2rem;
-  text-align: center;
+.productListHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #fff8f0 0%, #fffbf7 100%);
+  border: 2px solid rgba(255, 170, 44, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(255, 170, 44, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
+.productListHeader::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 170, 44, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 1;
+  flex: 1;
+}
+
+.headerIcon {
+  width: 70px;
+  height: 70px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ffaa2c 0%, #ff9500 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  box-shadow: 0 8px 20px rgba(255, 170, 44, 0.3);
+  flex-shrink: 0;
+}
+
+.headerText h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1f2937 0%, #ffaa2c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.headerText p {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin: 0.5rem 0 0 0;
+  font-weight: 500;
+}
+
+.headerStats {
+  display: flex;
+  gap: 1.5rem;
+  z-index: 1;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 170, 44, 0.1);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 100px;
+}
+
+.statLabel {
+  color: #9ca3af;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.statValue {
+  color: #ffaa2c;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+/* Table Wrapper */
+.tableWrapper {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.tableWrapper:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Product List Table */
 .productListTable {
-  background-color: white;
+  background-color: transparent !important;
+  border: none !important;
+  flex: 1;
+  scroll-behavior: smooth;
+}
+
+/* Image Cell */
+.productImageCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto;
+  flex-shrink: 0;
+  min-width: 70px;
+  min-height: 70px;
+}
+
+.productImageCell img {
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.productImageCell img:hover {
+  transform: scale(1.1);
+}
+
+/* Product Name Cell */
+.productNameCell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 100%;
+  width: 100%;
+  min-height: 70px;
+}
+
+.productNameCell span {
+  color: #1f2937;
+  font-weight: 600;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Price Cell */
+.priceCell {
+  color: #ffaa2c;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Stock Cell */
+.stockCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 100%; */
+  min-height: 50px;
+}
+
+.stockCell.inStock .stockBadge {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  padding: 5px 2px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  min-width: 60px;
+  min-height: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  justify-content: center;
+}
+
+.stockCell.outOfStock .outOfStockBadge {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  padding: 5px 2px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.5rem;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  min-width: 60px;
+  min-height: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  justify-content: center;
+}
+
+/* Review Cell */
+.reviewCell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.reviewIcon {
+  color: #fbbf24;
+  font-size: 1.1rem;
+}
+
+/* Action Cell */
+.actionCell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.editBtn,
+.deleteBtn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  transition: all 0.3s ease !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  color: #6b7280 !important;
+}
+
+.editBtn {
+  background: linear-gradient(135deg, rgba(255, 170, 44, 0.1) 0%, rgba(255, 170, 44, 0.05) 100%) !important;
+  color: #ffaa2c !important;
+}
+
+.editBtn:hover {
+  background: linear-gradient(135deg, rgba(255, 170, 44, 0.2) 0%, rgba(255, 170, 44, 0.1) 100%) !important;
+  transform: scale(1.1) !important;
+  color: #ff9500 !important;
+}
+
+.deleteBtn {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%) !important;
+  color: #ef4444 !important;
+}
+
+.deleteBtn:hover {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.1) 100%) !important;
+  transform: scale(1.1) !important;
+  color: #dc2626 !important;
+}
+
+.editBtn svg,
+.deleteBtn svg {
+  font-size: 1.2rem;
+}
+
+/* DataGrid Customization */
+.MuiDataGrid-root {
   border: none !important;
 }
 
-.productListTable div {
-  font: 300 1vmax "Roboto";
-  color: rgba(0, 0, 0, 0.678);
+.MuiDataGrid-columnHeader {
+  background: linear-gradient(135deg, #fff8f0 0%, #fffbf7 100%) !important;
+  border-bottom: 2px solid #ffaa2c !important;
+  color: #1f2937 !important;
+  padding: 0 !important;
+}
+
+.MuiDataGrid-columnHeaderTitle {
+  font-weight: 700 !important;
+  color: #1f2937 !important;
+  font-size: 0.95rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px !important;
+}
+
+.MuiDataGrid-row {
+  margin: 6px 0 !important;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease !important;
+  
+}
+
+.MuiDataGrid-virtualScrollerRenderZone {
+  gap: 6px;
+}
+
+.MuiDataGrid-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 170, 44, 0.15);
+  background: #fffaf2 !important;
+}
+
+.MuiDataGrid-cell {
+  padding: 16px 12px !important;
   border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.productListTable a,
-.productListTable button {
-  color: rgba(0, 0, 0, 0.527);
-  transition: all 0.5s;
+.MuiTablePagination-root {
+  border-top: 1px solid #f0f0f0 !important;
+  color: #6b7280 !important;
 }
 
-.productListTable a:hover {
-  color: tomato;
+.MuiTablePagination-toolbar {
+  min-height: 64px !important;
+  padding: 0 16px !important;
 }
 
-.productListTable button:hover {
-  color: rgb(236, 30, 30);
+.MuiIconButton-root {
+  color: #ffaa2c !important;
+  transition: all 0.3s ease !important;
 }
 
-.MuiDataGrid-columnHeader div {
-  color: rgb(255, 255, 255);
+.MuiIconButton-root:hover {
+  color: #ff9500 !important;
+  background: linear-gradient(135deg, rgba(255, 170, 44, 0.1) 0%, rgba(255, 170, 44, 0.05) 100%) !important;
 }
 
-@media screen and (max-width: 600px) {
-  .productListTable div {
-    font: 300 4vw "Roboto";
+.statusBadge {
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.statusBadge.processing {
+  background: linear-gradient(135deg,
+      #f97316,
+      #ea580c);
+
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+}
+
+.statusBadge.delivered {
+  background: linear-gradient(135deg,
+      #10b981,
+      #059669);
+
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .productListHeader {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .headerContent {
+    flex-direction: column;
+  }
+
+  .headerText h1 {
+    font-size: 1.8rem;
+  }
+
+  .headerStats {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .productListContainer {
+    padding: 1rem;
+  }
+
+  .productListHeader {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .headerIcon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .headerText h1 {
+    font-size: 1.4rem;
+  }
+
+  .headerText p {
+    font-size: 0.85rem;
+  }
+
+  .productImageCell {
+    height: 60px;
+  }
+
+  .productImageCell img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .MuiDataGrid-cell {
+    padding: 12px 8px !important;
+    font-size: 0.85rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .editBtn,
+  .deleteBtn {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .editBtn svg,
+  .deleteBtn svg {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .productListContainer {
+    padding: 0.75rem;
+  }
+
+  .productListHeader {
+    padding: 1rem;
+    flex-direction: column;
+  }
+
+  .headerText h1 {
+    font-size: 1.2rem;
+  }
+
+  .headerText p {
+    font-size: 0.8rem;
+  }
+
+  .productImageCell {
+    height: 50px;
+  }
+
+  .productImageCell img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .MuiDataGrid-cell {
+    padding: 10px 6px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .statValue {
+    font-size: 1.4rem;
   }
 }

@@ -3,7 +3,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-// import { DataGrid } from "@material-ui/data-grid";
 import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -14,26 +13,34 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
-// import EditIcon from "@material-ui/icons/Edit";
-// import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
 import { deleteProductReset } from "../../reducers/productReducer";
+import { motion } from "framer-motion";
+import StarIcon from "@mui/icons-material/Star";
+import InventoryIcon from "@mui/icons-material/Inventory";
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { error, products } = useSelector((state) => state.products);
+  const { error, products } = useSelector((state) => state.adminProducts);
 
   const { error: deleteError, isDeleted } = useSelector((state) => state.productUpdateDelete);
 
+  console.log("🛍️ Admin Products Data:", {
+    totalProducts: products?.length,
+    products: products
+  });
+
   const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      dispatch(deleteProduct(id));
+    }
   };
 
   useEffect(() => {
+    dispatch(getAdminProduct());
     if (error) {
       toast.error(error);
       dispatch(clearErrors());
@@ -50,62 +57,123 @@ const ProductList = () => {
       dispatch(deleteProductReset());
     }
 
-    dispatch(getAdminProduct());
-  }, [dispatch, toast, error, deleteError, navigate, isDeleted]);
+  }, [dispatch, error, deleteError, navigate, isDeleted]);
 
   const columns = [
-    { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
-
+    {
+      field: "image",
+      headerName: "Image",
+      minWidth: 90,
+      flex: 0.25,
+      align: "center",
+      headerAlign: "center",
+      sortable: false,
+      renderCell: (params) => (
+        <div className="productImageCell">
+          <img src={params.row.image} alt={params.row.name} />
+        </div>
+      ),
+    },
     {
       field: "name",
-      headerName: "Name",
-      minWidth: 350,
+      headerName: "Product Name",
+      minWidth: 250,
       flex: 1,
+      align: "left",
+      headerAlign: "left",
+      renderCell: (params) => (
+        <div className="productNameCell">
+          <span>
+            {params.row.name.length > 45
+              ? `${params.row.name.substring(0, 45)}...`
+              : params.row.name}
+          </span>
+        </div>
+      ),
+    },
+    {
+      field: "price",
+      headerName: "Price",
+      type: "number",
+      minWidth: 110,
+      flex: 0.25,
+      align: "center",
+      headerAlign: "center",
+      renderCell: (params) => (
+        <span className="priceCell">₹{params.row.price.toLocaleString()}</span>
+      ),
     },
     {
       field: "stock",
       headerName: "Stock",
       type: "number",
-      minWidth: 150,
-      flex: 0.3,
+      minWidth: 100,
+      flex: 0.25,
+      align: "center",
+      headerAlign: "center",
+      renderCell: (params) => (
+        <div className={`stockCell ${params.row.stock > 0 ? "inStock" : "outOfStock"}`}>
+          {params.row.stock > 0 ? (
+            <div className="stockBadge">{params.row.stock}</div>
+          ) : (
+            <div className="outOfStockBadge">Out of Stock</div>
+          )}
+        </div>
+      ),
     },
-
     {
-      field: "price",
-      headerName: "Price",
-      type: "number",
-      minWidth: 270,
-      flex: 0.5,
-    },
-
-    {
-      field: "actions",
-      flex: 0.3,
-      headerName: "Actions",
-      minWidth: 150,
-      type: "number",
+      field: "reviews",
+      headerName: "Reviews",
+      minWidth: 100,
+      flex: 0.2,
+      align: "center",
+      headerAlign: "center",
       sortable: false,
       renderCell: (params) => (
-        <>
-          <Link to={`/admin/product/${params.row.id}`}>
+        <div className="reviewCell">
+          <StarIcon className="reviewIcon" />
+          <span>{params.row.reviews}</span>
+        </div>
+      ),
+    },
+    {
+      field: "actions",
+      flex: 0.25,
+      headerName: "Actions",
+      minWidth: 120,
+      align: "center",
+      headerAlign: "center",
+      sortable: false,
+      renderCell: (params) => (
+        <div className="actionCell">
+          <Link
+            to={`/admin/product/${params.row.id}`}
+            className="editBtn"
+          >
             <EditIcon />
           </Link>
-
-          <Button onClick={() => deleteProductHandler(params.row.id)}>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              deleteProductHandler(params.row.id);
+            }}
+            className="deleteBtn"
+          >
             <DeleteIcon />
-          </Button>
-        </>
-      )
+          </button>
+        </div>
+      ),
     },
   ];
 
-  const rows =
-    products?.map((item) => ({
-      id: item._id,
-      stock: item.Stock,
-      price: item.price,
-      name: item.name,
-    })) || [];
+  const rows = products?.map((item) => ({
+    id: item._id,
+    stock: item.Stock,
+    price: item.price,
+    name: item.name,
+    image: item.images?.[0]?.url || "/default-product.png",
+    reviews: item.numOfReviews || 0,
+  })) || [];
 
   return (
     <Fragment>
@@ -113,25 +181,73 @@ const ProductList = () => {
 
       <div className="dashboard">
         <SideBar />
-        <div className="productListContainer">
-          <h1 id="productListHeading">ALL PRODUCTS</h1>
+        <motion.div
+          className="productListContainer"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="productListHeader">
+            <div className="headerContent">
+              <div className="headerIcon">
+                <InventoryIcon />
+              </div>
+              <div className="headerText">
+                <h1>All Products</h1>
+                <p>Manage and view all your products</p>
+              </div>
+            </div>
+            <div className="headerStats">
+              <div className="stat">
+                <span className="statLabel">Total</span>
+                <span className="statValue">{products?.length || 0}</span>
+              </div>
+            </div>
+          </div>
 
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 10,
+          <div className="tableWrapper">
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              disableRowSelectionOnClick
+              hideFooter
+              className="productListTable"
+              getRowHeight={() => 65}
+              sx={{
+                height: "calc(100vh - 400px)",
+                "& .MuiDataGrid-root": {
+                  border: "none",
+                  backgroundColor: "transparent",
                 },
-              },
-            }}
-            pageSizeOptions={[10, 25, 50]}
-            disableRowSelectionOnClick
-            autoHeight
-            className="productListTable"
-          />
-        </div>
+                "& .MuiDataGrid-virtualScroller": {
+                  scrollBehavior: "smooth",
+                },
+                "& .MuiDataGrid-cell": {
+                  borderBottom: "1px solid #f0f0f0",
+                  padding: "14px !important",
+                  fontSize: "0.95rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                },
+                "& .MuiDataGrid-columnHeader": {
+                  backgroundColor: "#fff8f0",
+                  borderBottom: "2px solid #ffaa2c",
+                  fontWeight: 700,
+                  fontSize: "0.95rem",
+                },
+                "& .MuiDataGrid-row": {
+                  height: "75px !important",
+                  alignItems: "center",
+                  "&:hover": {
+                    backgroundColor: "#fff8f0",
+                    boxShadow: "inset 0 0 8px rgba(255, 170, 44, 0.08)",
+                  },
+                },
+              }}
+            />
+          </div>
+        </motion.div>
       </div>
     </Fragment>
   );

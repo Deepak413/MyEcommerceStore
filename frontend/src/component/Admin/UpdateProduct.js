@@ -7,13 +7,7 @@ import {
 } from "../../actions/productAction";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
-// import AccountTreeIcon from "@material-ui/icons/AccountTree";
-// import DescriptionIcon from "@material-ui/icons/Description";
-// import StorageIcon from "@material-ui/icons/Storage";
-// import SpellcheckIcon from "@material-ui/icons/Spellcheck";
-// import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import Button from "@mui/material/Button";
 
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
@@ -49,15 +43,15 @@ const UpdateProduct = () => {
   const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
-  const categories = [
+ const categories = [
     "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
-    "Camera",
-    "SmartPhones",
-  ];
+    "Tablet",
+    "Phone",
+    "Watch",
+    "Monitor",
+    "Tv",
+    "Earphone",
+];
 
   useEffect(() => {
     if (!product || product._id !== productId) {
@@ -148,7 +142,7 @@ const UpdateProduct = () => {
             encType="multipart/form-data"
             onSubmit={updateProductSubmitHandler}
           >
-            <h1>Create Product</h1>
+            <h1>Update Product</h1>
 
             <div>
               <SpellcheckIcon />
@@ -237,7 +231,7 @@ const UpdateProduct = () => {
               type="submit"
               disabled={loading}
             >
-              Create
+              Update
             </Button>
           </form>
         </div>

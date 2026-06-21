@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-// import { DataGrid } from "@material-ui/data-grid";
 import "./productReviews.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -9,11 +8,7 @@ import {
 } from "../../actions/productAction";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
-// import DeleteIcon from "@material-ui/icons/Delete";
-// import Star from "@material-ui/icons/Star";
-
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -34,6 +29,8 @@ const ProductReviews = () => {
   const { error, reviews, loading } = useSelector(
     (state) => state.productReviews
   );
+
+  console.log("ProductReviews.js : Product Reviews Data:", reviews);
 
   const [productId, setProductId] = useState("");
 
@@ -83,18 +80,25 @@ const ProductReviews = () => {
       minWidth: 350,
       flex: 1,
     },
-
     {
       field: "rating",
       headerName: "Rating",
-      type: "number",
       minWidth: 180,
       flex: 0.4,
+      align: "center",
+      headerAlign: "center",
 
-      cellClassName: (params) =>
-        params.row.rating >= 3
-          ? "greenColor"
-          : "redColor"
+      renderCell: (params) => (
+        <div
+          className={
+            params.row.rating >= 3
+              ? "ratingBadge good"
+              : "ratingBadge bad"
+          }
+        >
+          ⭐ {params.row.rating}
+        </div>
+      ),
     },
 
     {
@@ -107,7 +111,10 @@ const ProductReviews = () => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Button onClick={() => deleteReviewHandler(params.row.id)} >
+            <Button
+              className="deleteReviewBtn"
+              onClick={() => deleteReviewHandler(params.row.id)}
+            >
               <DeleteIcon />
             </Button>
           </Fragment>
@@ -158,21 +165,41 @@ const ProductReviews = () => {
           </form>
 
           {reviews?.length > 0 ? (
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              autoHeight
-              className="productListTable"
-              disableRowSelectionOnClick
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 10,
+            <div className="reviewsTableWrapper">
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                disableRowSelectionOnClick
+                className="productListTable"
+                hideFooter
+                getRowHeight={() => 85}
+                sx={{
+                  border: "none",
+
+                  "& .MuiDataGrid-columnHeader": {
+                    backgroundColor: "#fff8f0",
+                    borderBottom: "2px solid #ffaa2c",
+                    fontWeight: 700,
                   },
-                },
-              }}
-              pageSizeOptions={[10, 25, 50]}
-            />
+
+                  "& .MuiDataGrid-row": {
+                    marginBottom: "12px",
+                    backgroundColor: "#fff",
+                    borderRadius: "14px",
+
+                    "&:hover": {
+                      backgroundColor: "#fff8f0",
+                    },
+                  },
+
+                  "& .MuiDataGrid-cell": {
+                    borderBottom: "none",
+                    display: "flex",
+                    alignItems: "center",
+                  },
+                }}
+              />
+            </div>
           ) : (
             <h1 className="productReviewsFormHeading">No Reviews Found</h1>
           )}

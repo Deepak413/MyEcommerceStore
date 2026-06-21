@@ -99,6 +99,12 @@ export const getAdminProduct = () => async (dispatch) => {
             "https://shoppingkaro-65sf.onrender.com/api/v1/admin/products"
         );
 
+        console.log("✅ Backend Admin Products Response:", {
+            totalFromBackend: data.productsCount,
+            productsArrayLength: data.products?.length,
+            data: data
+        });
+
         dispatch(
             adminProductSuccess({
                 products: data.products
@@ -177,6 +183,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 
         dispatch(deleteProductSuccess(data.success));
     } catch (error) {
+        console.log("Error in deleteProduct action : ", error);
         dispatch(
             deleteProductFail(
                 error.response?.data?.message || "Failed to delete product"
