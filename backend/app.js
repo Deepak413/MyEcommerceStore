@@ -10,7 +10,7 @@ const dotenv = require("dotenv");
 const errorMiddleware = require("./middleware/error");
 
 app.use(cors({
-    origin: ["http://localhost:3000", "https://shoppinggkaro.netlify.app"],
+    origin: ["http://localhost:3000", "https://shoppinggkaro.netlify.app", "http://192.168.1.17:3000"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
     methods: ["GET", "POST", "PUT", "DELETE"],
