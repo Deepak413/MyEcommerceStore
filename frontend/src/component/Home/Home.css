@@ -125,19 +125,17 @@
     display: flex;
     align-items: flex-end;
     transition: all 0.4s ease;
-    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
 }
 
 .categoryCard::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        to top,
-        rgba(0,0,0,0.8),
-        rgba(0,0,0,0.2),
-        transparent
-    );
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.2),
+            transparent);
     z-index: 1;
 }
 
@@ -194,9 +192,9 @@
     display: inline-block;
     padding: 12px 22px;
     border-radius: 999px;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.25);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     color: white;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -249,27 +247,27 @@
 }
 
 .viewAllPdtsBtn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.3rem 1.2rem;
-  background: #222222;
-  color: white;
-  border: none;
-  border-radius: 14px;
-  cursor: pointer;
-  font-size: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.3rem 1.2rem;
+    background: #222222;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .viewAllPdtsBtn:hover {
-  background: #ffaa2c;
-  transition: all 0.4s ease;
+    background: #ffaa2c;
+    transition: all 0.4s ease;
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
     .productCard>p {
         font-size: 1.7vmax;
     }
@@ -298,5 +296,255 @@
 
     .categoryTitle {
         font-size: 2rem;
+    }
+} */
+
+/* ===========================
+   TABLET (601px - 1024px)
+=========================== */
+@media screen and (max-width: 1024px) {
+
+    .servive-card {
+        width: 70%;
+    }
+
+    .home_content,
+    .home_content1 {
+        padding: 0 3rem;
+    }
+
+    .banner h1 {
+        font-size: 2.5rem;
+        letter-spacing: 4px;
+    }
+
+    .home_content1>p {
+        width: 70%;
+        font-size: 1rem;
+    }
+
+    .banner>a {
+        margin: 2rem 3rem;
+    }
+
+    .banner>a>button {
+        width: 180px;
+        font-size: 1rem;
+        padding: 14px 20px;
+    }
+
+    .categoryShowcase {
+        width: 95%;
+        margin: 4rem auto;
+    }
+
+    .categoryGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+    }
+
+    .categoryCard {
+        height: 350px;
+    }
+
+    .categoryOverlay {
+        padding: 1.5rem;
+    }
+
+    .categoryOverlay h3 {
+        font-size: 1.7rem;
+    }
+
+    .categoryTitle {
+        font-size: 2.2rem;
+    }
+
+    .featuredProductsSlider {
+        width: 95%;
+    }
+
+    .homeHeading {
+        width: fit-content;
+        font-size: 1.2rem;
+        padding: 0.8rem 2rem;
+    }
+
+    .viewAllPdtsBtn {
+        padding: 0.5rem 1rem;
+    }
+}
+
+
+/* ===========================
+   MOBILE (<= 650px)
+=========================== */
+@media screen and (max-width: 650px) {
+
+    .banner {
+        /* height: 100vh; */
+        align-items: center;
+        text-align: center;
+    }
+
+    .banner::after {
+        clip-path: polygon(100% 85%, 0 100%, 100% 100%);
+    }
+
+    .home_content,
+    .home_content1 {
+        padding: 0 1.5rem;
+    }
+
+    .banner h1 {
+        font-size: 2rem;
+        letter-spacing: 2px;
+        line-height: 1.2;
+    }
+
+    .home_content1>p {
+        width: 100%;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-top: 1rem;
+    }
+
+    .banner>a {
+        margin: 2rem 0 0;
+    }
+
+    .banner>a>button {
+        width: 170px;
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        border-radius: 8px;
+    }
+
+    /* Categories */
+
+    .categoryShowcase {
+        width: 92%;
+        margin: 3rem auto;
+    }
+
+    .categoryTitle {
+        font-size: 1.8rem;
+        line-height: 1.3;
+    }
+
+    .categorySubtitle {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+    }
+
+    .categoryGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .categoryCard {
+        height: 260px;
+        border-radius: 16px;
+    }
+
+    .categoryOverlay {
+        padding: 1.2rem;
+    }
+
+    .categoryOverlay h3 {
+        font-size: 1.4rem;
+    }
+
+    .categoryOverlay p {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .browseBtn {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+
+    /* Headings */
+
+    .homeHeading {
+        width: fit-content;
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+        margin: 3rem auto 2rem;
+    }
+
+    /* Product Slider */
+
+    .featuredProductsSlider {
+        width: 94%;
+        padding-top: 3rem;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none !important;
+    }
+
+    .viewAllPdtsBtn {
+        right: 0;
+        top: 0;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.9rem;
+    }
+
+    /* Existing Product Card Styles */
+
+    .productCard>p {
+        font-size: 0.95rem;
+    }
+
+    .productCardStars {
+        margin: 0;
+        display: block;
+    }
+
+    .productCard>span {
+        font-size: 0.9rem;
+    }
+
+    .productCardStars>span {
+        font-size: 0.8rem;
+        margin-left: 0.3rem;
+    }
+}
+
+
+/* ===========================
+   EXTRA SMALL DEVICES
+=========================== */
+@media screen and (max-width: 400px) {
+
+    .banner h1 {
+        font-size: 1.7rem;
+    }
+
+    .home_content1>p {
+        font-size: 0.9rem;
+    }
+
+    .categoryCard {
+        height: 220px;
+    }
+
+    .categoryOverlay h3 {
+        font-size: 1.2rem;
+    }
+
+    .browseBtn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .home_content1>p {
+        font-size: 0.8rem;
+    }
+
+    .banner h1 {
+        font-size: 1.5rem;
     }
 }

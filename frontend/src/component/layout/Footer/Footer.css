@@ -181,13 +181,9 @@
 .footer_social_cardlinks .fb_icon,
 .footer_social_cardlinks .twitter_icon {
     text-decoration: none;
-    /* Removes underline from the links */
     color: black;
-    /* Default color of icons */
     transition: color 0.3s ease, transform 0.3s ease;
-    /* Smooth transition for color and scaling */
     display: inline-block;
-    /* Ensures icons stay inline */
 }
 
 .footer_social_cardlinks .insta_icon:hover {
@@ -217,146 +213,233 @@
     font-weight: 500;
     font-family: 'Roboto';
     padding: 10px;
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
+/* =========================================
+   TABLET RESPONSIVE (768px - 1024px)
+========================================= */
+@media screen and (max-width: 1024px) {
 
-
-
-/* CSS FOR TABLET */
-@media (max-width: 850px) {
     .footer_container {
-        padding: 3rem 1rem;
+        padding: 2.5rem;
+        gap: 2rem;
+        flex-wrap: wrap;
     }
 
     .footer_container_left {
-        width: 41%;
-        padding: 25px 31px;
+        width: 40%;
+        padding: 0;
+    }
+
+    .footer_links {
+        width: 20%;
+        padding: 0;
     }
 
     .footer_container_right {
-        width: 59%;
-        padding: 35px 13px;
+        width: 35%;
+        padding: 0;
     }
 
-    .footer_container_left>a {
-        font-weight: 400;
-        font-size: 1.3rem;
+    .footer_links h5,
+    .footer_mail_container h5,
+    .footer_social_card h3 {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
     }
 
-    .footer_container_left>p {
-        padding-top: 20px;
-        width: 84%;
-        font-family: system-ui;
-        display: flex;
-        text-align: justify;
-    }
-
-    .footer_mail_container input {
-        padding: 7px 10px;
-        width: 70%;
-    }
-
-    .footer_mail_container button {
-        font-size: 13px;
-        margin-top: 20px;
-        border-radius: 10px;
-        padding: 11px 18px;
-        background-color: #3d3d3d;
-        color: #f5f5f5;
-        font-family: sans-serif;
-        letter-spacing: 3px;
-        border: 1px solid black;
+    .footer_link {
+        font-size: 15px;
     }
 
     .footer_address_detail {
-        margin-right: 14px;
+        font-size: 1rem;
     }
 
-    .footer_social_card p {
-        width: 75%;
+    .footer_mail_container input {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 12px;
+        box-sizing: border-box;
     }
 
-    .footer_social_cardlink {
-        width: 1.5rem;
-        height: 1.5rem;
-        font-size: 13px;
+    .footer_mail_container button {
+        width: fit-content;
+        padding: 10px 18px;
+        letter-spacing: 1px;
+    }
+
+    .footer_social_cardlinks svg {
+        font-size: 32px;
+    }
+
+    .footer_line {
+        font-size: 14px;
     }
 }
 
 
+/* =========================================
+   MOBILE RESPONSIVE (<= 767px)
+========================================= */
+@media screen and (max-width: 650px) {
 
-
-/* CSS FOR MOBILE PHONES */
-@media (max-width: 450px) {
     .footer_container {
-        display: flex;
         flex-direction: column;
+        padding: 2rem 1.2rem;
+        gap: 2rem;
     }
 
-    .footer_container_left {
-        width: 100%;
-        padding: 25px;
-    }
-
+    .footer_container_left,
+    .footer_links,
     .footer_container_right {
         width: 100%;
-        padding: 18px 26px;
+        padding: 0;
     }
 
-    .footer_container_left>a {
-        font-weight: 400;
+    /* Logo */
+
+    .footer_logo>a {
         font-size: 1.3rem;
     }
 
-    .footer_container_left>p {
-        width: 92%;
+    .footer_logo1 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
-    .footer_mail_container {
-        margin-bottom: 45px;
+    .footer_logo1>a {
+        font-size: 2rem;
     }
 
-    .footer_mail_container h5 {
-        margin-bottom: 10px;
-        letter-spacing: 1px;
-        font-size: 21px;
+    /* Address */
+
+    .footer_address_detail {
+        padding: 1.5rem 0;
+        font-size: 0.95rem;
     }
 
-    .footer_mail_container input {
-        padding: 5px 13px;
-        width: 91%;
-    }
-
-    .footer_mail_container button {
-        font-size: 12px;
-        margin-top: 11px;
-        padding: 6px 14px;
-    }
-
-    /* .footer_social_card h5 {
-        font-size: 19px;
-    } */
-
-    .footer_social_card p {
-        width: 75%;
-    }
-
-    .footer_social_cardlinks {
-        width: 84%;
-    }
-
-    .footer_social_cardlink {
-        font-size: 13px;
-        padding: 13px;
+    .footer_address_cardicon {
+        font-size: 1.2rem;
         margin-right: 10px;
     }
 
+    /* Links */
+
+    .footer_links h5,
+    .footer_mail_container h5,
+    .footer_social_card h3 {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        margin-bottom: 1rem;
+    }
+
+    .footer_links_list {
+        gap: 10px;
+    }
+
+    .footer_link {
+        font-size: 15px;
+    }
+
+    /* Subscribe */
+
+    .footer_mail_container {
+        margin-bottom: 2rem;
+    }
+
+    .footer_mail_container input {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 12px;
+        padding: 12px;
+        box-sizing: border-box;
+    }
+
+    .footer_mail_container button {
+        width: 100%;
+        padding: 12px;
+        letter-spacing: 2px;
+    }
+
+    /* Social */
+
+    .footer_social_cardlinks {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .footer_social_cardlinks svg {
+        font-size: 30px;
+    }
+
+    /* Copyright */
+
     .footer_line {
-        padding: 9px 10px;
+        padding: 12px;
         font-size: 12px;
+        line-height: 1.5;
+    }
+}
+
+
+/* =========================================
+   EXTRA SMALL DEVICES (<= 480px)
+========================================= */
+@media screen and (max-width: 480px) {
+
+    .footer_container {
+        padding: 1.5rem 1rem;
+    }
+
+    .footer_links_list {
+        width: 100%;
+        gap: 2rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .footer_container_left{
+        display: none;
+    }
+    .footer_links {
+        margin-top: 1rem;
+    }
+
+    .footer_logo>a {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+    }
+
+    .footer_logo1>a {
+        font-size: 1.8rem;
+    }
+
+    .footer_address_detail {
+        font-size: 0.85rem;
+    }
+
+    .footer_link {
+        font-size: 14px;
+    }
+
+    .footer_social_cardlinks {
+        gap: 12px;
+    }
+
+    .footer_social_cardlinks svg {
+        font-size: 26px;
+    }
+
+    .footer_line {
+        font-size: 11px;
     }
 }

@@ -62,15 +62,15 @@ const Header = () => {
             <FaPersonWalkingLuggage style={{ color: location.pathname === "/" ? "white" : "black" }} size={25} />
           </div>
         </div>
-        <ul className={`nav_links ${isOpen ? "active" : ""} ${isHomePage ? "white_nav_link" : ""}`}>
-          <li><NavLink to="/" className="nav_item">Home</NavLink></li>
-          <li><NavLink to="/products" className="nav_item">Products</NavLink></li>
-          <li><NavLink to="/contact" className="nav_item">Contact</NavLink></li>
-          <li><NavLink to="/about" className="nav_item">About</NavLink></li>
+        <ul className={`nav_links nav_links_left ${isOpen ? "active" : ""} ${isHomePage ? "white_nav_link" : ""}`}>
+          <li><NavLink to="/" className="nav_item" onClick={() => setIsOpen(false)}>Home</NavLink></li>
+          <li><NavLink to="/products" className="nav_item" onClick={() => setIsOpen(false)}>Products</NavLink></li>
+          <li><NavLink to="/contact" className="nav_item" onClick={() => setIsOpen(false)}>Contact</NavLink></li>
+          <li><NavLink to="/about" className="nav_item" onClick={() => setIsOpen(false)}>About</NavLink></li>
 
         </ul>
 
-        <ul className={`nav_links ${isOpen ? "active" : ""} ${isHomePage ? "white_nav_link" : ""}`}>
+        <ul className={`nav_links nav_links_right ${isOpen ? "active" : ""} ${isHomePage ? "white_nav_link" : ""}`}>
           <li ref={searchRef} className="nav_item nav_search_box_wrapper">
             {showSearch ? (
               <div className={`nav_search_input_wrapper ${showSearch ? 'slide-in' : 'slide-out'}`}>
@@ -95,7 +95,7 @@ const Header = () => {
             )}
           </li>
           <li className="nav_item cart_icon_wrapper">
-            <NavLink to="/cart" className="cart_icon_link">
+            <NavLink to="/cart" className="cart_icon_link" onClick={() => setIsOpen(false)}>
               <div className="cart_icon_container">
                 <BsFillCartFill
                   size={21}
@@ -115,9 +115,9 @@ const Header = () => {
             </NavLink>
           </li>
           {isAuthenticated ?
-            <li><NavLink to="/login" className="nav_item"><BiSolidUserPin size={21} /></NavLink></li>
+            <li><NavLink to="/login" className="nav_item" onClick={() => setIsOpen(false)}><BiSolidUserPin size={21} /></NavLink></li>
             :
-            <li><NavLink to="/login" className="nav_item"><BiLogIn size={22} /></NavLink></li>}
+            <li><NavLink to="/login" className="nav_item" onClick={() => setIsOpen(false)}><BiLogIn size={22} /></NavLink></li>}
         </ul>
 
         {/* For Mobile Menu Button */}
