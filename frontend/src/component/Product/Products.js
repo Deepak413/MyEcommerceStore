@@ -11,10 +11,9 @@ import { Rating } from '@mui/material';
 import { toast } from 'react-toastify';
 import './FilterBoxDrawer.css';
 import Box from '@mui/material/Box';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 import Typography from "@mui/material/Typography";
 import MetaData from '../layout/MetaData';
-// import FilterBoxDrawer from './FilterBoxDrawer.js';
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { RxReset } from "react-icons/rx";
 
@@ -42,7 +41,6 @@ const Products = ({ match }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [price, setPrice] = useState([0, 200000]);
     const [category, setCategory] = useState(new URLSearchParams(window.location.search).get("category") || "");
-    // const [category, setCategory] = useState("");
     const [ratings, setRatings] = useState(0);
 
     const [tempPrice, setTempPrice] = useState([0, 200000]); // for slider state - to make API call when user clicks on button

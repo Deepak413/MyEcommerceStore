@@ -69,8 +69,15 @@
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 .headerIcon {
@@ -111,8 +118,13 @@
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .headerStats {
@@ -396,7 +408,9 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   cursor: pointer;
+  overflow: hidden;
 }
+
 
 .chartBox:hover {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
@@ -465,7 +479,9 @@
   .chartsContainer {
     grid-template-columns: 1fr;
   }
+
 }
+
 
 @media screen and (max-width: 768px) {
   .dashboard {
@@ -474,7 +490,7 @@
   }
 
   .dashboardContainer {
-    padding: 1.5rem;
+    padding: 4.5rem 1.5rem;
   }
 
   .dashboardTitle {
@@ -540,7 +556,7 @@
 
 @media screen and (max-width: 600px) {
   .dashboardContainer {
-    padding: 1rem;
+    padding: 4rem 2rem;
   }
 
   .dashboardTitle {

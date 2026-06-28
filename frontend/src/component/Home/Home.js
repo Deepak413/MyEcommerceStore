@@ -7,7 +7,7 @@ import { getProduct,getProductWithoutPagination, clearErrors, getSimilarCategory
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/Loader/Loader';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 import "../layout/About/aboutSection.css"
 import { FaLaptop, FaMobileAlt, FaCamera, FaTabletAlt, FaHeadphones } from "react-icons/fa";
 

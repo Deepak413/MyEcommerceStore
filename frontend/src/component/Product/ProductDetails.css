@@ -32,8 +32,10 @@
 }
 
 .CarouselImage {
-  width: 20vmax;
-  padding: 6rem;
+  width: 100%;
+  max-width: 500px;
+  object-fit: contain;
+  padding: 2rem;
 }
 
 .detailsBlock-1 {
@@ -60,7 +62,7 @@
   align-items: center;
   /* border-top: 1px solid rgba(0, 0, 0, 0.205); */
   /* border-bottom: 1px solid rgba(0, 0, 0, 0.205); */
-  width: 70%;
+  width: 100%;
   padding: 1.5vmax 0 0.4vmax 0;
 }
 
@@ -74,7 +76,7 @@
 
 
 .detailsBlock-3 {
-  width: 70%;
+  width: 100%;
 }
 
 .detailsBlock-3>h1 {
@@ -105,10 +107,10 @@
 .detailsBlock-3-1-1>input {
   border: none;
   padding: 0.5vmax;
-  width: 1vmax;
+  width: 3vmax;
   text-align: center;
   outline: none;
-  font: 400 0.8vmax "Roboto";
+  font: 400 1vmax "Roboto";
   color: rgba(0, 0, 0, 0.74);
 }
 
@@ -138,6 +140,8 @@
   color: rgba(0, 0, 0, 0.651);
   font: 400 1vmax "Roboto";
   margin: 1vmax 0;
+  display: flex;
+  align-items: center;
 }
 
 .detailsBlock-4 {
@@ -314,20 +318,6 @@
   transition: all 0.4s ease;
 }
 
-/* .carousel .slide {
-  display: flex;
-  justify-content: center;
-  width: 20% !important;
-}
-.carouselItem{
-  width: 20% !important; 
-}
-.similarProductsContainer{
-  width: 90%;
-  margin: auto;
-  padding: 2rem 0;
-} */
-
 .swiper {
   width: 100%;
 }
@@ -343,7 +333,6 @@
   background: white;
   width: 2rem;
   height: 2rem;
-  /* border-radius: 50%; */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   opacity: 0.5;
   transition: 0.3s;
@@ -354,91 +343,373 @@
   font-size: 1rem !important;
 }
 
-@media screen and (max-width: 600px) {
+
+/* ==========================================
+   Laptop (1024px)
+========================================== */
+@media (max-width: 1024px) {
+
+  .ProductDetails {
+    padding: 3rem 1.5rem;
+  }
+
+  .CarouselImage {
+    width: 28vw;
+    padding: 3rem;
+  }
+
+  .detailsBlock-1 {
+    margin-top: 3rem;
+  }
+
+  .detailsBlock-1 h2 {
+    font-size: 1.7rem;
+  }
+
+  .detailsBlock-2,
+  .detailsBlock-3 {
+    width: 90%;
+  }
+
+  .detailsBlock-3 h1 {
+    font-size: 2rem;
+  }
+
+  .similarProductsContainer {
+    padding: 2rem;
+  }
+
+  .similarProductsCards {
+    padding: 2rem;
+  }
+
+}
+
+
+/* ==========================================
+   Tablet (768px)
+========================================== */
+@media (max-width: 768px) {
+
   .ProductDetails {
     flex-direction: column;
-    height: unset;
+    margin-top: 5rem;
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+
+  .ProductDetails>div {
+    width: 100%;
   }
 
   .ProductDetails>div:last-child {
     align-items: center;
+    padding: 3rem 2rem;
+
   }
 
-  .detailsBlock-1>h2 {
-    font-size: 2.8vmax;
+  .CarouselImage {
+    width: 60%;
+    padding: 2rem;
+  }
+
+  .carousel .thumb {
+    height: 60px;
+  }
+
+  .detailsBlock-1 {
+    margin-top: 0;
     text-align: center;
   }
 
-  .detailsBlock-1>p {
+  .detailsBlock-1 h2 {
+    font-size: 2rem;
+  }
+
+  .detailsBlock-1 p {
+    font-size: 1rem;
+  }
+
+  .detailsBlock-2,
+  .detailsBlock-3,
+  .detailsBlock-4 {
+    width: 100%;
     text-align: center;
-    font-size: 1vmax;
   }
 
   .detailsBlock-2 {
     justify-content: center;
+    padding: 1rem 0;
   }
 
-  .detailsBlock-2>span {
-    font-size: 1.5vmax;
+  .detailsBlock-2-span {
+    font-size: .95rem;
   }
 
-  .detailsBlock-3>h1 {
-    font: 700 3vmax "Franklin Gothic Medium";
-    text-align: center;
+  .detailsBlock-3 h1 {
+    font-size: 2rem;
   }
 
   .detailsBlock-3-1 {
     flex-direction: column;
+    gap: 20px;
   }
 
   .detailsBlock-3-1-1 {
-    padding: 2vmax 0;
+    display: flex;
+    align-items: center;
   }
 
-  .detailsBlock-3-1-1>button {
-    padding: 1.2vmax;
-    width: 4vmax;
+  .detailsBlock-3-1-1 button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
   }
 
-  .detailsBlock-3-1-1>input {
-    padding: 1.5vmax;
-    width: 3vmax;
-    font: 400 1.8vmax "Roboto";
+  .detailsBlock-3-1-1 input {
+    width: 50px;
+    padding: 10px;
+    font-size: 1rem;
   }
 
   .detailsBlock-3-1>button:last-child {
-    font: 500 1.7vmax "Roboto";
-    padding: 1.5vmax;
-    width: 20vmax;
-    margin: 3vmax 0;
+    width: 240px;
+    padding: 14px;
+    margin: 0;
+    font-size: .95rem;
   }
 
-  .detailsBlock-3>p {
-    padding: 2.5vmax 0;
-    text-align: center;
-    font: 400 2vmax "Roboto";
+  .detailsBlock-3 p {
+    font-size: 1rem;
+    padding: 1rem 0;
+    justify-content: center;
   }
 
-  .detailsBlock-4 {
-    font: 500 2.5vmax sans-serif;
-  }
-
-  .detailsBlock-4>p {
-    font: 300 1.8vmax sans-serif;
+  .detailsBlock-4 p {
+    margin: 20px 0;
+    font-size: .95rem;
+    line-height: 1.7;
   }
 
   .submitReview {
-    font: 500 1.7vmax "Roboto";
-    padding: 1.5vmax;
-    width: 20vmax;
-    margin: 3vmax 0;
+    width: 220px;
+    padding: 14px;
+    font-size: .9rem;
+    margin-top: 1.5rem;
   }
 
-  .reviewCard>p {
-    font: 600 3vw "Roboto";
+  .reviewsHeading,
+  .similarProductsHeading {
+    width: 220px;
+    font-size: 1.3rem;
+    padding: .8rem;
+  }
+
+  .reviews {
+    padding: 0 1rem;
+  }
+
+  .reviewCard {
+    width: 280px;
+    padding: 1.5rem;
+  }
+
+  .reviewCard img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .reviewCard p {
+    font-size: 1rem;
   }
 
   .reviewCardComment {
-    font: 300 5vw sans-serif;
+    font-size: .9rem;
   }
+
+  .similarProductsContainer {
+    padding: 1.5rem;
+  }
+
+  .similarProductsCards {
+    padding: 2rem 1rem;
+  }
+
+}
+
+
+/* ==========================================
+   Mobile (576px)
+========================================== */
+@media (max-width: 576px) {
+
+  .ProductDetails {
+    padding: 1rem;
+  }
+
+  .CarouselImage {
+    width: 75%;
+    padding: 1rem;
+  }
+
+  .carousel .thumb {
+    height: 50px;
+  }
+
+  .detailsBlock-1 h2 {
+    font-size: 1.6rem;
+  }
+
+  .detailsBlock-1 p {
+    font-size: .9rem;
+  }
+
+  .detailsBlock-3 h1 {
+    font-size: 1.7rem;
+  }
+
+  .detailsBlock-4 p {
+    font-size: .9rem;
+  }
+
+  .detailsBlock-3-1>button:last-child,
+  .submitReview {
+    width: 100%;
+    max-width: 260px;
+  }
+
+  .reviewsHeading,
+  .similarProductsHeading {
+    width: 180px;
+    font-size: 1.1rem;
+  }
+
+  .reviewCard {
+    width: 250px;
+    margin: .5rem;
+  }
+
+  .reviewCard img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .reviewCard p {
+    font-size: .95rem;
+  }
+
+  .reviewCardComment {
+    font-size: .85rem;
+  }
+
+  .submitReviewBoxTextArea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .similarProductsContainer {
+    padding: 1rem;
+  }
+
+  .similarProductsCards {
+    padding: 1.5rem .8rem;
+  }
+
+  .viewAllBtn {
+    right: .6rem;
+    padding: .35rem .8rem;
+    font-size: .85rem;
+  }
+
+}
+
+
+/* ==========================================
+   Small Mobile (400px)
+========================================== */
+@media (max-width: 400px) {
+
+  .ProductDetails {
+    margin-top: 4.5rem;
+    padding: .8rem;
+  }
+
+  .CarouselImage {
+    width: 90%;
+    padding: .5rem;
+  }
+
+  .detailsBlock-1 h2 {
+    font-size: 1.35rem;
+  }
+
+  .detailsBlock-1 p {
+    font-size: .8rem;
+  }
+
+  .detailsBlock-3 h1 {
+    font-size: 1.5rem;
+  }
+
+  .detailsBlock-3 p,
+  .detailsBlock-4 p {
+    font-size: .85rem;
+  }
+
+  .detailsBlock-2-span {
+    font-size: .8rem;
+  }
+
+  .detailsBlock-3-1-1 button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .detailsBlock-3-1-1 input {
+    width: 45px;
+    font-size: .9rem;
+  }
+
+  .submitReview,
+  .detailsBlock-3-1>button:last-child {
+    font-size: .8rem;
+  }
+
+  .reviewsHeading,
+  .similarProductsHeading {
+    width: 150px;
+    font-size: 1rem;
+  }
+
+  .reviewCard {
+    width: 220px;
+    padding: 1rem;
+  }
+
+  .reviewCard img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .reviewCard p {
+    font-size: .9rem;
+  }
+
+  .reviewCardComment {
+    font-size: .8rem;
+  }
+
+  .similarProductsContainer {
+    padding: .75rem;
+  }
+
+  .similarProductsCards {
+    padding: 1.2rem .5rem;
+  }
+
+  .viewAllBtn {
+    padding: .3rem .7rem;
+    font-size: .75rem;
+  }
+
 }

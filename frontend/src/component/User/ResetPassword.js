@@ -2,7 +2,7 @@ import "./ResetPassword.css";
 import React, { Fragment, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 import {  AiFillLock } from "react-icons/ai";
 import { RiKeyLine } from "react-icons/ri";
 

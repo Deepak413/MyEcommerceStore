@@ -9,7 +9,7 @@ import { BsFillCartFill } from 'react-icons/bs';
 import { FaRegListAlt } from 'react-icons/fa';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 import { logout } from '../../../actions/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 

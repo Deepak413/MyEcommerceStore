@@ -7,11 +7,12 @@
     align-items: center;
     background-color: rgb(231, 231, 231);
     margin: 6rem 0;
+    box-sizing: border-box;
   }
   
   .updateProfileBox {
     background-color: white;
-    width: 25vw;
+    width: 40vw;
     height: 64vh;
     box-sizing: border-box;
     overflow: hidden;
@@ -34,8 +35,10 @@
     margin: auto;
     padding: 2vmax;
     justify-content: space-evenly;
+    gap: 10px;
     height: 63%;
     transition: all 0.5s;
+    /* box-sizing: border-box; */
   }
   
   .updateProfileForm > div {
@@ -108,41 +111,208 @@
   .updateProfileBtn:hover {
     background-color: #d48503;
   }
-  
-  @media screen and (max-width: 600px) {
-    .updateProfileContainer {
-      background-color: white;
-    }
-    .updateProfileBox {
-      width: 100vw;
-      height: 95vh;
-    }
-  
-    .updateProfileForm {
-      padding: 5vmax;
-    }
-  
-    .updateProfileForm > div > input {
-      padding: 2.5vmax 5vmax;
-      font: 300 1.7vmax Droid Sans;
-    }
-  
-    .updateProfileForm > div > svg {
-      font-size: 2.8vmax;
-    }
-  
-    #updateProfileImage > img {
-      width: 8vmax;
-      border-radius: 100%;
-    }
-  
-    #updateProfileImage > input::file-selector-button {
-      height: 7vh;
-      font: 400 1.8vmax Droid Sans;
-    }
-  
-    .updateProfileBtn {
-      font: 300 1.9vmax "Roboto";
-      padding: 1.8vmax;
-    }
+
+
+  /* ===========================
+   Responsive - Update Profile
+=========================== */
+
+/* Large Desktop */
+@media (max-width: 1200px) {
+  .updateProfileBox {
+    width: 40vw;
   }
+}
+
+/* Laptop */
+@media (max-width: 992px) {
+  .updateProfileContainer {
+    padding: 2rem;
+    height: auto;
+    min-height: calc(100vh - 6rem);
+  }
+
+  .updateProfileBox {
+    width: 50vw;
+    height: auto;
+    padding-bottom: 2rem;
+  }
+
+  .updateProfileHeading {
+    width: 70%;
+    font-size: 1.5rem;
+    padding: 1.3rem;
+  }
+
+  .updateProfileForm {
+    padding: 2rem;
+    height: auto;
+    gap: 1.3rem;
+  }
+
+  .updateProfileForm > div {
+    position: relative;
+  }
+
+  .updateProfileForm > div > svg {
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+  }
+
+  .updateProfileForm > div > input {
+    padding: 0.9rem 1rem 0.9rem 3rem;
+    font-size: 1rem;
+  }
+
+  #updateProfileImage {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  #updateProfileImage > img {
+    width: 60px;
+    height: 60px;
+    margin: 0;
+    object-fit: cover;
+  }
+
+  #updateProfileImage > input::file-selector-button {
+    height: 45px;
+    font-size: 0.95rem;
+    padding: 0 1rem;
+  }
+
+  .updateProfileBtn {
+    padding: 0.9rem;
+    font-size: 1rem;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .updateProfileContainer {
+    padding: 1.5rem;
+  }
+
+  .updateProfileBox {
+    width: 70vw;
+  }
+
+  .updateProfileHeading {
+    width: 80%;
+    font-size: 1.4rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .updateProfileContainer {
+    margin-top: 6rem;
+    margin-bottom: 0;
+    padding: 1rem;
+    background: #f5f5f5;
+    min-height: calc(100vh - 6rem);
+  }
+
+  .updateProfileBox {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    padding-bottom: 1.5rem;
+  }
+
+  .updateProfileHeading {
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 1.2rem;
+  }
+
+  .updateProfileForm {
+    padding: 1.5rem;
+    gap: 1.2rem;
+    height: auto;
+  }
+
+  .updateProfileForm > div {
+    position: relative;
+  }
+
+  .updateProfileForm > div > svg {
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+  }
+
+  .updateProfileForm > div > input {
+    padding: 0.9rem 1rem 0.9rem 2.8rem;
+    font-size: 15px;
+  }
+
+  #updateProfileImage {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  #updateProfileImage > img {
+    width: 55px;
+    height: 55px;
+    margin: 0;
+    object-fit: cover;
+  }
+
+  #updateProfileImage > input::file-selector-button {
+    height: 42px;
+    font-size: 14px;
+    padding: 0 0.8rem;
+  }
+
+  .updateProfileBtn {
+    font-size: 15px;
+    padding: 0.9rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 400px) {
+  .updateProfileHeading {
+    font-size: 1.3rem;
+  }
+
+  .updateProfileForm {
+    padding: 1rem;
+  }
+
+  .updateProfileForm > div > input {
+    padding: 0.85rem 0.9rem 0.85rem 2.7rem;
+    font-size: 14px;
+  }
+
+  #updateProfileImage {
+    align-items: flex-start;
+  }
+
+  #updateProfileImage > img {
+    width: 50px;
+    height: 50px;
+  }
+
+  #updateProfileImage > input {
+    width: 100%;
+  }
+
+  #updateProfileImage > input::file-selector-button {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .updateProfileBtn {
+    font-size: 14px;
+    padding: 0.85rem;
+  }
+}

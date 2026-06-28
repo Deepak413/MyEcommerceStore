@@ -10,7 +10,7 @@ import Loader from '../layout/Loader/Loader';
 import { updateProfileReset } from '../../reducers/userReducer';
 import MetaData from '../layout/MetaData';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 
 const UpdateProfile = () => {
 

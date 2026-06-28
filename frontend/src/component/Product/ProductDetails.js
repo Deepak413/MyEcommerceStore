@@ -10,7 +10,8 @@ import ReviewCard from "./ReviewCard.js";
 import Loader from '../layout/Loader/Loader';
 import ProductCard from '../Home/ProductCard.js';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToasdetailsBlock-2tify.css';
+import 'react-toastify/ReactToastify.css';
 import MetaData from '../layout/MetaData';
 import { addItemsToCart } from '../../actions/cartAction';
 import {
@@ -183,7 +184,8 @@ const ProductDetails = () => {
                                 </div>
 
                                 <p>
-                                    Status:
+                                    {/* Status :  */}
+                                    <p style={{'margin-right':'8px'}}>Status : </p>
                                     <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
                                         {product.Stock < 1 ? "  OutOfStock" : "  In Stock"}
                                     </b>

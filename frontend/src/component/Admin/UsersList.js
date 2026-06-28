@@ -10,7 +10,7 @@ import "./UsersList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 import MetaData from "../layout/MetaData";
 import SideBar from "./Sidebar";
 import { getAllUsers, clearErrors, deleteUser } from "../../actions/userAction";

@@ -119,6 +119,7 @@
     width: 0;
     opacity: 0;
   }
+
   to {
     width: 3px;
     opacity: 1;
@@ -191,6 +192,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -202,49 +204,108 @@
     max-height: 0;
     opacity: 0;
   }
+
   to {
     max-height: 500px;
     opacity: 1;
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    min-height: auto;
-    border-right: none;
-    border-bottom: 1px solid #e5e7eb;
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 0;
-    position: static;
-  }
+/* Hamburger Button */
 
-  .sidebarLogo {
-    margin-bottom: 0;
-    padding: 0.5rem 1rem;
-    display: none;
-  }
+.hamburgerBtn {
+  display: none;
+  position: fixed;
+  top: 5rem;
+  left: 2rem;
+  z-index: 1200;
+  opacity: 0.7;
+  padding: 9px;
+  border: none;
+  border-radius: 8px;
+  background: #ffaa2c;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, .2);
+}
 
-  .sidebarLink,
-  .subMenuLink {
-    padding: 0.75rem 1rem;
-    white-space: nowrap;
-  }
+.hamburgerBtn svg {
+  font-size: 20px;
+}
 
-  .sidebarSection {
-    margin-top: 0;
-    padding: 0 1rem;
+/* Close Icon */
+
+.sidebarClose {
+  display: none;
+}
+
+.sidebarOverlay {
+  display: none;
+}
+
+@media (max-width:768px) {
+
+  .hamburgerBtn {
     display: flex;
+    justify-content: center;
     align-items: center;
   }
 
-  .subMenu {
-    display: none;
+  .sidebar {
+
+    position: fixed;
+    top: 0;
+    left: -300px;
+
+    width: 280px;
+    height: 100vh;
+
+    z-index: 1300;
+
+    transition: .35s ease;
+
+    overflow-y: auto;
   }
 
-  .sidebarLogo img {
-    width: 140px;
+  .sidebar.open {
+    left: 0;
   }
+
+  .sidebarOverlay {
+
+    display: block;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, .45);
+
+    z-index: 1200;
+  }
+
+  .sidebarClose {
+
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 18px 20px;
+  }
+
+  .sidebarClose svg {
+
+    font-size: 30px;
+    cursor: pointer;
+    color: #666;
+  }
+
+  .sidebarSection {
+
+    display: block;
+  }
+
+  .subMenu {
+
+    display: block;
+  }
+
 }

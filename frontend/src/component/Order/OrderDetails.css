@@ -158,10 +158,257 @@
 }
 
 
-@media(max-width:900px) {
+/* @media(max-width:900px) {
 
   .orderPage {
     grid-template-columns: 1fr;
+  }
+
+} */
+.orderProductInfo a,
+.orderIdDetails p,
+.orderDeliveryDetailCard p {
+  word-break: break-word;
+}
+
+.orderProductCard img {
+  border-radius: 8px;
+}
+
+.orderProductCard {
+  gap: 1rem;
+}
+
+.orderDeliveryDetailCard svg {
+  flex-shrink: 0;
+}
+
+.orderProductCardBtns a {
+  border-radius: 6px;
+}
+
+.orderPage {
+  box-sizing: border-box;
+}
+
+/* ==========================
+   Tablet (992px and below)
+========================== */
+
+@media screen and (max-width: 992px) {
+
+  .orderPage {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .orderProductCard img {
+    width: 7rem;
+  }
+
+}
+
+
+/* ==========================
+   Mobile (768px and below)
+========================== */
+
+@media screen and (max-width:768px) {
+
+  .orderPage {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem;
+    margin-top: 5rem;
+  }
+
+  .orderProductCardContainer {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .orderProductCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .orderProductCard img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    margin: 0 auto;
+  }
+
+  .orderProductInfo {
+    width: 100%;
+  }
+
+  .orderProductInfo a {
+    font-size: 16px;
+    word-break: break-word;
+    display: block;
+  }
+
+  .orderProductInfo p {
+    font-size: 14px;
+  }
+
+  .orderProductTotal {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .orderProductCardBtns {
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 1.2rem;
+  }
+
+  .orderProductCardBtns a {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .orderStatusCard {
+    padding: 1rem;
+  }
+
+  .orderStatusCard span {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .orderIdDetails {
+    font-size: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+    word-break: break-word;
+    align-items: center;
+  }
+
+  .orderRight {
+    gap: 1rem;
+  }
+
+  .orderCardContainer {
+    padding: 1rem;
+  }
+
+  .orderCardContainer h3 {
+    font-size: 18px;
+    margin-bottom: 1rem;
+  }
+
+  .orderDeliveryDetailContainer,
+  .orderPriceDetailContainer {
+    padding: 1rem;
+    font-size: 14px;
+  }
+
+  .orderDeliveryDetailCard {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .orderDeliveryDetailCard span,
+  .orderDeliveryDetailCard p {
+    width: 100%;
+    margin-left: 26px;
+    word-break: break-word;
+  }
+
+  .priceRow {
+    font-size: 15px;
+  }
+
+  .total {
+    font-size: 20px;
+  }
+
+}
+
+
+/* ==========================
+   Small Mobile (480px and below)
+========================== */
+
+@media screen and (max-width:480px) {
+
+  .orderPage {
+    padding: .75rem;
+    margin-top: 4.5rem;
+  }
+
+  .orderProductCardContainer {
+    padding: .8rem;
+  }
+
+  .orderProductCard img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .orderProductInfo a {
+    font-size: 15px;
+  }
+
+  .orderProductInfo p {
+    font-size: 13px;
+  }
+
+  .orderProductTotal {
+    font-size: 16px;
+  }
+
+  .orderProductCardBtns a {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .orderStatusCard {
+    padding: .9rem;
+  }
+
+  .orderStatusSuccess {
+    font-size: 15px;
+  }
+
+  .orderStatusCard span {
+    font-size: 13px;
+  }
+
+  .orderIdDetails {
+    font-size: 13px;
+  }
+
+  .orderCardContainer {
+    padding: .9rem;
+  }
+
+  .orderCardContainer h3 {
+    font-size: 16px;
+  }
+
+  .orderDeliveryDetailContainer,
+  .orderPriceDetailContainer {
+    font-size: 13px;
+  }
+
+  .priceRow {
+    font-size: 14px;
+  }
+
+  .total {
+    font-size: 18px;
   }
 
 }

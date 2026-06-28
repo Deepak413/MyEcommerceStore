@@ -13,7 +13,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 import SideBar from "./Sidebar";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import { newProductReset } from "../../reducers/productReducer";
 

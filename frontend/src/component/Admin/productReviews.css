@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  overflow: hidden;
 }
 
 .productReviewsForm {
@@ -156,31 +157,210 @@
 
 .reviewsTableWrapper {
   background: white;
-
-  border-radius: 18px;
-
-  overflow: hidden;
-
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.08);
-
-  padding: 1rem;
+    border-radius: 18px;
+    overflow: hidden;
+    width: 90%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    padding: 1rem;
+    margin: auto;
 }
 
 
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .productReviewsContainer {
     border-left: none;
     border-top: 1px solid rgba(0, 0, 0, 0.158);
   }
 
   .productReviewsForm>div>input {
-    /* padding: 2.5vmax 5vmax; */
     font: 300 1.7vmax cursive;
   }
 
   .productReviewsForm>div>svg {
     font-size: 2.8vmax;
   }
+} */
+
+/* ==========================================
+   Responsive Design
+========================================== */
+
+/* Large Tablets */
+@media screen and (max-width: 1200px) {
+
+  .productReviewsContainer{
+    padding: 1.5rem;
+    overflow: hidden;
+  }
+
+  .productReviewsForm{
+    max-width: 90%;
+  }
+
+  .reviewsTableWrapper{
+    overflow-x: auto;
+  }
+
+}
+
+
+/* Tablets */
+@media screen and (max-width: 900px) {
+
+  .productReviewsContainer{
+    padding: 1rem;
+    gap: 1.5rem;
+    box-sizing: border-box;
+  }
+
+  .productReviewsForm{
+    margin: 4rem auto 1.5rem;
+    max-width: 100%;
+    border-radius: 14px;
+  }
+
+  .productReviewsFormHeading{
+    font-size: 1.6rem;
+  }
+
+  .productReviewsForm > div{
+    width: 90%;
+  }
+
+  .productReviewsForm button{
+    width: 90%;
+    margin: auto;
+  }
+
+  .reviewsTableWrapper{
+    width: 100%;
+    overflow-x: auto;
+    padding: .8rem;
+  }
+
+  .MuiDataGrid-root{
+    min-width: 900px;
+  }
+
+}
+
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+
+  .productReviewsContainer{
+    padding: .8rem;
+    gap: 1rem;
+  }
+
+  .productReviewsForm{
+    margin-top: 4.5rem;
+    border-radius: 12px;
+    box-sizing: border-box;
+    padding: 1.2rem;
+  }
+
+  .productReviewsFormHeading{
+    font-size: 1.35rem;
+    margin-top: 0;
+  }
+
+  .productReviewsForm > div{
+    width: 100%;
+  }
+
+  .productReviewsForm > div > input{
+    padding: .9rem .9rem .9rem 2.8rem;
+    font-size: .95rem;
+  }
+
+  .productReviewsForm > div > svg{
+    left: .9rem;
+    font-size: 1.25rem;
+  }
+
+  .productReviewsForm button{
+    width: 100%;
+    height: 48px !important;
+    font-size: .95rem !important;
+  }
+
+  .reviewsTableWrapper{
+    padding: .5rem;
+    border-radius: 12px;
+    overflow-x: auto;
+  }
+
+  /* Horizontal scrolling table */
+  .MuiDataGrid-root{
+    min-width: 950px;
+  }
+
+  .ratingBadge{
+    width: 80%;
+    font-size: .8rem;
+  }
+
+  .deleteReviewBtn{
+    width: 36px;
+    height: 36px;
+    min-width: 36px !important;
+  }
+
+}
+
+
+/* Small Mobiles */
+@media screen and (max-width: 480px){
+
+  .productReviewsContainer{
+    padding: .6rem;
+  }
+
+  .productReviewsForm{
+    padding: 1rem;
+  }
+
+  .productReviewsFormHeading{
+    font-size: 1.2rem;
+  }
+
+  .productReviewsForm > div > input{
+    font-size: .9rem;
+    padding: .8rem .8rem .8rem 2.5rem;
+  }
+
+  .productReviewsForm > div > svg{
+    font-size: 1.1rem;
+    left: .8rem;
+  }
+
+  .productReviewsForm button{
+    height: 45px !important;
+    font-size: .9rem !important;
+  }
+
+  .reviewsTableWrapper{
+    padding: .4rem;
+  }
+
+}
+
+
+/* Very Small Phones */
+@media screen and (max-width:360px){
+
+  .productReviewsFormHeading{
+    font-size: 1.05rem;
+  }
+
+  .productReviewsForm > div > input{
+    font-size: .82rem;
+  }
+
+  .productReviewsForm button{
+    font-size: .82rem !important;
+  }
+
 }

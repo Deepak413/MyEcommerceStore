@@ -7,6 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .about-banner {
@@ -35,6 +36,7 @@
 
 
 .divider {
+  box-sizing: border-box;
   width: 40px;
   height: 2px;
   background: #c2a78e;
@@ -49,6 +51,7 @@
   background: white;
   margin: 0 6rem;
   width: 90%;
+  box-sizing: border-box;
 }
 
 .about-text {
@@ -73,6 +76,9 @@
 }
 
 .about-image img {
+
+  display: block;
+  object-fit: cover;
   width: 100%;
   border-radius: 10px;
 }
@@ -107,7 +113,7 @@
 }
 
 /* OUR ADVANTAGES SECTION */
-.ourAdvantagesContainer{
+.ourAdvantagesContainer {
   width: 90%;
 }
 
@@ -121,7 +127,6 @@
   width: 90%;
   padding: 5rem 0;
   text-align: center;
-  margin-bottom: 4rem;
 }
 
 .our-products-subtitle {
@@ -194,4 +199,244 @@
   font-weight: 600;
   color: #333;
   letter-spacing: 0.5px;
+}
+
+
+/* ==========================================
+Large Tablets (1024px)
+========================================== */
+@media screen and (max-width: 1024px) {
+
+  .about-banner {
+    margin-top: 5rem;
+    padding: 4rem 1.5rem;
+    height: auto;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .about-content {
+    width: 95%;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    gap: 2rem;
+  }
+
+  .about-text,
+  .about-image {
+    width: 48%;
+  }
+
+  .mission-section {
+    width: 90%;
+    padding: 5rem 0;
+  }
+
+  .mission-text {
+    width: 90%;
+  }
+
+  .our-product-item {
+    width: 160px;
+    height: 160px;
+  }
+
+  .our-product-icon {
+    font-size: 3rem;
+  }
+}
+
+/* ==========================================
+Tablets (768px)
+========================================== */
+@media screen and (max-width: 768px) {
+
+  .about-banner {
+    margin-top: 4rem;
+    padding: 3rem 1rem;
+    height: auto;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .about-content {
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 95%;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+    box-sizing: border-box;
+  }
+
+  .about-text,
+  .about-image {
+    width: 100%;
+  }
+
+  .about-text {
+    text-align: center;
+  }
+
+  .about-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .about-text p {
+    line-height: 1.8;
+  }
+
+  .about-image img {
+    border-radius: 14px;
+  }
+
+  .mission-section {
+    width: 95%;
+    padding: 4rem 1rem;
+  }
+
+  .mission-title {
+    font-size: 2rem;
+  }
+
+  .mission-text {
+    width: 100%;
+    line-height: 1.8;
+  }
+
+  .our-products {
+    width: 95%;
+    padding: 4rem 0;
+  }
+
+  .our-products-title {
+    font-size: 2.3rem;
+  }
+
+  .our-products-icons {
+    gap: 18px;
+  }
+
+  .our-product-item {
+    width: 150px;
+    height: 150px;
+  }
+
+  .our-product-icon {
+    font-size: 2.8rem;
+  }
+}
+
+/* ==========================================
+Mobile (576px)
+========================================== */
+@media screen and (max-width: 576px) {
+
+  .about-banner {
+    padding: 2.5rem 1rem;
+  }
+
+  .about-banner .sub-title {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+  }
+
+  .title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .about-content {
+    padding: 1.5rem;
+  }
+
+  .about-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .mission-subtitle,
+  .our-products-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+  }
+
+  .mission-title,
+  .our-products-title {
+    font-size: 1.8rem;
+  }
+
+  .mission-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .our-products-icons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 2.5rem;
+  }
+
+  .our-product-item {
+    width: 100%;
+    height: 140px;
+    border-radius: 16px;
+  }
+
+  .our-product-icon {
+    font-size: 2.5rem;
+  }
+
+  .our-product-item p {
+    font-size: 0.95rem;
+  }
+}
+
+/* ==========================================
+Small Mobile (400px)
+========================================== */
+@media screen and (max-width: 400px) {
+
+  .about-banner {
+    padding: 2rem .8rem;
+  }
+
+  .title {
+    font-size: 1.7rem;
+  }
+
+  .about-text h2 {
+    font-size: 1.3rem;
+  }
+
+  .about-text p,
+  .mission-text {
+    font-size: 0.9rem;
+  }
+
+  .mission-title,
+  .our-products-title {
+    font-size: 1.5rem;
+  }
+
+  .our-product-item {
+    height: 130px;
+  }
+
+  .our-product-icon {
+    font-size: 2.2rem;
+  }
+
+  .our-product-item p {
+    font-size: 0.9rem;
+  }
 }

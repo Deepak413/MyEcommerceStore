@@ -6,8 +6,7 @@ import { clearErrors, myOrders } from "../../actions/orderAction";
 import Loader from "../layout/Loader/Loader";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-// import Typography from "@mui/material/Typography";
+import 'react-toastify/ReactToastify.css';
 import MetaData from "../layout/MetaData";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { BiFontFamily } from "react-icons/bi";
@@ -28,11 +27,6 @@ const MyOrders = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  // useEffect(() => {
-  //   if (orders && orders.length > (orders?.totalOrders || 0)) {
-  //     setHasMore(false);
-  //   }
-  // }, [orders]);
   useEffect(() => {
     if (orders && totalOrders !== 0) {
       setHasMore(orders.length < totalOrders);

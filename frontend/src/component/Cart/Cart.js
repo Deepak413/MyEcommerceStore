@@ -6,7 +6,7 @@ import { Typography } from "@mui/material";
 import { TbShoppingCartOff } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -43,7 +43,6 @@ const Cart = () => {
         else{
         navigate("/login");
         }
-        // navigate("/login?redirect=shipping");
     };
 
     return (

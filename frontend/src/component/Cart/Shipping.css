@@ -93,7 +93,7 @@
   border: 2px solid black;
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .shippingBox {
     width: 100vw;
     height: 95vh;
@@ -122,5 +122,193 @@
   .shippingBtn {
     font: 300 4vw "Roboto";
     padding: 4vw;
+  }
+} */
+
+
+/* ==========================
+   Large Tablets (992px)
+========================== */
+
+@media (max-width: 992px) {
+
+  .shippingParentContainer {
+    padding: 2rem;
+  }
+
+  .shippingBox {
+    border-radius: 12px;
+  }
+
+  .shippingHeading {
+    font-size: 1.6rem;
+    padding: 1.2rem;
+  }
+
+  .shippingForm {
+    padding: 2rem;
+  }
+
+  .shippingForm>div {
+    width: 60%;
+    position: relative;
+  }
+
+  .shippingForm>div>input,
+  .shippingForm>div>select {
+    padding: 14px 14px 14px 48px;
+    font-size: 15px;
+  }
+
+  .shippingForm>div>svg {
+    font-size: 22px;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .shippingBtn {
+    width: 60%;
+    padding: 14px;
+    font-size: 15px;
+  }
+}
+
+/* ==========================
+   Tablets (768px)
+========================== */
+
+@media (max-width:768px) {
+
+  .shippingParentContainer {
+    padding: 1.5rem;
+  }
+
+  .shippingCheckoutSteps {
+    padding: 2rem 0;
+  }
+
+  .shippingHeading {
+    font-size: 1.4rem;
+  }
+
+  .shippingForm {
+    padding: 2rem 1.5rem;
+  }
+
+  .shippingForm>div {
+    width: 80%;
+    position: relative;
+  }
+
+  .shippingForm>div>input,
+  .shippingForm>div>select {
+    padding: 13px 13px 13px 46px;
+    font-size: 15px;
+  }
+
+  .shippingForm>div>svg {
+    font-size: 20px;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .shippingBtn {
+    width: 80%;
+    padding: 13px;
+    font-size: 15px;
+  }
+}
+
+/* ==========================
+   Mobile (576px)
+========================== */
+
+@media (max-width:576px) {
+
+  .shippingParentContainer {
+    padding: 1rem;
+    margin-top: 5rem;
+  }
+
+  .shippingCheckoutSteps {
+    padding: 1.5rem .5rem;
+  }
+
+  .shippingBox {
+    border-radius: 10px;
+  }
+
+  .shippingHeading {
+    width: 100%;
+    font-size: 1.25rem;
+    padding: 1rem;
+  }
+
+  .shippingForm {
+    padding: 1.5rem;
+  }
+
+  .shippingForm>div {
+    width: 100%;
+    position: relative;
+    margin: 12px 0;
+  }
+
+  .shippingForm>div>input,
+  .shippingForm>div>select {
+    padding: 13px 14px 13px 44px;
+    font-size: 15px;
+  }
+
+  .shippingForm>div>svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 19px;
+  }
+
+  .shippingBtn {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    margin-top: 1rem;
+  }
+}
+
+/* ==========================
+   Small Phones (400px)
+========================== */
+
+@media (max-width:400px) {
+
+  .shippingParentContainer {
+    padding: .8rem;
+  }
+
+  .shippingHeading {
+    font-size: 1.1rem;
+  }
+
+  .shippingForm {
+    padding: 1.2rem;
+  }
+
+  .shippingForm>div>input,
+  .shippingForm>div>select {
+    padding: 12px 12px 12px 42px;
+    font-size: 14px;
+  }
+
+  .shippingForm>div>svg {
+    left: 12px;
+    font-size: 18px;
+  }
+
+  .shippingBtn {
+    font-size: 14px;
+    padding: 13px;
   }
 }

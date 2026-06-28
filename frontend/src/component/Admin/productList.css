@@ -7,6 +7,8 @@
   min-height: 100vh;
   padding: 2rem;
   gap: 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .productListHeader {
@@ -323,7 +325,7 @@
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: all 0.3s ease !important;
-  
+
 }
 
 .MuiDataGrid-virtualScrollerRenderZone {
@@ -365,16 +367,16 @@
 }
 
 .statusBadge {
-    border-radius: 15px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: white;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 .statusBadge.processing {
@@ -393,8 +395,7 @@
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
   .productListHeader {
     flex-direction: column;
     text-align: center;
@@ -502,5 +503,252 @@
 
   .statValue {
     font-size: 1.4rem;
+  }
+} */
+
+/* ==========================================
+   Responsive Design
+========================================== */
+
+/* Large Tablets */
+@media screen and (max-width: 1200px) {
+
+  .productListContainer {
+    padding: 1.5rem;
+    gap: 1.5rem;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .productListHeader {
+    padding: 1.5rem;
+  }
+
+  .headerText h1 {
+    font-size: 1.7rem;
+  }
+
+  .headerIcon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .headerIcon svg {
+    font-size: 1.8rem;
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+  }
+
+  .productListTable {
+    min-width: 900px;
+  }
+}
+
+
+/* Tablets */
+@media screen and (max-width: 992px) {
+
+  .productListContainer {
+    width: 100%;
+    padding: 5rem 1rem 1rem;
+    min-height: auto;
+    box-sizing: border-box;
+    /* margin: auto; */
+    overflow: hidden;
+  }
+
+  .productListHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.3rem;
+  }
+
+  .headerContent {
+    width: 100%;
+  }
+
+  .headerStats {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .headerText h1 {
+    font-size: 1.5rem;
+  }
+
+  .headerText p {
+    font-size: 0.9rem;
+  }
+
+  .stat {
+    min-width: 80px;
+  }
+
+  .statValue {
+    font-size: 1.5rem;
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+  }
+
+  .productListTable {
+    min-width: 900px;
+  }
+}
+
+
+/* Mobile */
+@media screen and (max-width:768px) {
+
+  .productListContainer {
+    padding: 5rem 0.8rem 1rem;
+    gap: 1rem;
+  }
+
+  .productListHeader {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .headerContent {
+    gap: 1rem;
+  }
+
+  .headerIcon {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+  }
+
+  .headerIcon svg {
+    font-size: 1.5rem;
+  }
+
+  .headerText h1 {
+    font-size: 1.25rem;
+  }
+
+  .headerText p {
+    font-size: 0.82rem;
+  }
+
+  .headerStats {
+    width: 100%;
+    padding: .8rem;
+  }
+
+  .statLabel {
+    font-size: .72rem;
+  }
+
+  .statValue {
+    font-size: 1.3rem;
+  }
+
+  .tableWrapper {
+    border-radius: 10px;
+    overflow-x: auto;
+  }
+
+  .productListTable {
+    min-width: 850px;
+  }
+
+  .productImageCell {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    min-height: 55px;
+  }
+
+  .productImageCell img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .productNameCell span {
+    font-size: .85rem;
+  }
+
+  .priceCell {
+    font-size: .9rem;
+  }
+
+  .stockBadge,
+  .outOfStockBadge {
+    min-width: 55px !important;
+    font-size: .7rem !important;
+  }
+
+  .reviewCell {
+    font-size: .85rem;
+  }
+
+  .editBtn,
+  .deleteBtn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .editBtn svg,
+  .deleteBtn svg {
+    font-size: 1rem;
+  }
+}
+
+
+/* Small Phones */
+@media screen and (max-width:576px) {
+
+  .productListContainer {
+    padding: 5rem .5rem 1rem;
+  }
+
+  .productListHeader {
+    padding: .9rem;
+  }
+
+  .headerContent {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .headerIcon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .headerIcon svg {
+    font-size: 1.3rem;
+  }
+
+  .headerText h1 {
+    font-size: 1.1rem;
+  }
+
+  .headerText p {
+    font-size: .75rem;
+  }
+
+  .headerStats {
+    justify-content: center;
+  }
+
+  .statValue {
+    font-size: 1.15rem;
+  }
+
+  .tableWrapper {
+    border-radius: 8px;
+  }
+
+  .productListTable {
+    min-width: 820px;
   }
 }

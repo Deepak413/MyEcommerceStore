@@ -48,8 +48,10 @@
 .contact-card {
   background: white;
   border-radius: 12px;
-  padding: 4rem 5rem;
-  width: 14rem;
+  width: 100%;
+  max-width: 320px;
+  padding: 3rem 2rem;
+  box-sizing: border-box;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
 }
@@ -125,6 +127,7 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: none;
+  box-sizing: border-box;
 }
 
 .send-button {
@@ -143,4 +146,248 @@ textarea {
 
 .contact-map {
   margin-top: 5rem;
+}
+
+/* ==========================================
+   Large Tablets (1024px)
+========================================== */
+@media screen and (max-width: 1024px) {
+
+  .contact-page {
+    margin-top: 5rem;
+  }
+
+  .contact-header {
+    padding: 4rem 1.5rem;
+    height: auto;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .contact-cards {
+    gap: 25px;
+    padding: 0 1.5rem;
+  }
+
+  .contact-card {
+    width: 260px;
+    padding: 3rem 2rem;
+  }
+
+  .contact-form {
+    max-width: 90%;
+  }
+
+  .contact-map iframe {
+    height: 350px;
+  }
+}
+
+
+/* ==========================================
+   Tablets (768px)
+========================================== */
+@media screen and (max-width: 768px) {
+
+  .contact-page {
+    margin-top: 4rem;
+  }
+
+  .contact-header {
+    margin-top: 4rem;
+    padding: 3rem 1rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .contact-cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 0 1rem;
+  }
+
+  .contact-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem 2rem;
+  }
+
+  .contact-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .contact-card p {
+    font-size: 0.95rem;
+  }
+
+  .contact-footer {
+    margin-top: 5rem;
+    padding: 0 1rem 3rem;
+  }
+
+  .contact-form {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 2rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .send-button {
+    width: 100%;
+    padding: 14px;
+    font-size: 0.95rem;
+  }
+
+  .contact-map {
+    margin-top: 4rem;
+  }
+
+  .contact-map iframe {
+    height: 320px;
+  }
+}
+
+
+/* ==========================================
+   Mobile (576px)
+========================================== */
+@media screen and (max-width: 576px) {
+
+  .contact-page {
+    margin-top: 4rem;
+  }
+
+  .contact-header {
+    padding: 2.5rem 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .sub-title {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+  }
+
+  .divider {
+    margin: 15px auto;
+  }
+
+  .contact-card {
+    padding: 2rem 1.5rem;
+    border-radius: 14px;
+  }
+
+  .contact-card .icon {
+    font-size: 2rem;
+  }
+
+  .contact-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .contact-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .contact-form {
+    margin-top: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    font-size: 0.95rem;
+  }
+
+  /* input,
+  textarea {
+    font-size: 0.95rem;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  textarea {
+    min-height: 140px;
+  } */
+
+  .send-button {
+    width: 100%;
+    padding: 14px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  .contact-map {
+    margin-top: 3rem;
+  }
+
+  .contact-map iframe {
+    height: 280px;
+    border-radius: 10px;
+  }
+}
+
+
+/* ==========================================
+   Small Mobile (400px)
+========================================== */
+@media screen and (max-width: 400px) {
+
+  .contact-header {
+    padding: 2rem .8rem;
+  }
+
+  .title {
+    font-size: 1.7rem;
+  }
+
+  .contact-card {
+    padding: 1.6rem 1rem;
+  }
+
+  .contact-card .icon {
+    font-size: 1.8rem;
+  }
+
+  .contact-card h3 {
+    font-size: 1rem;
+  }
+
+  .contact-card p {
+    font-size: 0.85rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+/* 
+  input,
+  textarea {
+    font-size: 0.9rem;
+    padding: 10px;
+  } */
+
+  .send-button {
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+
+  .contact-map iframe {
+    height: 240px;
+  }
 }

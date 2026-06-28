@@ -11,7 +11,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/Loader/Loader";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 import Button from "@mui/material/Button";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import { updateOrderReset } from "../../reducers/orderReducer";

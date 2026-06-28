@@ -11,7 +11,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStation";
 import { Country, State } from "country-state-city";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 import CheckoutSteps from "./CheckoutSteps.js";
 import { useNavigate } from "react-router-dom";
 

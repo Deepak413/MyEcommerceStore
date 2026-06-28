@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import MetaData from "../layout/MetaData";
 import SideBar from "./Sidebar";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 import {
   deleteOrder,
   getAllOrders,

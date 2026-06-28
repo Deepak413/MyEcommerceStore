@@ -5,7 +5,7 @@ import { AiOutlineLock } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, register, clearErrors } from '../../actions/userAction';
 import Loader from '../layout/Loader/Loader';

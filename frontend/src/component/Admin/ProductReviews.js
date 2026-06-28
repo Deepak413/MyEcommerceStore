@@ -7,7 +7,7 @@ import {
   deleteReviews,
 } from "../../actions/productAction";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 import MetaData from "../layout/MetaData";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";

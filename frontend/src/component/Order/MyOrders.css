@@ -7,6 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .ordersHeading {
@@ -23,6 +24,7 @@
   width: 90%;
   margin-bottom: 2rem;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
 .orderHeader {
@@ -162,8 +164,13 @@
 
 /* Smooth rotation */
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .endMessage {
@@ -188,6 +195,209 @@
   background: linear-gradient(to right, transparent, #ccc, transparent);
 }
 
-.scrollContainer{
+.scrollContainer {
   width: 65%;
+  max-width: 1100px;
+}
+
+/* ===========================
+   Tablet (992px and below)
+=========================== */
+@media screen and (max-width: 992px) {
+
+  .myOrdersContainer {
+    padding: 2rem;
+    margin: 6rem 0;
+  }
+
+  .scrollContainer {
+    width: 90%;
+  }
+
+  .orderCard {
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .orderItemDetails {
+    width: 100%;
+  }
+
+}
+
+
+/* ===========================
+   Mobile (768px and below)
+=========================== */
+
+@media screen and (max-width:768px) {
+
+  .myOrdersContainer {
+    margin: 5rem 0;
+    padding: 1rem;
+  }
+
+  .ordersHeading {
+    font-size: 1.7rem;
+    padding: 1.5rem 0;
+  }
+
+  .scrollContainer {
+    width: 100%;
+  }
+
+  .orderCard {
+    width: 90%;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: auto auto 1.5rem auto
+  }
+
+  .orderHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .orderHeader p {
+    font-size: 14px;
+    word-break: break-word;
+  }
+
+  .orderStatus {
+    width: 100%;
+  }
+
+  .orderStatus span {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: .7rem;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+
+  .orderItems {
+    gap: 20px;
+  }
+
+  .orderItem {
+    align-items: flex-start;
+  }
+
+  .orderItemImage {
+    width: 100px;
+    height: 100px;
+    align-self: center;
+  }
+
+  .orderItemDetails {
+    width: 100%;
+    font-size: 14px;
+    word-break: break-word;
+  }
+
+  .productName {
+    font-size: 16px;
+  }
+
+  .orderFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .orderFooter p {
+    font-size: 14px;
+  }
+
+  .viewOrderBtn {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 15px;
+
+    box-sizing: border-box;
+  }
+
+  .noOrders {
+    padding: 5rem 1rem;
+    text-align: center;
+  }
+
+  .noOrders svg {
+    font-size: 55px;
+  }
+
+  .noOrders p {
+    font-size: 16px;
+  }
+
+  .noOrdersBtn {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+  }
+
+  .endMessage {
+    gap: 8px;
+    font-size: 13px;
+  }
+
+}
+
+
+/* ===========================
+   Small Mobile (480px and below)
+=========================== */
+
+@media screen and (max-width:480px) {
+
+  .myOrdersContainer {
+    padding: 0.75rem;
+  }
+
+  .ordersHeading {
+    font-size: 1.4rem;
+  }
+
+  .orderCard {
+    padding: .8rem;
+  }
+
+  .orderHeader p,
+  .orderFooter p,
+  .orderItemDetails p {
+    font-size: 13px;
+  }
+
+  .orderItemImage {
+    width: 80px;
+    height: 80px;
+  }
+
+  .productName {
+    font-size: 15px;
+  }
+
+  .viewOrderBtn {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .orderStatus span {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .spinner {
+    width: 25px;
+    height: 25px;
+  }
+
+  .infiniteLoader p {
+    font-size: 15px;
+  }
+
 }

@@ -8,7 +8,6 @@ import webFont from "webfontloader";
 import Home from "./component/Home/Home";
 import ProductDetails from "./component/Product/ProductDetails"
 import Products from "./component/Product/Products";
-import Search from "./component/Product/Search";
 import LoginSignUp from './component/User/LoginSignUp';
 import store from "./store";
 import { loadUser } from './actions/userAction';
@@ -67,19 +66,19 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
-        <Route path="/search" element={<Search />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<LoginSignUp />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
-
+        <Route path="/cart" element={<Cart />} />
+        
         {/* Protected User Routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/account" element={<Profile />} />
           <Route path="/me/update" element={<UpdateProfile />} />
           <Route path="/password/update" element={<UpdatePassword />} />
-          <Route path="/cart" element={<Cart />} />
+          
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/order/confirm" element={<ConfirmOrder />} />
           <Route path="/process/payment" element={<PaymentWrapper />} />
@@ -104,111 +103,6 @@ function App() {
       <Footer />
     </Router>
 
-
-    // <Router>
-    //   <Header />
-    //   {isAuthenticated && <UserOptions user={user} />}
-
-    //   <Routes>
-    //     <Route path="/process/payment" element={<PaymentWrapper />} />
-    //     <Route exact path="/" element={<Home />} />
-    //     <Route exact path='/product/:id' Component={ProductDetails} />
-    //     <Route exact path='/products' Component={Products} />
-    //     <Route path='/products/:keyword' Component={Products} />
-
-    //     <Route exact path='/search' Component={Search} />
-
-    //     <Route exact path="/contact" Component={Contact} />
-
-    //     <Route exact path="/about" Component={About} />
-
-    //     <Route exact path='/account' Component={Profile} />
-
-    //     <Route exact path='/me/update' Component={UpdateProfile} />
-
-    //     <Route exact path='/password/update' Component={UpdatePassword} />
-
-    //     <Route exact path='/password/forgot' Component={ForgotPassword} />
-
-    //     <Route exact path='/password/reset/:token' Component={ResetPassword} />
-
-    //     <Route exact path='/login' Component={LoginSignUp} />
-
-    //     <Route exact path='/cart' Component={Cart} />
-
-    //     <Route exact path='/shipping' Component={Shipping} />
-
-    //     <Route exact path='/success' Component={OrderSuccess} />
-
-    //     <Route exact path='/orders' Component={MyOrders} />
-
-    //     <Route exact path='/order/confirm' Component={ConfirmOrder} />
-
-    //     <Route exact path='/order/:id' Component={OrderDetails} />
-
-    //     <ProtectedRoute
-    //       isAdmin={true}
-    //       exact
-    //       path="/admin/dashboard"
-    //       component={Dashboard}
-    //     />
-    //     <ProtectedRoute
-    //       exact
-    //       path="/admin/products"
-    //       isAdmin={true}
-    //       component={ProductList}
-    //     />
-    //     <ProtectedRoute
-    //       exact
-    //       path="/admin/product"
-    //       isAdmin={true}
-    //       component={NewProduct}
-    //     />
-
-    //     <ProtectedRoute
-    //       exact
-    //       path="/admin/product/:id"
-    //       isAdmin={true}
-    //       component={UpdateProduct}
-    //     />
-    //     <ProtectedRoute
-    //       exact
-    //       path="/admin/orders"
-    //       isAdmin={true}
-    //       component={OrderList}
-    //     />
-
-    //     <ProtectedRoute
-    //       exact
-    //       path="/admin/order/:id"
-    //       isAdmin={true}
-    //       component={ProcessOrder}
-    //     />
-    //     <ProtectedRoute
-    //       exact
-    //       path="/admin/users"
-    //       isAdmin={true}
-    //       component={UsersList}
-    //     />
-
-    //     <ProtectedRoute
-    //       exact
-    //       path="/admin/user/:id"
-    //       isAdmin={true}
-    //       component={UpdateUser}
-    //     />
-
-    //     <ProtectedRoute
-    //       exact
-    //       path="/admin/reviews"
-    //       isAdmin={true}
-    //       component={ProductReviews}
-    //     />
-
-    //   </Routes>
-
-    //   <Footer />
-    // </Router>
   );
 }
 

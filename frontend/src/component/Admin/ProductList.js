@@ -12,7 +12,7 @@ import {
 } from "../../actions/productAction";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/ReactToastify.css';
 import MetaData from "../layout/MetaData";
 import SideBar from "./Sidebar";
 import { deleteProductReset } from "../../reducers/productReducer";
