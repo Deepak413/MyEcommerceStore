@@ -3,6 +3,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 const cloudinary = require("cloudinary");
 const User = require("../models/userModel");
+const Product = require("../models/productModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 
@@ -291,5 +292,64 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     success: true,
     message: "User Deleted Successfully"
   });
+});
+
+exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
+
+    const user = await User.findById(req.user.id);
+
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+        return next(new ErrorHandler("Product not found",404));
+    }
+
+    if (user.wishlist.includes(product._id)) {
+        return res.status(200).json({
+            success:true,
+            message:"Already in wishlist"
+        });
+    }
+
+    user.wishlist.push(product._id);
+
+    await user.save();
+
+    res.status(200).json({
+        success:true,
+        wishlist:user.wishlist
+    });
+
+});
+
+exports.removeWishlist = catchAsyncErrors(async (req,res,next)=>{
+
+    const user = await User.findById(req.user.id);
+
+    user.wishlist = user.wishlist.filter(
+        (id)=> id.toString() !== req.params.id
+    );
+
+    await user.save();
+
+    res.status(200).json({
+        success:true,
+        wishlist:user.wishlist
+    });
+
+});
+
+exports.getWishlist = catchAsyncErrors(async(req,res,next)=>{
+
+    const user = await User.findById(req.user.id)
+        .populate("wishlist");
+
+    res.status(200).json({
+
+        success:true,
+        wishlist:user.wishlist
+
+    });
+
 });
 
