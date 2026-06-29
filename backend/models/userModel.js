@@ -36,6 +36,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "user",
     },
+    wishlist: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: "Product",
+        },
+    ],
     createdAt: {
         type: Date,
         default: Date.now,
@@ -77,7 +83,7 @@ userSchema.methods.getResetPasswordToken = function () {
         .update(resetToken)
         .digest("hex");
 
-    this.resetPasswordExpire = Date.now() + 15*60*1000;
+    this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
 
     return resetToken;
 }
