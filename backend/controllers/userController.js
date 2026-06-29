@@ -296,60 +296,68 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 
 exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
 
-    const user = await User.findById(req.user.id);
+  const user = await User.findById(req.user.id);
 
-    const product = await Product.findById(req.params.id);
+  if (!user) {
+    return next(new ErrorHander(`User does not exist with Id: ${req.user.id}`));
+  }
 
-    if (!product) {
-        return next(new ErrorHandler("Product not found",404));
-    }
+  const product = await Product.findById(req.params.id);
 
-    if (user.wishlist.includes(product._id)) {
-        return res.status(200).json({
-            success:true,
-            message:"Already in wishlist"
-        });
-    }
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404));
+  }
 
-    user.wishlist.push(product._id);
-
-    await user.save();
-
-    res.status(200).json({
-        success:true,
-        wishlist:user.wishlist
+  if (user.wishlist.includes(product._id)) {
+    return res.status(200).json({
+      success: true,
+      message: "Already in wishlist"
     });
+  }
+
+  user.wishlist.push(product._id);
+
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    wishlist: user.wishlist
+  });
 
 });
 
-exports.removeWishlist = catchAsyncErrors(async (req,res,next)=>{
+exports.removeWishlist = catchAsyncErrors(async (req, res, next) => {
 
-    const user = await User.findById(req.user.id);
+  const user = await User.findById(req.user.id);
 
-    user.wishlist = user.wishlist.filter(
-        (id)=> id.toString() !== req.params.id
-    );
+  if (!user) {
+    return next(new ErrorHander(`User does not exist with Id: ${req.user.id}`));
+  }
 
-    await user.save();
+  user.wishlist = user.wishlist.filter(
+    (id) => id.toString() !== req.params.id
+  );
 
-    res.status(200).json({
-        success:true,
-        wishlist:user.wishlist
-    });
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    wishlist: user.wishlist
+  });
 
 });
 
-exports.getWishlist = catchAsyncErrors(async(req,res,next)=>{
+exports.getWishlist = catchAsyncErrors(async (req, res, next) => {
 
-    const user = await User.findById(req.user.id)
-        .populate("wishlist");
+  const user = await User.findById(req.user.id)
+    .populate("wishlist");
 
-    res.status(200).json({
+  res.status(200).json({
 
-        success:true,
-        wishlist:user.wishlist
+    success: true,
+    wishlist: user.wishlist
 
-    });
+  });
 
 });
 

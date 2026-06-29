@@ -9,6 +9,8 @@ import 'react-toastify/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, register, clearErrors } from '../../actions/userAction';
 import Loader from '../layout/Loader/Loader';
+import { getWishlist } from '../../../../backend/controllers/userController';
+
 
 const LoginSignUp = () => {
     
@@ -69,6 +71,7 @@ const LoginSignUp = () => {
     
     useEffect(() => {
         if(isAuthenticated){
+            dispatch(getWishlist());
             navigate('/account');
         }
         if (error) {
