@@ -5,6 +5,7 @@ import productsReducer from "./reducers/productReducer";
 import userReducer from "./reducers/userReducer";  
 import cartReducer from "./reducers/cartReducer";
 import orderReducer from "./reducers/orderReducer";
+import wishlistReducer from "./reducers/wishlistReducer";
 
 const middleware = [thunk];
 
@@ -25,7 +26,7 @@ let initialState = {
 
 const store = configureStore({
     reducer: {
-        ...productsReducer, ...userReducer, ...cartReducer, ...orderReducer,
+        ...productsReducer, ...userReducer, ...cartReducer, ...orderReducer, ...wishlistReducer,
     },
     preloadedState: initialState,
     middleware
