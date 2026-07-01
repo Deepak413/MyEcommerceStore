@@ -4,13 +4,12 @@ import { Carousel } from 'react-responsive-carousel';
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { clearErrors, getProductDetails, getSimilarCategoryProducts, newReview } from '../../actions/productAction';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard.js";
 import Loader from '../layout/Loader/Loader';
 import ProductCard from '../Home/ProductCard.js';
 import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToasdetailsBlock-2tify.css';
 import 'react-toastify/ReactToastify.css';
 import MetaData from '../layout/MetaData';
 import { addItemsToCart } from '../../actions/cartAction';
@@ -29,13 +28,18 @@ import "swiper/css";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css/navigation";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { addToWishlist, removeWishlist } from '../../actions/wishlistAction.js';
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { id } = useParams();      //to get the id parameter from the current page
 
     const { product, loading: productLoading, error: productError } =
         useSelector((state) => state.productDetails);
+
+    const { error:wishlistError, loading:wishlistLoading, isAuthenticated } = useSelector(state => state.user);
 
     const {
         similarProducts,
@@ -52,6 +56,10 @@ const ProductDetails = () => {
 
     const { success, error: reviewError } = useSelector(
         (state) => state.newReview
+    );
+
+    const { loading, error, wishlist } = useSelector(
+        (state) => state.wishlist
     );
 
     const increseQuantity = () => {
@@ -135,6 +143,29 @@ const ProductDetails = () => {
 
     }, [similarProducts, product?._id]);
 
+    const isWishlisted = wishlist?.some(
+        item => item._id === product._id
+    );
+
+    const wishlistHandler = async () => {
+
+        if (!isAuthenticated) {
+            toast.info("Please login to use Wishlist");
+            navigate("/login");
+            return;
+        }
+
+        if (isWishlisted) {
+            await dispatch(removeWishlist(product._id));
+            toast.success("Removed from Wishlist");
+        }
+        else {
+            await dispatch(addToWishlist(product._id));
+            toast.success("Added to Wishlist ❤️");
+        }
+
+    };
+
     const options = {
         size: "large",
         value: product.ratings,
@@ -178,14 +209,16 @@ const ProductDetails = () => {
                                     <button
                                         disabled={product.Stock < 1 ? true : false}
                                         onClick={addToCartHandler}
+                                        className='addToCartBtnOnDetailsPage' 
                                     >
                                         Add to Cart
                                     </button>
+                                    <button disabled={wishlistLoading} className='addToWishlistBtnOnDetailsPage' onClick={wishlistHandler}>Add to Wishlist <FaRegHeart /></button>
                                 </div>
 
                                 <p>
                                     {/* Status :  */}
-                                    <p style={{'margin-right':'8px'}}>Status : </p>
+                                    <p style={{ 'margin-right': '8px' }}>Status : </p>
                                     <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
                                         {product.Stock < 1 ? "  OutOfStock" : "  In Stock"}
                                     </b>

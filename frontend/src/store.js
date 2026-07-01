@@ -10,8 +10,6 @@ import wishlistReducer from "./reducers/wishlistReducer";
 const middleware = [thunk];
 
 let savedData = localStorage.getItem("cartItems");
-// console.log("savedData")
-// console.log(savedData);
 
 let initialState = {
     cart: {

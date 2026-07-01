@@ -9,13 +9,14 @@ import {
     removeWishlistSuccess,
     removeWishlistFail,
     clearWishlistErrors,
-} from "../reducers/wishListReducer";
+} from "../reducers/wishlistReducer";
+import axios from "axios";
 
 export const getWishlist = () => async (dispatch) => {
     try {
         dispatch(getWishlistRequest());
 
-        const { data } = await axios.get("/api/v1/wishlist");
+        const { data } = await axios.get(`https://shoppingkaro-65sf.onrender.com/api/v1/wishlist`);
         console.log("wishListAction : data in getWishlist : ", data);
 
         dispatch(getWishlistSuccess(data.wishlist));
@@ -29,7 +30,7 @@ export const addToWishlist = (id) => async (dispatch) => {
     try {
         dispatch(addToWishlistRequest());
 
-        const { data } = await axios.post(`/api/v1/wishlist/${id}`);
+        const { data } = await axios.post(`https://shoppingkaro-65sf.onrender.com/api/v1/wishlist/${id}`);
         console.log("wishListAction : data in addToWishlist : ", data);
 
         dispatch(addToWishlistSuccess(data.wishlist));
@@ -43,7 +44,7 @@ export const removeWishlist = (id) => async (dispatch) => {
     try {
         dispatch(removeWishlistRequest());
 
-        const { data } = await axios.delete(`/api/v1/wishlist/${id}`);
+        const { data } = await axios.delete(`https://shoppingkaro-65sf.onrender.com/api/v1/wishlist/${id}`);
         console.log("wishListAction : data in removeWishlist : ", data);
 
         dispatch(removeWishlistSuccess(data.wishlist));
