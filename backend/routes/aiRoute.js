@@ -1,9 +1,8 @@
-import express from "express";
+const express = require("express");
 
-import { testGemini } from "../controllers/aiController.js";
-
+const testGemini = require("../controllers/aiController.js");
 const router = express.Router();
 
-router.get("ai/test", testGemini);
+router.route("/ai/test").get(testGemini);
 
-export default router;
+module.exports = router;
