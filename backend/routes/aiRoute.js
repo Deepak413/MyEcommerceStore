@@ -1,0 +1,9 @@
+import express from "express";
+
+import { testGemini } from "../controllers/aiController.js";
+
+const router = express.Router();
+
+router.get("ai/test", testGemini);
+
+export default router;
