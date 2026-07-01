@@ -10,7 +10,7 @@ import "./Header.css";
 
 import { FaPersonWalkingLuggage } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
-import UserOptions from './UserOptions';
+// import UserOptions from './UserOptions';
 import { BiLogIn } from "react-icons/bi";
 import { FaGreaterThan } from "react-icons/fa6";
 import { MdOutlineHome } from "react-icons/md";
@@ -18,6 +18,7 @@ import { IoFileTrayStackedOutline } from "react-icons/io5";
 import { MdCall } from "react-icons/md";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { FaTag } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +26,7 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
   const searchRef = useRef(null);
   const { isAuthenticated, user } = useSelector(state => state.user);
+  const { loading, wishlist, error } = useSelector((state) => state.wishlist);
   const { cartItems } = useSelector((state) => state.cart);
   const navigate = useNavigate();
 
@@ -114,7 +116,7 @@ const Header = () => {
                     <BsFillCartFill
                       className='cart_icon icon navbar_quick_action_icon'
                       style={{
-                        color: cartItems.length > 0
+                        color: cartItems?.length > 0
                           ? "rgb(255 159 0)"
                           : isHomePage
                             ? "white"
@@ -123,7 +125,7 @@ const Header = () => {
                     />
                   </div>
                   <div className='navbar_quick_action_text'>My Cart</div>
-                  {cartItems.length == 0 && (
+                  {cartItems.length === 0 && (
                     <FaGreaterThan className='navbar_greater_icon' />
                   )}
 
@@ -133,10 +135,47 @@ const Header = () => {
                 </div>
               </NavLink>
             </li>
+            {isAuthenticated &&
+              <li className="nav_item nav_wishlist_wrapper">
+                <NavLink to="/wishlist" className="wishlist_icon_link" onClick={() => setIsOpen(false)}>
+                  <div className='wishlist_icon_container'>
+                    <div className='navbar_quick_action_icon_wrapper'>
+                      {wishlist?.length > 0 ?
+                        <FaHeart style={{
+                          color: wishlist?.length > 0
+                            ? "rgb(255 159 0)"
+                            : isHomePage
+                              ? "white"
+                              : "black"
+                        }} className='wishlist_icon navbar_quick_action_icon' /> :
+                        <FaRegHeart style={{
+                          color: wishlist?.length > 0
+                            ? "rgb(255 159 0)"
+                            : isHomePage
+                              ? "white"
+                              : "black"
+                        }} className='wishlist_icon navbar_quick_action_icon' />
+                      }
+                    </div>
+                  </div>
+
+                  <div className='navbar_quick_action_text'> Wishlist</div>
+                  {wishlist?.length === 0 && (
+                    <FaGreaterThan className='navbar_greater_icon' />
+                  )}
+                  {wishlist?.length > 0 && (
+                    <span className="wishlist_count_tooltip">{wishlist?.length}</span>
+                  )}
+
+                </NavLink>
+              </li>
+            }
             {isAuthenticated ?
               <li className="nav_item nav_account_login_wrapper"><NavLink to="/login" className="nav_item" onClick={() => setIsOpen(false)}><div className='navbar_quick_action_icon_wrapper'><BiSolidUserPin className='navbar_quick_action_icon' /></div> <div className='navbar_quick_action_text'> My Account</div> <FaGreaterThan className='navbar_greater_icon' /> </NavLink></li>
               :
-              <li className="nav_item nav_account_login_wrapper"><NavLink to="/login" className="nav_item" onClick={() => setIsOpen(false)}><div className='navbar_quick_action_icon_wrapper'><BiLogIn className='navbar_quick_action_icon' /></div> <div className='navbar_quick_action_text'>Login / Register</div> <FaGreaterThan className='navbar_greater_icon' /> </NavLink></li>}
+              <li className="nav_item nav_account_login_wrapper"><NavLink to="/login" className="nav_item" onClick={() => setIsOpen(false)}><div className='navbar_quick_action_icon_wrapper'><BiLogIn className='navbar_quick_action_icon' /></div> <div className='navbar_quick_action_text'>Login / Register</div> <FaGreaterThan className='navbar_greater_icon' /> </NavLink></li>
+            }
+
           </ul>
           <div className="mobile_deals_card">
             <div className="mobile_deals_left">

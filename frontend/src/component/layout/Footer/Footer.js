@@ -28,11 +28,11 @@ const Footer = () => {
                         </div>
                         <div className="footer_address_detail">
                             <div className="footer_address_card">
-                                <div className="footer_address_cardicon"><i class="zmdi zmdi-pin"></i></div>
+                                <div className="footer_address_cardicon"><i className="zmdi zmdi-pin"></i></div>
                                 <div className="footer_address_cardtext">12, Maiden Street, Delhi 311602</div>
                             </div>
                             <div className="footer_address_card">
-                                <div className="footer_address_cardicon"><i class="zmdi zmdi-phone"></i></div>
+                                <div className="footer_address_cardicon"><i className="zmdi zmdi-phone"></i></div>
                                 <div className="footer_address_cardtext">+91 99824*****</div>
                             </div>
                         </div>

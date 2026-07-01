@@ -319,6 +319,8 @@ exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
 
   await user.save();
 
+  await user.populate("wishlist");
+
   res.status(200).json({
     success: true,
     wishlist: user.wishlist
@@ -339,6 +341,7 @@ exports.removeWishlist = catchAsyncErrors(async (req, res, next) => {
   );
 
   await user.save();
+  await user.populate("wishlist");
 
   res.status(200).json({
     success: true,
@@ -351,6 +354,10 @@ exports.getWishlist = catchAsyncErrors(async (req, res, next) => {
 
   const user = await User.findById(req.user.id)
     .populate("wishlist");
+
+  const wishlist = user.wishlist.filter(
+    product => product != null
+  );
 
   res.status(200).json({
 

@@ -11,7 +11,7 @@ import Products from "./component/Product/Products";
 import LoginSignUp from './component/User/LoginSignUp';
 import store from "./store";
 import { loadUser } from './actions/userAction';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import UserOptions from "./component/layout/Header/UserOptions";
 import Profile from "./component/User/Profile";
 import UpdateProfile from "./component/User/UpdateProfile";
@@ -41,9 +41,11 @@ import ProcessOrder from "./component/Admin/ProcessOrder";
 import UsersList from "./component/Admin/UsersList";
 import UpdateUser from "./component/Admin/UpdateUser";
 import ProductReviews from "./component/Admin/ProductReviews";
+import Wishlist from './component/Wishlist/Wishlist.js';
+import { getWishlist } from './actions/wishlistAction.js';
 
 function App() {
-
+  const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector(state => state.user);
 
   useEffect(() => {
@@ -55,6 +57,12 @@ function App() {
 
     store.dispatch(loadUser());
   }, [])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(getWishlist());
+    }
+  }, [dispatch, isAuthenticated]);
 
   return (
     <Router>
@@ -72,19 +80,20 @@ function App() {
         <Route path="/password/forgot" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/cart" element={<Cart />} />
-        
+
         {/* Protected User Routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/account" element={<Profile />} />
           <Route path="/me/update" element={<UpdateProfile />} />
           <Route path="/password/update" element={<UpdatePassword />} />
-          
+
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/order/confirm" element={<ConfirmOrder />} />
           <Route path="/process/payment" element={<PaymentWrapper />} />
           <Route path="/success" element={<OrderSuccess />} />
           <Route path="/orders" element={<MyOrders />} />
           <Route path="/order/:id" element={<OrderDetails />} />
+          <Route path="/wishlist" element={<Wishlist />} />
         </Route>
 
         {/* Admin Routes */}

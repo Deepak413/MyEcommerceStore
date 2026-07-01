@@ -12,7 +12,8 @@ const wishlistSlice = createSlice({
       state.loading = true;
     },
     getWishlistSuccess: (state, action) => {
-      state.wishlist = action.payload.wishlist;
+      console.log("WishListReduver, wishlist : ", action.payload);
+      state.wishlist = action.payload;
       state.loading = false;
     },
     getWishlistFail: (state, action) => {
@@ -24,7 +25,7 @@ const wishlistSlice = createSlice({
       state.loading = true;
     },
     addToWishlistSuccess: (state, action) => {
-      state.wishlist = action.payload.wishlist;
+      state.wishlist = action.payload;
       state.loading = false;
     },
     addToWishlistFail: (state, action) => {
@@ -36,7 +37,7 @@ const wishlistSlice = createSlice({
       state.loading = true;
     },
     removeWishlistSuccess: (state, action) => {
-      state.wishlist = action.payload.wishlist;
+      state.wishlist = action.payload;
       state.loading = false;
     },
     removeWishlistFail: (state, action) => {
@@ -44,8 +45,13 @@ const wishlistSlice = createSlice({
       state.error = action.payload;
     },
 
-    clearAllErrors: (state) => {
+    clearWishlistErrors: (state) => {
       state.error = null;
+    },
+
+    clearWishlist: (state) => {
+      state.loading = false;
+      state.wishlist = [];
     },
 
   },
@@ -55,7 +61,7 @@ const wishlistSlice = createSlice({
 export const {
     getWishlistRequest, getWishlistSuccess, getWishlistFail,
     addToWishlistRequest, addToWishlistSuccess, addToWishlistFail,
-    removeWishlistRequest, removeWishlistSuccess, removeWishlistFail, clearAllErrors
+    removeWishlistRequest, removeWishlistSuccess, removeWishlistFail, clearWishlistErrors, clearWishlist
 } = wishlistSlice.actions;
 
 const reducers = {

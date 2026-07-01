@@ -7,6 +7,8 @@ import "./Profile.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logout } from "../../actions/userAction";
+import { clearWishlist } from "../../reducers/wishlistReducer";
+import { getWishlist } from "../../actions/wishlistAction";
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -16,14 +18,17 @@ const Profile = () => {
     const dispatch = useDispatch();
 
     function logoutUser() {
-            dispatch(logout());
-            toast.success("Logout Successfully");
-            navigate("/login");
-        }
+        dispatch(clearWishlist());
+        dispatch(logout());
+        toast.success("Logout Successfully");
+        navigate("/login");
+    }
 
     useEffect(() => {
         if (isAuthenticated === false) {
             navigate("/login");
+        } else {
+            dispatch(getWishlist());
         }
     }, [navigate, isAuthenticated]);
     return (
@@ -72,6 +77,7 @@ const Profile = () => {
 
                                 <div className="profileActions">
                                     <Link to="/orders">My Orders</Link>
+                                    <Link to="/wishlist">My Wishlist</Link>
                                     <Link to="/password/update">Change Password</Link>
                                     <button onClick={logoutUser}>Logout</button>
                                 </div>

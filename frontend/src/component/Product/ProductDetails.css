@@ -114,11 +114,10 @@
   color: rgba(0, 0, 0, 0.74);
 }
 
-.detailsBlock-3-1>button:last-child {
+.addToCartBtnOnDetailsPage {
   border: none;
   cursor: pointer;
   color: white;
-  transition: all 0.5s;
   background-color: #ffaa2c;
   padding: 0.6vmax 2.2vmax;
   margin: 1vmax 1.5vmax;
@@ -127,10 +126,30 @@
   font-weight: bold;
 }
 
-.detailsBlock-3-1>button:last-child:hover {
+.addToCartBtnOnDetailsPage:hover {
   color: black;
   background-color: white;
-  border: 1px solid black;
+  border: 0.4px solid black;
+}
+
+.addToWishlistBtnOnDetailsPage {
+  cursor: pointer;
+  color: #000000;
+  padding: 0.6vmax 2.2vmax;
+  margin: 1vmax 0;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border: 0.4px solid black;
+}
+.addToWishlistBtnOnDetailsPage:hover{
+  color: white;
+  background-color: #f6ca87;
+  border: none;
 }
 
 .detailsBlock-3>p {
@@ -160,7 +179,7 @@
   border: none;
   cursor: pointer;
   color: white;
-  transition: all 0.5s;
+  /* transition: all 0.5s; */
   background-color: #ffaa2c;
   padding: 0.6vmax 2.2vmax;
   margin: 1vmax 0;
@@ -173,7 +192,7 @@
 
   color: black;
   background-color: white;
-  border: 1px solid black;
+  border: 0.5px solid black;
 }
 
 .submitReviewBox {
@@ -472,10 +491,16 @@
     font-size: 1rem;
   }
 
-  .detailsBlock-3-1>button:last-child {
+  .addToCartBtnOnDetailsPage {
     width: 240px;
     padding: 14px;
     margin: 0;
+    font-size: .95rem;
+  }
+  .addToWishlistBtnOnDetailsPage {
+    width: 240px;
+    padding: 14px;
+    margin: 0 0 1rem 0;
     font-size: .95rem;
   }
 
@@ -572,7 +597,8 @@
     font-size: .9rem;
   }
 
-  .detailsBlock-3-1>button:last-child,
+  .addToCartBtnOnDetailsPage,
+  .addToWishlistBtnOnDetailsPage,
   .submitReview {
     width: 100%;
     max-width: 260px;
@@ -671,7 +697,7 @@
   }
 
   .submitReview,
-  .detailsBlock-3-1>button:last-child {
+  .addToCartBtnOnDetailsPage {
     font-size: .8rem;
   }
 
