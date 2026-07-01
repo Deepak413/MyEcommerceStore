@@ -29,12 +29,14 @@ const product = require("./routes/productRoute");
 const user = require("./routes/userRoute");
 const Order = require("./routes/orderRoute");
 const Payment = require("./routes/paymentRoute");
+const ai = require("./routes/aiRoute.js");
 
 // creating collections in database
 app.use("/api/v1", product);
 app.use("/api/v1", user);
 app.use("/api/v1", Order);
 app.use("/api/v1", Payment);
+app.use("/api/v1", ai)
 
 if (process.env.NODE_ENV == "production") {
 
