@@ -34,7 +34,7 @@ const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 // Test Gemini API
-export const testGemini = catchAsyncErrors(async (req, res, next) => {
+exports.testGemini = catchAsyncErrors(async (req, res, next) => {
 
     const response = await ai.models.generateContent({
         model: "gemini-2.5-flash",
