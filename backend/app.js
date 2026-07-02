@@ -29,7 +29,7 @@ const product = require("./routes/productRoute");
 const user = require("./routes/userRoute");
 const Order = require("./routes/orderRoute");
 const Payment = require("./routes/paymentRoute");
-const ai = require("./routes/aiRoute.js");
+const ai = require("./routes/aiRoute");
 
 // creating collections in database
 app.use("/api/v1", product);
