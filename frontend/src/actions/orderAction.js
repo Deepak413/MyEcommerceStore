@@ -1,129 +1,147 @@
 import axios from "axios";
 import {
-    createOrderRequest,
-    createOrderSuccess,
-    createOrderFail,
-    myOrdersRequest,
-    myOrdersSuccess,
-    myOrdersFail,
-    allOrdersRequest,
-    allOrdersSuccess,
-    allOrdersFail,
-    updateOrderRequest,
-    updateOrderSuccess,
-    updateOrderFail,
-    deleteOrderRequest,
-    deleteOrderSuccess,
-    deleteOrderFail,
-    orderDetailsRequest,
-    orderDetailsSuccess,
-    orderDetailsFail,
-    clearAllErrors
+  createOrderRequest,
+  createOrderSuccess,
+  createOrderFail,
+  myOrdersRequest,
+  myOrdersSuccess,
+  myOrdersFail,
+  allOrdersRequest,
+  allOrdersSuccess,
+  allOrdersFail,
+  updateOrderRequest,
+  updateOrderSuccess,
+  updateOrderFail,
+  deleteOrderRequest,
+  deleteOrderSuccess,
+  deleteOrderFail,
+  orderDetailsRequest,
+  orderDetailsSuccess,
+  orderDetailsFail,
+  clearAllErrors,
 } from "../reducers/orderReducer";
 
 axios.defaults.withCredentials = true;
 
 // Create Order
 export const createOrder = (order) => async (dispatch) => {
-    try {
-        dispatch(createOrderRequest());
+  try {
+    dispatch(createOrderRequest());
 
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
-        const { data } = await axios.post("https://shoppingkaro-65sf.onrender.com/api/v1/order/new", order, config);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.post(
+      "https://shoppingkaro-65sf.onrender.com/api/v1/order/new",
+      order,
+      config,
+    );
 
-        dispatch(createOrderSuccess(data));
-    } catch (error) {
-        dispatch(createOrderFail(error.response.data.message));
-    }
+    dispatch(createOrderSuccess(data));
+  } catch (error) {
+    dispatch(createOrderFail(error.response.data.message));
+  }
 };
 
 // My Orders
-export const myOrders = (page = 1) => async (dispatch) => {
+export const myOrders =
+  (page = 1) =>
+  async (dispatch) => {
     try {
-        console.log("entering myOrders in OrderAction with page : ", page);
-        dispatch(myOrdersRequest(page));
+      console.log("entering myOrders in OrderAction with page : ", page);
+      dispatch(myOrdersRequest(page));
 
-        const { data } = await axios.get(`https://shoppingkaro-65sf.onrender.com/api/v1/orders/me?page=${page}&limit=3`);
-        console.log("data(orders with page and limit) fetched in orderAction : ", data);
+      const { data } = await axios.get(
+        `https://shoppingkaro-65sf.onrender.com/api/v1/orders/me?page=${page}&limit=3`,
+      );
+      console.log(
+        "data(orders with page and limit) fetched in orderAction : ",
+        data,
+      );
 
-
-        dispatch(myOrdersSuccess({
-            orders: data.orders,
-            totalOrders: data.totalOrders,
-            page,
-        }));
+      dispatch(
+        myOrdersSuccess({
+          orders: data.orders,
+          totalOrders: data.totalOrders,
+          page,
+        }),
+      );
     } catch (error) {
-        console.log("error in myOrders action :", error);
-        dispatch(myOrdersFail(error.response.data.message));
+      console.log("error in myOrders action :", error);
+      dispatch(myOrdersFail(error.response.data.message));
     }
-};
+  };
 
 // Get All Orders (admin)
 export const getAllOrders = () => async (dispatch) => {
-    try {
-        dispatch(allOrdersRequest());
+  try {
+    dispatch(allOrdersRequest());
 
-        const { data } = await axios.get("https://shoppingkaro-65sf.onrender.com/api/v1/admin/orders");
+    const { data } = await axios.get(
+      "https://shoppingkaro-65sf.onrender.com/api/v1/admin/orders",
+    );
 
-        dispatch(allOrdersSuccess(data));
-    } catch (error) {
-        dispatch(allOrdersFail(error.response.data.message));
-    }
+    dispatch(allOrdersSuccess(data));
+  } catch (error) {
+    dispatch(allOrdersFail(error.response.data.message));
+  }
 };
 
 // Update Order (admin)
 export const updateOrder = (id, order) => async (dispatch) => {
-    try {
-        dispatch(updateOrderRequest());
+  try {
+    dispatch(updateOrderRequest());
 
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
-        const { data } = await axios.put(
-            `https://shoppingkaro-65sf.onrender.com/api/v1/admin/order/${id}`,
-            order,
-            config
-        );
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.put(
+      `https://shoppingkaro-65sf.onrender.com/api/v1/admin/order/${id}`,
+      order,
+      config,
+    );
 
-        dispatch(updateOrderSuccess(data.success));
-    } catch (error) {
-        dispatch(updateOrderFail(error.response.data.message));
-    }
+    dispatch(updateOrderSuccess(data.success));
+  } catch (error) {
+    dispatch(updateOrderFail(error.response.data.message));
+  }
 };
 
 // Delete Order (admin)
 export const deleteOrder = (id) => async (dispatch) => {
-    try {
-        dispatch(deleteOrderRequest());
+  try {
+    dispatch(deleteOrderRequest());
 
-        const { data } = await axios.delete(`https://shoppingkaro-65sf.onrender.com/api/v1/admin/order/${id}`);
+    const { data } = await axios.delete(
+      `https://shoppingkaro-65sf.onrender.com/api/v1/admin/order/${id}`,
+    );
 
-        dispatch(deleteOrderSuccess(data.success));
-    } catch (error) {
-        dispatch(deleteOrderFail(error.response.data.message));
-    }
+    dispatch(deleteOrderSuccess(data.success));
+  } catch (error) {
+    dispatch(deleteOrderFail(error.response.data.message));
+  }
 };
 
 // Get Order Details
 export const getOrderDetails = (id) => async (dispatch) => {
-    try {
-        dispatch(orderDetailsRequest());
+  try {
+    dispatch(orderDetailsRequest());
 
-        const { data } = await axios.get(`https://shoppingkaro-65sf.onrender.com/api/v1/order/${id}`);
+    const { data } = await axios.get(
+      `https://shoppingkaro-65sf.onrender.com/api/v1/order/${id}`,
+    );
 
-        dispatch(orderDetailsSuccess(data.order));
-    } catch (error) {
-        dispatch(orderDetailsFail(error.response.data.message));
-    }
+    dispatch(orderDetailsSuccess(data.order));
+  } catch (error) {
+    dispatch(orderDetailsFail(error.response.data.message));
+  }
 };
 
 // Clearing Errors
 export const clearErrors = () => async (dispatch) => {
-    dispatch(clearAllErrors());
+  dispatch(clearAllErrors());
 };

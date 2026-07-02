@@ -105,6 +105,7 @@ const ProductDetails = () => {
             console.log("Error while getting product details");
             toast.error(productError);
             dispatch(clearErrors());
+            navigate("/products");
         }
 
         if (reviewError) {

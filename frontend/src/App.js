@@ -1,38 +1,38 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import './App.css';
-import Header from "./component/layout/Header/Header"
+import React from "react";
+import { useState, useEffect } from "react";
+import "./App.css";
+import Header from "./component/layout/Header/Header";
 import Footer from "./component/layout/Footer/Footer";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import webFont from "webfontloader";
 import Home from "./component/Home/Home";
-import ProductDetails from "./component/Product/ProductDetails"
+import ProductDetails from "./component/Product/ProductDetails";
 import Products from "./component/Product/Products";
-import LoginSignUp from './component/User/LoginSignUp';
+import LoginSignUp from "./component/User/LoginSignUp";
 import store from "./store";
-import { loadUser } from './actions/userAction';
-import { useDispatch, useSelector } from 'react-redux';
+import { loadUser } from "./actions/userAction";
+import { useDispatch, useSelector } from "react-redux";
 import UserOptions from "./component/layout/Header/UserOptions";
 import Profile from "./component/User/Profile";
 import UpdateProfile from "./component/User/UpdateProfile";
 import UpdatePassword from "./component/User/UpdatePassword";
 import ForgotPassword from "./component/User/ForgotPassword";
 import ResetPassword from "./component/User/ResetPassword";
-import Cart from "./component/Cart/Cart"
-import Shipping from "./component/Cart/Shipping"
-import ConfirmOrder from "./component/Cart/ConfirmOrder.js"
-import axios from 'axios';
-import Payment from "./component/Cart/Payment.js"
+import Cart from "./component/Cart/Cart";
+import Shipping from "./component/Cart/Shipping";
+import ConfirmOrder from "./component/Cart/ConfirmOrder.js";
+import axios from "axios";
+import Payment from "./component/Cart/Payment.js";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import OrderSuccess from "./component/Cart/OrderSuccess.js";
 import MyOrders from "./component/Order/MyOrders.js";
 import OrderDetails from "./component/Order/OrderDetails.js";
-import About from './component/layout/About/About.js';
-import Contact from './component/layout/Contact/Contact.js';
-import PaymentWrapper from './component/Cart/PaymentWrapper.js';
-import ProtectedRoute from './component/Route/ProtectedRoute.js';
-import Dashboard from './component/Admin/Dashboard.js';
+import About from "./component/layout/About/About.js";
+import Contact from "./component/layout/Contact/Contact.js";
+import PaymentWrapper from "./component/Cart/PaymentWrapper.js";
+import ProtectedRoute from "./component/Route/ProtectedRoute.js";
+import Dashboard from "./component/Admin/Dashboard.js";
 import ProductList from "./component/Admin/ProductList.js";
 import NewProduct from "./component/Admin/NewProduct";
 import UpdateProduct from "./component/Admin/UpdateProduct";
@@ -41,22 +41,24 @@ import ProcessOrder from "./component/Admin/ProcessOrder";
 import UsersList from "./component/Admin/UsersList";
 import UpdateUser from "./component/Admin/UpdateUser";
 import ProductReviews from "./component/Admin/ProductReviews";
-import Wishlist from './component/Wishlist/Wishlist.js';
-import { getWishlist } from './actions/wishlistAction.js';
+import Wishlist from "./component/Wishlist/Wishlist.js";
+import { getWishlist } from "./actions/wishlistAction.js";
+
+import AIChat from "./component/AI/AIChat.js";
 
 function App() {
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector(state => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
   useEffect(() => {
     webFont.load({
       google: {
-        families: ["Roboto", "Droid Sans", "Chilanka"]
-      }
+        families: ["Roboto", "Droid Sans", "Chilanka"],
+      },
     });
 
     store.dispatch(loadUser());
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -68,6 +70,7 @@ function App() {
     <Router>
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
+      <AIChat />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
@@ -111,7 +114,6 @@ function App() {
       </Routes>
       <Footer />
     </Router>
-
   );
 }
 

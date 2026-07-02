@@ -231,7 +231,7 @@ const Products = ({ match }) => {
                 <div className={`filter-drawer ${isFilterBoxOpen ? 'open' : ''}`}>
                     <button className="close-btn" onClick={toggleFilterBox}>×</button>
                     <div className="filterBoxSearchContainer">
-                        <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} type="text" placeholder="Search for Gadgets..." autoFocus />
+                        <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} type="text" placeholder="Search for Gadgets..." />
                         <button className='filterBoxSearchContainerBtn' onClick={handleSearchFilterSubmit}>Search</button>
                     </div>
                     <div className="filterByPriceContainer">

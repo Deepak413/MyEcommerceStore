@@ -74,7 +74,7 @@ const UserOptions = ({ user }) => {
                 onOpen={() => setOpen(true)}
                 open={open}
                 direction='up'
-                style={{zIndex:11, position: 'fixed', bottom: 80, right: 25}}
+                style={{zIndex:11, position: 'fixed', bottom: 80, left: 25}}
                 className='speedDial'
                 icon={
                     <img

@@ -2,114 +2,150 @@ const ai = require("../utils/gemini.js");
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Product = require("../models/productModel.js");
-const {searchProducts} = require("../services/productSearchService.js");
-const {extractIntent} = require("../services/intentExtractor.js");
+const { searchProducts } = require("../services/productSearchService.js");
+const { extractIntent } = require("../services/intentExtractor.js");
 const { parseGeminiJSON } = require("../utils/jsonParser.js");
 const { buildMongoQuery } = require("../services/queryBuilder.js");
 
 exports.testGemini = catchAsyncErrors(async (req, res, next) => {
+  const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: "Say hello to my MERN Ecommerce project.",
+  });
+  console.log(
+    "aiController.js : response from Gemini API in testGemini : ",
+    response,
+  );
 
-    const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: "Say hello to my MERN Ecommerce project.",
-    });
-    console.log("aiController.js : response from Gemini API in testGemini : ", response);
+  if (!response || !response.text) {
+    return next(new ErrorHander("Failed to generate AI response", 500));
+  }
 
-    if (!response || !response.text) {
-        return next(new ErrorHander("Failed to generate AI response", 500));
-    }
-
-    res.status(200).json({
-        success: true,
-        message: response.text,
-    });
-
+  res.status(200).json({
+    success: true,
+    message: response.text,
+  });
 });
 
 exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
-    const { question } = req.body;
-    console.log("aiController.js : question received in shoppingAssistant : ", question);
-    if (!question) {
-        return next(new ErrorHander("Question is required", 400));
-    }
+  const { question, history } = req.body;
+  console.log(
+    "aiController.js : question received in shoppingAssistant : ",
+    question,
+  );
+  if (!question) {
+    return next(new ErrorHander("Question is required", 400));
+  }
 
-    // const products = await productSearchService.searchProducts(question);
-    
-    const intentText = await extractIntent(question);
+  const conversation = history
+    .map((message) => {
+      return `
+                ${message.role.toUpperCase()}:
+                ${message.content}
+                `;
+    })
+    .join("\n");
 
-    console.log("aiController.js : intentText found in shoppingAssistant : ", intentText);
+  console.log(
+    "aiController.js : conversation text in shoppingAssistant : ",
+    conversation,
+  );
 
-    const filters = parseGeminiJSON(intentText);
+  // const products = await productSearchService.searchProducts(question);
 
-    console.log("aiController.js : filters found in shoppingAssistant : ", filters);
+  const intentText = await extractIntent(question);
+  console.log(
+    "aiController.js : intentText found in shoppingAssistant : ",
+    intentText,
+  );
 
-    const mongoQuery = buildMongoQuery(filters);
+  const filters = parseGeminiJSON(intentText);
+  console.log(
+    "aiController.js : filters found in shoppingAssistant : ",
+    filters,
+  );
 
-    console.log("aiController.js : mongoQuery built in shoppingAssistant : ", mongoQuery);
+  const mongoQuery = buildMongoQuery(filters);
 
-    const products = await Product.find(mongoQuery).select("name description category price ratings stock").limit(10);
+  const products = await Product.find(mongoQuery)
+    .select("name description category price ratings stock")
+    .limit(10);
 
-    console.log("aiController.js : 10 products found in shoppingAssistant : ", products);
+  console.log(
+    "aiController.js : 10 products found in shoppingAssistant : ",
+    products,
+  );
 
-    if (!products || products.length === 0) {
-        return next(new ErrorHander("No products found", 404));
-    }
+  if (!products || products.length === 0) {
+    return next(new ErrorHander("No products found", 404));
+  }
 
-    const productList = products
-        .map((product) => `
+  const formattedProducts = products.map((product) => ({
+    _id: product._id,
+    name: product.name,
+    price: product.price,
+    ratings: product.ratings,
+    stock: product.stock,
+    image: product.images?.[0]?.url || "",
+  }));
+
+  const productList = products
+    .map(
+      (product) => `
                 Name: ${product.name}
                 Category: ${product.category}
                 Price: ₹${product.price}
                 Rating: ${product.ratings}
                 Stock: ${product.stock}
                 Description: ${product.description}
-                `).join("\n");
+                `,
+    )
+    .join("\n");
 
-    if (products.length === 0) {
-        return res.status(200).json({
-            success: true,
-            answer: "Sorry, I couldn't find any matching products in our store."
-        });
-    }
-
-    const prompt = `
+  if (products.length === 0) {
+    return res.status(200).json({
+      success: true,
+      answer: "Sorry, I couldn't find any matching products in our store.",
+    });
+  }
+  
+  const prompt = `
                 You are an AI Shopping Assistant.
+                Conversation History:
+                ${conversation}
 
-                Rules:
-
-                1. Recommend ONLY products from the provided list.
-
-                2. Never invent products.
-
-                3. Explain WHY each recommendation matches the customer's needs.
-
-                4. Mention price whenever possible.
-
-                5. Keep the answer concise and friendly.
-
+                Current User Question:
+                ${question}
+                
                 Available Products:
-
                 ${productList}
 
-                Customer Question:
-
-                ${question}
+                Rules:
+                1 Recommend ONLY products provided.
+                2 Understand previous conversation.
+                3 Never invent products.
+                4 If user says anything like "same as before" or "like previous", it refers to previous products.
+                5 Keep answer short.
+                6 Explain WHY each recommendation matches the customer's needs.
                 `;
 
-    const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: prompt,
-    });
+  const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: prompt,
+  });
 
-    console.log("aiController.js : response from Gemini API in shoppingAssistant : ", response);
+  console.log(
+    "aiController.js : response from Gemini API in shoppingAssistant : ",
+    response,
+  );
 
-    if (!response || !response.text) {
-        return next(new ErrorHander("Failed to generate AI response", 500));
-    }
+  if (!response || !response.text) {
+    return next(new ErrorHander("Failed to generate AI response", 500));
+  }
 
-    res.status(200).json({
-        success: true,
-        answer: response.text,
-    });
-
+  res.status(200).json({
+    success: true,
+    message: response.text,
+    products: formattedProducts,
+  });
 });
