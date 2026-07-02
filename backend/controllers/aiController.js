@@ -2,8 +2,8 @@ const ai = require("../utils/gemini.js");
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Product = require("../models/productModel.js");
-const productSearchService = require("../services/productSearchService.js");
-const extractIntentService = require("../services/intentExtractor.js");
+const {searchProducts} = require("../services/productSearchService.js");
+const {extractIntent} = require("../services/intentExtractor.js");
 const { parseGeminiJSON } = require("../utils/jsonParser.js");
 const { buildMongoQuery } = require("../services/queryBuilder.js");
 
@@ -65,7 +65,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
                 Description: ${product.description}
                 `).join("\n");
 
-    if (filters.length === 0) {
+    if (products.length === 0) {
         return res.status(200).json({
             success: true,
             answer: "Sorry, I couldn't find any matching products in our store."
