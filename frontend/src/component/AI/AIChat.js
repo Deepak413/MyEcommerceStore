@@ -78,7 +78,7 @@ const AIChat = () => {
         ...prev,
         {
           sender: "assistant",
-          text: "Sorry, something went wrong.",
+          text: error?.response?.data?.message || "Sorry, something went wrong. Please try again.",
           time: getCurrentTime(),
         },
       ]);

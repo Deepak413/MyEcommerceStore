@@ -37,12 +37,13 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("Question is required", 400));
   }
 
-  const conversation = history.map((message) => {
-    return `
+  const conversation = history
+    .map((message) => {
+      return `
                 ${message?.role?.toUpperCase()}:
                 ${message?.content}
                 `;
-  })
+    })
     .join("\n");
 
   console.log(
@@ -59,26 +60,35 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   );
 
   const filters = parseGeminiJSON(intentText);
-  console.log("aiController.js : filters extracted from intentText in shoppingAssistant : ", filters);
+  console.log(
+    "aiController.js : filters extracted from intentText in shoppingAssistant : ",
+    filters,
+  );
 
   const mongoQuery = buildMongoQuery(filters);
-  console.log("aiController.js : mongoQuery built from filters in shoppingAssistant : ", mongoQuery);
+  console.log(
+    "aiController.js : mongoQuery built from filters in shoppingAssistant : ",
+    mongoQuery,
+  );
 
-  const products = await Product.find(mongoQuery)
-    .select("name images description category price ratings stock")
-    .limit(5);
+  const products = [];
+  if (mongoQuery || Object.keys(mongoQuery).length !== 0) {
+    products = await Product.find(mongoQuery)
+      .select("name images description category price ratings stock")
+      .limit(5);
+
+    if (!products || products?.length === 0) {
+      return res.status(200).json({
+        success: true,
+        answer: "Sorry, I couldn't find any matching products in our store.",
+      });
+    }
+  }
 
   console.log(
     "aiController.js : 5 products found in shoppingAssistant : ",
     products,
   );
-  
-  if (!products || products?.length === 0) {
-    return res.status(200).json({
-      success: true,
-      answer: "Sorry, I couldn't find any matching products in our store.",
-    });
-  }
 
   const formattedProducts = products?.map((product) => ({
     _id: product._id,
@@ -89,8 +99,9 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     image: product.images?.[0]?.url || "",
   }));
 
-  const productList = products?.map(
-    (product) => `
+  const productList = products
+    ?.map(
+      (product) => `
                 Name: ${product.name}
                 Category: ${product.category}
                 Price: ₹${product.price}
@@ -98,7 +109,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
                 Stock: ${product.stock}
                 Description: ${product.description}
                 `,
-  )
+    )
     .join("\n");
 
   const prompt = `
