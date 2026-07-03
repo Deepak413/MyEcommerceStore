@@ -88,7 +88,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
                 Rating: ${product.ratings}
                 Stock: ${product.stock}
                 Description: ${product.description}
-                `,h
+                `,
     )
     .join("\n");
 
