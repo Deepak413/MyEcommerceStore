@@ -52,7 +52,7 @@ const AIChat = () => {
     console.log("AIChat.js : userMessage : ", userMessage);
 
     try {
-      const history = messages.slice(-8).map((message) => ({
+      const history = messages.slice(-4).map((message) => ({
         role: message.sender === "user" ? "user" : "assistant",
         content: message.text,
       }));
