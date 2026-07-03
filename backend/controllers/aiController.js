@@ -81,7 +81,8 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     if (!products || products?.length === 0) {
       return res.status(200).json({
         success: true,
-        answer: "Sorry, I couldn't find any matching products in our store.",
+        products: [],
+        message: "Sorry, I couldn't find any matching products in our store.",
       });
     }
   } else {
@@ -96,9 +97,11 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   const formattedProducts = products?.map((product) => ({
     _id: product._id,
     name: product.name,
+    description: product.description,
+    category: product.category,
     price: product.price,
     ratings: product.ratings,
-    stock: product.stock,
+    stock: product.Stock,
     image: product.images?.[0]?.url || "",
   }));
 
@@ -109,7 +112,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
                 Category: ${product.category}
                 Price: ₹${product.price}
                 Rating: ${product.ratings}
-                Stock: ${product.stock}
+                Stock: ${product.Stock}
                 Description: ${product.description}
                 `,
     )
