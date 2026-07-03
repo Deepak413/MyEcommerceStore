@@ -5,7 +5,7 @@ import ProductRecommendationCard from "./ProductRecommendationCard.js";
 
 const ChatMessage = ({ message }) => {
   const { user, loading, isAuthenticated } = useSelector(
-    (state) => state.user.user,
+    (state) => state.user,
   );
 
   const isUser = message.sender === "user";

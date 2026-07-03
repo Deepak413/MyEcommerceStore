@@ -7,7 +7,7 @@ exports.extractIntent = async (question) => {
 
                 Return ONLY valid JSON.
 
-                Do not explain anything.
+                Do not explain anything. Available categories are: Laptop, Tablet, Phone, Watch, Monitor, Tv, Earphone. use category from this list only.
 
                 Schema:
 
