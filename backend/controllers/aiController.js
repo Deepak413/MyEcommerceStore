@@ -71,10 +71,11 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     mongoQuery,
   );
 
-  const products = [];
-  if (mongoQuery || Object.keys(mongoQuery).length !== 0) {
+  let products;
+
+  if (Object.keys(mongoQuery).length !== 0) {
     products = await Product.find(mongoQuery)
-      .select("name images description category price ratings stock")
+      .select("name images description category price ratings Stock")
       .limit(5);
 
     if (!products || products?.length === 0) {
@@ -83,6 +84,8 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
         answer: "Sorry, I couldn't find any matching products in our store.",
       });
     }
+  } else {
+    products = [];
   }
 
   console.log(
