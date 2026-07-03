@@ -28,7 +28,7 @@ exports.testGemini = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
-  const { question, history } = req.body;
+  const { question, history = [] } = req.body;
   console.log(
     "aiController.js : question received in shoppingAssistant : ",
     question,
@@ -37,7 +37,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("Question is required", 400));
   }
 
-  const conversation = history?.map((message) => {
+  const conversation = history.map((message) => {
       return `
                 ${message?.role?.toUpperCase()}:
                 ${message?.content}
