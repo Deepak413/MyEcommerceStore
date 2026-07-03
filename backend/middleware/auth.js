@@ -5,20 +5,11 @@ const ErrorHander = require("../utils/errorhander");
 
 exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     console.log("Authentication process started");
-    console.log("req in auth : ", req);
-    console.log("req in auth ended");
-
-    console.log("Headers in auth:", req.headers);
-    console.log("Headers in auth: ended");
-
-    console.log("Received Cookies in auth:", req.cookies);
-    console.log("Received Cookies in auth: ended")
 
     console.log("Checking incoming token cookie inside auth.js : ", req.cookies.token);
 
     try {
         const decodedData = jwt.verify(req.cookies.token, process.env.JWT_SECRET);
-        console.log("Decoded data in auth : ", decodedData);
 
         req.user = await User.findById(decodedData.id);
 

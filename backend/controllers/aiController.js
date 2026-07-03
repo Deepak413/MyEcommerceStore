@@ -37,11 +37,10 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("Question is required", 400));
   }
 
-  const conversation = history
-    .map((message) => {
+  const conversation = history?.map((message) => {
       return `
-                ${message.role.toUpperCase()}:
-                ${message.content}
+                ${message?.role?.toUpperCase()}:
+                ${message?.content}
                 `;
     })
     .join("\n");
@@ -54,16 +53,8 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   // const products = await productSearchService.searchProducts(question);
 
   const intentText = await extractIntent(question);
-  console.log(
-    "aiController.js : intentText found in shoppingAssistant : ",
-    intentText,
-  );
 
   const filters = parseGeminiJSON(intentText);
-  console.log(
-    "aiController.js : filters found in shoppingAssistant : ",
-    filters,
-  );
 
   const mongoQuery = buildMongoQuery(filters);
 
@@ -76,11 +67,11 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     products,
   );
 
-  if (!products || products.length === 0) {
+  if (!products || products?.length === 0) {
     return next(new ErrorHander("No products found", 404));
   }
 
-  const formattedProducts = products.map((product) => ({
+  const formattedProducts = products?.map((product) => ({
     _id: product._id,
     name: product.name,
     price: product.price,
@@ -89,8 +80,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     image: product.images?.[0]?.url || "",
   }));
 
-  const productList = products
-    .map(
+  const productList = products.map(
       (product) => `
                 Name: ${product.name}
                 Category: ${product.category}
@@ -98,7 +88,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
                 Rating: ${product.ratings}
                 Stock: ${product.stock}
                 Description: ${product.description}
-                `,
+                `,h
     )
     .join("\n");
 
@@ -108,7 +98,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
       answer: "Sorry, I couldn't find any matching products in our store.",
     });
   }
-  
+
   const prompt = `
                 You are an AI Shopping Assistant.
                 Conversation History:
@@ -135,8 +125,13 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   });
 
   console.log(
-    "aiController.js : response from Gemini API in shoppingAssistant : ",
-    response,
+    "aiController.js : response content from Gemini API in shoppingAssistant : ",
+    response.candidates[0].content,
+  );
+
+  console.log(
+    "aiController.js : response text from Gemini API in shoppingAssistant : ",
+    response.text,
   );
 
   if (!response || !response.text) {

@@ -19,7 +19,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   })
 
   const { name, email, password, avatar } = req.body;
-  console.log("inside userController, name, email", name, email);
+  
   if (!name || !email || !password || !avatar) {
     return next(new ErrorHander("Please fill all required fields", 400));
   }
