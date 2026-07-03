@@ -72,9 +72,12 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     "aiController.js : 5 products found in shoppingAssistant : ",
     products,
   );
-
+  
   if (!products || products?.length === 0) {
-    return next(new ErrorHander("No products found", 404));
+    return res.status(200).json({
+      success: true,
+      answer: "Sorry, I couldn't find any matching products in our store.",
+    });
   }
 
   const formattedProducts = products?.map((product) => ({
@@ -86,7 +89,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     image: product.images?.[0]?.url || "",
   }));
 
-  const productList = products.map(
+  const productList = products?.map(
     (product) => `
                 Name: ${product.name}
                 Category: ${product.category}
@@ -97,13 +100,6 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
                 `,
   )
     .join("\n");
-
-  if (products.length === 0) {
-    return res.status(200).json({
-      success: true,
-      answer: "Sorry, I couldn't find any matching products in our store.",
-    });
-  }
 
   const prompt = `
                 You are an AI Shopping Assistant.

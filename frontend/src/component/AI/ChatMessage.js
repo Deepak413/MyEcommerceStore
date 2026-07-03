@@ -2,6 +2,7 @@ import React from "react";
 import "./AIChat.css";
 import { useSelector } from "react-redux";
 import ProductRecommendationCard from "./ProductRecommendationCard.js";
+import profilePng from "../../images/Profile.png";
 
 const ChatMessage = ({ message }) => {
   const { user, loading, isAuthenticated } = useSelector(
@@ -16,7 +17,7 @@ const ChatMessage = ({ message }) => {
     <div className={`messageRow ${isUser ? "userRow" : "assistantRow"}`}>
       <div className="avatar">
         {isUser ? (
-          <img style={{"height":"100%", "width":"100%", "border-radius":"50%"}} src={user?.avatar?.url} alt={user?.name} />
+          <img style={{"height":"100%", "width":"100%", "border-radius":"50%"}} src={user?.avatar?.url || profilePng} alt={user?.name} />
         ) : (
           "🤖"
         )}
