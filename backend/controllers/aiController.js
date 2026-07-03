@@ -9,7 +9,7 @@ const { buildMongoQuery } = require("../services/queryBuilder.js");
 
 exports.testGemini = catchAsyncErrors(async (req, res, next) => {
   const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
+    model: "gemini-2.0-flash",
     contents: "Say hello to my MERN Ecommerce project.",
   });
   console.log(
