@@ -38,11 +38,11 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   }
 
   const conversation = history.map((message) => {
-      return `
+    return `
                 ${message?.role?.toUpperCase()}:
                 ${message?.content}
                 `;
-    })
+  })
     .join("\n");
 
   console.log(
@@ -53,17 +53,23 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   // const products = await productSearchService.searchProducts(question);
 
   const intentText = await extractIntent(question);
+  console.log(
+    "aiController.js : intentText from Gemini API in shoppingAssistant : ",
+    intentText,
+  );
 
   const filters = parseGeminiJSON(intentText);
+  console.log("aiController.js : filters extracted from intentText in shoppingAssistant : ", filters);
 
   const mongoQuery = buildMongoQuery(filters);
+  console.log("aiController.js : mongoQuery built from filters in shoppingAssistant : ", mongoQuery);
 
   const products = await Product.find(mongoQuery)
-    .select("name description category price ratings stock")
-    .limit(10);
+    .select("name images description category price ratings stock")
+    .limit(5);
 
   console.log(
-    "aiController.js : 10 products found in shoppingAssistant : ",
+    "aiController.js : 5 products found in shoppingAssistant : ",
     products,
   );
 
@@ -81,7 +87,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   }));
 
   const productList = products.map(
-      (product) => `
+    (product) => `
                 Name: ${product.name}
                 Category: ${product.category}
                 Price: ₹${product.price}
@@ -89,7 +95,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
                 Stock: ${product.stock}
                 Description: ${product.description}
                 `,
-    )
+  )
     .join("\n");
 
   if (products.length === 0) {

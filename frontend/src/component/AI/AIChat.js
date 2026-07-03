@@ -49,6 +49,7 @@ const AIChat = () => {
 
     setInput("");
     setLoading(true);
+    console.log("AIChat.js : userMessage : ", userMessage);
 
     try {
       const history = messages.slice(-8).map((message) => ({
@@ -56,7 +57,11 @@ const AIChat = () => {
         content: message.text,
       }));
 
+      console.log("AIChat.js : history : ", history);
+
       const response = await askAI(userMessage.text, history);
+
+      console.log("AIChat.js : response from askAI : ", response);
 
       setMessages((prev) => [
         ...prev,
@@ -68,6 +73,7 @@ const AIChat = () => {
         },
       ]);
     } catch (error) {
+      console.error("AIChat.js : Error in sendMessage : ", error);
       setMessages((prev) => [
         ...prev,
         {
@@ -76,6 +82,7 @@ const AIChat = () => {
           time: getCurrentTime(),
         },
       ]);
+      console.error("AIChat.js : message in sendMessage in catch block : ", messages);
     } finally {
       setLoading(false);
     }

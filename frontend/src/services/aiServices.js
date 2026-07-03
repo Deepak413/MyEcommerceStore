@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "/api/v1",
+  baseURL: "https://shoppingkaro-65sf.onrender.com/api/v1",
 });
 
 export const askAI = async (question, history) => {

@@ -1,59 +1,45 @@
 import React from "react";
 import "./AIChat.css";
+import { useSelector } from "react-redux";
 import ProductRecommendationCard from "./ProductRecommendationCard.js";
 
 const ChatMessage = ({ message }) => {
+  const { user, loading, isAuthenticated } = useSelector(
+    (state) => state.user.user,
+  );
 
-    const isUser = message.sender === "user";
+  const isUser = message.sender === "user";
 
-    return (
+  console.log("ChatMessage.js : products : ", message.products);
 
-        <div className={`messageRow ${isUser ? "userRow" : "assistantRow"}`}>
-            <div className="avatar">
-                {isUser ? "🧑" : "🤖"}
-            </div>
-            {/* Message */}
-            <div className={`messageBubble ${isUser ? "userBubble" : "assistantBubble"}`}>
-                <p>
+  return (
+    <div className={`messageRow ${isUser ? "userRow" : "assistantRow"}`}>
+      <div className="avatar">
+        {isUser ? (
+          <img style={{"height":"100%", "width":"100%", "border-radius":"50%"}} src={user?.avatar?.url} alt={user?.name} />
+        ) : (
+          "🤖"
+        )}
+      </div>
+      <div
+        className={`messageBubble ${isUser ? "userBubble" : "assistantBubble"}`}
+      >
+        <p>{message.text}</p>
 
-                    {message.text}
+        {message.products && message.products.length > 0 && (
+          <div className="recommendedProducts">
+            {message.products.map((product) => (
+              <ProductRecommendationCard
+                key={product._id}
 
-                </p>
-
-                {
-
-                    message.products &&
-
-                    message.products.length > 0 && (
-
-                        <div className="recommendedProducts">
-
-                            {
-
-                                message.products.map(product => (
-
-                                    <ProductRecommendationCard
-
-                                        key={product._id}
-
-                                        product={product}
-
-                                    />
-
-                                ))
-
-                            }
-
-                        </div>
-
-                    )
-
-                }
-                <span className="messageTime">
-                    {message.time}
-                </span>
-            </div>
-        </div>
-    );
+                product={product}
+              />
+            ))}
+          </div>
+        )}
+        <span className="messageTime">{message.time}</span>
+      </div>
+    </div>
+  );
 };
 export default ChatMessage;

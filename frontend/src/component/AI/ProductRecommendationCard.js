@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./AIChat.css";
+import { IoStar } from "react-icons/io5";
 
 const ProductRecommendationCard = ({ product }) => {
   const navigate = useNavigate();
@@ -22,11 +23,16 @@ const ProductRecommendationCard = ({ product }) => {
       <div className="aiProductInfo">
         <h4>{product.name}</h4>
 
-        <p>⭐ {product.ratings}</p>
+        <p>
+          <IoStar style={{ color: "#dcb679" }} /> {product.ratings}
+        </p>
 
-        <h3>₹{product.price}</h3>
+        <h3 style={{ "font-size": "0.8rem" }}>₹{product.price}</h3>
 
-        <span className={product.stock > 0 ? "stockGreen" : "stockRed"}>
+        <span
+          style={{ "font-size": "0.8rem" }}
+          className={product.stock > 0 ? "stockGreen" : "stockRed"}
+        >
           {product.stock > 0 ? "In Stock" : "Out of Stock"}
         </span>
 
