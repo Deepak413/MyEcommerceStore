@@ -3,7 +3,6 @@ const app = require("./app");
 const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/database");
-const Product = require("./models/productModel");
 
 //Unhandling Uncaught Exception - undefined variables
 process.on("uncaughtException", (err) => {
@@ -17,46 +16,6 @@ dotenv.config({ path: "backend/config/config.env" });
 
 //connecting to database
 connectDatabase();
-
-async function updateEmbeddings() {
-  const products = await Product.find();
-
-  console.log(
-    `Found ${products.length} products in script generating embeddings`,
-  );
-
-  for (const product of products) {
-    const text = `
-
-        Name: ${product.name}
-
-        Description: ${product.description}
-
-        Category: ${product.category}
-
-        Price: ${product.price}
-
-        `;
-
-    console.log(
-      "Generating embedding for",
-
-      product.name,
-    );
-
-    const embedding = await generateEmbedding(text);
-
-    product.embedding = embedding;
-
-    await product.save();
-  }
-
-  console.log("Done");
-
-  process.exit();
-}
-
-updateEmbeddings();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
