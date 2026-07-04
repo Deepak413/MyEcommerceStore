@@ -3,6 +3,7 @@ const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary");
+const { generateEmbedding } = require("../services/embeddingService");
 
 // Create Products -- ADMIN
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
