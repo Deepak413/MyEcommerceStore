@@ -1,4 +1,4 @@
-const app = require('./app');
+const app = require("./app");
 
 const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
@@ -6,33 +6,73 @@ const connectDatabase = require("./config/database");
 
 //Unhandling Uncaught Exception - undefined variables
 process.on("uncaughtException", (err) => {
-    console.log(`Error : ${err.message}`);
-    console.log(`Shutting down the server due to Uncaught Exception`);
-    process.exit(1);
+  console.log(`Error : ${err.message}`);
+  console.log(`Shutting down the server due to Uncaught Exception`);
+  process.exit(1);
 });
 
 //config
-dotenv.config({path:"backend/config/config.env"});
+dotenv.config({ path: "backend/config/config.env" });
 
 //connecting to database
 connectDatabase();
 
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME ,
-    api_key: process.env.CLOUDINARY_API_KEY ,
-    api_secret: process.env.CLOUDINARY_API_SECRET 
-})
+async function updateEmbeddings() {
+  const products = await Product.find();
 
-const server = app.listen(process.env.PORT, ()=>{
-    console.log(`server is running on port ${process.env.PORT}`);
-})
+  console.log(
+    `Found ${products.length} products in script generating embeddings`,
+  );
+
+  for (const product of products) {
+    const text = `
+
+        Name: ${product.name}
+
+        Description: ${product.description}
+
+        Category: ${product.category}
+
+        Price: ${product.price}
+
+        `;
+
+    console.log(
+      "Generating embedding for",
+
+      product.name,
+    );
+
+    const embedding = await generateEmbedding(text);
+
+    product.embedding = embedding;
+
+    await product.save();
+  }
+
+  console.log("Done");
+
+  process.exit();
+}
+
+updateEmbeddings();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const server = app.listen(process.env.PORT, () => {
+  console.log(`server is running on port ${process.env.PORT}`);
+});
 
 //Unhandling Promise Rejection handling  - strings change
 process.on("unhandledRejection", (err) => {
-    console.log(`Error : ${err.message}`);
-    console.log(`Shutting down the server due to Promise Rejection`);
+  console.log(`Error : ${err.message}`);
+  console.log(`Shutting down the server due to Promise Rejection`);
 
-    server.close(() => {
-        process.exit(1);
-    });
+  server.close(() => {
+    process.exit(1);
+  });
 });
