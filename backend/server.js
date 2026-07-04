@@ -3,6 +3,7 @@ const app = require("./app");
 const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/database");
+const Product = require("./models/productModel");
 
 //Unhandling Uncaught Exception - undefined variables
 process.on("uncaughtException", (err) => {
