@@ -1,8 +1,11 @@
-require("dotenv").config();
-
 const mongoose = require("mongoose");
 
 const Product = require("../models/productModel");
+const dotenv = require("dotenv");
+
+dotenv.config({
+  path: "backend/config/config.env",
+});
 
 const { generateEmbedding } = require("../services/embeddingService");
 const connectDatabase = require("../config/database");
