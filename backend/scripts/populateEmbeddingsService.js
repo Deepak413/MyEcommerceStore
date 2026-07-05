@@ -1,6 +1,4 @@
 const Product = require("../models/productModel");
-// const { generateEmbedding } = require("./embeddingService");
-// const generateEmbedding = require("./embeddingService").generateEmbedding;
 const { generateEmbedding } = require("../services/embeddingService");
 
 exports.populateMissingEmbeddings = async () => {

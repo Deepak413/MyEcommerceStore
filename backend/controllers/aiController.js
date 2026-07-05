@@ -32,8 +32,6 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     conversation,
   );
 
-  // const products = await productSearchService.searchProducts(question);
-
   const intentText = await extractIntent(question);
   console.log(
     "aiController.js : intentText from Gemini API in shoppingAssistant : ",
@@ -56,32 +54,36 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   let vectorResults;
 
   if (Object.keys(mongoQuery).length !== 0) {
-    // products = await Product.find(mongoQuery).select("name images description category price ratings Stock").limit(5);
 
-    vectorResults = await vectorSearchProducts(question, 5);
+    vectorResults = await vectorSearchProducts(question, 5, mongoQuery);
     console.log(
-      "aiController.js : products fetched from vectorSearch : ",
+      "aiController.js : products fetched from vectorSearch with filters : ",
       vectorResults,
     );
+    products = vectorResults;
 
-    const productIds = vectorResults.map((product) => product._id);
-    console.log(
-      "aiController.js : productIds fetched from vectorSearch : ",
-      productIds,
-    );
 
-    products = await Product.find({
-      _id: {
-        $in: productIds,
-      },
-      ...mongoQuery,
-    }).limit(5)
-      .select("name images description category price ratings Stock");
+    // console.log(
+    //   "aiController.js : products fetched from vectorSearch : ",
+    //   vectorResults,
+    // );
+    // const productIds = vectorResults.map((product) => product._id);
+    // console.log(
+    //   "aiController.js : productIds fetched from vectorSearch : ",
+    //   productIds,
+    // );
 
-    console.log(
-      "aiController.js : products fetched from MongoDB after vector search : ",
-      products,
-    );
+    // products = await Product.find({
+    //   _id: {
+    //     $in: productIds,
+    //   },
+    //   ...mongoQuery,
+    // }).limit(5).select("name images description category price ratings Stock");
+
+    // console.log(
+    //   "aiController.js : products fetched from MongoDB after vector search : ",
+    //   products,
+    // );
 
     if (!products || products?.length === 0) {
       return res.status(200).json({

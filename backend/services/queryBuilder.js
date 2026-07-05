@@ -29,24 +29,6 @@ exports.buildMongoQuery = (filters) => {
     }
   }
 
-  // Description search (color + usage + keywords)
-  // const descriptionTerms = [];
-
-  // if (filters.color) descriptionTerms.push(filters.color);
-
-  // if (filters.usage) descriptionTerms.push(filters.usage);
-
-  // if (filters.keywords && filters.keywords.length > 0) {
-  //     descriptionTerms.push(...filters.keywords);
-  // }
-
-  // if (descriptionTerms.length > 0) {
-  //     query.description = {
-  //         $regex: descriptionTerms.join("|"),
-  //         $options: "i",
-  //     };
-  // }
-
   if (filters.ratingMin != null) {
     query.ratings = {
       $gte: filters.ratingMin,

@@ -1,7 +1,7 @@
 const Product = require("../models/productModel");
 const { generateEmbedding } = require("./embeddingService");
 
-const vectorSearchProducts = async (query, limit = 5) => {
+const vectorSearchProducts = async (query, limit = 5, mongoQuery = {}) => {
   const queryEmbedding = await generateEmbedding(query);
 
   const products = await Product.aggregate([
@@ -12,6 +12,7 @@ const vectorSearchProducts = async (query, limit = 5) => {
         path: "embedding",
 
         queryVector: queryEmbedding,
+        filter: mongoQuery,
 
         numCandidates: limit * 10,
 
