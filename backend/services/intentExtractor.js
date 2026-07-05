@@ -24,12 +24,12 @@ exports.extractIntent = async (question) => {
         {
         "category": "",
         "name": "",
-        "brand": "",
         "color": "",
+        "brand": "",
         "priceMin": null,
         "priceMax": null,
         "ratingMin": null,
-        "stock": null,
+        "Stock": null,
         "keywords": [],
         "usage": ""
         }
@@ -38,11 +38,9 @@ exports.extractIntent = async (question) => {
 
         - name should contain the product name if mentioned.
 
-        - brand should contain only the brand name.
-
         - priceMin and priceMax should be numbers or null.
 
-        - ratingMin should be a number if user specifies rating.
+        - ratingMin should be a number if user specifies ratings.
 
         - stock should be: a number or null.
 

@@ -6,26 +6,7 @@ const { searchProducts } = require("../services/productSearchService.js");
 const { extractIntent } = require("../services/intentExtractor.js");
 const { parseGeminiJSON } = require("../utils/jsonParser.js");
 const { buildMongoQuery } = require("../services/queryBuilder.js");
-
-exports.testGemini = catchAsyncErrors(async (req, res, next) => {
-  const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
-    contents: "Say hello to my MERN Ecommerce project.",
-  });
-  console.log(
-    "aiController.js : response from Gemini API in testGemini : ",
-    response,
-  );
-
-  if (!response || !response.text) {
-    return next(new ErrorHander("Failed to generate AI response", 500));
-  }
-
-  res.status(200).json({
-    success: true,
-    message: response.text,
-  });
-});
+const { vectorSearchProducts } = require("../services/vectorSearchService.js");
 
 exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   const { question, history = [] } = req.body;
@@ -34,7 +15,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     question,
   );
   if (!question) {
-    return next(new ErrorHander("Question is required", 400));
+    return next(new ErrorHander("Please provide a question input", 400));
   }
 
   const conversation = history
@@ -74,9 +55,32 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   let products;
 
   if (Object.keys(mongoQuery).length !== 0) {
-    products = await Product.find(mongoQuery)
-      .select("name images description category price ratings Stock")
-      .limit(5);
+    // products = await Product.find(mongoQuery).select("name images description category price ratings Stock").limit(5);
+
+    const vectorResults = await vectorSearchProducts(mongoQuery, 10);
+    console.log(
+      "aiController.js : products fetched from vectorSearch : ",
+      vectorResults,
+    );
+
+    const productIds = vectorResults.map((product) => product._id);
+    console.log(
+      "aiController.js : productIds fetched from vectorSearch : ",
+      productIds,
+    );
+
+    const products = await Product.find({
+      _id: {
+        $in: productIds,
+      },
+      ...mongoQuery,
+    }).limit(5)
+      .select("name images description category price ratings Stock");
+
+    console.log(
+      "aiController.js : products fetched from MongoDB after vector search : ",
+      products,
+    );
 
     if (!products || products?.length === 0) {
       return res.status(200).json({
@@ -90,7 +94,25 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   }
 
   console.log(
-    "aiController.js : 5 products found in shoppingAssistant : ",
+    "aiController.js : 5 products found in shoppingAssistant(not score sorted) : ",
+    products,
+  );
+
+  const scoreMap = new Map();
+  vectorResults.forEach((product) => {
+    scoreMap.set(
+      product._id.toString(),
+
+      product.score,
+    );
+  });
+
+  products.sort((a, b) => {
+    return scoreMap.get(b._id.toString()) - scoreMap.get(a._id.toString());
+  });
+
+  console.log(
+    "aiController.js : 5 products found in shoppingAssistant(most relevant sorted) : ",
     products,
   );
 
