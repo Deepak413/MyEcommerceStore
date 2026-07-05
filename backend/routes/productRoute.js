@@ -37,4 +37,18 @@ router.route("/reviews")
     .get(getProductReviews)
     .delete(isAuthenticatedUser, deleteReview);
 
+router.route("/admin/populate-embeddings")
+  .get(
+    isAuthenticatedUser,
+    authorizeRoles("admin"),
+    populateEmbeddings
+);
+
+router.get(
+  "/admin/populate-embeddings",
+  isAuthenticatedUser,
+  authorizeRoles("admin"),
+  populateEmbeddings
+);
+
 module.exports = router

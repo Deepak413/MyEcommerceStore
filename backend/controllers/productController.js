@@ -4,6 +4,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary");
 const { generateEmbedding } = require("../services/embeddingService");
+const { populateMissingEmbeddings } = require("../scripts/populateEmbeddingsService");
 
 // Create Products -- ADMIN
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
@@ -199,7 +200,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res) => {
     await product.save();
   }
   console.log("productController : updateProduct - Embedding updated");
-  
+
   res.status(200).json({
     success: true,
     product,
@@ -327,5 +328,15 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
+  });
+});
+
+//Populate embeddings for products that are missing them
+exports.populateEmbeddings = catchAsyncErrors(async (req, res) => {
+  const result = await populateMissingEmbeddings();
+
+  res.status(200).json({
+    success: true,
+    ...result,
   });
 });
