@@ -57,7 +57,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   if (Object.keys(mongoQuery).length !== 0) {
     // products = await Product.find(mongoQuery).select("name images description category price ratings Stock").limit(5);
 
-    const vectorResults = await vectorSearchProducts(mongoQuery, 10);
+    const vectorResults = await vectorSearchProducts(question, 10);
     console.log(
       "aiController.js : products fetched from vectorSearch : ",
       vectorResults,
@@ -69,7 +69,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
       productIds,
     );
 
-    const products = await Product.find({
+    products = await Product.find({
       _id: {
         $in: productIds,
       },
