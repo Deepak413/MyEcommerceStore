@@ -11,7 +11,7 @@ const { vectorSearchProducts } = require("../services/vectorSearchService.js");
 exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   const { question, history = [] } = req.body;
   console.log(
-    "aiController.js : question received in shoppingAssistant : ",
+    "=====aiController.js : question received in shoppingAssistant : ",
     question,
   );
   if (!question) {
@@ -27,11 +27,6 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     })
     .join("\n");
 
-  console.log(
-    "aiController.js : conversation text in shoppingAssistant : ",
-    conversation,
-  );
-
   const intentText = await extractIntent(question);
   console.log(
     "aiController.js : intentText from Gemini API in shoppingAssistant : ",
@@ -39,10 +34,6 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   );
 
   const filters = parseGeminiJSON(intentText);
-  console.log(
-    "aiController.js : filters extracted from intentText in shoppingAssistant : ",
-    filters,
-  );
 
   const mongoQuery = buildMongoQuery(filters);
   console.log(
@@ -51,7 +42,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   );
 
   let products;
-  let vectorResults;
+  let vectorResults = [];
 
   if (Object.keys(mongoQuery).length !== 0) {
 
@@ -61,29 +52,6 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
       vectorResults,
     );
     products = vectorResults;
-
-
-    // console.log(
-    //   "aiController.js : products fetched from vectorSearch : ",
-    //   vectorResults,
-    // );
-    // const productIds = vectorResults.map((product) => product._id);
-    // console.log(
-    //   "aiController.js : productIds fetched from vectorSearch : ",
-    //   productIds,
-    // );
-
-    // products = await Product.find({
-    //   _id: {
-    //     $in: productIds,
-    //   },
-    //   ...mongoQuery,
-    // }).limit(5).select("name images description category price ratings Stock");
-
-    // console.log(
-    //   "aiController.js : products fetched from MongoDB after vector search : ",
-    //   products,
-    // );
 
     if (!products || products?.length === 0) {
       return res.status(200).json({
@@ -97,27 +65,23 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   }
 
   console.log(
-    "aiController.js : 5 products found in shoppingAssistant(not score sorted) : ",
+    "aiController.js : 5 products found in shoppingAssistant : ",
     products,
   );
 
-  const scoreMap = new Map();
-  vectorResults?.forEach((product) => {
-    scoreMap.set(
-      product._id.toString(),
+  //Cann be used for weighted ranking based on vector search score if needed in future
+  // const scoreMap = new Map();
+  // vectorResults?.forEach((product) => {
+  //   scoreMap.set(
+  //     product._id.toString(),
 
-      product.score,
-    );
-  });
+  //     product.score,
+  //   );
+  // });
 
-  products?.sort((a, b) => {
-    return scoreMap.get(b._id.toString()) - scoreMap.get(a._id.toString());
-  });
-
-  console.log(
-    "aiController.js : 5 products found in shoppingAssistant(most relevant sorted) : ",
-    products,
-  );
+  // products?.sort((a, b) => {
+  //   return scoreMap.get(b._id.toString()) - scoreMap.get(a._id.toString());
+  // });
 
   const formattedProducts = products?.map((product) => ({
     _id: product._id,
@@ -166,11 +130,6 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     model: "gemini-2.5-flash",
     contents: prompt,
   });
-
-  console.log(
-    "aiController.js : response content from Gemini API in shoppingAssistant : ",
-    response?.candidates?.[0]?.content,
-  );
 
   console.log(
     "aiController.js : response text from Gemini API in shoppingAssistant : ",
