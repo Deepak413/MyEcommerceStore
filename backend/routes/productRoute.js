@@ -8,7 +8,8 @@ const { getAllProductsWithPagination,
         createProductReview, 
         getProductReviews,
         deleteReview,
-        getAdminProducts
+        getAdminProducts,
+        populateEmbeddings
     } = require("../controllers/productController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
@@ -42,13 +43,6 @@ router.route("/admin/populate-embeddings")
     isAuthenticatedUser,
     authorizeRoles("admin"),
     populateEmbeddings
-);
-
-router.get(
-  "/admin/populate-embeddings",
-  isAuthenticatedUser,
-  authorizeRoles("admin"),
-  populateEmbeddings
-);
+  );
 
 module.exports = router
