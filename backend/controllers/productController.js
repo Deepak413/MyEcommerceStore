@@ -181,6 +181,8 @@ exports.updateProduct = catchAsyncErrors(async (req, res) => {
     useFindAndModify: false,
   });
 
+  console.log("productController : updateProduct - Updated Product without embedding:", product);
+
   if (req.body.name || req.body.description || req.body.category || req.body.price ) {
     const text = `
         Name: ${product.name}
@@ -196,7 +198,8 @@ exports.updateProduct = catchAsyncErrors(async (req, res) => {
 
     await product.save();
   }
-
+  console.log("productController : updateProduct - Embedding updated");
+  
   res.status(200).json({
     success: true,
     product,
