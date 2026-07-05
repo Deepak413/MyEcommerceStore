@@ -5,8 +5,8 @@ import {
   updateProduct,
   getProductDetails,
 } from "../../actions/productAction";
-import { toast } from 'react-toastify';
-import 'react-toastify/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 import MetaData from "../layout/MetaData";
 import Button from "@mui/material/Button";
 
@@ -43,7 +43,7 @@ const UpdateProduct = () => {
   const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
- const categories = [
+  const categories = [
     "Laptop",
     "Tablet",
     "Phone",
@@ -51,7 +51,7 @@ const UpdateProduct = () => {
     "Monitor",
     "Tv",
     "Earphone",
-];
+  ];
 
   useEffect(() => {
     if (!product || product._id !== productId) {
@@ -226,11 +226,7 @@ const UpdateProduct = () => {
               ))}
             </div>
 
-            <Button
-              id="createProductBtn"
-              type="submit"
-              disabled={loading}
-            >
+            <Button id="createProductBtn" type="submit" disabled={loading}>
               Update
             </Button>
           </form>

@@ -127,10 +127,6 @@ exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
 
   if (!product) {
     return next(new ErrorHander("Product not found", 404));
-    // return res.status(500).json({
-    //     success:false,
-    //     message:"product not found"
-    // })
   }
 
   res.status(200).json({
@@ -177,11 +173,29 @@ exports.updateProduct = catchAsyncErrors(async (req, res) => {
     req.body.images = imagesLinks;
   }
 
+  console.log("productController : updateProduct - Updating Product with ID:", req.params.id, "and Data:", req.body);
+
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
   });
+
+  if (req.body.name || req.body.description || req.body.category || req.body.price ) {
+    const text = `
+        Name: ${product.name}
+        Description: ${product.description}
+        Category: ${product.category}
+        Rating: ${product.ratings}
+        Price: ${product.price}
+        `;
+
+    const embedding = await generateEmbedding(text);
+
+    product.embedding = embedding;
+
+    await product.save();
+  }
 
   res.status(200).json({
     success: true,
