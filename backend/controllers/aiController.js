@@ -102,7 +102,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   );
 
   const scoreMap = new Map();
-  vectorResults.forEach((product) => {
+  vectorResults?.forEach((product) => {
     scoreMap.set(
       product._id.toString(),
 
@@ -110,7 +110,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     );
   });
 
-  products.sort((a, b) => {
+  products?.sort((a, b) => {
     return scoreMap.get(b._id.toString()) - scoreMap.get(a._id.toString());
   });
 
@@ -130,8 +130,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     image: product.images?.[0]?.url || "",
   }));
 
-  const productList = products
-    ?.map(
+  const productList = products?.map(
       (product) => `
                 Name: ${product.name}
                 Category: ${product.category}
@@ -170,12 +169,12 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
 
   console.log(
     "aiController.js : response content from Gemini API in shoppingAssistant : ",
-    response.candidates[0].content,
+    response?.candidates?.[0]?.content,
   );
 
   console.log(
     "aiController.js : response text from Gemini API in shoppingAssistant : ",
-    response.text,
+    response?.text,
   );
 
   if (!response || !response.text) {
