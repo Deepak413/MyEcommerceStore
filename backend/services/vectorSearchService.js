@@ -29,6 +29,7 @@ const vectorSearchProducts = async (query, limit = 5, mongoQuery = {}) => {
         Stock: 1,
         images: 1,
         description: 1,
+        numOfReviews: 1,
         score: {
           $meta: "vectorSearchScore",
         },

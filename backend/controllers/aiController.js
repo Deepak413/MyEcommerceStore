@@ -7,6 +7,7 @@ const { extractIntent } = require("../services/intentExtractor.js");
 const { parseGeminiJSON } = require("../utils/jsonParser.js");
 const { buildMongoQuery } = require("../services/queryBuilder.js");
 const { vectorSearchProducts } = require("../services/vectorSearchService.js");
+const { calculateScore } = require("../services/weightedRankingService.js");
 
 exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   const { question, history = [] } = req.body;
@@ -45,7 +46,6 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   let vectorResults = [];
 
   if (Object.keys(mongoQuery).length !== 0) {
-
     vectorResults = await vectorSearchProducts(question, 5, mongoQuery);
     console.log(
       "aiController.js : products fetched from vectorSearch with filters : ",
@@ -69,19 +69,7 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     products,
   );
 
-  //Cann be used for weighted ranking based on vector search score if needed in future
-  // const scoreMap = new Map();
-  // vectorResults?.forEach((product) => {
-  //   scoreMap.set(
-  //     product._id.toString(),
-
-  //     product.score,
-  //   );
-  // });
-
-  // products?.sort((a, b) => {
-  //   return scoreMap.get(b._id.toString()) - scoreMap.get(a._id.toString());
-  // });
+  products?.sort((a, b) => calculateScore(b) - calculateScore(a));
 
   const formattedProducts = products?.map((product) => ({
     _id: product._id,
@@ -94,7 +82,8 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     image: product.images?.[0]?.url || "",
   }));
 
-  const productList = products?.map(
+  const productList = products
+    ?.map(
       (product) => `
                 Name: ${product.name}
                 Category: ${product.category}

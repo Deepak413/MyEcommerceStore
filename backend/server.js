@@ -3,6 +3,7 @@ const app = require("./app");
 const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/database");
+const { connectRedis } = require("./config/redis");
 
 //Unhandling Uncaught Exception - undefined variables
 process.on("uncaughtException", (err) => {
@@ -16,6 +17,7 @@ dotenv.config({ path: "backend/config/config.env" });
 
 //connecting to database
 connectDatabase();
+connectRedis();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
