@@ -24,7 +24,7 @@ const ai = require("../utils/gemini");
 const { getEmbedding, saveEmbedding } = require("./queryCacheService");
 
 exports.generateEmbedding = async (text) => {
-  const cached = getEmbedding(text);
+  const cached = await getEmbedding(text);
 
   if (cached) {
     console.log("embeddingService.js : Embedding Cache HIT ✅");
@@ -38,7 +38,7 @@ exports.generateEmbedding = async (text) => {
 
   const embedding = response.embeddings[0].values;
 
-  saveEmbedding(text, embedding);
+  await saveEmbedding(text, embedding);
 
   return embedding;
 };
