@@ -32,7 +32,7 @@ exports.generateEmbedding = async (text) => {
   }
 
   const response = await ai.models.embedContent({
-    model: "text-embedding-001",
+    model: "gemini-embedding-001",
     contents: text,
   });
 
