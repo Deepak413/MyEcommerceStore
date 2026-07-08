@@ -40,8 +40,8 @@ const Home = () => {
     console.log("bestsellerProducts in Home.js : ", bestsellerProducts);
     useEffect(() => {
         console.log("Dispatching Home.js getProduct()");
-        dispatch(getProductWithoutPagination());
-        // dispatch(getHomeProducts());
+        // dispatch(getProductWithoutPagination());
+        dispatch(getHomeProducts());
         dispatch(loadUser());
 
         if (error) {
@@ -145,7 +145,7 @@ const Home = () => {
                                 },
                             }}
                         >
-                            {featuredProducts?.map((product) => (
+                            {homefeaturedProducts?.map((product) => (
                                 <SwiperSlide key={product._id}>
                                     <ProductCard product={product} />
                                 </SwiperSlide>
@@ -186,7 +186,7 @@ const Home = () => {
                                 },
                             }}
                         >
-                            {bestsellerProducts?.map((product) => (
+                            {homebestSellerProducts?.map((product) => (
                                 <SwiperSlide key={product._id}>
                                     <ProductCard product={product} />
                                 </SwiperSlide>
@@ -227,7 +227,7 @@ const Home = () => {
                                 },
                             }}
                         >
-                            {topRatedProducts?.map((product) => (
+                            {hometopRatedProducts?.map((product) => (
                                 <SwiperSlide key={product._id}>
                                     <ProductCard product={product} />
                                 </SwiperSlide>

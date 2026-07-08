@@ -83,6 +83,11 @@ exports.getAllProductsWithPagination = catchAsyncErrors(
         (Number(req.query["price[gte]"]) === 12000 &&
           Number(req.query["price[lte]"]) === 150000));
 
+    console.log(
+      "getAllProductsWithPagination - isDefaultRequest : ",
+      isDefaultRequest,
+    );
+
     const DEFAULT_PRODUCTS_CACHE_KEY = "products:first-page";
 
     if (isDefaultRequest) {
@@ -95,6 +100,11 @@ exports.getAllProductsWithPagination = catchAsyncErrors(
         return res.status(200).json(cachedProducts);
       }
     }
+
+    console.log(
+      "getAllProductsWithPagination - Products NOT found in Redis, fetching from MongoDB, query from frontend : req.query : ",
+      req.query
+    );
 
     const apiFeature = new ApiFeatures(Product.find(), req.query)
       .search()
@@ -172,6 +182,10 @@ exports.getHomeProducts = catchAsyncErrors(async (req, res, next) => {
   const HOME_PRODUCTS_CACHE_KEY = "home:products";
   const cachedProducts = await cacheService.get(HOME_PRODUCTS_CACHE_KEY);
 
+  console.log(
+    cachedProducts ? "getHomeProducts - ✅ Found in Redis" : "getHomeProducts - ❌ Not found in Redis",
+  );
+
   if (cachedProducts) {
     console.log("getHomeProducts - Products served from Redis ✅");
     return res.status(200).json(cachedProducts);
@@ -194,7 +208,6 @@ exports.getHomeProducts = catchAsyncErrors(async (req, res, next) => {
         .limit(8),
     ]);
 
-  
   const response = {
     success: true,
     featuredProducts,
