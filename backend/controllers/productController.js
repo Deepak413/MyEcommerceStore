@@ -76,12 +76,12 @@ exports.getAllProductsWithPagination = catchAsyncErrors(
     const isDefaultRequest =
       (!req.query.keyword || req.query.keyword === "") &&
       (!req.query.category || req.query.category === "") &&
-      (!req.query.sort || req.query.sort === "") &&
+      (!req.query.sort || req.query.sort === "default") &&
       (!req.query["ratings[gte]"] || req.query["ratings[gte]"] == 0) &&
       (!req.query.page || Number(req.query.page) === 1) &&
       ((!req.query["price[gte]"] && !req.query["price[lte]"]) ||
-        (Number(req.query["price[gte]"]) === 12000 &&
-          Number(req.query["price[lte]"]) === 150000));
+        (Number(req.query["price[gte]"]) === 0 &&
+          Number(req.query["price[lte]"]) === 200000));
 
     console.log(
       "getAllProductsWithPagination - isDefaultRequest : ",

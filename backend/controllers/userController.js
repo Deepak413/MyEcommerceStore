@@ -7,35 +7,38 @@ const Product = require("../models/productModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 
+const cacheService = require("../services/cacheService");
+
 const crypto = require("crypto");
 
 //Register a user
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-
   const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
     folder: "avatars",
     width: 150,
     crop: "scale",
-  })
+  });
 
   const { name, email, password, avatar } = req.body;
-  
+
   if (!name || !email || !password || !avatar) {
     return next(new ErrorHander("Please fill all required fields", 400));
   }
 
   const user = await User.create({
-    name, email, password,
+    name,
+    email,
+    password,
     avatar: {
       public_id: myCloud.public_id,
       url: myCloud.secure_url,
-    }
+    },
   });
 
   console.log("inside userController, created user", user);
 
   sendToken(user, 201, res);
-})
+});
 
 //Login user
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
@@ -61,8 +64,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   // const token = user.getJWTToken();
 
   sendToken(user, 200, res);
-})
-
+});
 
 //Logout user
 exports.logout = catchAsyncErrors(async (req, res, next) => {
@@ -126,7 +128,6 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
 //Reset Password
 exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
-
   //Creating token hash
   const resetPasswordToken = crypto
     .createHash("sha256")
@@ -139,7 +140,12 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   });
 
   if (!user) {
-    return next(new ErrorHander("Reset Password token is Invalid or has been expired", 400));
+    return next(
+      new ErrorHander(
+        "Reset Password token is Invalid or has been expired",
+        400,
+      ),
+    );
   }
 
   if (req.body.password !== req.body.confirmPassword) {
@@ -153,23 +159,20 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   await user.save();
 
   sendToken(user, 200, res);
-
 });
 
 //Get User Details
 exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
-
   const user = await User.findById(req.user.id);
 
   res.status(200).json({
     success: true,
     user,
-  })
+  });
 });
 
 //Update User Password
 exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
-
   console.log("in userController, token is : ", req.token);
 
   const user = await User.findById(req.user.id).select("+password");
@@ -192,11 +195,10 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 
 //Update User Profile
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
-
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
-  }
+  };
 
   if (req.body.avatar) {
     const user = await User.findById(req.user.id);
@@ -226,12 +228,10 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
   });
-
 });
 
 // Get All Users (admin)
 exports.getAllUser = catchAsyncErrors(async (req, res, next) => {
-
   const users = await User.find();
 
   res.status(200).json({
@@ -242,11 +242,12 @@ exports.getAllUser = catchAsyncErrors(async (req, res, next) => {
 
 // Get Single User (admin)
 exports.getSinglelUser = catchAsyncErrors(async (req, res, next) => {
-
   const user = await User.findById(req.params.id);
 
   if (!user) {
-    return next(new ErrorHander(`User does not exist with Id: ${req.params.id}`));
+    return next(
+      new ErrorHander(`User does not exist with Id: ${req.params.id}`),
+    );
   }
 
   res.status(200).json({
@@ -257,10 +258,9 @@ exports.getSinglelUser = catchAsyncErrors(async (req, res, next) => {
 
 //Update User Role --Admin
 exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
-
   const newUserData = {
     role: req.body.role,
-  }
+  };
 
   const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
     new: true,
@@ -275,11 +275,12 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
 
 //Delete User --Admin
 exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
-
   const user = await User.findById(req.params.id);
 
   if (!user) {
-    return next(new ErrorHander(`User does not exist with Id: ${req.params.id}`));
+    return next(
+      new ErrorHander(`User does not exist with Id: ${req.params.id}`),
+    );
   }
 
   const imageId = user.avatar.public_id;
@@ -290,12 +291,11 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "User Deleted Successfully"
+    message: "User Deleted Successfully",
   });
 });
 
 exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
-
   const user = await User.findById(req.user.id);
 
   if (!user) {
@@ -311,7 +311,7 @@ exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
   if (user.wishlist.includes(product._id)) {
     return res.status(200).json({
       success: true,
-      message: "Already in wishlist"
+      message: "Already in wishlist",
     });
   }
 
@@ -321,50 +321,56 @@ exports.addToWishlist = catchAsyncErrors(async (req, res, next) => {
 
   await user.populate("wishlist");
 
+  await cacheService.delete(`wishlist:${req.user.id}`);
+
   res.status(200).json({
     success: true,
-    wishlist: user.wishlist
+    wishlist: user.wishlist,
   });
-
 });
 
 exports.removeWishlist = catchAsyncErrors(async (req, res, next) => {
-
   const user = await User.findById(req.user.id);
 
   if (!user) {
     return next(new ErrorHander(`User does not exist with Id: ${req.user.id}`));
   }
 
-  user.wishlist = user.wishlist.filter(
-    (id) => id.toString() !== req.params.id
-  );
+  user.wishlist = user.wishlist.filter((id) => id.toString() !== req.params.id);
 
   await user.save();
   await user.populate("wishlist");
 
+  await cacheService.delete(`wishlist:${req.user.id}`);
+
   res.status(200).json({
     success: true,
-    wishlist: user.wishlist
+    wishlist: user.wishlist,
   });
-
 });
 
 exports.getWishlist = catchAsyncErrors(async (req, res, next) => {
+  const cacheKey = `wishlist:${req.user.id}`;
 
-  const user = await User.findById(req.user.id)
-    .populate("wishlist");
+  const cachedWishlist = await cacheService.get(cacheKey);
 
-  const wishlist = user.wishlist.filter(
-    product => product != null
-  );
+  if (cachedWishlist) {
+    console.log("UserController - Wishlist served from Redis ✅");
+
+    return res.status(200).json({
+      success: true,
+      wishlist: cachedWishlist,
+    });
+  }
+
+  const user = await User.findById(req.user.id).populate("wishlist");
+
+  const wishlist = user.wishlist.filter((product) => product != null);
+
+  await cacheService.set(cacheKey, wishlist, 60 * 60);
 
   res.status(200).json({
-
     success: true,
-    wishlist: user.wishlist
-
+    wishlist: user.wishlist,
   });
-
 });
-
