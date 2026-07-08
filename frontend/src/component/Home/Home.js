@@ -126,7 +126,7 @@ const Home = () => {
                             navigation
                             pagination={{ clickable: true }}
                             autoplay={{
-                                delay: 3000,
+                                delay: 3000000,
                                 disableOnInteraction: false,
                             }}
                             spaceBetween={20}

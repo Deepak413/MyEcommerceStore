@@ -2,7 +2,7 @@ const Order = require("../models/orderModel");
 const Product = require("../models/productModel");
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-
+const cacheService = require("../services/cacheService");
 // Create new Order
 exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     const {
@@ -30,6 +30,7 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     order.orderItems.forEach(async(ord) => {
         await updateStock(ord.product, ord.quantity)
     })
+    await cacheService.delete(`product:${req.params.id}`);
 
     res.status(201).json({
         success:true,

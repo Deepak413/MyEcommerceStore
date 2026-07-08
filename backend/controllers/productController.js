@@ -103,7 +103,7 @@ exports.getAllProductsWithPagination = catchAsyncErrors(
 
     console.log(
       "getAllProductsWithPagination - Products NOT found in Redis, fetching from MongoDB, query from frontend : req.query : ",
-      req.query
+      req.query,
     );
 
     const apiFeature = new ApiFeatures(Product.find(), req.query)
@@ -183,7 +183,9 @@ exports.getHomeProducts = catchAsyncErrors(async (req, res, next) => {
   const cachedProducts = await cacheService.get(HOME_PRODUCTS_CACHE_KEY);
 
   console.log(
-    cachedProducts ? "getHomeProducts - ✅ Found in Redis" : "getHomeProducts - ❌ Not found in Redis",
+    cachedProducts
+      ? "getHomeProducts - ✅ Found in Redis"
+      : "getHomeProducts - ❌ Not found in Redis",
   );
 
   if (cachedProducts) {
@@ -191,17 +193,22 @@ exports.getHomeProducts = catchAsyncErrors(async (req, res, next) => {
     return res.status(200).json(cachedProducts);
   }
 
+  const HOME_PRODUCT_FIELDS =
+    "name price ratings numOfReviews totalSold images";
+
   const [featuredProducts, topRatedProducts, bestSellerProducts] =
     await Promise.all([
-      Product.find().limit(8),
+      Product.find().select(HOME_PRODUCT_FIELDS).limit(8),
 
       Product.find()
+        .select(HOME_PRODUCT_FIELDS)
         .sort({
           ratings: -1,
         })
         .limit(8),
 
       Product.find()
+        .select(HOME_PRODUCT_FIELDS)
         .sort({
           totalSold: -1,
         })
@@ -215,7 +222,7 @@ exports.getHomeProducts = catchAsyncErrors(async (req, res, next) => {
     bestSellerProducts,
   };
 
-  await cacheService.set(HOME_PRODUCTS_CACHE_KEY, response, 60 * 60 * 48);
+  await cacheService.set(HOME_PRODUCTS_CACHE_KEY, response, 60 * 60);
 
   console.log("getHomeProducts - Products stored in cache redis.");
   res.status(200).json(response);
@@ -223,11 +230,27 @@ exports.getHomeProducts = catchAsyncErrors(async (req, res, next) => {
 
 //Get product Details
 exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
+  const cacheKey = `product:${req.params.id}`;
+  const cachedProduct = await cacheService.get(cacheKey);
+
+  if (cachedProduct) {
+    console.log(
+      "ProductController - Product served from Redis in getProductDetails ✅",
+    );
+
+    return res.status(200).json({
+      success: true,
+      product: cachedProduct,
+    });
+  }
   const product = await Product.findById(req.params.id);
 
   if (!product) {
     return next(new ErrorHander("Product not found", 404));
   }
+
+  await cacheService.set(cacheKey, product, 60 * 60);
+  console.log("ProductController - Product saved to Redis in getProductDetails",)
 
   res.status(200).json({
     success: true,
@@ -314,6 +337,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res) => {
   console.log("productController : updateProduct - Embedding updated");
   await cacheService.delete("products:first-page");
   await cacheService.delete("home:products");
+  await cacheService.delete(`product:${req.params.id}`);
 
   res.status(200).json({
     success: true,
@@ -338,6 +362,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 
   await cacheService.delete("products:first-page");
   await cacheService.delete("home:products");
+  await cacheService.delete(`product:${req.params.id}`);
 
   res.status(200).json({
     success: true,
@@ -385,6 +410,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   product.ratings = avg / product.reviews.length;
 
   await product.save({ validateBeforeSave: false });
+  await cacheService.delete(`product:${req.params.id}`);
 
   res.status(200).json({
     success: true,
@@ -442,6 +468,8 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
       useFindAndModify: false,
     },
   );
+
+  await cacheService.delete(`product:${req.params.id}`);
 
   res.status(200).json({
     success: true,

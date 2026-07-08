@@ -8,6 +8,8 @@ const { parseGeminiJSON } = require("../utils/jsonParser.js");
 const { buildMongoQuery } = require("../services/queryBuilder.js");
 const { vectorSearchProducts } = require("../services/vectorSearchService.js");
 const { calculateScore } = require("../services/weightedRankingService.js");
+const crypto = require("crypto");
+const cacheService = require("../services/cacheService.js");
 
 exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   const { question, history = [] } = req.body;
@@ -17,6 +19,19 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
   );
   if (!question) {
     return next(new ErrorHander("Please provide a question input", 400));
+  }
+
+  const normalizedQuestion = question.trim().toLowerCase();
+  // const cacheKey = `ai:${normalizedQuestion}`;
+  const cacheKey =
+    "ai:" +
+    crypto.createHash("sha256").update(normalizedQuestion).digest("hex");
+
+  const cachedResponse = await cacheService.get(cacheKey);
+  if (cachedResponse) {
+    console.log("aiController.js : AI Cache HIT ✅");
+
+    return res.status(200).json(cachedResponse);
   }
 
   const conversation = history
@@ -129,9 +144,15 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("Failed to generate AI response", 500));
   }
 
-  res.status(200).json({
+  const apiResponse = {
     success: true,
     message: response.text,
     products: formattedProducts,
-  });
+  };
+
+  await cacheService.set(cacheKey, apiResponse, 60 * 60 * 6);
+
+  return res.status(200).json(apiResponse);
+
+  res.status(200).json(apiResponse);
 });
