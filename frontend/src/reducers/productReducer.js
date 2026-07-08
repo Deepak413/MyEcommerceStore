@@ -54,6 +54,35 @@ const adminProductSlice = createSlice({
   },
 });
 
+const homeProductSlice = createSlice({
+  name: "homeProducts",
+  initialState: {
+    featured: [],
+    topRated: [],
+    bestSeller: [],
+    error: null,
+    loading: false,
+  },
+  reducers: {
+    homeProductRequest: (state) => {
+      state.loading = true;
+    },
+    homeProductSuccess: (state, action) => {
+      state.loading = false;
+      state.featuredProducts = action.payload.featuredProducts;
+      state.topRatedProducts = action.payload.topRatedProducts;
+      state.bestSellerProducts = action.payload.bestSellerProducts;
+    },
+    homeProductFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    clearAllErrors: (state) => {
+      state.error = null;
+    },
+  },
+});
+
 const newProductSlice = createSlice({
   name: "newProduct",
   initialState: {
@@ -303,6 +332,12 @@ export const {
   adminProductFail,
 } = adminProductSlice.actions;
 
+export const {
+  homeProductRequest,
+  homeProductSuccess,
+  homeProductFail,
+} = homeProductSlice.actions;
+
 export const{
   similarProductsRequest,
   similarProductsSuccess,
@@ -360,6 +395,7 @@ const reducers = {
   newProduct: newProductSlice.reducer,
   products: productSlice.reducer,
   adminProducts: adminProductSlice.reducer,
+  homeProducts: homeProductSlice.reducer,
   productUpdateDelete: productUpdateDeleteSlice.reducer,
   similarProducts: similarProductsSlice.reducer,
   productDetails: productDetailsSlice.reducer,

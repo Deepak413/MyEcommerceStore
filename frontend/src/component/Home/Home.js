@@ -3,7 +3,7 @@ import { CgMouse } from "react-icons/cg";
 import "./Home.css";
 import ProductCard from "./ProductCard.js";
 import MetaData from '../layout/MetaData';
-import { getProduct,getProductWithoutPagination, clearErrors, getSimilarCategoryProducts } from '../../actions/productAction';
+import { getProduct,getProductWithoutPagination, getHomeProducts, clearErrors, getSimilarCategoryProducts } from '../../actions/productAction';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/Loader/Loader';
 import { toast } from 'react-toastify';
@@ -28,6 +28,11 @@ const Home = () => {
     const { loading, error, products } = useSelector(state => state.products);
     console.log("products in Home.js : ", products);
 
+    const { loading: homeProductsLoading, error: homeProductsError, featuredProducts:homefeaturedProducts, topRatedProducts:hometopRatedProducts, bestSellerProducts:homebestSellerProducts } = useSelector(state => state.homeProducts);
+    console.log("homefeaturedProducts in Home.js : ", homefeaturedProducts);
+    console.log("hometopRatedProducts in Home.js : ", hometopRatedProducts);
+    console.log("homebestSellerProducts in Home.js : ", homebestSellerProducts);
+
     const featuredProducts = products.slice(0, 8);
     const topRatedProducts = [...products].sort((a, b) => b.ratings - a.ratings).slice(0, 8);
     console.log("topRatedProducts in Home.js : ", topRatedProducts);
@@ -36,6 +41,7 @@ const Home = () => {
     useEffect(() => {
         console.log("Dispatching Home.js getProduct()");
         dispatch(getProductWithoutPagination());
+        // dispatch(getHomeProducts());
         dispatch(loadUser());
 
         if (error) {

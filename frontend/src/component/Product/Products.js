@@ -98,6 +98,7 @@ const Products = ({ match }) => {
     useEffect(() => {
         setCurrentPage(1);
         setCategory(params.category === undefined ? "" : params.category);
+        console.log("keyword changed in useEffect");
     }, [keyword]);
 
     useEffect(() => {

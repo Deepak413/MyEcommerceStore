@@ -9,6 +9,7 @@ const { getAllProductsWithPagination,
         getProductReviews,
         deleteReview,
         getAdminProducts,
+        getHomeProducts,
         populateEmbeddings
     } = require("../controllers/productController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
@@ -20,6 +21,8 @@ router.route("/products").get(getAllProductsWithPagination);
 router
   .route("/admin/products")
   .get(isAuthenticatedUser, authorizeRoles("admin"), getAdminProducts);
+
+router.route("/homeProducts").get(getHomeProducts);
   
 router.route("/productsAll").get(getAllProductsWithoutPagination);
 

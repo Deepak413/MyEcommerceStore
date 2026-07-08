@@ -256,7 +256,7 @@ const ProductDetails = () => {
                 <Rating {...options} />
                 <span className="detailsBlock-2-span">
                   {" "}
-                  ({product.numOfReviews} Reviews)
+                  ({product.numOfReviews} Reviews with {product.totalSold || 0} sold)
                 </span>
               </div>
 
