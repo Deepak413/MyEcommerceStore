@@ -1,6 +1,6 @@
 const ai = require("../utils/gemini.js");
 
-exports.extractIntent = async (question) => {
+exports.extractIntent = async (question, userQueriesInConversation) => {
   const prompt = `
         You are an AI shopping assistant.
 
@@ -51,6 +51,9 @@ exports.extractIntent = async (question) => {
         Customer Query:
 
         "${question}"
+
+        And recent userQueriesInConversation:
+        "${userQueriesInConversation}"
         `;
 
   const response = await ai.models.generateContent({

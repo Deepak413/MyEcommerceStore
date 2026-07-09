@@ -42,8 +42,16 @@ exports.shoppingAssistant = catchAsyncErrors(async (req, res, next) => {
                 `;
     })
     .join("\n");
+  console.log(
+    "aiController.js : conversation in shoppingAssistant : ",
+    conversation,
+  );
 
-  const intentText = await extractIntent(question);
+  const userQueriesInConversation = history
+    .filter((message) => message.role === "user")
+    .map((message) => message.content)
+    .join("\n");
+  const intentText = await extractIntent(question, userQueriesInConversation);
   console.log(
     "aiController.js : intentText from Gemini API in shoppingAssistant : ",
     intentText,
