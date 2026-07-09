@@ -20,10 +20,6 @@ const UserOptions = ({ user }) => {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // console.log("inside userOptions");
-    // console.log(user);
-
-
 
     const options = [
         { icon: <FaRegListAlt />, name: "Orders", func: orders },
@@ -43,9 +39,7 @@ const UserOptions = ({ user }) => {
             func: dashboard,
         });
     }
-    // console.log(user)
-    // console.log(options)
-
+    
     function dashboard() {
         navigate("/admin/dashboard");
     }

@@ -43,6 +43,7 @@ import UpdateUser from "./component/Admin/UpdateUser";
 import ProductReviews from "./component/Admin/ProductReviews";
 import Wishlist from "./component/Wishlist/Wishlist.js";
 import { getWishlist } from "./actions/wishlistAction.js";
+import ScrollToTop from "./services/ScrollToTop.js";
 
 import AIChat from "./component/AI/AIChat.js";
 
@@ -68,6 +69,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
       <AIChat />

@@ -1,21 +1,21 @@
 * {
-    margin: 0;
-    scroll-behavior: smooth;
-  }
-  
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  .greenColor {
-    color: green !important;
-  }
-  .redColor {
-    color: red !important;
-  }
+  margin: 0;
+  scroll-behavior: smooth;
+}
 
-  nav {
-    backdrop-filter: blur(10px); /* Glassmorphism effect */
-  }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.greenColor {
+  color: green !important;
+}
+.redColor {
+  color: red !important;
+}
+
+nav {
+  backdrop-filter: blur(10px); /* Glassmorphism effect */
+}
