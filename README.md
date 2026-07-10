@@ -1,19 +1,19 @@
 # MyEcommerceStore - ShoppinggKaro
 
-Built a full-stack eCommerce website with more than 20 pages, featuring secure JWT authentication, role-based access,
-and a responsive UI using React, Redux, and React Router.
-
-• Built dynamic product catalog with filtering, searching, pagination and detailed pages including reviews and ratings.
-
-• Enhanced ordering workflow by integrating cart management, CRUD operations, and Stripe for smooth checkout.
-
-• Enabled users to register, log in, update profile, and manage orders with full functionality.
-
-• Implemented in-app notifications with validation-based popups to enhance UX and reduce user errors
-
-• Added security measures including data validation, bcrypt password hashing, ensured responsive design.
-
-• Integrated Cloudinary CDN to optimize image delivery and improve load speed.
+• Built a full-stack AI-driven commerce platform using MERN, Gemini AI, MongoDB Atlas Vector Search and
+Redis, enabling conversational shopping, natural language product discovery, semantic/hybrid search, personalized
+recommendations, and vector-based retrieval.
+• Configured an AI Shopping Assistant using LLM integration, prompt engineering, RAG architecture, intent
+extraction, conversational memory, product recommendations with MongoDB as the source of truth.
+• Engineered a hybrid retrieval engine leveraging MongoDB Atlas Vector Search, query embeddings, structured
+filters, aggregation pipelines, and weighted ranking, improving search relevance by 80%.
+• Reduced AI inference latency by implementing Redis distributed caching using the Cache-Aside pattern, caching
+6+ frequently accessed datasets and delivering sub-100 ms response times for cached requests while minimizing
+repeated LLM and database calls.
+• Designed a modular MVC backend with 25+ REST APIs, implementing JWT authentication, middleware-based
+authorization, password hashing, email password reset, pagination, lazy loading, image uploads, cart etc.
+• Developed a responsive React frontend with conversational AI chat, Redux, persistent wishlist, debounced search,
+infinite scrolling, advanced filtering, and optimized user experience
 
 <img width="1467" height="764" alt="Screenshot 2025-07-28 at 2 45 00 AM" src="https://github.com/user-attachments/assets/63bff356-2dba-4e47-b099-295a1fbaa6e3" />
 <img width="1466" height="791" alt="Screenshot 2025-07-28 at 2 45 17 AM" src="https://github.com/user-attachments/assets/68e6a17d-225a-4742-a847-65f478cfbb43" />
