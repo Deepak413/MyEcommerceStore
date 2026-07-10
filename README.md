@@ -3,15 +3,20 @@
 • Built a full-stack AI-driven commerce platform using MERN, Gemini AI, MongoDB Atlas Vector Search and
 Redis, enabling conversational shopping, natural language product discovery, semantic/hybrid search, personalized
 recommendations, and vector-based retrieval.
+
 • Configured an AI Shopping Assistant using LLM integration, prompt engineering, RAG architecture, intent
 extraction, conversational memory, product recommendations with MongoDB as the source of truth.
+
 • Engineered a hybrid retrieval engine leveraging MongoDB Atlas Vector Search, query embeddings, structured
 filters, aggregation pipelines, and weighted ranking, improving search relevance by 80%.
+
 • Reduced AI inference latency by implementing Redis distributed caching using the Cache-Aside pattern, caching
 6+ frequently accessed datasets and delivering sub-100 ms response times for cached requests while minimizing
 repeated LLM and database calls.
+
 • Designed a modular MVC backend with 25+ REST APIs, implementing JWT authentication, middleware-based
 authorization, password hashing, email password reset, pagination, lazy loading, image uploads, cart etc.
+
 • Developed a responsive React frontend with conversational AI chat, Redux, persistent wishlist, debounced search,
 infinite scrolling, advanced filtering, and optimized user experience
 
